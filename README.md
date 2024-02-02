@@ -41,10 +41,10 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
   👤 Entities
 </h3>
 
-- Usuario
-- Aportación
-- Proyecto
-- Comentario<br>
+- User
+- Investment
+- Project
+- Comment<br>
 Un usuario realiza una aportación económica a un proyecto<br>
 Un usuario deja un comentario en un proyecto
 
@@ -60,13 +60,15 @@ Un usuario deja un comentario en un proyecto
   🖼️ Images
 </h3>
 
-DSADADSDSDSA
+- **Project pictures:** A gallery of pictures which allows the Project Owner to show information about his/her project.
+- **User profile picture:** A picture which identifies each user.
 
 <h3>
   📊 Graphics
 </h3>
 
-FDSADDASDSDS
+- **Progress bar:** Monitorize the status of the objective.
+- **Pie chart:** Shows the percentage of money invested by each investor.
 
 <h3>
   🤖 Complementary technology
