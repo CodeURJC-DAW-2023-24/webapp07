@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-	<b><i>Little description / eslogan</i></b><br>
+	<b><i>Web for crowdfunding</i></b><br>
 </p>
 
 <h3 align="center">
@@ -44,9 +44,14 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 - User
 - Investment
 - Project
-- Comment<br>
-A user makes an investment into a project<br>
-A user leaves a comment on a project
+- Comment
+
+<h4>
+  👥 Relations
+</h4>
+
+- A user makes an investment into a project
+- A user leaves a comment on a project
 
 <h3>
   🔐 User permissions
