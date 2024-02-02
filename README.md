@@ -74,13 +74,13 @@ Un usuario deja un comentario en un proyecto
   🤖 Complementary technology
 </h3>
 
-DSADASDDSDSADS
+- **Email:** Email notifications for users.
+- **Google Maps:** Shows a map to locate an on-site event.
+- **PDF:** Generates a PDF summarizing the user´s transactions.
 
 <h3>
   ⚙️ Advanced algorithm or query
-
 </h3>
 
- - **Recommendation:** Users will be presented with projects aligned with their preferences, according to insights from their past contributions.
-
+DSSDADSADSDSAD
 
