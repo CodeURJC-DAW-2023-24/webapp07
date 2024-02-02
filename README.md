@@ -1,5 +1,5 @@
 <h1 align="center">
-	🌐 FundMe
+	🌱 FundMe
 </h1>
 
 <p align="center">
