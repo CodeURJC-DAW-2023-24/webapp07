@@ -45,14 +45,17 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 - Aportación
 - Proyecto
 - Comentario
+Un usuario realiza una aportación económica a un proyecto
+Un usuario deja un comentario en un proyecto
 
 <h3>
   🔐 User permissions
 </h3>
 
-- **Usuario1:** Jasdadsasdadsad
-- **Usuario2:** KSAJDADDasdadasda
-- **Usuario3:** SDAsdasdadsada
+- **ProjectOwner:** Jasdadsasdadsad
+- **ProjectInvestor:** KSAJDADDasdadasda
+- **Guest:**
+- **Admin:** SDAsdasdadsada
 
 <h3>
   🖼️ Images
