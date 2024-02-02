@@ -1,5 +1,5 @@
 <h1 align="center">
-	🌐 FundHub
+	🌐 Fund.me
 </h1>
 
 <p align="center">
