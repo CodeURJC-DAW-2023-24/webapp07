@@ -8,8 +8,6 @@
 
 <h3 align="center">
 	<a href="#phase-0">Phase 0</a>
-	<span> · </span>
-	<a>Phase 1</a>
 </h3>
 
 ---
@@ -36,11 +34,11 @@
 To coordinate the team, we will use "notion / trello / lo que sea"
 
 <h2>
-  🍆 Main aspects
+  🎯 Main aspects
 </h2>
 
 <h3>
-  😈 Entities
+  👤 Entities
 </h3>
 
 - Algo
