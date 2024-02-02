@@ -82,5 +82,5 @@ Un usuario deja un comentario en un proyecto
   ⚙️ Advanced algorithm or query
 </h3>
 
-DSSDADSADSDSAD
+**Recommendation:** Users will be presented with projects aligned with their preferences, according to insights from their past contributions.
 
