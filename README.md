@@ -87,5 +87,5 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
   ⚙️ Advanced algorithm or query
 </h3>
 
-**Recommendation:** Users will be presented with projects aligned with their preferences, according to insights from their past contributions.
+- **Recommendation:** Users will be presented with projects aligned with their preferences, according to insights from their past contributions.
 
