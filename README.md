@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-	<b><i>Web for crowdfunding</i></b><br>
+	<b><i>Seed Change, Grow Dreams: Your Investment, Their Revolution.</i></b><br>
 </p>
 
 <h3 align="center">
