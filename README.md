@@ -31,7 +31,7 @@
   📋 Team coordination
 </h2>
 
-To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundme)
+To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundme).
 
 <h2>
   🎯 Main aspects
