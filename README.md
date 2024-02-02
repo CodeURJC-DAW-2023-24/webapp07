@@ -31,7 +31,7 @@
   📋 Team coordination
 </h2>
 
-To coordinate the team, we will use "notion / trello / lo que sea"
+To coordinate the team, we will use trello: (https://trello.com/invite/fundme11/ATTIfb1cfcf855be811d530ede102c2921ecB113D1CC)
 
 <h2>
   🎯 Main aspects
