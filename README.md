@@ -54,7 +54,7 @@ Un usuario deja un comentario en un proyecto
 
 - **User:** Can invest in projects or upload/delete theirs. They can post comments on any project available.
 - **Guest:** Can log in, sign up or see the projects available to invest.
-- **Admin:** Limited access, is the owner of all the entities.
+- **Admin:** Unlimited access, is the owner of all the entities.
 
 <h3>
   🖼️ Images
