@@ -27,7 +27,7 @@
 | Pablo Requejo Postlbauer  | p.requejo.2021@alumnos.urjc.es  | [pablorpost](https://github.com/pablorpost)  |
 | Diego  | di.fernandez.2021@alumnos.urjc.es  | [Diego-G19](https://github.com/Diego-G19) |
 | Fer  | mail  | github  |
-| Miguel Ángel García Martínez  | ma.garciam.2021@alumnos.urjc.es  | magarciam2003  |
+| Miguel Ángel García Martínez  | ma.garciam.2021@alumnos.urjc.es  | [magarciam2003] (https://github.com/magarciam2003)  |
 
 <h2>
   📋 Team coordination
