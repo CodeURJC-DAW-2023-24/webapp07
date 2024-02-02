@@ -41,10 +41,10 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
   👤 Entities
 </h3>
 
-- Algo
-- Algo
-- Algo
-- Algo
+- Usuario
+- Aportación
+- Proyecto
+- Comentario
 
 <h3>
   🔐 User permissions
