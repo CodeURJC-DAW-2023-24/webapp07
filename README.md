@@ -45,8 +45,8 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 - Investment
 - Project
 - Comment<br>
-Un usuario realiza una aportación económica a un proyecto<br>
-Un usuario deja un comentario en un proyecto
+A user makes an investment into a project<br>
+A user leaves a comment on a project
 
 <h3>
   🔐 User permissions
