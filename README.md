@@ -78,6 +78,8 @@ DSADASDDSDSADS
 
 <h3>
   ⚙️ Advanced algorithm or query
+
+ - **Recommendation:** Users will be presented with projects aligned with their preferences, leveraging insights from their past contributions.
 </h3>
 
 DSSDADSADSDSAD
