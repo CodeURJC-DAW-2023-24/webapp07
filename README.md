@@ -81,6 +81,6 @@ DSADASDDSDSADS
 
 </h3>
 
- - **Recommendation:** Users will be presented with projects aligned with their preferences, leveraging insights from their past contributions.
+ - **Recommendation:** Users will be presented with projects aligned with their preferences, according to insights from their past contributions.
 
 
