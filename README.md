@@ -25,7 +25,7 @@
 |-----------|-----------|-----------|
 | Marcos Hernangil Prats | m.hernangil.2021@alumnos.urjc.es  | [mhernangilp](https://github.com/mhernangilp)  |
 | Pablo  | p.requejo.2021@alumnos.urjc.es  | [pablorpost](https://github.com/pablorpost)  |
-| Diego  | di.fernandez.2021@alumnos.urjc.es  | [Diego-G19] (https://github.com/Diego-G19) |
+| Diego  | di.fernandez.2021@alumnos.urjc.es  | [Diego-G19](https://github.com/Diego-G19) |
 | Fer  | mail  | github  |
 | Mangel  | mail  | github  |
 
