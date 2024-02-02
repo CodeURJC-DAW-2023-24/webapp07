@@ -1,5 +1,5 @@
 <h1 align="center">
-	🌯 App name
+	🌐 FundHub
 </h1>
 
 <p align="center">
