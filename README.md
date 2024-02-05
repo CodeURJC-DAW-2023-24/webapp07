@@ -45,6 +45,8 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 - Investment
 - Project
 - Comment
+- Bookmark
+- Review
 
 <h4>
   👥 Relations
