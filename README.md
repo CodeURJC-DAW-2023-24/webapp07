@@ -45,7 +45,6 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 - Investment
 - Project
 - Comment
-- Bookmark
 - Review
 
 <h4>
@@ -82,7 +81,6 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 </h3>
 
 - **Email:** Email notifications for users.
-- **Google Maps:** Shows a map to locate an on-site event.
 - **PDF:** Generates a PDF summarizing the user´s transactions.
 
 <h3>
