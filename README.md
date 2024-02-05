@@ -1,5 +1,5 @@
 <h1 align="center">
-	🌱 InvestorHub
+	🌱 SeedVentures
 </h1>
 
 <p align="center">
