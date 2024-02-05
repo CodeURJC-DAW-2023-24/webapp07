@@ -87,5 +87,4 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
   ⚙️ Advanced algorithm or query
 </h3>
 
-- **Recommendation:** Users will be presented with projects aligned with their preferences, according to insights from their past contributions.
-
+- **Recommendation:** Users will be recommended projects which they are likely to donate to. This will be made using a greedy algorithm, that allows a 1% less likeliness between users' previous donations in each iteration, until a sufficient numbers of users are encountered to make the suggestions.
