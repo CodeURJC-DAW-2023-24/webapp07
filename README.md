@@ -1,5 +1,5 @@
 <h1 align="center">
-	🌱 FundMe
+	🌱 InvestorHub
 </h1>
 
 <p align="center">
