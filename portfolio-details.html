@@ -24,6 +24,9 @@
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/assets2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link href="assets/assets2/css/sb-admin-2.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
@@ -106,15 +109,15 @@
               <div class="swiper-wrapper align-items-center">
 
                 <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-1.jpg" alt="">
+                  <img src="assets/img/kf/MENU-DONER-KEBAP-7.jpg" alt="">
                 </div>
 
                 <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-2.jpg" alt="">
+                  <img src="assets/img/kf/OIG2.jpg" alt="">
                 </div>
 
                 <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-3.jpg" alt="">
+                  <img src="assets/img/kf/OIG4.jpg" alt="">
                 </div>
 
               </div>
@@ -124,12 +127,12 @@
 
           <div class="col-lg-4">
             <div class="portfolio-info">
-              <h3>Project information</h3>
+              <h3>Kebab Finder</h3>
               <ul>
-                <li><strong>Category</strong>: Web design</li>
-                <li><strong>Client</strong>: ASU Company</li>
-                <li><strong>Project date</strong>: 01 March, 2020</li>
-                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+                <li><strong>Category</strong>: Technology</li>
+                <li><strong>Owner</strong>: MarkIndustries</li>
+                <li><strong>Project date</strong>: 28 January, 2024</li>
+                <li><strong>Project URL</strong>: <a href="#">www.kebabfinder.com</a></li>
               </ul>
             </div>
             <div class="portfolio-description">
@@ -139,6 +142,78 @@
               </p>
             </div>
           </div>
+        
+
+          <div class="row">
+
+            <!-- Area Chart -->
+            <div class="col-xl-8 col-lg-7">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                        <div class="dropdown no-arrow">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-header">Dropdown Header:</div>
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                            <canvas id="myAreaChart" width="512" height="400" style="display: block; height: 320px; width: 410px;" class="chartjs-render-monitor"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pie Chart -->
+            <div class="col-xl-4 col-lg-5">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                        <div class="dropdown no-arrow">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-header">Dropdown Header:</div>
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="chart-pie pt-4 pb-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                            <canvas id="myPieChart" width="342" height="306" style="display: block; height: 245px; width: 274px;" class="chartjs-render-monitor"></canvas>
+                        </div>
+                        <div class="mt-4 text-center small">
+                            <span class="mr-2">
+                                <i class="fas fa-circle text-primary"></i> Direct
+                            </span>
+                            <span class="mr-2">
+                                <i class="fas fa-circle text-success"></i> Social
+                            </span>
+                            <span class="mr-2">
+                                <i class="fas fa-circle text-info"></i> Referral
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         </div>
 
