@@ -499,7 +499,7 @@ h6 {
   }
 
   #hero .hero-img img {
-    width: 50%;
+    width: 40%;
   }
 }
 
@@ -516,13 +516,13 @@ h6 {
   }
 
   #hero .hero-img img {
-    width: 70%;
+    width: 60%;
   }
 }
 
 @media (max-width: 575px) {
   #hero .hero-img img {
-    width: 80%;
+    width: 70%;
   }
 
   #hero .btn-get-started {
@@ -1008,14 +1008,14 @@ section {
 }
 
 .portfolio .portfolio-item .portfolio-info {
-  opacity: 0;
+  opacity: 0.9;
   position: absolute;
   left: 15px;
   bottom: 0;
   z-index: 3;
   right: 15px;
-  transition: all 0.3s;
-  background: rgba(55, 81, 126, 0.8);
+  /*transition: all 0.3s;*/
+  background: #FA8A4B;
   padding: 10px 15px;
 }
 
