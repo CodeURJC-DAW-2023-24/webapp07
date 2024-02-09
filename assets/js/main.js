@@ -255,4 +255,16 @@
     });
   });
 
+  /**
+   * Project page donatation
+   */
+  $("#moremoney").on("click", function() {
+    $("#howmuch").attr("value",parseInt($("#howmuch").val())+1);
+  });
+  $("#lessmoney").on("click", function() {
+    if($("#howmuch").val() > 0){
+      $("#howmuch").attr("value",parseInt($("#howmuch").val())-1);
+    }
+  });
+
 })()

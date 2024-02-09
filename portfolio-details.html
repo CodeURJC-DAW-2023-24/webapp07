@@ -300,24 +300,29 @@
                   <div class="chart-area">
                     <div class="row">
                       <div class="col-lg-10">
-                        <div class="coolinput">
-                          <label for="input" class="text">Quantity:</label>
-                          <input type="text" placeholder="0" name="input" class="input">
-                        </div>
+                        <form>
+                          <input id="howmuch" type="text" name="search" value=0 />
+                        </form>
                       </div>
                       <div class="col-lg-2">
                         <div class="row">
-                          <button>+</button>
+                          <button id="moremoney" class="buttonnd" style="background-color: darkgreen; outline: 3px darkgreen solid;">
+                            <p class="textnd">+</p>
+                          </button>
                         </div>
                         <div class="row">
-                          <button>-</button>
+                          <button id="lessmoney" class="buttonnd" style="background-color: darkred; outline: 3px darkred solid;">
+                            <p class="textnd">-</p>
+                          </button>
                         </div>
                       </div>
                     </div>
                     
 
                     <div class="row justify-content-center">
-                      <button class="justify-content-center">Donate now</button>
+                      <button class="buttonnd" style="background-color: white; outline: 3px white solid;">
+                        <p class="textnd" style="color: black;">Donate now</p>
+                      </button>
                     </div>
                     
                   </div>
