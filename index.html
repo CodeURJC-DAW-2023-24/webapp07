@@ -870,11 +870,13 @@
 
 <div id="login-modal" class="login-modal">
 <form class="form">
+  <button type="button"  id="closeButtonLog" class="close-button">X</button>
+
   <div class="flex-column">
     <label>Email </label></div>
     <div class="inputForm">
       <svg height="20" viewBox="0 0 32 32" width="20" xmlns="http://www.w3.org/2000/svg"><g id="Layer_3" data-name="Layer 3"><path d="m30.853 13.87a15 15 0 0 0 -29.729 4.082 15.1 15.1 0 0 0 12.876 12.918 15.6 15.6 0 0 0 2.016.13 14.85 14.85 0 0 0 7.715-2.145 1 1 0 1 0 -1.031-1.711 13.007 13.007 0 1 1 5.458-6.529 2.149 2.149 0 0 1 -4.158-.759v-10.856a1 1 0 0 0 -2 0v1.726a8 8 0 1 0 .2 10.325 4.135 4.135 0 0 0 7.83.274 15.2 15.2 0 0 0 .823-7.455zm-14.853 8.13a6 6 0 1 1 6-6 6.006 6.006 0 0 1 -6 6z"></path></g></svg>
-      <input type="text" class="input" placeholder="Enter your Email">
+      <input id="emailInput" type="text" class="input" placeholder="Enter your Email">
     </div>
   
   <div class="flex-column">
@@ -892,7 +894,7 @@
     </div>
     <span class="span">Forgot password?</span>
   </div>
-  <button  class="button-submit">Sign In</button>
+  <button  type="submit" class="button-submit">Sign In</button>
   <p  class="p">Don't have an account? <span id = "signUpredirect" class="span">Sign Up</span>
 
   </p><p class="p line">Or With</p>
@@ -923,14 +925,12 @@ C318.115,0,375.068,22.126,419.404,58.936z"></path>
       Apple 
       
 </button></div>
-<button id="closeButton" class="close-button">X</button>
 </form>
 </div>
 
 <div id="signup-modal" class="login-modal">
   <form class="form">
-
-
+    <button type="button" id="closeButtonSign" class="close-button">X</button>
     <div class="flex-column">
       <label>Name </label>
       <div class="inputForm">
@@ -983,7 +983,7 @@ C318.115,0,375.068,22.126,419.404,58.936z"></path>
       </div>
 
     </div>
-    <button class="button-submit">Sign In</button>
+    <button type="submit" class="button-submit">Sign In</button>
   
     </p><p class="p line">Or With</p>
   
@@ -1013,7 +1013,6 @@ C318.115,0,375.068,22.126,419.404,58.936z"></path>
         Apple 
         
   </button></div>
-  <button id="closeButton" class="close-button">X</button>
   </form>
   </div>
 
@@ -1031,11 +1030,11 @@ C318.115,0,375.068,22.126,419.404,58.936z"></path>
     document.getElementById('signup-modal').style.display = 'block';
   });
 
-  document.getElementById('closeButton').addEventListener('click', function () {
+  document.getElementById('closeButtonLog').addEventListener('click', function () {
     document.getElementById('login-modal').style.display = 'none';
   });
 
-  document.getElementById('closeButton').addEventListener('click', function () {
+  document.getElementById('closeButtonSign').addEventListener('click', function () {
     document.getElementById('signup-modal').style.display = 'none';
   });
 
@@ -1067,6 +1066,39 @@ C318.115,0,375.068,22.126,419.404,58.936z"></path>
       passwordInput.type = 'password';
     }
   });
+
+
+  // contraseña y usuario administrador
+  const correctUser = "diego";
+  const correctPassword = "1234";
+
+  // recoger los datos del formulario
+  const form = document.querySelector(".form");
+  const emailInput = document.getElementById("emailInput");
+  const passwordInput = document.getElementById("passwordInputLog");
+
+  // añadir una función al formulario para que se ejecute cuando se envíe
+  form.addEventListener("submit", function(event) {
+    // prevenir que el formulario se envíe sin comprobacion
+    event.preventDefault();
+
+    // recoger los valores de los inputs
+    const user = emailInput.value;
+    const pass = passwordInput.value;
+
+    // comprobar si los valores son correctos
+    if (user === correctUser && pass === correctPassword) {
+      //  redirigir a la página de perfil
+      window.location.href = "perfil.html";
+      form.reset();
+    } else {
+      // If they don't, show an error message
+      alert("Invalid username or password");
+    }
+
+  });
+
+
 </script>
 
 
