@@ -9,6 +9,9 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
+  <!-- JQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
   <!-- Favicons -->
   <link href="assets/img/hero-img.png" rel="icon">
   <link href="assets/img/hero-img.png" rel="apple-touch-icon">
@@ -1016,90 +1019,88 @@ C318.115,0,375.068,22.126,419.404,58.936z"></path>
   </form>
   </div>
 
-<script>
-  document.getElementById('login').addEventListener('click', function () {
-    document.getElementById('login-modal').style.display = 'block';
-  });
-
-  document.getElementById('signup').addEventListener('click', function () {
-    document.getElementById('signup-modal').style.display = 'block';
-  });
-
-  document.getElementById('signUpredirect').addEventListener('click', function () {
-    document.getElementById('login-modal').style.display = 'block';
-    document.getElementById('signup-modal').style.display = 'block';
-  });
-
-  document.getElementById('closeButtonLog').addEventListener('click', function () {
-    document.getElementById('login-modal').style.display = 'none';
-  });
-
-  document.getElementById('closeButtonSign').addEventListener('click', function () {
-    document.getElementById('signup-modal').style.display = 'none';
-  });
-
-  window.addEventListener('click', function (event) {
-    if (event.target == document.getElementById('login-modal') || event.target == document.getElementById('signup-modal')) {
-      document.getElementById('login-modal').style.display = 'none';
-      document.getElementById('signup-modal').style.display = 'none';
-    }
-  });
-
-  //al presionar en id = passwordVisible, cambia el tipo de input de password a text y viceversa
-  document.getElementById('passwordVisibleSign').addEventListener('click', function () {
-    var passwordInput = document.getElementById('passwordInputSign');
-    var passwordInputConfirmation = document.getElementById('passwordInputSignConf');
-    if (passwordInput.type === 'password') {
-      passwordInput.type = 'text';
-      passwordInputConfirmation.type = 'text';
-    } else {
-      passwordInput.type = 'password';
-      passwordInputConfirmation.type = 'password';
-    }
-  });
-
-  document.getElementById('passwordVisibleLog').addEventListener('click', function () {
-    var passwordInput = document.getElementById('passwordInputLog');
-    if (passwordInput.type === 'password') {
-      passwordInput.type = 'text';
-    } else {
-      passwordInput.type = 'password';
-    }
-  });
-
-
-  // contraseña y usuario administrador
-  const correctUser = "diego";
-  const correctPassword = "1234";
-
-  // recoger los datos del formulario
-  const form = document.querySelector(".form");
-  const emailInput = document.getElementById("emailInput");
-  const passwordInput = document.getElementById("passwordInputLog");
-
-  // añadir una función al formulario para que se ejecute cuando se envíe
-  form.addEventListener("submit", function(event) {
-    // prevenir que el formulario se envíe sin comprobacion
-    event.preventDefault();
-
-    // recoger los valores de los inputs
-    const user = emailInput.value;
-    const pass = passwordInput.value;
-
-    // comprobar si los valores son correctos
-    if (user === correctUser && pass === correctPassword) {
-      //  redirigir a la página de perfil
-      window.location.href = "perfil.html";
-      form.reset();
-    } else {
-      // If they don't, show an error message
-      alert("Invalid username or password");
-    }
-
-  });
-
-
-</script>
+  <script>
+    $(document).ready(function() {
+      $('#login').on('click', function() {
+        $('#login-modal').show();
+      });
+  
+      $('#signup').on('click', function() {
+        $('#signup-modal').show();
+      });
+  
+      $('#signUpredirect').on('click', function() {
+        $('#login-modal').show();
+        $('#signup-modal').show();
+      });
+  
+      $('#closeButtonLog').on('click', function() {
+        $('#login-modal').hide();
+      });
+  
+      $('#closeButtonSign').on('click', function() {
+        $('#signup-modal').hide();
+      });
+  
+      $(window).on('click', function(event) {
+        if (event.target == $('#login-modal')[0] || event.target == $('#signup-modal')[0]) {
+          $('#login-modal').hide();
+          $('#signup-modal').hide();
+        }
+      });
+  
+      $('#passwordVisibleSign').on('click', function() {
+        var passwordInput = $('#passwordInputSign');
+        var passwordInputConfirmation = $('#passwordInputSignConf');
+        if (passwordInput.attr('type') === 'password') {
+          passwordInput.attr('type', 'text');
+          passwordInputConfirmation.attr('type', 'text');
+        } else {
+          passwordInput.attr('type', 'password');
+          passwordInputConfirmation.attr('type', 'password');
+        }
+      });
+  
+      $('#passwordVisibleLog').on('click', function() {
+        var passwordInput = $('#passwordInputLog');
+        if (passwordInput.attr('type') === 'password') {
+          passwordInput.attr('type', 'text');
+        } else {
+          passwordInput.attr('type', 'password');
+        }
+      });
+  
+      // Contraseña y usuario administrador
+      const correctUser = "diego";
+      const correctPassword = "1234";
+  
+      // Recoger los datos del formulario
+      const form = $('.form');
+      const emailInput = $('#emailInput');
+      const passwordInput = $('#passwordInputLog');
+  
+      // Añadir una función al formulario para que se ejecute cuando se envíe
+      form.on('submit', function(event) {
+        // Prevenir que el formulario se envíe sin comprobación
+        event.preventDefault();
+  
+        // Recoger los valores de los inputs
+        const user = emailInput.val();
+        const pass = passwordInput.val();
+  
+        // Comprobar si los valores son correctos
+        if (user === correctUser && pass === correctPassword) {
+          // Redirigir a la página de perfil
+          window.location.href = "perfil.html";
+          form[0].reset();
+        } else {
+          // Si no son correctos, mostrar un mensaje de error
+          alert("Invalid username or password");
+        }
+      });
+    });
+  </script>
+  
 
 
 </html>
