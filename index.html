@@ -61,26 +61,6 @@
           <li><a class="nav-link scrollto" href="#team">Team</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           <li><a id="login" class="getstarted scrollto">Log in</a></li>
-          <li class="dropdown"><a href="#"><img class="profile-img" src="assets/img/profile/user_icon2.jpg" alt="Foto de Perfil"></a>
-            <ul>
-              <li><a href="profile.html">
-                <img class="option-img" src="assets/img/profile/dashboard.png">
-                <p class="option-text">Dashboard</p>
-              </a></li>
-              <li><a href="profile.html">
-                <img class="option-img" src="assets/img/profile/user.png">
-                <p class="option-text">Profile</p>
-              </a></li>
-              <li><a href="profile.html">
-                <img class="option-img" src="assets/img/profile/chart.png">
-                <p class="option-text">Analytics</p>
-              </a></li>
-              <li><a href="profile.html">
-                <img class="option-img" src="assets/img/profile/setting.png">
-                <p class="option-text">Settings</p>
-              </a></li>
-            </ul>
-          </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -987,12 +967,10 @@ C318.115,0,375.068,22.126,419.404,58.936z"></path>
       <input type="checkbox">
       <label>Remember me </label>
       </div>
-
     </div>
+
     <button type="submit" class="button-submit">Sign In</button>
-  
-    </p><p class="p line">Or With</p>
-  
+    <p class="p line">Or With</p>
     <div class="flex-row">
       <button class="btn google">
         <svg version="1.1" width="20" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
@@ -1094,7 +1072,7 @@ C318.115,0,375.068,22.126,419.404,58.936z"></path>
         // Comprobar si los valores son correctos
         if (user === correctUser && pass === correctPassword) {
           // Redirigir a la página de perfil
-          window.location.href = "perfil.html";
+          window.location.href = "profile.html";
           form[0].reset();
         } else {
           // Si no son correctos, mostrar un mensaje de error
