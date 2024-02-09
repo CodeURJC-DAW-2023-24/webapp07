@@ -301,6 +301,49 @@ h6 {
   }
 }
 
+.navbar .dropdown ul {
+  position: absolute;
+  top: 100%;
+  left: 65%; /* Centra el menú horizontalmente */
+  transform: translateX(-50%);
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background-color: #fff; /* Color de fondo del menú */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra del menú */
+  opacity: 0; /* Oculta el menú inicialmente */
+  visibility: hidden; /* Oculta el menú inicialmente */
+  transition: opacity 0.3s ease, visibility 0.3s ease; /* Agrega una transición suave */
+}
+
+.profile-img {
+  width: 45px; /* Ancho de la imagen de perfil */
+  height: 45px; /* Altura de la imagen de perfil */
+  border-radius: 50%; /* Borde redondeado para una apariencia circular */
+}
+
+/* Estilos para el dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.option-img {
+  width: 25px;
+  height: 25px;
+  filter: grayscale(100%) invert(100%) brightness(1000%) sepia(100%) saturate(10000%) hue-rotate(140deg);
+}
+
+.option-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  color: #1cb98b; /* Color verde personalizado */
+  margin: auto; /* Margen superior e inferior de 50px, centrado horizontalmente */
+  margin-left: 20%;
+}
+
 /**
 * Mobile Navigation 
 */
