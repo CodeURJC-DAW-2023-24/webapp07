@@ -56,40 +56,37 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li class="li-nav">
-            <a class="nav-container" href="landingPage.html">
-              <img class="nav-img" src="assets/img/profile/dashboard.png">
-              <p class="nav-text">Dashboard</p>
-            </a>
+
+          <li class="nav-link scrollto active">
+            <img class="nav-img" src="assets/img/profile/dashboard.png">
+            <a  href="landingPage.html">Dashboard</a>
           </li>
-          <li class="li-nav">
-            <a class="nav-container" href="ranking.html">
-              <img class="nav-img" src="assets/img/profile/ranking.png">
-              <p class="nav-text">Ranking</p>
-            </a>
+          <li class="nav-link scrollto active">
+            <img class="nav-img" src="assets/img/profile/ranking.png">
+            <a class="nav-link scrollto" href="ranking.html">Ranking</a>
           </li>
-          <li class="li-nav">
-            <a class="nav-container" href="create-project.html">
-              <img class="nav-img" src="assets/img/profile/upload.png">
-              <p class="nav-text">Upload proyect</p>
-            </a>
+            
+          <li class="nav-link scrollto active">
+            <img class="nav-img" src="assets/img/profile/upload.png">
+            <a class="nav-link scrollto" href="create-project.html">Upload proyect</a>  
           </li>
+
           <li class="dropdown"><a href="#"><img class="profile-img" src="assets/img/profile/user_icon2.jpg" alt="Foto de Perfil"></a>
             <ul>
               <li><a href="user-details.html">
                 <img class="option-img" src="assets/img/profile/user.png">
                 <p class="option-text">Profile</p>
               </a></li>
-              </a></li>
               <li><a href="index.html">
                 <img class="option-img" src="assets/img/profile/logout.png">
                 <p class="option-text">Log out</p>
               </a></li>
             </ul>
-          </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
+
+
 
     </div>
   </header><!-- End Header -->
@@ -99,11 +96,6 @@
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
-
-        <ol>
-          <li><a href="index.html">Dashboard</a></li>
-          <li>Kebab Finder</li>
-        </ol>
         <h2>Kebab Finder</h2>
 
       </div>
@@ -183,7 +175,7 @@
               <p>
                 Kebab Finder es una aplicación que te permite encontrar los mejores kebabs de tu ciudad.
                 Podrás ver las opiniones de otros usuarios, ver la carta de los kebabs y hacer tus propias
-                reseñas. Además, podrás solicitar un kebab a domicilio y pagar con tarjeta.
+                reseñas. Además, podrás solicitar un kebab a domicilio y pagar con tarjeta. <br><br>
               </p>
             </div>
           </div>
@@ -196,7 +188,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Donations over time</h6>
+                  <h6 class="portfolioText">Donations over time</h6>
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                       aria-haspopup="true" aria-expanded="false">
@@ -235,7 +227,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Donations by user</h6>
+                  <h6 class="portfolioText">Donations by user</h6>
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                       aria-haspopup="true" aria-expanded="false">
@@ -286,7 +278,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h5 class="m-0 font-weight-bold text-primary justify-content-center">Help this project grow</h6>
+                  <h5 class="portfolioText">Help this project grow</h6>
                     <div class="dropdown no-arrow">
                       <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
@@ -311,26 +303,13 @@
                           <input class="inputnd" id="howmuch" type="text" name="search" value=0 />
                         </form>
                       </div>
-                      <div class="col-lg-2">
-                        <div class="row">
-                          <button id="moremoney" class="buttonnd"
-                            style="background-color: darkgreen; outline: 3px darkgreen solid;">
-                            <p class="textnd">+</p>
-                          </button>
-                        </div>
-                        <div class="row">
-                          <button id="lessmoney" class="buttonnd"
-                            style="background-color: darkred; outline: 3px darkred solid;">
-                            <p class="textnd">-</p>
-                          </button>
-                        </div>
-                      </div>
+       
                     </div>
 
 
                     <div class="row justify-content-center">
-                      <button class="buttonnd" style="background-color: white; outline: 3px white solid;">
-                        <p class="textnd" style="color: black;">Donate now</p>
+                      <button class="buttonnd">
+                        <p class="textnd">Donate now</p>
                       </button>
                     </div>
 

@@ -135,6 +135,7 @@ h6 {
   border: none;
   cursor: pointer;
   transition: 400ms;
+  background-color: #1cb98b;
 }
 
 .buttonnd .textnd {
@@ -142,6 +143,10 @@ h6 {
   font-weight: 700;
   font-size: 3em;
   transition: 400ms;
+}
+
+.buttonnd:hover {
+  background-color: #169e75;
 }
 
 /*--------------------------------------------------------------
@@ -225,6 +230,7 @@ h6 {
   display: flex;
   list-style: none;
   align-items: center;
+  gap: 20px;
 }
 
 .navbar li {
@@ -388,8 +394,11 @@ h6 {
 .nav-img {
   width: 20px;
   height: 20px;
+  vertical-align:bottom;
   filter: invert(100%);
 }
+
+
 
 .nav-text {
   font-family: 'Poppins', sans-serif;
@@ -427,14 +436,6 @@ h6 {
 
 #login {
   cursor: pointer;
-}
-
-.li-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10px;
-  margin-right: 5%;
 }
 
 
@@ -1358,6 +1359,10 @@ section {
 
 .team .member .social a+a {
   margin-left: 8px;
+}
+
+.portfolioText{
+  color: #1cb98b;
 }
 
 /*--------------------------------------------------------------
