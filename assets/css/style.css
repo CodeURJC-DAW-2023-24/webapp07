@@ -396,6 +396,15 @@ h6 {
   margin-left: 20%;
 }
 
+#signup {
+  cursor: pointer;
+}
+
+#login {
+  cursor: pointer;
+}
+
+
 /**
 * Mobile Navigation 
 */
