@@ -37,33 +37,52 @@ h6 {
 # Input money
 --------------------------------------------------------------*/
 ::-webkit-input-placeholder {
-   color: black;
+  color: black;
 }
 
-:-moz-placeholder { /* Firefox 18- */
-  color: black;  
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: black;
 }
 
-::-moz-placeholder {  /* Firefox 19+ */
-   color: black;  
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: black;
 }
 
-:-ms-input-placeholder {  
-   color: black;  
+:-ms-input-placeholder {
+  color: black;
 }
 
-form {
+.formnd {
   margin: 50px;
   padding: 5px;
   display: inline-block;
 }
 
-form input {
+.formnd .inputnd {
   border: none;
   background: transparent;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid lightgreen;
   outline: none;
+
+  font-weight: 700;
+  font-size: 3em;
 }
+
+/*--------------------------------------------------------------
+# HRblack
+--------------------------------------------------------------*/
+.hrb {
+  color: black;
+  display: block;
+  height: 4px;
+  border: 0;
+  border-top: 1px solid black;
+  margin: 1em 0;
+  padding: 0;
+}
+
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
@@ -117,12 +136,14 @@ form input {
   cursor: pointer;
   transition: 400ms;
 }
+
 .buttonnd .textnd {
   color: white;
   font-weight: 700;
   font-size: 3em;
   transition: 400ms;
 }
+
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -324,22 +345,31 @@ form input {
 .navbar .dropdown ul {
   position: absolute;
   top: 100%;
-  left: 65%; /* Centra el menú horizontalmente */
+  left: 65%;
+  /* Centra el menú horizontalmente */
   transform: translateX(-50%);
   list-style-type: none;
   padding: 0;
   margin: 0;
-  background-color: #fff; /* Color de fondo del menú */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra del menú */
-  opacity: 0; /* Oculta el menú inicialmente */
-  visibility: hidden; /* Oculta el menú inicialmente */
-  transition: opacity 0.3s ease, visibility 0.3s ease; /* Agrega una transición suave */
+  background-color: #fff;
+  /* Color de fondo del menú */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  /* Sombra del menú */
+  opacity: 0;
+  /* Oculta el menú inicialmente */
+  visibility: hidden;
+  /* Oculta el menú inicialmente */
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  /* Agrega una transición suave */
 }
 
 .profile-img {
-  width: 45px; /* Ancho de la imagen de perfil */
-  height: 45px; /* Altura de la imagen de perfil */
-  border-radius: 50%; /* Borde redondeado para una apariencia circular */
+  width: 45px;
+  /* Ancho de la imagen de perfil */
+  height: 45px;
+  /* Altura de la imagen de perfil */
+  border-radius: 50%;
+  /* Borde redondeado para una apariencia circular */
 }
 
 /* Estilos para el dropdown */
@@ -359,8 +389,10 @@ form input {
   font-size: 15px;
   font-weight: bold;
   text-align: center;
-  color: #1cb98b; /* Color verde personalizado */
-  margin: auto; /* Margen superior e inferior de 50px, centrado horizontalmente */
+  color: #1cb98b;
+  /* Color verde personalizado */
+  margin: auto;
+  /* Margen superior e inferior de 50px, centrado horizontalmente */
   margin-left: 20%;
 }
 
@@ -1924,7 +1956,7 @@ section {
 --------------------------------------------------------------*/
 
 
-.login-modal{
+.login-modal {
   display: none;
   position: fixed;
   z-index: 999;
@@ -1943,8 +1975,10 @@ section {
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  max-height: 100%; /* Altura máxima en relación con la ventana */
-  overflow: auto; /* Agregar desplazamiento si el contenido es demasiado grande */
+  max-height: 100%;
+  /* Altura máxima en relación con la ventana */
+  overflow: auto;
+  /* Agregar desplazamiento si el contenido es demasiado grande */
   gap: 10px;
   background-color: #ffffff;
   padding: 30px;
@@ -1955,9 +1989,11 @@ section {
 
 /* Media Query para pantallas más pequeñas */
 @media (max-width: 600px) {
-  .form{
-    width: 70%; /* Ajusta el ancho para pantallas más pequeñas */
-    height: 70%; /* Ajusta el alto para pantallas más pequeñas */
+  .form {
+    width: 70%;
+    /* Ajusta el ancho para pantallas más pequeñas */
+    height: 70%;
+    /* Ajusta el alto para pantallas más pequeñas */
   }
 }
 
@@ -1969,7 +2005,7 @@ section {
   align-self: flex-end;
 }
 
-.flex-column > label {
+.flex-column>label {
   color: #151717;
   font-weight: 600;
 }
@@ -2008,7 +2044,7 @@ section {
   justify-content: space-between;
 }
 
-.flex-row > div > label {
+.flex-row>div>label {
   font-size: 14px;
   color: black;
   font-weight: 400;
@@ -2077,13 +2113,13 @@ section {
 
 .passwordVisible {
   cursor: pointer;
-  fill: #757575; 
+  fill: #757575;
 }
 
 .passwordVisible:hover {
-  fill: #000000; 
+  fill: #000000;
 }
-    
+
 .close-button {
   position: absolute;
   top: 10px;
