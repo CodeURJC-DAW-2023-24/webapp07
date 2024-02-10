@@ -133,23 +133,9 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Projects</h2>
-          <p>All available projects will be showed up here</p>
+          <h2>Trending Proyects</h2>
+          <p>These projects are killing it !!</p>
         </div>
-
-        <div class="search-bar">
-          <form action="#" method="GET">
-              <input type="text" name="search" placeholder="Search...">
-              <button type="submit">Search</button>
-          </form>
-        </div>
-
-        <ul id="portfolio-flters" class="d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
-          <li data-filter="*" class="filter-active">All</li>
-          <li data-filter=".filter-app">App</li>
-          <li data-filter=".filter-card">Card</li>
-          <li data-filter=".filter-web">Web</li>
-        </ul>
 
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
           <a href="portfolio-details.html">
@@ -378,6 +364,11 @@
           </a>
         </div>
 
+      </div>
+      <div class="row">
+        <div class="col-12 text-center">
+            <a class="btn btn-primary" href="landingPage.html">See all projects</a>
+        </div>
       </div>
 
       </div>
@@ -1244,7 +1235,7 @@ C318.115,0,375.068,22.126,419.404,58.936z"></path>
       // Comprobar si los valores son correctos
       if (user === correctUser && pass === correctPassword) {
         // Redirigir a la página de perfil
-        window.location.href = "profile.html";
+        window.location.href = "landingPage.html";
         form[0].reset();
       } else {
         // Si no son correctos, mostrar un mensaje de error
