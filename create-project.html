@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>SeedVentures</title>
+  <title>SeedVentures - Create new project</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -26,10 +26,14 @@
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/assets2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+  <link href="assets/assets2/css/sb-admin-2.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-  <link href="assets/css/profile.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Arsha
@@ -43,7 +47,7 @@
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top " style="background-color: #1cb98b">
+  <header id="header" class="fixed-top header-inner-pages">
     <div class="container d-flex align-items-center">
 
       <h1 class="logo me-auto"><a href="index.html">SeedVentures</a></h1>
@@ -52,32 +56,9 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link   scrollto" href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
+          <li><a class="nav-link scrollto " href="index.html">Home</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li class="dropdown"><a href="#"><img class="profile-img" src="assets/img/profile/user_icon2.jpg" alt="Foto de Perfil"></a>
-            <ul>
-              <li><a href="profile.html">
-                <img class="option-img" src="assets/img/profile/dashboard.png">
-                <p class="option-text">Dashboard</p>
-              </a></li>
-              <li><a href="profile.html">
-                <img class="option-img" src="assets/img/profile/user.png">
-                <p class="option-text">Profile</p>
-              </a></li>
-              <li><a href="profile.html">
-                <img class="option-img" src="assets/img/profile/chart.png">
-                <p class="option-text">Analytics</p>
-              </a></li>
-              <li><a href="profile.html">
-                <img class="option-img" src="assets/img/profile/setting.png">
-                <p class="option-text">Settings</p>
-              </a></li>
-            </ul>
-          </li>
+          <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -85,32 +66,51 @@
     </div>
   </header><!-- End Header -->
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center">
+  <main id="main">
 
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
-          data-aos="fade-up" data-aos-delay="200">
-          <h1>SeedVentures</h1>
-          <h2>Seed change, grow dreams <br> Your investment, their revolution</h2>
-          <div class="d-flex justify-content-center justify-content-lg-start">
-            <a id ="newProject"  class="btn-get-started scrollto" href="create-project.html">Start a Project</a>
-            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i
-                class="bi bi-play-circle"></i><span>Watch Video</span></a>
-          </div>
-        </div>
-        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
-          <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
-        </div>
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li>New project</li>
+        </ol>
+        <h2>New project</h2>
+
       </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+<!------------------------------------------------------------->
+        <div class="row gy-4">
+            <div class="portfolio-info">
+                <form action="" method="post" enctype="multipart/form-data" id="createPr">
+                    <h1>Create project</h1>
+                    <br>
+                    <h3>Name: </h3>
+                    <p><input type="text" name="name"></p>
+                    <br>
+                    <h3>Description: </h3>
+                    <p><input type="text" name="description"></p>
+                    <h3>Pictures</h3>
+                    <input type="file" name="description">
+                </form>
+            </div>
+        </div>
+
     </div>
+    </section><!-- End Portfolio Details Section -->
 
-  </section><!-- End Hero -->
-
+  </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
+
+    
 
     <div class="footer-top">
       <div class="container">
@@ -191,6 +191,24 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
+
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="assets/assets2/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/assets2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="assets/assets2/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="assets/assets2/js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="assets/assets2/vendor/chart.js/Chart.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="assets/assets2/js/demo/chart-area-demo.js"></script>
+  <script src="assets/assets2/js/demo/chart-pie-demo.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
