@@ -407,7 +407,6 @@ h6 {
 .option-img {
   width: 25px;
   height: 25px;
-  filter: grayscale(100%) invert(100%) brightness(1000%) sepia(100%) saturate(10000%) hue-rotate(140deg);
 }
 
 .option-text {
@@ -2388,4 +2387,53 @@ section {
   background-color: #3ae977; /* Cambia el color de fondo a verde */
   color: white; /* Cambia el color del texto a blanco */
   margin: 0 auto; /* Centra horizontalmente */
+}
+/*Barra busqueda*/
+.search-form {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5%;
+}
+
+.search-form input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  font-size: 16px;
+  width: 80%;
+}
+
+.search-form button {
+  padding: 10px 15px;
+  background-color: #1cb98b;
+  color: #fff;
+  border: none;
+  border-radius: 5px 5px 5px 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.search-form button:hover {
+  background-color: #179e72;
+}
+
+/* Estilo para el icono dentro del botón */
+.search-form button i {
+  font-size: 18px;
+}
+
+/* Estilo para los botones de filtro */
+.filter-button {
+  padding: 10px 15px;
+  margin-left: 5px;
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.filter-button:hover {
+  background-color: #e0e0e0;
 }
