@@ -364,9 +364,9 @@ h6 {
 }
 
 .profile-img {
-  width: 45px;
+  width: 35px;
   /* Ancho de la imagen de perfil */
-  height: 45px;
+  height: 35px;
   /* Altura de la imagen de perfil */
   border-radius: 50%;
   /* Borde redondeado para una apariencia circular */
