@@ -2347,3 +2347,30 @@ section {
     opacity: 0;
   }
 }
+
+/* Estilos para la barra de búsqueda */
+.search-bar {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+}
+
+.search-bar input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 500px; /* Ajusta el ancho según tu preferencia */
+}
+
+.search-bar button {
+  padding: 10px 20px;
+  background-color: #3ae977;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-bar button:hover {
+  background-color: #0056b3;
+}
