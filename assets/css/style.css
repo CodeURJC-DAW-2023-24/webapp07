@@ -2588,3 +2588,89 @@ section {
   border-radius: 50%;
   object-fit: cover;
 }
+
+
+/*--------------------------------------------------------------
+# CREATE PROJECT
+--------------------------------------------------------------*/
+
+
+.create-project-form {
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.create-project-form h3 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #3ae977;
+  margin-bottom: 20px;
+}
+
+.create-project-form .form-control {
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+  margin-bottom: 10px;
+}
+
+.create-project-form textarea {
+  resize: vertical;
+}
+
+.new-slides-container {
+  margin-top: 20px;
+}
+
+.new-slides-container .swiper-slide {
+  border: 2px dashed #3ae977;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-slides-container .swiper-slide img {
+  width: 100%;
+  margin-top: 20px;
+  position: relative;
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  opacity: 1;
+  border: 1px solid #3ae977;
+  background-color: #3ae977;
+  padding: 30px;
+  box-shadow: 0px 0 30px rgba(55, 81, 126, 0.08);
+
+}
+
+.responsive-image {
+  max-width: 100%; /* La imagen no excederá el 100% del contenedor */
+  max-height: 70% ; /* Mantiene la proporción de aspecto original */
+  display: block; /* Elimina el espacio adicional por debajo de la imagen */
+  margin: 0 auto; /* Centra la imagen horizontalmente */
+}
+
+
+#add-slide-btn {
+  margin-top: 20px;
+}
+
+#new-slide-input {
+  margin-top: 10px;
+}
+
+#upload-slide-btn {
+  margin-top: 10px;
+}
