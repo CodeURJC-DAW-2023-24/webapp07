@@ -45,7 +45,7 @@
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top ">
+  <header id="header" class="fixed-top " style="background-color: #1cb98b">
     <div class="container d-flex align-items-center">
 
       <h1 class="logo me-auto"><a href="index.html">SeedVentures</a></h1>
@@ -54,13 +54,37 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link   scrollto" href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a id="login" class="getstarted scrollto">Log in</a></li>
+          <li class="li-nav">
+            <a class="nav-container" href="landingPage.html">
+              <img class="nav-img" src="assets/img/profile/dashboard.png">
+              <p class="nav-text">Dashboard</p>
+            </a>
+          </li>
+          <li class="li-nav">
+            <a class="nav-container" href="ranking.html">
+              <img class="nav-img" src="assets/img/profile/ranking.png">
+              <p class="nav-text">Ranking</p>
+            </a>
+          </li>
+          <li class="li-nav">
+            <a class="nav-container" href="create-project.html">
+              <img class="nav-img" src="assets/img/profile/upload.png">
+              <p class="nav-text">Upload proyect</p>
+            </a>
+          </li>
+          <li class="dropdown"><a href="#"><img class="profile-img" src="assets/img/profile/user.png" alt="Foto de Perfil"></a>
+            <ul>
+              <li><a href="user-details.html">
+                <img class="option-img" src="assets/img/profile/user.png">
+                <p class="option-text">Profile</p>
+              </a></li>
+              </a></li>
+              <li><a href="index.html">
+                <img class="option-img" src="assets/img/profile/logout.png">
+                <p class="option-text">Log out</p>
+              </a></li>
+            </ul>
+          </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -68,74 +92,28 @@
     </div>
   </header><!-- End Header -->
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center">
+  <main>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
-          data-aos="fade-up" data-aos-delay="200">
-          <h1>SeedVentures</h1>
-          <h2>Seed change, grow dreams <br> Your investment, their revolution</h2>
-          <div class="d-flex justify-content-center justify-content-lg-start">
-            <a id="signup" class="btn-get-started scrollto">Sign Up</a>
-            <a href="assets/video/rickroll.mp4" class="glightbox btn-watch-video"><i
-                class="bi bi-play-circle"></i><span>Watch Video</span></a>
-          </div>
-        </div>
-        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
-          <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
-        </div>
-      </div>
-    </div>
-
-  </section><!-- End Hero -->
-
-  <main id="main">
-
-    <!-- ======= Clients Section ======= -->
-    <section id="clients" class="clients section-bg">
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
-
-        <div class="row" data-aos="zoom-in">
-
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-            <img src="assets/img/clients/client-1.png" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-            <img src="assets/img/clients/client-2.png" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-            <img src="assets/img/clients/client-3.png" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-            <img src="assets/img/clients/client-4.png" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-            <img src="assets/img/clients/client-5.png" class="img-fluid" alt="">
-          </div>
-
-          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-            <img src="assets/img/clients/client-6.png" class="img-fluid" alt="">
-          </div>
-
-        </div>
+        <h2>Dashboard</h2>
 
       </div>
-    </section><!-- End Cliens Section -->
+    </section><!-- End Breadcrumbs -->
 
     <!-- ======= Portfolio Section ======= -->
     <section id="portfolio" class="portfolio">
       <div class="container" data-aos="fade-up">
 
-        <div class="section-title">
-          <h2>Trending Proyects</h2>
-          <p>These projects are killing it !!</p>
-        </div>
+        <form class="search-form">
+          <input type="text" placeholder="Search...">
+          <button type="submit"><i class="bi bi-search"></i></button>
+          <button type="button" class="filter-button" id="filter1">Technology</button>
+          <button type="button" class="filter-button" id="filter2">Books</button>
+          <button type="button" class="filter-button" id="filter3">Music</button>
+          <button type="button" class="filter-button" id="filter4">Art</button>
+        </form>        
 
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
           <a href="portfolio-details.html">
@@ -367,519 +345,13 @@
       </div>
       <div class="row">
         <div class="col-12 text-center">
-            <a class="btn btn-primary" href="landingPage.html">See all projects</a>
+            <a class="btn btn-primary" href="#">Load more</a>
         </div>
       </div>
 
       </div>
     </section><!-- End Portfolio Section -->
-
-
-    <!-- ======= About Us Section ======= -->
-    <section id="about" class="about">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>About Us</h2>
-        </div>
-
-        <div class="row content">
-          <div class="col-lg-6">
-            <p>
-              At SeedVentures, we believe in the power of innovation and collective action to drive positive change in the world. As a leading crowdfunding platform, we provide a dynamic space where creators, innovators, and visionaries can turn their ideas into reality with the support of a global community.
-            </p>
-            <ul>
-              <li><i class="ri-check-double-line"></i> Democratize funding</li>
-              <li><i class="ri-check-double-line"></i> Bring personal projects to life</li>
-              <li><i class="ri-check-double-line"></i> Transparency, integrity, and inclusivity</li>
-            </ul>
-          </div>
-          <div class="col-lg-6 pt-4 pt-lg-0">
-            <p>
-              Join us in shaping the future, one seed at a time. Together, we can plant the seeds of innovation and cultivate a brighter tomorrow for generations to come. Welcome to SeedVentures, where ideas take root and dreams flourish.
-            </p>
-            <a href="#team" class="btn-learn-more">Learn More</a>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End About Us Section -->
-
-    <!-- ======= Why Us Section ======= -->
-    <section id="why-us" class="why-us section-bg">
-      <div class="container-fluid" data-aos="fade-up">
-
-        <div class="row">
-
-          <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
-
-            <div class="content">
-              <h3>How to start your <strong>own proyect</strong></h3>
-              <p>
-                Would you like to start your new project and allow others to finance it? Follow these steps to achieve
-                it:
-              </p>
-            </div>
-
-            <div class="accordion-list">
-              <ul>
-                <li>
-                  <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>01</span>
-                    Create a new account <i class="bx bx-chevron-down icon-show"></i><i
-                      class="bx bx-chevron-up icon-close"></i></a>
-                  <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
-                    <p>
-                      Sign up for a new account on our website, or log in if you're already registered, and ensure you
-                      provide all the necessary personal details to complete your profile
-                    </p>
-                  </div>
-                </li>
-
-                <li>
-                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed"><span>02</span>
-                    Upload your project <i class="bx bx-chevron-down icon-show"></i><i
-                      class="bx bx-chevron-up icon-close"></i></a>
-                  <div id="accordion-list-2" class="collapse" data-bs-parent=".accordion-list">
-                    <p>
-                      Design and add all the necessary features to describe your project to the rest of the world,
-                      allowing you to include photos to enhance its appearance
-                    </p>
-                  </div>
-                </li>
-
-                <li>
-                  <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span>03</span>
-                    Share your project <i class="bx bx-chevron-down icon-show"></i><i
-                      class="bx bx-chevron-up icon-close"></i></a>
-                  <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
-                    <p>
-                      Showcase your project to the world by sharing it with your friends, family, or even through social
-                      media. Interested investors will have the opportunity to contribute to your project
-                    </p>
-                  </div>
-                </li>
-
-              </ul>
-            </div>
-
-          </div>
-
-          <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img"
-            style='background-image: url("assets/img/why-us.png");' data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
-        </div>
-
-      </div>
-    </section><!-- End Why Us Section -->
-
-
-    <!--Top donors section-->
-    <section id="top-donors" class="skills">
-      <div class="container" data-aos="fade-up">
-        <div class="row">
-          <div class="col-lg-6 d-flex align-items-center" data-aos="fade-right" data-aos-delay="100">
-            <img src="assets/img/skills.png" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
-            <h3>Top donors this month</h3>
-            <p class="fst-italic">
-              "The best way to find yourself is to lose yourself in the service of others" - Mahatma Gandhi
-            </p>
-
-            <div class="skills-content">
-
-              <div class="progress">
-                <span class="skill">Abraham_666 <i class="val">102.564,56€</i></span>
-                <div class="progress-bar-wrap">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0"
-                    aria-valuemax="100"></div>
-                </div>
-              </div>
-
-              <div class="progress">
-                <span class="skill">XxMortxX <i class="val">23.045,93€</i></span>
-                <div class="progress-bar-wrap">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="22.47" aria-valuemin="0" aria-valuemax="100">
-                  </div>
-                </div>
-              </div>
-
-              <div class="progress">
-                <span class="skill">User_8765421 <i class="val">21.432,02</i></span>
-                <div class="progress-bar-wrap">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="20.896" aria-valuemin="0" aria-valuemax="100">
-                  </div>
-                </div>
-              </div>
-
-              <div class="progress">
-                <span class="skill">Jorge_madref******_salvaje_69 <i class="val">17.898,88€</i></span>
-                <div class="progress-bar-wrap">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="17.451" aria-valuemin="0" aria-valuemax="100">
-                  </div>
-                </div>
-              </div>
-
-              <div class="progress">
-                <span class="skill">miguelgm03 <i class="val">5.836,00€</i></span>
-                <div class="progress-bar-wrap">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="5.69" aria-valuemin="0" aria-valuemax="100">
-                  </div>
-                </div>
-              </div>
-              
-              <div class="progress">
-                <span class="skill">Alexia_no_se_calla <i class="val">1.243,36€</i></span>
-                <div class="progress-bar-wrap">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="1.212" aria-valuemin="0" aria-valuemax="100">
-                  </div>
-                </div>
-              </div>
-
-              <div class="progress">
-                <span class="skill">User_43535432 <i class="val">634,75€</i></span>
-                <div class="progress-bar-wrap">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="0.619" aria-valuemin="0" aria-valuemax="100">
-                  </div>
-                </div>
-              </div>
-
-              <div class="progress">
-                <span class="skill">Berni <i class="val">234,00€</i></span>
-                <div class="progress-bar-wrap">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="0.228" aria-valuemin="0" aria-valuemax="100">
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-      </div>
-    </section>
-    <!--End Top donors section-->
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Services</h2>
-          <p>Embark on your journey with our comprehensive range of services designed to bring your projects to life.</p>
-        </div>
-
-        <div class="row">
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4><a href="">Proyect creations</a></h4>
-              <p>This service involves the initiation and development of new projects or ideas. It encompasses the process of conceptualizing, planning, and executing a project from its inception to completion</p>
-            </div>
-          </div>
-
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in"
-            data-aos-delay="200">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4><a href="">Proyect contributions</a></h4>
-              <p>This service pertains to individuals or entities contributing resources, such as funding, expertise, or materials, to support the realization of a project. Contributions can come from various sources, including backers, investors, or collaborators</p>
-            </div>
-          </div>
-
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
-            data-aos-delay="300">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-layer"></i></div>
-              <h4><a href="">Networking</a></h4>
-              <p>Networking involves establishing and nurturing relationships with individuals or organizations within a particular industry or community. It facilitates opportunities for collaboration, sharing of knowledge, and accessing resources that can enhance the success of projects</p>
-            </div>
-          </div>
-
-          <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
-            data-aos-delay="400">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4><a href="">Proyect financiation</a></h4>
-              <p>Project financing refers to the process of acquiring funding or financial resources to support the implementation of a project. It may involve securing investments, loans, grants, or other forms of financial support to cover the costs associated with project development and execution</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Services Section -->
-
-    <!-- ======= Cta Section ======= -->
-    <section id="cta" class="cta">
-      <div class="container" data-aos="zoom-in">
-
-        <div class="row">
-          <div class="col-lg-9 text-center text-lg-start">
-            <h3>Join us !</h3>
-            <p> Join us and become part of our vibrant community by creating an account on our website. Unlock exclusive benefits, stay updated with the latest news and offerings, and connect with like-minded individuals who share your interests. Start your journey with us today!.</p>
-          </div>
-          <div class="col-lg-3 cta-btn-container text-center">
-            <a href="#" class="cta-btn align-middle">Join Us</a>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Cta Section -->
-
-
-    <!-- ======= Team Section ======= -->
-    <section id="team" class="team section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Team</h2>
-          <p>"Great pains lead to great achievements.
-            Needs drive us to find solutions even in the most difficult situations.
-            Determination and passion propel us forward. There is no obstacle we cannot overcome.
-            Every challenge is an opportunity to grow and achieve our goals."
-        </div>
-
-        <div class="row">
-
-          <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="100">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="https://cdn.pixabay.com/photo/2016/12/01/11/40/blossom-1875080_1280.png"
-                  class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Diego Isaac Fernández</h4>
-                <span>Chief Executive Officer</span>
-                <p>Mas vale pajaro en mano que sida en el ano</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="https://i.pinimg.com/originals/85/15/be/8515be0f8158b10f8f305629555dfde4.png"
-                  class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Fernando Alonso Calderon</h4>
-                <span>Product Manager</span>
-                <p>La vida es una lenteja o las tomas o las dejas</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="300">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img
-                  src="https://static.vecteezy.com/system/resources/previews/009/266/705/original/element-flower-icon-free-png.png"
-                  class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Marcos Hernangil Prats</h4>
-                <span>Chief Operating Officer</span>
-                <p>Tirar la puerta por la ventana</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="400">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img
-                  src="https://images.vexels.com/media/users/3/135719/isolated/preview/1ee813a1483e4b152c0131e357847939-icono-de-flores-de-colores-5.png"
-                  class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Pablo Requejo Postlbauer</h4>
-                <span>Chief Creative Officer</span>
-                <p>Estoy haciendo la pagina web yo solo</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-
-        </div>
-
-        <div class="row justify-content-center">
-          <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="400">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img
-                  src="https://images.vexels.com/media/users/3/135718/isolated/preview/12e56f8395992260b7125e02a59724b8-icono-de-flor-de-colores-4.png"
-                  class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Miguel Ángel García</h4>
-                <span>Chief Technology Officer</span>
-                <p>Menos mal que no hemos pillao coche</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""><i class="ri-linkedin-box-fill"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-      </div>
-    </section><!-- End Team Section -->
-
-    <!-- ======= Frequently Asked Questions Section ======= -->
-    <section id="faq" class="faq section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Frequently Asked Questions</h2>
-          <p>Discover answers to our most frequently asked questions and gain insights into everything you need to know.</p>
-        </div>
-
-        <div class="faq-list">
-          <ul>
-            <li data-aos="fade-up" data-aos-delay="100">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse"
-                data-bs-target="#faq-list-1">How does crowdfunding on SeedVentures work? <i
-                  class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
-                <p>
-                  SeedVenture is a platform where creators can launch projects and raise funds from backers. Creators set a funding goal and deadline, and backers pledge money to support the project. If the funding goal is met by the deadline, the project is funded, and backers' pledges are collected. If the goal is not met, no money changes hands.
-                </p>
-              </div>
-            </li>
-
-            <li data-aos="fade-up" data-aos-delay="200">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2"
-                class="collapsed">What are the benefits of backing a project on SeedVenture? <i
-                  class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
-                <p>
-                  Backing a project on SeedVenture allows you to support innovative ideas and creative endeavors. You often get access to exclusive rewards or perks depending on your level of support. Additionally, you can be part of a community that shares your interests and values.
-                </p>
-              </div>
-            </li>
-
-            <li data-aos="fade-up" data-aos-delay="300">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3"
-                class="collapsed">Can I trust the projects listed on SeedVenture? <i
-                  class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
-                <p>
-                  While SeedVenture strives to ensure the integrity of the projects listed on its platform, there is always a level of risk involved in crowdfunding. It's essential to research the project creator, read project updates, and assess the feasibility of the project before pledging your support. Kickstarter provides guidelines for creators and offers some level of protection for backers, but there are no guarantees that every project will succeed.
-                </p>
-              </div>
-            </li>
-
-            <li data-aos="fade-up" data-aos-delay="400">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-4"
-                class="collapsed">What happens if a project I backed on SeedVenture doesn't meet its funding goal? <i
-                  class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
-                <p>
-                  If a project fails to meet its funding goal by the deadline, no money is collected from backers, and the project is not funded. In this case, backers get their money back, and the project creator does not receive any funds. The project creator may choose to relaunch the project with adjustments or seek alternative funding sources.
-                </p>
-              </div>
-            </li>
-
-          </ul>
-        </div>
-
-      </div>
-    </section><!-- End Frequently Asked Questions Section -->
-
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Contact</h2>
-          <p>If you have any questions or you want to contact us here is our info:</p>
-        </div>
-
-        <div class="row">
-
-          <div class="col-lg-5 d-flex align-items-stretch">
-            <div class="info">
-              <div class="address">
-                <i class="bi bi-geo-alt"></i>
-                <h4>Location:</h4>
-                <p>C. de Mejorada del Campo 38, Arroyo Culebrero, Madrid</p>
-              </div>
-
-              <div class="email">
-                <i class="bi bi-envelope"></i>
-                <h4>Email:</h4>
-                <p>jose13.villagran@gmail.com</p>
-              </div>
-
-              <div class="phone">
-                <i class="bi bi-phone"></i>
-                <h4>Call:</h4>
-                <p>+34 651 16 44 45</p>
-              </div>
-
-
-
-
-              <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3042.057217866696!2d-3.791634387168582!3d40.31888766146755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd418bd203a89c3f%3A0x2c5903f6b6a3dfa8!2sC.%20de%20Mejorada%20del%20Campo%2C%2038%2C%2028914%20Legan%C3%A9s%2C%20Madrid!5e0!3m2!1ses!2ses!4v1707560960440!5m2!1ses!2ses"
-              frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
-            </div>
-
-          </div>
-
-          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-              <div class="row">
-                <div class="form-group col-md-6">
-                  <label for="name">Your Name</label>
-                  <input type="text" name="name" class="form-control" id="name" required>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="name">Your Email</label>
-                  <input type="email" class="form-control" name="email" id="email" required>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="name">Subject</label>
-                <input type="text" class="form-control" name="subject" id="subject" required>
-              </div>
-              <div class="form-group">
-                <label for="name">Message</label>
-                <textarea class="form-control" name="message" rows="10" required></textarea>
-              </div>
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
-            </form>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Contact Section -->
-
-  </main><!-- End #main -->
-
+  </main>
   <!-- ======= Footer ======= -->
   <footer id="footer">
 
@@ -1246,9 +718,6 @@ C318.115,0,375.068,22.126,419.404,58.936z"></path>
     const correctUser = "diego";
     const correctPassword = "1234";
 
-    const adminUser = "miguel";
-    const adminPassword = "5678";
-
     // Recoger los datos del formulario
     const form = $('.form');
     const emailInput = $('#emailInput');
@@ -1266,18 +735,14 @@ C318.115,0,375.068,22.126,419.404,58.936z"></path>
       // Comprobar si los valores son correctos
       if (user === correctUser && pass === correctPassword) {
         // Redirigir a la página de perfil
-        window.location.href = "landingPage.html";
+        window.location.href = "profile.html";
         form[0].reset();
-      } else if (user == adminUser && pass == adminPassword){
-        // Redirigir a la página de administrador
-        window.location.href = "admin-page.html";
-        form[0].reset();
-
       } else {
         // Si no son correctos, mostrar un mensaje de error
         alert("Invalid username or password");
       }
     });
+
   });
 </script>
 
