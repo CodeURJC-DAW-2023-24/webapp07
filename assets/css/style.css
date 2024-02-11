@@ -1262,6 +1262,42 @@ section {
 .portfolio-details .portfolio-description p {
   padding: 0;
 }
+.portfolio-details {
+  padding: 50px 0;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.portfolio-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.portfolio-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #3ae977;
+  margin-bottom: 20px;
+}
+
+.portfolio-category {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 5px;
+}
+
+.portfolio-form-input {
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+}
 
 /*--------------------------------------------------------------
 # Team
