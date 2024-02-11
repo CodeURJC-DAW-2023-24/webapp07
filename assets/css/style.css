@@ -135,6 +135,7 @@ h6 {
   border: none;
   cursor: pointer;
   transition: 400ms;
+  background-color: #1cb98b;
 }
 
 .buttonnd .textnd {
@@ -142,6 +143,10 @@ h6 {
   font-weight: 700;
   font-size: 3em;
   transition: 400ms;
+}
+
+.buttonnd:hover {
+  background-color: #169e75;
 }
 
 /*--------------------------------------------------------------
@@ -225,6 +230,7 @@ h6 {
   display: flex;
   list-style: none;
   align-items: center;
+  gap: 20px;
 }
 
 .navbar li {
@@ -292,7 +298,7 @@ h6 {
 }
 
 .navbar .dropdown ul li {
-  min-width: 200px;
+  min-width: 150px;
 }
 
 .navbar .dropdown ul a {
@@ -364,9 +370,9 @@ h6 {
 }
 
 .profile-img {
-  width: 45px;
+  width: 35px;
   /* Ancho de la imagen de perfil */
-  height: 45px;
+  height: 35px;
   /* Altura de la imagen de perfil */
   border-radius: 50%;
   /* Borde redondeado para una apariencia circular */
@@ -378,10 +384,38 @@ h6 {
   display: inline-block;
 }
 
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.nav-img {
+  width: 20px;
+  height: 20px;
+  vertical-align:bottom;
+  filter: invert(100%);
+}
+
+
+
+.nav-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  /* Color verde personalizado */
+  margin: auto;
+  /* Margen superior e inferior de 50px, centrado horizontalmente */
+  margin-top: 2%;
+  margin-left: 10%;
+}
+
 .option-img {
   width: 25px;
   height: 25px;
-  filter: grayscale(100%) invert(100%) brightness(1000%) sepia(100%) saturate(10000%) hue-rotate(140deg);
 }
 
 .option-text {
@@ -395,6 +429,15 @@ h6 {
   /* Margen superior e inferior de 50px, centrado horizontalmente */
   margin-left: 20%;
 }
+
+#signup {
+  cursor: pointer;
+}
+
+#login {
+  cursor: pointer;
+}
+
 
 /**
 * Mobile Navigation 
@@ -1219,6 +1262,42 @@ section {
 .portfolio-details .portfolio-description p {
   padding: 0;
 }
+.portfolio-details {
+  padding: 50px 0;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.portfolio-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.portfolio-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #3ae977;
+  margin-bottom: 20px;
+}
+
+.portfolio-category {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 5px;
+}
+
+.portfolio-form-input {
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+}
 
 /*--------------------------------------------------------------
 # Team
@@ -1316,6 +1395,10 @@ section {
 
 .team .member .social a+a {
   margin-left: 8px;
+}
+
+.portfolioText{
+  color: #1cb98b;
 }
 
 /*--------------------------------------------------------------
@@ -2337,4 +2420,171 @@ section {
     transform: scale(0.8);
     opacity: 0;
   }
+}
+
+/*Boton todos los proyectos*/
+.btn-primary {
+  width: 150px; /* Ajusta el ancho según tus necesidades */
+  background-color: #3ae977; /* Cambia el color de fondo a verde */
+  color: white; /* Cambia el color del texto a blanco */
+  margin: 0 auto; /* Centra horizontalmente */
+}
+/*Barra busqueda*/
+.search-form {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5%;
+}
+
+.search-form input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  font-size: 16px;
+  width: 80%;
+}
+
+.search-form button {
+  padding: 10px 15px;
+  background-color: #1cb98b;
+  color: #fff;
+  border: none;
+  border-radius: 5px 5px 5px 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.search-form button:hover {
+  background-color: #179e72;
+}
+
+/* Estilo para el icono dentro del botón */
+.search-form button i {
+  font-size: 18px;
+}
+
+/* Estilo para los botones de filtro */
+.filter-button {
+  padding: 10px 15px;
+  margin-left: 5px;
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.filter-button:hover {
+  background-color: #e0e0e0;
+}
+
+/* COMENTARIOS */
+.comments-section {
+  margin-top: 50px;
+  width: 100%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.comments-section h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.comment-form textarea {
+  width: 100%;
+  height: 200px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+
+.comment-form button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #24d361;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.profile-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+
+.comment-text {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+
+
+.comment-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #f2f2f2;
+  padding: 15px;
+  border-radius: 5px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+
+.comment-author {
+  font-weight: bold;
+  font-size: 14px;
+  color: #777;
+}
+
+.reply-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.reply-btn {
+  background-color: #3ae977;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reply-container .reply-container {
+  margin-left: 30px;
+}
+
+.profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
 }
