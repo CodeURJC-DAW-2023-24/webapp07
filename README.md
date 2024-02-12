@@ -8,6 +8,8 @@
 
 <h3 align="center">
 	<a href="#phase-0">Phase 0</a>
+	<span> · </span>
+	<a href="#phase-1">Phase 1</a>
 </h3>
 
 ---
@@ -88,3 +90,15 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 </h3>
 
 - **Recommendation:** Users will be recommended projects which they are likely to donate to. This will be made using a greedy algorithm, that allows a 1% less likeliness between users' previous donations in each iteration, until a sufficient numbers of users are encountered to make the suggestions.
+
+<h1 align="center" id="phase-1">
+  📏 Phase 1
+</h1>
+
+<h2>
+  📸 Screenshots
+</h2>
+
+<h2>
+  🚢 Navigation diagram
+</h2>
