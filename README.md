@@ -102,9 +102,17 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/1cdc5f7d-3c64-4752-b205-07273abb9c00">
 </p>
 
+**Main page:** On this screen, you can see the options to log in and register, as well as access information about the page such as collaborators, the team, contact, and others.
+
+---
+
 <p align="center">
 	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/124e07bb-7eb8-4ff7-951f-62c6649acfa2">
 </p>
+
+**Trending projects:** By scrolling the main page, the user will see the most popular projects at the time, which can be opened to see more information about it. If the user is logged, the page will show personalised reccomendations.
+
+---
 
 <p align="center">
 	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/d905932b-09b8-4746-9e08-3b7149a9446e">
@@ -126,9 +134,17 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/ca0f55a0-6486-4e41-be6c-05a8af983b4d">
 </p>
 
+**Project:** This page shows more information about a project, besides its graphics and statistics.
+
+---
+
 <p align="center">
 	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/d5f57c4e-5115-4c02-bd09-21f607a7397c">
 </p>
+
+**Dashboard:** This page allows users to search and filter over the different active projects.
+
+---
 
 <p align="center">
 	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/105402e3-3002-4c97-a89e-c65c691f068c">
