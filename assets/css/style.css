@@ -2222,7 +2222,7 @@ section {
 
 .ui-bookmark {
   --icon-size: 24px;
-  --icon-secondary-color: rgb(77, 77, 77);
+  --icon-secondary-color: rgb(255, 255, 255);
   --icon-hover-color: rgb(97, 97, 97);
   --icon-primary-color: gold;
   --icon-circle-border: 1px solid var(--icon-primary-color);
