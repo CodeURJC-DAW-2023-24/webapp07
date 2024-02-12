@@ -430,4 +430,136 @@
 
 </body>
 
+<script>
+  $(document).ready(function () {
+    $('#login').on('click', function () {
+      $('#login-modal').show();
+    });
+
+    $('#signup').on('click', function () {
+      $('#signup-modal').show();
+    });
+
+    $('#signUpredirect').on('click', function () {
+      $('#login-modal').show();
+      $('#signup-modal').show();
+    });
+
+    $('#closeButtonLog').on('click', function () {
+      $('#login-modal').hide();
+    });
+
+    $('#closeButtonSign').on('click', function () {
+      $('#signup-modal').hide();
+    });
+
+    $(window).on('click', function (event) {
+      if (event.target == $('#login-modal')[0] || event.target == $('#signup-modal')[0]) {
+        $('#login-modal').hide();
+        $('#signup-modal').hide();
+      }
+    });
+
+    $('#passwordVisibleSign').on('click', function () {
+      var passwordInput = $('#passwordInputSign');
+      var passwordInputConfirmation = $('#passwordInputSignConf');
+      if (passwordInput.attr('type') === 'password') {
+        passwordInput.attr('type', 'text');
+        passwordInputConfirmation.attr('type', 'text');
+      } else {
+        passwordInput.attr('type', 'password');
+        passwordInputConfirmation.attr('type', 'password');
+      }
+    });
+
+    $('#passwordVisibleLog').on('click', function () {
+      var passwordInput = $('#passwordInputLog');
+      if (passwordInput.attr('type') === 'password') {
+        passwordInput.attr('type', 'text');
+      } else {
+        passwordInput.attr('type', 'password');
+      }
+    });
+
+    // Contraseña y usuario administrador
+    const correctUser = "diego";
+    const correctPassword = "1234";
+
+    const adminUser = "miguel";
+    const adminPassword = "5678";
+
+    // Recoger los datos del formulario
+    const form = $('.form');
+    const emailInput = $('#emailInput');
+    const passwordInput = $('#passwordInputLog');
+
+    // Añadir una función al formulario para que se ejecute cuando se envíe
+    form.on('submit', function (event) {
+      // Prevenir que el formulario se envíe sin comprobación
+      event.preventDefault();
+
+      // Recoger los valores de los inputs
+      const user = emailInput.val();
+      const pass = passwordInput.val();
+
+      // Comprobar si los valores son correctos
+      if (user === correctUser && pass === correctPassword) {
+        // Redirigir a la página de perfil
+        window.location.href = "landingPage.html";
+        form[0].reset();
+
+
+        // Seleccionar el elemento con id "navbar" y modificar su contenido
+        $(".navbar").html(`
+        <ul>
+          <li class="li-nav">
+            <a class="nav-container" href="landingPage.html">
+              <img class="nav-img" src="assets/img/profile/dashboard.png">
+              <p class="nav-text">Dashboard</p>
+            </a>
+          </li>
+          <li class="li-nav">
+            <a class="nav-container" href="ranking.html">
+              <img class="nav-img" src="assets/img/profile/ranking.png">
+              <p class="nav-text">Ranking</p>
+            </a>
+          </li>
+          <li class="li-nav">
+            <a class="nav-container" href="create-project.html">
+              <img class="nav-img" src="assets/img/profile/upload.png">
+              <p class="nav-text">Upload proyect</p>
+            </a>
+          </li>
+          <li class="dropdown"><a href="#"><img class="profile-img" src="assets/img/profile/user_icon2.jpg" alt="Foto de Perfil"></a>
+            <ul>
+              <li><a href="user-details.html">
+                <img class="option-img" src="assets/img/profile/user.png">
+                <p class="option-text">Profile</p>
+              </a></li>
+              </a></li>
+              <li><a href="index.html">
+                <img class="option-img" src="assets/img/profile/logout.png">
+                <p class="option-text">Log out</p>
+              </a></li>
+            </ul>
+          </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+        `);
+
+
+
+      } else if (user == adminUser && pass == adminPassword){
+        // Redirigir a la página de administrador
+        window.location.href = "admin-page.html";
+        form[0].reset();
+
+      } else {
+        // Si no son correctos, mostrar un mensaje de error
+        alert("Invalid username or password");
+      }
+    });
+  });
+</script>
+
 </html>
