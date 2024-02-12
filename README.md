@@ -98,7 +98,43 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 <h2>
   📸 Screenshots
 </h2>
+<p align="center">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/1cdc5f7d-3c64-4752-b205-07273abb9c00">
+</p>
+
+<p align="center">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/124e07bb-7eb8-4ff7-951f-62c6649acfa2">
+</p>
+
+<p align="center">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/d905932b-09b8-4746-9e08-3b7149a9446e">
+</p>
+
+<p align="center">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/217779be-7c87-4e61-889e-b85f6ec58384">
+</p>
+
+<p align="center">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/ca0f55a0-6486-4e41-be6c-05a8af983b4d">
+</p>
+
+<p align="center">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/d5f57c4e-5115-4c02-bd09-21f607a7397c">
+</p>
+
+<p align="center">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/b3c2ea67-d926-485a-8b4b-e493282ca32d">
+</p>
+
+<p align="center">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/ad15a0d2-a678-43ab-80a1-67adf74b89cc">
+</p>
+
+---
 
 <h2>
   🚢 Navigation diagram
 </h2>
+<p align="center">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/192ff1e6-82e0-47b0-895d-e67bd5c9b057">
+</p>
