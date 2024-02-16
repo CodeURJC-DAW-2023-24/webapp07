@@ -44,7 +44,7 @@ public class ProjectController {
     @RequestMapping("/portfolio-details/{id}")
     public String home(Model model, @PathVariable String id) {
         model.addAttribute("project", portfolio.get(id));
-        return "/portfolio-details";
+        return "project-details";
     }
 
 
