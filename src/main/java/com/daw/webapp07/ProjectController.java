@@ -23,7 +23,7 @@ public class ProjectController {
     }
 
 
-    @GetMapping("/inner-page")
+    @GetMapping(value={"/inner-page","/"})
     public String innerPage(Model model) {
         model.addAttribute("projects", portfolio.values());
         return "inner-page";
