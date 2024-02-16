@@ -55,7 +55,7 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link   scrollto" href="#portfolio">Portfolio</a></li>
+          <li><a class="nav-link   scrollto" href="#portfolio">Projects</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
           <li><a class="nav-link scrollto" href="#team">Team</a></li>
@@ -138,7 +138,6 @@
         </div>
 
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-          <a href="portfolio-details.html">
             <div class="col-lg-4 col-md-6 portfolio-item filter-app">
               <div class="portfolio-img"><img src="assets/img/kf/MENU-DONER-KEBAP-7.jpg" class="img-fluid" alt=""></div>
               <div class="portfolio-info">
@@ -512,7 +511,7 @@
               </div>
 
               <div class="progress">
-                <span class="skill">Jorge_madref******_salvaje_69 <i class="val">17.898,88€</i></span>
+                <span class="skill">Jorge_salvaje_69 <i class="val">17.898,88€</i></span>
                 <div class="progress-bar-wrap">
                   <div class="progress-bar" role="progressbar" aria-valuenow="17.451" aria-valuemin="0" aria-valuemax="100">
                   </div>
@@ -528,7 +527,7 @@
               </div>
               
               <div class="progress">
-                <span class="skill">Alexia_no_se_calla <i class="val">1.243,36€</i></span>
+                <span class="skill">Alexia_calla <i class="val">1.243,36€</i></span>
                 <div class="progress-bar-wrap">
                   <div class="progress-bar" role="progressbar" aria-valuenow="1.212" aria-valuemin="0" aria-valuemax="100">
                   </div>
@@ -646,7 +645,7 @@
               <div class="member-info">
                 <h4>Diego Isaac Fernández</h4>
                 <span>Chief Executive Officer</span>
-                <p>Mas vale pajaro en mano que sida en el ano</p>
+                <p>Si la vida te da limones, haz limonada</p>
                 <div class="social">
                   <a href=""><i class="ri-twitter-fill"></i></a>
                   <a href=""><i class="ri-facebook-fill"></i></a>
@@ -664,7 +663,7 @@
               <div class="member-info">
                 <h4>Fernando Alonso Calderon</h4>
                 <span>Product Manager</span>
-                <p>La vida es una lenteja o las tomas o las dejas</p>
+                <p>Mejor arrepentirse</p>
                 <div class="social">
                   <a href=""><i class="ri-twitter-fill"></i></a>
                   <a href=""><i class="ri-facebook-fill"></i></a>
@@ -683,7 +682,7 @@
               <div class="member-info">
                 <h4>Marcos Hernangil Prats</h4>
                 <span>Chief Operating Officer</span>
-                <p>Tirar la puerta por la ventana</p>
+                <p>El software es progreso</p>
                 <div class="social">
                   <a href=""><i class="ri-twitter-fill"></i></a>
                   <a href=""><i class="ri-facebook-fill"></i></a>
@@ -702,7 +701,7 @@
               <div class="member-info">
                 <h4>Pablo Requejo Postlbauer</h4>
                 <span>Chief Creative Officer</span>
-                <p>Estoy haciendo la pagina web yo solo</p>
+                <p>Si bebes no conduzcas</p>
                 <div class="social">
                   <a href=""><i class="ri-twitter-fill"></i></a>
                   <a href=""><i class="ri-facebook-fill"></i></a>
@@ -726,7 +725,7 @@
               <div class="member-info">
                 <h4>Miguel Ángel García</h4>
                 <span>Chief Technology Officer</span>
-                <p>Menos mal que no hemos pillao coche</p>
+                <p>Apostamos por el talento</p>
                 <div class="social">
                   <a href=""><i class="ri-twitter-fill"></i></a>
                   <a href=""><i class="ri-facebook-fill"></i></a>
@@ -1246,6 +1245,9 @@ C318.115,0,375.068,22.126,419.404,58.936z"></path>
     const correctUser = "diego";
     const correctPassword = "1234";
 
+    const adminUser = "miguel";
+    const adminPassword = "5678";
+
     // Recoger los datos del formulario
     const form = $('.form');
     const emailInput = $('#emailInput');
@@ -1265,6 +1267,53 @@ C318.115,0,375.068,22.126,419.404,58.936z"></path>
         // Redirigir a la página de perfil
         window.location.href = "landingPage.html";
         form[0].reset();
+
+
+        // Seleccionar el elemento con id "navbar" y modificar su contenido
+        $("#navbar").html(`
+        <ul>
+          <li class="li-nav">
+            <a class="nav-container" href="landingPage.html">
+              <img class="nav-img" src="assets/img/profile/dashboard.png">
+              <p class="nav-text">Dashboard</p>
+            </a>
+          </li>
+          <li class="li-nav">
+            <a class="nav-container" href="ranking.html">
+              <img class="nav-img" src="assets/img/profile/ranking.png">
+              <p class="nav-text">Ranking</p>
+            </a>
+          </li>
+          <li class="li-nav">
+            <a class="nav-container" href="create-project.html">
+              <img class="nav-img" src="assets/img/profile/upload.png">
+              <p class="nav-text">Upload proyect</p>
+            </a>
+          </li>
+          <li class="dropdown"><a href="#"><img class="profile-img" src="assets/img/profile/user_icon2.jpg" alt="Foto de Perfil"></a>
+            <ul>
+              <li><a href="user-details.html">
+                <img class="option-img" src="assets/img/profile/user.png">
+                <p class="option-text">Profile</p>
+              </a></li>
+              </a></li>
+              <li><a href="index.html">
+                <img class="option-img" src="assets/img/profile/logout.png">
+                <p class="option-text">Log out</p>
+              </a></li>
+            </ul>
+          </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+        `);
+
+
+
+      } else if (user == adminUser && pass == adminPassword){
+        // Redirigir a la página de administrador
+        window.location.href = "admin-page.html";
+        form[0].reset();
+
       } else {
         // Si no son correctos, mostrar un mensaje de error
         alert("Invalid username or password");
