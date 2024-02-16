@@ -6,17 +6,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 @Controller
-public class WebAppController {
+public class ProjectController {
 
     HashMap<String, Project> portfolio;
-    public WebAppController(){
+    public ProjectController(){
         portfolio = new HashMap<>();
         Project p = new Project("1", "Proyecto 1", "Descripcion 1", "Owner 1");
+        p.addImage("/img/kf/OIG2.jpg");
+        p.addImage("/img/kf/OIG4.jpg");
+        p.addImage("/img/kf/MENU-DONER-KEBAP-7.jpg");
+
         portfolio.put("1", p);
     }
 
@@ -39,7 +41,7 @@ public class WebAppController {
         return "inner-page";
     }
 
-    @RequestMapping("/portfolio-datails/{id}")
+    @RequestMapping("/portfolio-details/{id}")
     public String home(Model model, @PathVariable String id) {
         model.addAttribute("project", portfolio.get(id));
         return "/portfolio-details";

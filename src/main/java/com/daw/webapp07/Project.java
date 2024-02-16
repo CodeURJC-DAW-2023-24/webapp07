@@ -1,14 +1,13 @@
 package com.daw.webapp07;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Project {
     private String id;
     private String name;
     private String description;
     private String owner;
-    private Date startDate;
+    private String date;
     private String category;
     private String url;
     private ArrayList<String> images;
@@ -16,12 +15,12 @@ public class Project {
     private int currentAmount;
     private ArrayList<Inversion> inversions;
 
-    public Project(String id, String name, String description, String owner, Date startDate, String category, String url, ArrayList<String> images, int goal) {
+    public Project(String id, String name, String description, String owner, String startString, String category, String url, ArrayList<String> images, int goal) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.owner = owner;
-        this.startDate = startDate;
+        this.date = startString;
         this.category = category;
         this.url = url;
         this.images = images;
@@ -36,6 +35,13 @@ public class Project {
         this.description = description;
         this.owner = owner;
         this.category = "";
+        this.url = "";
+        this.images = new ArrayList<>();
+        this.goal = 206000;
+        this.currentAmount = 1543;
+        this.inversions = new ArrayList<>();
+        this.date = "";
+        
     }
 
     public String getId() {
@@ -69,15 +75,6 @@ public class Project {
     public void setOwner(String owner) {
         this.owner = owner;
     }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
     public String getCategory() {
         return category;
     }
@@ -118,6 +115,14 @@ public class Project {
         this.currentAmount = currentAmount;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public void addInversion(Inversion inversion) {
         this.inversions.add(inversion);
         this.currentAmount += inversion.getAmount();
@@ -125,5 +130,9 @@ public class Project {
 
     public ArrayList<Inversion> getInversions() {
         return inversions;
+    }
+
+    public void addImage(String image) {
+        this.images.add(image);
     }
 }
