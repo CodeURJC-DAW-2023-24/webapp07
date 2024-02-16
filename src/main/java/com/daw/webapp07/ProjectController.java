@@ -23,18 +23,6 @@ public class ProjectController {
     }
 
 
-
-    @GetMapping("/index")
-    public String index(Model model) {
-        //model.addAttribute("nombre", "Mundo");
-        return "index";
-    }
-
-    @GetMapping("/login")
-    public String login(Model model) {
-        //model.addAttribute()
-        return "login";
-    }
     @GetMapping("/inner-page")
     public String innerPage(Model model) {
         model.addAttribute("projects", portfolio.values());
