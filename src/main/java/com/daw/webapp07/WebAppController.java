@@ -28,6 +28,11 @@ public class WebAppController {
         return "index";
     }
 
+    @GetMapping("/login")
+    public String login(Model model) {
+        //model.addAttribute()
+        return "login";
+    }
     @GetMapping("/inner-page")
     public String innerPage(Model model) {
         model.addAttribute("projects", portfolio.values());
