@@ -8,7 +8,7 @@
     <section id="breadcrumbs" class="breadcrumbs">
         <br><br>
         <div class="container">
-            <h2>{{name}}</h2>
+            <h2>{{project.name}}</h2>
 
         </div>
     </section><!-- End Breadcrumbs -->
@@ -54,19 +54,11 @@
                 <div class="col-lg-8">
                     <div class="portfolio-details-slider swiper">
                         <div id = "carrusel" class="swiper-wrapper align-items-center">
-
-                            <div class="swiper-slide">
-                                <img src="assets/img/kf/MENU-DONER-KEBAP-7.jpg" alt="">
-                            </div>
-
-                            <div class="swiper-slide">
-                                <img src="assets/img/kf/OIG2.jpg" alt="">
-                            </div>
-
-                            <div class="swiper-slide">
-                                <img src="assets/img/kf/OIG4.jpg" alt="">
-                            </div>
-
+                            {{#project.images}}
+                                <div class="swiper-slide">
+                                    <img src="{{.}}" alt="">
+                                </div>
+                            {{/project.images}}
                         </div>
                         <div class="swiper-pagination"></div>
                     </div>
@@ -74,18 +66,18 @@
 
                 <div class="col-lg-4">
                     <div class="portfolio-info">
-                        <h3>Kebab Finder</h3>
+                        <h3>{{project.name}}</h3>
                         <ul>
-                            <li><strong>Category</strong>: {{category}}</li>
-                            <li><strong>Owner</strong>: {{owner}}</li>
-                            <li><strong>Project date</strong>: {{date}}</li>
-                            <li><strong>Project URL</strong>: <a href="#">{{url}}</a></li>
+                            <li><strong>Category</strong>: {{project.category}}</li>
+                            <li><strong>Owner</strong>: {{project.owner}}</li>
+                            <li><strong>Project date</strong>: {{project.date}}</li>
+                            <li><strong>Project URL</strong>: <a href="#">{{project.url}}</a></li>
                         </ul>
                     </div>
                     <div class="portfolio-description">
                         <h2>About this project</h2>
                         <p>
-                            {{description}} <br><br>
+                            {{project.description}} <br><br>
                         </p>
                     </div>
                 </div>
@@ -252,71 +244,11 @@
             </div>
         </div>
 
-
-
-
     </section><!-- End Portfolio Details Section -->
 
 </main><!-- End #main -->
 
-<!-- ======= Footer ======= -->
-<footer id="footer">
-
-    <div class="footer-top">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-lg-3 col-md-6 footer-contact">
-                    <h3>SeedVentures</h3>
-                    <p>
-                        C. de Mejorada del Campo, 38 <br>
-                        Arroyo Culebrero, Madrid<br>
-                        Spain <br><br>
-                        <strong>Phone:</strong> +34 651 16 44 45<br>
-                        <strong>Email:</strong> jose13.villagran@gmail.com<br>
-                    </p>
-                </div>
-
-                <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Useful Links</h4>
-                    <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#about">About us</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#services">Services</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#services">Proyect creations</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#services">Proyect contributions</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#services">Networking</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#services">Proyect financiation</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Our Social Networks</h4>
-                    <div class="social-links mt-3">
-                        <a href="https://www.chess.com/member/islondock" class="twitter"><i class="bx bxl-twitter"></i></a>
-                        <a href="https://open.spotify.com/user/islondock" class="facebook"><i class="bx bxl-facebook"></i></a>
-                        <a href="https://www.instagram.com/josee_roobles/" class="instagram"><i class="bx bxl-instagram"></i></a>
-                        <a href="https://www.roblox.com/users/852389310/profile" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="container footer-bottom clearfix">
-        <div class="copyright">
-            &copy; Copyright <strong><span>SeedVentures</span></strong>. All Rights Reserved
-        </div>
-    </div>
-</footer><!-- End Footer -->
+{{> footer}}
 
 <div id="preloader"></div>
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
@@ -484,4 +416,5 @@
         });
     });
 </script>
+
 
