@@ -1,8 +1,45 @@
 {{> header}}
 
+<script>
+    $(document).ready(function () {
+        $('#passwordVisibleLog').on('click', function () {
+            var passwordInput = $('#passwordInputLog');
+            if (passwordInput.attr('type') === 'password') {
+                passwordInput.attr('type', 'text');
+            } else {
+                passwordInput.attr('type', 'password');
+            }
+        });
+
+    });
+</script>
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
+                 data-aos="fade-up" data-aos-delay="200">
+                <h1>SeedVentures</h1>
+                <h2>Seed change, grow dreams <br> Your investment, their revolution</h2>
+                <div class="d-flex justify-content-center justify-content-lg-start">
+                    <a href="/signup" id="signup" class="btn-get-started scrollto">Sign Up</a>
+                    <a href="/video/rickroll.mp4" class="glightbox btn-watch-video"><i
+                            class="bi bi-play-circle"></i><span>Watch Video</span></a>
+                </div>
+            </div>
+            <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+                <img src="/img/hero-img.png" class="img-fluid animated" alt="">
+            </div>
+        </div>
+    </div>
+
+</section><!-- End Hero -->
+
 <div id="login-modal" class="login-modal">
-    <form name="loginForm" action="/login" method="post" onsubmit="return validarFormulario()" class="form">
-        <button type="button" id="closeButtonLog" class="close-button">X</button>
+    <form action="/login" method="post"  class="form">
+        <button href="/inner-page" type="button" id="closeButtonLog" class="close-button">X</button>
         <div class="flex-column">
             <label for="email">Email </label>
         </div>
@@ -46,6 +83,7 @@
             </div>
             <span class="span">Forgot password?</span>
         </div>
+        <input type="hidden" name = "_csrf" value="{{token}}">
         <button type="submit" class="button-submit">Sign In</button>
         <p class="p">Don't have an account? <span id="signUpredirect" class="span">Sign Up</span>
 
@@ -99,38 +137,5 @@ C318.115,0,375.068,22.126,419.404,58.936z"></path>
 </div>
 
 
-{{> footer}}
-
-<script>
-    $(document).ready(function () {
-
-        $('#passwordVisibleSign').on('click', function () {
-            var passwordInput = $('#passwordInputSign');
-            var passwordInputConfirmation = $('#passwordInputSignConf');
-            if (passwordInput.attr('type') === 'password') {
-                passwordInput.attr('type', 'text');
-                passwordInputConfirmation.attr('type', 'text');
-            } else {
-                passwordInput.attr('type', 'password');
-                passwordInputConfirmation.attr('type', 'password');
-            }
-        });
-
-        function validarFormulario() {
-            var email = document.forms["loginForm"]["email"].value;
-            var password = document.forms["loginForm"]["password"].value;
 
 
-            if (email == "") {
-                alert("El campo email es obligatorio");
-                return false;
-            }
-            if (password == "") {
-                alert("El campo password es obligatorio");
-                return false;
-            }
-            return true;
-
-        }
-    });
-</script>

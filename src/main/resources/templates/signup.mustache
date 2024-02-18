@@ -1,7 +1,48 @@
 {{> header}}
 
+<script>
+    $(document).ready(function () {
+        $('#passwordVisibleSign').on('click', function () {
+            var passwordInput = $('#passwordInputSign');
+            var passwordConfirmation = $('#passwordInputSignConf');
+
+            if (passwordInput.attr('type') === 'password') {
+                passwordInput.attr('type', 'text');
+                passwordConfirmation.attr('type', 'text');
+            } else {
+                passwordInput.attr('type', 'password');
+                passwordConfirmation.attr('type', 'password');
+            }
+    });
+
+    });
+</script>
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
+                 data-aos="fade-up" data-aos-delay="200">
+                <h1>SeedVentures</h1>
+                <h2>Seed change, grow dreams <br> Your investment, their revolution</h2>
+                <div class="d-flex justify-content-center justify-content-lg-start">
+                    <a href="/signup" id="signup" class="btn-get-started scrollto">Sign Up</a>
+                    <a href="/video/rickroll.mp4" class="glightbox btn-watch-video"><i
+                            class="bi bi-play-circle"></i><span>Watch Video</span></a>
+                </div>
+            </div>
+            <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+                <img src="/img/hero-img.png" class="img-fluid animated" alt="">
+            </div>
+        </div>
+    </div>
+
+</section><!-- End Hero -->
+
 <div id="signup-modal" class="login-modal">
-    <form class="form">
+    <form action="/signup" method="post"  class="form">
         <button type="button" id="closeButtonSign" class="close-button">X</button>
         <div class="flex-column">
             <label>Name </label>
@@ -56,7 +97,7 @@
                         d="m304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0">
                 </path>
             </svg>
-            <input id="passwordInputSign" type="password" class="input" placeholder="Enter your Password">
+            <input id="passwordInputSign" type="password" class="input" name="password" placeholder="Enter your Password">
             <svg id="passwordVisibleSign" class="passwordVisible" viewBox="0 0 576 512" height="1em"
                  xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -77,7 +118,7 @@
                         d="m304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0">
                 </path>
             </svg>
-            <input id="passwordInputSignConf" type="password" class="input" placeholder="Enter your Password">
+            <input id="passwordInputSignConf" type="password" class="input" name="checkpassword" placeholder="Enter your Password">
         </div>
 
         <div class="flex-row">
@@ -136,67 +177,3 @@
 
 {{> footer}}
 
-<script>
-    $(document).ready(function () {
-        $('#passwordVisibleSign').on('click', function () {
-            var passwordInput = $('#passwordInputSign');
-            var passwordInputConfirmation = $('#passwordInputSignConf');
-            if (passwordInput.attr('type') === 'password') {
-                passwordInput.attr('type', 'text');
-                passwordInputConfirmation.attr('type', 'text');
-            } else {
-                passwordInput.attr('type', 'password');
-                passwordInputConfirmation.attr('type', 'password');
-            }
-        });
-
-        $('#passwordVisibleLog').on('click', function () {
-            var passwordInput = $('#passwordInputLog');
-            if (passwordInput.attr('type') === 'password') {
-                passwordInput.attr('type', 'text');
-            } else {
-                passwordInput.attr('type', 'password');
-            }
-        });
-
-        // Contraseña y usuario administrador
-        const correctUser = "diego";
-        const correctPassword = "1234";
-
-        const adminUser = "miguel";
-        const adminPassword = "5678";
-
-        function validarFormulario() {
-            var email = document.forms["loginForm"]["email"].value;
-            var password = document.forms["loginForm"]["password"].value;
-
-
-            if (email == "") {
-                alert("El campo email es obligatorio");
-                return false;
-            }
-            if (password == "") {
-                alert("El campo password es obligatorio");
-                return false;
-            }
-
-            // Comprobar si los valores son correctos
-            if (user === correctUser && pass === correctPassword) {
-                alert("HAY QUE REDIRECCIONAR A LA PÁGINA DE USUARIO LOGEADO");
-                return true;
-
-
-            } else if (user == adminUser && pass == adminPassword) {
-                alert("HAY QUE REDIRECCIONAR A LA PÁGINA DE USUARIO ADMINISTRADOR");
-                return true;
-
-
-            } else {
-                // Si no son correctos, mostrar un mensaje de error
-                alert("Invalid username or password");
-                return false;
-            }
-
-    }
-    });
-</script>
