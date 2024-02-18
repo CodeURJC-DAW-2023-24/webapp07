@@ -1,4 +1,4 @@
-package com.daw.webapp07;
+package com.daw.webapp07.model;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public class Project {
     private ArrayList<String> images;
     private int goal;
     private int currentAmount;
-    private ArrayList<Inversion> inversions;
+    //private ArrayList<Inversion> inversions;
 
     public Project(String id, String name, String description, String owner, String startString, String category, String url, ArrayList<String> images, int goal) {
         this.id = id;
@@ -26,7 +26,7 @@ public class Project {
         this.images = images;
         this.goal = goal;
         this.currentAmount = 0;
-        this.inversions = new ArrayList<>();
+        //this.inversions = new ArrayList<>();
     }
 
     public Project(String id, String name, String description, String owner) {
@@ -39,7 +39,7 @@ public class Project {
         this.images = new ArrayList<>();
         this.goal = 206000;
         this.currentAmount = 1543;
-        this.inversions = new ArrayList<>();
+        //this.inversions = new ArrayList<>();
         this.date = "";
         
     }
@@ -123,6 +123,7 @@ public class Project {
         this.date = date;
     }
 
+/*
     public void addInversion(Inversion inversion) {
         this.inversions.add(inversion);
         this.currentAmount += inversion.getAmount();
@@ -131,6 +132,8 @@ public class Project {
     public ArrayList<Inversion> getInversions() {
         return inversions;
     }
+
+ */
 
     public void addImage(String image) {
         this.images.add(image);
