@@ -3,13 +3,14 @@ package com.daw.webapp07.model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private Long id;
 
     private String name;
     private String description;
@@ -26,13 +27,12 @@ public class Project {
     private int currentAmount;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private ArrayList<Inversion> inversions;
+    private List<Inversion> inversions;
 
     public Project() {
     }
 
-    public Project(String id, String name, String description, String owner) {
-        this.id = id;
+    public Project( String name, String description, String owner) {
         this.name = name;
         this.description = description;
         this.owner = owner;
@@ -47,8 +47,7 @@ public class Project {
         this.currentAmount = 0;
     }
 
-    public Project(String id, String name, String description, String owner, String date, String category, String url, String image1, String image2, String image3, int goal, int currentAmount, ArrayList<Inversion> inversions) {
-        this.id = id;
+    public Project( String name, String description, String owner, String date, String category, String url, String image1, String image2, String image3, int goal, int currentAmount, ArrayList<Inversion> inversions) {
         this.name = name;
         this.description = description;
         this.owner = owner;
@@ -63,11 +62,11 @@ public class Project {
         this.inversions = inversions;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -163,7 +162,7 @@ public class Project {
         this.currentAmount += inversion.getAmount();
     }
 
-    public ArrayList<Inversion> getInversions() {
+    public List<Inversion> getInversions() {
         return inversions;
     }
 

@@ -18,16 +18,6 @@ public class ProjectController {
     @Autowired
     private ProjectRepository projectRepository;
 
-    public ProjectController(){
-        Project p = new Project("1", "Proyecto 1", "Descripcion 1", "Owner 1");
-        p.setImage1("/img/kf/OIG2.jpg");
-        p.setImage2("/img/kf/OIG4.jpg");
-        p.setImage3("/img/kf/MENU-DONER-KEBAP-7.jpg");
-
-        projectRepository.save(p);
-    }
-
-
     @GetMapping(value={"/inner-page","/"})
     public String innerPage(Model model) {
         model.addAttribute("projects", projectRepository.findAll());
