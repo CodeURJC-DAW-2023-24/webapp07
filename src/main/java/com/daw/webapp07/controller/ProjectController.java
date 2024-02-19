@@ -24,7 +24,6 @@ public class ProjectController {
         return "inner-page";
     }
 
-
     @RequestMapping("/project-details/{id}/")
     public String home(Model model, @PathVariable Long id) {
         Optional<Project> project = projectRepository.findById(id);
