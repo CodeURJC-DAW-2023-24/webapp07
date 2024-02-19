@@ -1,32 +1,34 @@
 package com.daw.webapp07.model;
 
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 
+@Entity
 public class Project {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
+
     private String name;
     private String description;
     private String owner;
     private String date;
     private String category;
     private String url;
-    private ArrayList<String> images;
+
+    private String image1;
+    private String image2;
+    private String image3;
+
     private int goal;
     private int currentAmount;
-    //private ArrayList<Inversion> inversions;
 
-    public Project(String id, String name, String description, String owner, String startString, String category, String url, ArrayList<String> images, int goal) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.owner = owner;
-        this.date = startString;
-        this.category = category;
-        this.url = url;
-        this.images = images;
-        this.goal = goal;
-        this.currentAmount = 0;
-        //this.inversions = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    private ArrayList<Inversion> inversions;
+
+    public Project() {
     }
 
     public Project(String id, String name, String description, String owner) {
@@ -34,14 +36,31 @@ public class Project {
         this.name = name;
         this.description = description;
         this.owner = owner;
-        this.category = "";
-        this.url = "";
-        this.images = new ArrayList<>();
-        this.goal = 206000;
-        this.currentAmount = 1543;
-        //this.inversions = new ArrayList<>();
+        this.inversions = new ArrayList<>();
+        this.category= "";
         this.date = "";
-        
+        this.url = "";
+        this.image1 = "";
+        this.image2 = "";
+        this.image3 = "";
+        this.goal = 0;
+        this.currentAmount = 0;
+    }
+
+    public Project(String id, String name, String description, String owner, String date, String category, String url, String image1, String image2, String image3, int goal, int currentAmount, ArrayList<Inversion> inversions) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.owner = owner;
+        this.date = date;
+        this.category = category;
+        this.url = url;
+        this.image1 = image1;
+        this.image2 = image2;
+        this.image3 = image3;
+        this.goal = goal;
+        this.currentAmount = currentAmount;
+        this.inversions = inversions;
     }
 
     public String getId() {
@@ -91,12 +110,28 @@ public class Project {
         this.url = url;
     }
 
-    public ArrayList<String> getImages() {
-        return images;
+    public String getImage1() {
+        return image1;
     }
 
-    public void setImages(ArrayList<String> images) {
-        this.images = images;
+    public void setImage1(String image1) {
+        this.image1 = image1;
+    }
+
+    public String getImage2() {
+        return image2;
+    }
+
+    public void setImage2(String image2) {
+        this.image2 = image2;
+    }
+
+    public String getImage3() {
+        return image3;
+    }
+
+    public void setImage3(String image3) {
+        this.image3 = image3;
     }
 
     public int getGoal() {
@@ -123,7 +158,6 @@ public class Project {
         this.date = date;
     }
 
-/*
     public void addInversion(Inversion inversion) {
         this.inversions.add(inversion);
         this.currentAmount += inversion.getAmount();
@@ -133,9 +167,4 @@ public class Project {
         return inversions;
     }
 
- */
-
-    public void addImage(String image) {
-        this.images.add(image);
-    }
 }

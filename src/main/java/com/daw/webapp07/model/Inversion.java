@@ -1,7 +1,12 @@
 package com.daw.webapp07.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+
+@Entity
 public class Inversion {
     private User user;
+    @ManyToOne
     private Project project;
     private int amount;
 
