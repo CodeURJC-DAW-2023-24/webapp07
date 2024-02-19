@@ -66,7 +66,7 @@ public class WebSecurityConfig {
                         // PUBLIC PAGES
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/signup").permitAll()
-                        .requestMatchers("/project-details/*").permitAll()
+                        .requestMatchers("/project-details/**").permitAll()
                         .requestMatchers("/inner-page").permitAll()
 
 
