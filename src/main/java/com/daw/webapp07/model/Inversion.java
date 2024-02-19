@@ -1,26 +1,33 @@
 package com.daw.webapp07.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 @Entity
 public class Inversion {
-    private User user;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @ManyToOne
+    private UserEntity user;
     @ManyToOne
     private Project project;
     private int amount;
 
-    public Inversion(User user, Project project, int amount) {
+    public Inversion() {
+    }
+
+    public Inversion(UserEntity user, Project project, int amount) {
         this.user = user;
         this.project = project;
         this.amount = amount;
     }
 
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
 

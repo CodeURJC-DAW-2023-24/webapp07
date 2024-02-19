@@ -1,10 +1,16 @@
 package com.daw.webapp07.service;
 
 
+import com.daw.webapp07.model.Project;
+import com.daw.webapp07.repository.InversionRepository;
+import com.daw.webapp07.repository.ProjectRepository;
+import com.daw.webapp07.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import com.daw.webapp07.security.WebSecurityConfig;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.PostConstruct;
@@ -12,30 +18,22 @@ import jakarta.annotation.PostConstruct;
 @Service
 public class DatabaseInitializer {
 
-    /*
     @Autowired
     private UserRepository userRepository;
-    */
-
+    @Autowired
+    private ProjectRepository projectRepository;
+    @Autowired
+    private InversionRepository inversionRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @PostConstruct
     public void init() {
-
-        // Sample projects
-
-
-       // bookRepository.save(new Book("SUEÑOS DE ACERO Y NEON",
-        //         "Los personajes que protagonizan este relato sobreviven en una sociedad en decadencia a la que, no obstante, lograrán devolver la posibilidad de un futuro. Año 2484. En un mundo dominado por las grandes corporaciones, solo un hombre, Jordi Thompson, detective privado deslenguado y vividor, pero de gran talento y sentido d..."));
-
-        // Sample users
-
-        /*
-        userRepository.save(new User("user1", passwordEncoder.encode("1234"), "USER"));
-        userRepository.save(new User("user2", passwordEncoder.encode("1234"), "USER"));
-
-         */
+        Project p = new Project("Proyecto 1", "Descripcion 1", "Owner 1");
+        p.setImage1("/img/kf/OIG2.jpg");
+        p.setImage2("/img/kf/OIG4.jpg");
+        p.setImage3("/img/kf/MENU-DONER-KEBAP-7.jpg");
+        projectRepository.save(p);
     }
 
 }

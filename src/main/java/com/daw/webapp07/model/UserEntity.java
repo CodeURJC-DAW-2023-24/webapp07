@@ -3,15 +3,10 @@ package com.daw.webapp07.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-@Entity(name = "USERS")
-public class User {
+@Entity
+public class UserEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,17 +15,19 @@ public class User {
     private String name;
 
     private String encodedPassword;
-
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
 
+    @OneToMany(cascade = CascadeType.ALL)
     private ArrayList<Inversion> inversions;
+
+    @OneToMany(cascade = CascadeType.ALL)
     private ArrayList<Project> projects;
 
-    public User() {
+    public UserEntity() {
     }
 
-    public User(String name, String encodedPassword, String... roles) {
+    public UserEntity(String name, String encodedPassword, String... roles) {
         this.name = name;
         this.encodedPassword = encodedPassword;
         this.roles = List.of(roles);
@@ -76,6 +73,14 @@ public class User {
 
     public void setProjects(ArrayList<Project> projects) {
         this.projects = projects;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
 
