@@ -30,9 +30,9 @@ public class DatabaseInitializer {
     @PostConstruct
     public void init() {
         Project p = new Project("Proyecto 1", "Descripcion 1", "Owner 1");
-        p.setImage1("/img/kf/OIG2.jpg");
-        p.setImage2("/img/kf/OIG4.jpg");
-        p.setImage3("/img/kf/MENU-DONER-KEBAP-7.jpg");
+        p.addImage("/img/kf/OIG2.jpg");
+        p.addImage("/img/kf/OIG4.jpg");
+        p.addImage("/img/kf/MENU-DONER-KEBAP-7.jpg");
         projectRepository.save(p);
     }
 
