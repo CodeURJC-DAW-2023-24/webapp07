@@ -8,6 +8,7 @@ import com.daw.webapp07.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.antlr.v4.runtime.misc.Pair;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,11 @@ import com.daw.webapp07.model.Project;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class ProjectController {
@@ -48,8 +53,24 @@ public class ProjectController {
         if (project.isEmpty()) {
             return "redirect:/";
         }
-        model.addAttribute("project",project.get());
+
+        List<String> base64Images = project.get().getImages().stream()
+                .map(image -> convertBlobToBase64(image.getImageFile()))
+                .collect(Collectors.toList());
+
+        model.addAttribute("project", project.get());
+        model.addAttribute("base64Images", base64Images);
+
         return "project-details";
+    }
+
+    private String convertBlobToBase64(Blob blob) {
+        try (InputStream inputStream = blob.getBinaryStream()) {
+            byte[] bytes = IOUtils.toByteArray(inputStream);
+            return Base64.getEncoder().encodeToString(bytes);
+        } catch (SQLException | IOException e) {
+            throw new RuntimeException("Error converting Blob to Base64", e);
+        }
     }
 
     @PostMapping("/create-project/new")

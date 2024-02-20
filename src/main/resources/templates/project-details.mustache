@@ -54,11 +54,11 @@
                 <div class="col-lg-8">
                     <div class="portfolio-details-slider swiper">
                         <div id = "carrusel" class="swiper-wrapper align-items-center">
-                            {{#project.images}}
+                            {{#base64Images}}
                                 <div class="swiper-slide">
-                                    <img src="{{.}}" alt="">
+                                    <img src="data:image;base64,{{.}}" alt="">
                                 </div>
-                            {{/project.images}}
+                            {{/base64Images}}
                         </div>
                         <div class="swiper-pagination"></div>
                     </div>

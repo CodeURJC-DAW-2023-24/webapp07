@@ -20,8 +20,8 @@ public class Project {
     private Category category;
     private String url;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> images;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Image> images;
 
     private int goal;
     private int currentAmount;
@@ -45,14 +45,14 @@ public class Project {
         this.currentAmount = 0;
     }
 
-    public Project( String name, String description, String owner, String date, Category category, String url, String image1, String image2, String image3, int goal, int currentAmount, ArrayList<Inversion> inversions) {
+    public Project( String name, String description, String owner, String date, Category category, String url, ArrayList<Image> images, int goal, int currentAmount, ArrayList<Inversion> inversions) {
         this.name = name;
         this.description = description;
         this.owner = owner;
         this.date = date;
         this.category = category;
         this.url = url;
-        this.images = new ArrayList<>(Arrays.asList(image1, image2, image3));
+        this.images = images;
         this.goal = goal;
         this.currentAmount = currentAmount;
         this.inversions = inversions;
@@ -105,15 +105,15 @@ public class Project {
         this.url = url;
     }
 
-    public List<String> getImages() {
+    public List<Image> getImages() {
         return images;
     }
 
-    public void setImages(List<String> images) {
+    public void setImages(List<Image> images) {
         this.images = images;
     }
 
-    public void addImage(String im){
+    public void addImage(Image im){
         this.images.add(im);
     }
     public int getGoal() {
