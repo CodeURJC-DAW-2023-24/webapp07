@@ -38,9 +38,14 @@ public class ProjectController {
 
     @PostMapping("/create-project/new")
     public String createBook(@RequestBody Project project, Model model) {
-
         projectRepository.save(project);
         return "inner-page";
+    }
+
+    @GetMapping(value={"/landing-page"})
+    public String landindPage(Model model) {
+
+        return "landing-page";
     }
 
 
