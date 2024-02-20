@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import jakarta.annotation.PostConstruct;
 
+import java.util.ArrayList;
+
 @Service
 public class DatabaseInitializer {
 
@@ -29,10 +31,17 @@ public class DatabaseInitializer {
 
     @PostConstruct
     public void init() {
-        Project p = new Project("Proyecto 1", "Descripcion 1", "Owner 1");
-        p.setImage1("/img/kf/OIG2.jpg");
-        p.setImage2("/img/kf/OIG4.jpg");
-        p.setImage3("/img/kf/MENU-DONER-KEBAP-7.jpg");
+        Project p = new Project(
+                "KebabFinder",
+                "Kebab Finder es una aplicación que te permite encontrar los mejores kebabs de tu ciudad. Podrás ver las opiniones de otros usuarios, ver la carta de los kebabs y hacer tus propias reseñas. Además, podrás solicitar un kebab a domicilio y pagar con tarjeta.",
+                "MarkiIndustries",
+                "28 January, 2024",
+                "Technology",
+                "https://kebabfinder.com",
+                "/img/kf/OIG2.jpg","/img/kf/OIG4.jpg","/img/kf/MENU-DONER-KEBAP-7.jpg",
+                150000,
+                0,
+                new ArrayList<>());
         projectRepository.save(p);
     }
 

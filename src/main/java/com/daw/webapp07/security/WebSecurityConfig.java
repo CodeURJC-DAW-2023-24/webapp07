@@ -33,7 +33,6 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -43,8 +42,6 @@ public class WebSecurityConfig {
 
         return authProvider;
     }
-
-
 
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
@@ -60,8 +57,6 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.authenticationProvider(authenticationProvider());
-
-
         http
                 .authorizeHttpRequests(authorize -> authorize
 
@@ -70,15 +65,13 @@ public class WebSecurityConfig {
 
                         // PUBLIC PAGES
                         .requestMatchers("/").permitAll()
-                        .requestMatchers("/login").permitAll()
                         .requestMatchers("/signup").permitAll()
-                        .requestMatchers("/loginerror").permitAll()
                         .requestMatchers("/project-details/**").permitAll()
                         .requestMatchers("/inner-page").permitAll()
 
 
                         // PRIVATE PAGES
-                        .requestMatchers("/landing-page").hasAnyRole("USER")
+
 
                 )
 
@@ -89,7 +82,7 @@ public class WebSecurityConfig {
                         .permitAll()
                 )
                 .logout(logout -> logout
-                        .logoutUrl("/landing-page")
+                        .logoutUrl("/logout")
                         .logoutSuccessUrl("/inner-page")
                         .permitAll()
                 );

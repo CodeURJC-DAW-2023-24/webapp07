@@ -3,6 +3,7 @@ package com.daw.webapp07.model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -19,9 +20,8 @@ public class Project {
     private String category;
     private String url;
 
-    private String image1;
-    private String image2;
-    private String image3;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> images;
 
     private int goal;
     private int currentAmount;
@@ -40,9 +40,7 @@ public class Project {
         this.category= "";
         this.date = "";
         this.url = "";
-        this.image1 = "";
-        this.image2 = "";
-        this.image3 = "";
+        this.images = new ArrayList<>();
         this.goal = 0;
         this.currentAmount = 0;
     }
@@ -54,9 +52,7 @@ public class Project {
         this.date = date;
         this.category = category;
         this.url = url;
-        this.image1 = image1;
-        this.image2 = image2;
-        this.image3 = image3;
+        this.images = new ArrayList<>(Arrays.asList(image1, image2, image3));
         this.goal = goal;
         this.currentAmount = currentAmount;
         this.inversions = inversions;
@@ -109,30 +105,17 @@ public class Project {
         this.url = url;
     }
 
-    public String getImage1() {
-        return image1;
+    public List<String> getImages() {
+        return images;
     }
 
-    public void setImage1(String image1) {
-        this.image1 = image1;
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 
-    public String getImage2() {
-        return image2;
+    public void addImage(String im){
+        this.images.add(im);
     }
-
-    public void setImage2(String image2) {
-        this.image2 = image2;
-    }
-
-    public String getImage3() {
-        return image3;
-    }
-
-    public void setImage3(String image3) {
-        this.image3 = image3;
-    }
-
     public int getGoal() {
         return goal;
     }
