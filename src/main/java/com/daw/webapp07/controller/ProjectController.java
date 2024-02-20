@@ -41,14 +41,4 @@ public class ProjectController {
         projectRepository.save(project);
         return "inner-page";
     }
-
-    @GetMapping(value={"/landing-page"})
-    public String landindPage(Model model) {
-
-        return "landing-page";
-    }
-
-
-
-
 }
