@@ -37,8 +37,8 @@ public class ProjectController {
         return "project-details";
     }
 
-    @PostMapping("/create-project/new")
-    public String createBook(@RequestBody Project project, Model model) {
+    @PostMapping("/new")
+    public String createProject(@RequestBody Project project, Model model) {
 
         projectRepository.save(project);
         return "inner-page";
