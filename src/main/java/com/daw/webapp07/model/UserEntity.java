@@ -82,5 +82,9 @@ public class UserEntity{
     public void setId(Long id) {
         this.id = id;
     }
+
+    public boolean hasInversions() {
+        return !inversions.isEmpty();
+    }
 }
 
