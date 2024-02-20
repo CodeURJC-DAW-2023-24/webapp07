@@ -76,7 +76,6 @@ public class WebSecurityConfig {
                         .requestMatchers("/editproject/*").hasAnyRole("USER")
                         .requestMatchers("/landing-page").hasAnyRole("USER")
 
-
                 )
 
                 .formLogin(formLogin -> formLogin
