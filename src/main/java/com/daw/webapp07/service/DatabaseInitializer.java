@@ -2,7 +2,6 @@ package com.daw.webapp07.service;
 
 
 import com.daw.webapp07.model.Category;
-import com.daw.webapp07.model.Image;
 import com.daw.webapp07.model.Project;
 import com.daw.webapp07.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -192,11 +191,11 @@ public class DatabaseInitializer {
 
 
 
-        List<Image> images = new ArrayList<>();
+        List<Blob> images = new ArrayList<>();
         try {
             for (String imagePath : imagePaths) {
                 Blob imageBlob = createBlob(imagePath);
-                images.add(new Image(getImageNameFromPath(imagePath), imageBlob));
+                images.add(imageBlob);
             }
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
@@ -214,9 +213,4 @@ public class DatabaseInitializer {
         }
     }
 
-    private String getImageNameFromPath(String imagePath) {
-        String[] parts = imagePath.split("/");
-        String fileName = parts[parts.length - 1];
-        return fileName.substring(0, fileName.lastIndexOf('.'));
-    }
 }

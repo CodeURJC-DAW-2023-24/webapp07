@@ -1,7 +1,9 @@
 package com.daw.webapp07.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,8 +22,9 @@ public class Project {
     private Category category;
     private String url;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Image> images;
+    @Lob
+    @JsonIgnore
+    private List<Blob> images;
 
     private int goal;
     private int currentAmount;
@@ -45,7 +48,7 @@ public class Project {
         this.currentAmount = 0;
     }
 
-    public Project( String name, String description, String owner, String date, Category category, String url, ArrayList<Image> images, int goal, int currentAmount, ArrayList<Inversion> inversions) {
+    public Project( String name, String description, String owner, String date, Category category, String url, ArrayList<Blob> images, int goal, int currentAmount, ArrayList<Inversion> inversions) {
         this.name = name;
         this.description = description;
         this.owner = owner;
@@ -105,15 +108,15 @@ public class Project {
         this.url = url;
     }
 
-    public List<Image> getImages() {
+    public List<Blob> getImages() {
         return images;
     }
 
-    public void setImages(List<Image> images) {
+    public void setImages(List<Blob> images) {
         this.images = images;
     }
 
-    public void addImage(Image im){
+    public void addImage(Blob im){
         this.images.add(im);
     }
     public int getGoal() {

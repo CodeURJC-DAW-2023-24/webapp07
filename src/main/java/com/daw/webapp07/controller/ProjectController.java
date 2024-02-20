@@ -8,9 +8,12 @@ import com.daw.webapp07.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.antlr.v4.runtime.misc.Pair;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -49,29 +52,28 @@ public class ProjectController {
 
     @GetMapping("/project-details/{id}/")
     public String home(Model model, @PathVariable Long id) {
-        Optional<Project> project = projectRepository.findById(id);
-        if (project.isEmpty()) {
-            return "redirect:/";
-        }
+        Project project = projectRepository.findById(id).orElseThrow();
 
-        List<String> base64Images = project.get().getImages().stream()
-                .map(image -> convertBlobToBase64(image.getImageFile()))
-                .collect(Collectors.toList());
-
-        model.addAttribute("project", project.get());
-        model.addAttribute("base64Images", base64Images);
+        model.addAttribute("project", project);
 
         return "project-details";
     }
 
-    private String convertBlobToBase64(Blob blob) {
-        try (InputStream inputStream = blob.getBinaryStream()) {
-            byte[] bytes = IOUtils.toByteArray(inputStream);
-            return Base64.getEncoder().encodeToString(bytes);
-        } catch (SQLException | IOException e) {
-            throw new RuntimeException("Error converting Blob to Base64", e);
+    @GetMapping("/projects/{id}/images/{index}")
+    public ResponseEntity<Object> displayImage(@PathVariable Long id, @PathVariable int index) throws SQLException{
+        Project project = projectRepository.findById(id).orElseThrow();
+        if (index < project.getImages().size()){
+            Resource file = new InputStreamResource(project.getImages().get(index).getBinaryStream());
+
+            return ResponseEntity.ok()
+                    .contentLength(project.getImages().get(index).length())
+                    .body(file);
         }
+        return ResponseEntity.notFound().build();
+
     }
+
+
 
     @PostMapping("/create-project/new")
     public String createBook(@RequestBody Project project, Model model) {

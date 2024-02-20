@@ -68,7 +68,8 @@ public class WebSecurityConfig {
                         .requestMatchers("/signup").permitAll()
                         .requestMatchers("/project-details/**").permitAll()
                         .requestMatchers("/inner-page").permitAll()
-                                .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/projects/**").permitAll()
 
 
                         // PRIVATE PAGES
