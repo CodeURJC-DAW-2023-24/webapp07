@@ -17,7 +17,7 @@ public class Project {
     private String description;
     private String owner;
     private String date;
-    private String category;
+    private Category category;
     private String url;
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -37,7 +37,7 @@ public class Project {
         this.description = description;
         this.owner = owner;
         this.inversions = new ArrayList<>();
-        this.category= "";
+        this.category= Category.Other;
         this.date = "";
         this.url = "";
         this.images = new ArrayList<>();
@@ -45,7 +45,7 @@ public class Project {
         this.currentAmount = 0;
     }
 
-    public Project( String name, String description, String owner, String date, String category, String url, String image1, String image2, String image3, int goal, int currentAmount, ArrayList<Inversion> inversions) {
+    public Project( String name, String description, String owner, String date, Category category, String url, String image1, String image2, String image3, int goal, int currentAmount, ArrayList<Inversion> inversions) {
         this.name = name;
         this.description = description;
         this.owner = owner;
@@ -89,11 +89,11 @@ public class Project {
     public void setOwner(String owner) {
         this.owner = owner;
     }
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
