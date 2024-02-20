@@ -19,7 +19,7 @@ public class ProjectController {
     @Autowired
     private ProjectRepository projectRepository;
 
-    @GetMapping(value={"/inner-page","/"})
+    @GetMapping("/")
     public String innerPage(Model model) {
 
         model.addAttribute("projects", projectRepository.findAll());
