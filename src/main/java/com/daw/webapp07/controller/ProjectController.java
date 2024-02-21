@@ -36,7 +36,7 @@ public class ProjectController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping(value={"/inner-page","/"})
+    @GetMapping("/")
     public String innerPage(Model model, HttpServletRequest request) {
         if(request.isUserInRole("USER")){
             Optional<UserEntity> user = userRepository.findByName(request.getUserPrincipal().getName());
@@ -47,6 +47,7 @@ public class ProjectController {
         }
 
         model.addAttribute("projects", projectRepository.findAll());
+        model.addAttribute("user", request.isUserInRole("USER"));
         return "inner-page";
     }
 
