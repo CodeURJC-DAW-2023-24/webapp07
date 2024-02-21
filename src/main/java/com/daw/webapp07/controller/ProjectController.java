@@ -51,6 +51,8 @@ public class ProjectController {
         return "inner-page";
     }
 
+
+
     @GetMapping("/project-details/{id}/")
     public String home(Model model, @PathVariable Long id) {
         Project project = projectRepository.findById(id).orElseThrow();
@@ -81,6 +83,8 @@ public class ProjectController {
         projectRepository.save(project);
         return "inner-page";
     }
+
+
 
 
 
