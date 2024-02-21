@@ -1,8 +1,9 @@
 package com.daw.webapp07.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class UserController {
@@ -17,7 +18,8 @@ public class UserController {
     }
 
     @GetMapping("/landing-page")
-    public String landing() {
+    public String landing(Model model, HttpServletRequest request) {
+        model.addAttribute("user", request.isUserInRole("USER"));
         return "landing-page";
     }
 
