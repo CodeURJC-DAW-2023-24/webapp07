@@ -81,15 +81,22 @@
               </li>
               <li class="dropdown"><a href="#"><img class="profile-img" src="img/profile/user_icon2.jpg" alt="Foto de Perfil"></a>
                 <ul>
-                  <li><a href="user-details.html">
-                    <img class="option-img" src="img/profile/user.png">
-                    <p class="option-text">Profile</p>
-                  </a></li>
-                  </a></li>
-                  <li><a href="/logout">
-                    <img class="option-img" src="img/profile/logout.png">
-                    <p class="option-text">Log out</p>
-                  </a></li>
+                    <li>
+                        <a href="user-details.html" class="profile-link">
+                            <img class="option-img" src="img/profile/user.png">
+                            <p class="option-text">Profile</p>
+                        </a>
+                    </li>
+                    <li>
+                        <form action="/logout" method="post" class="logout-link">
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="submit" class="logout-button">
+                                <img class="option-img" src="img/profile/logout.png">
+                                <p class="logout-text logout-text-right">Log out</p>
+                            </button>
+                            <input type="hidden" name="_csrf" value="{{token}}">
+                        </form>
+                    </li>
                 </ul>
               </li>
             </ul>

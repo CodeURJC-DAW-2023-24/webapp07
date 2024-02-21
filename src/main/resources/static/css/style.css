@@ -425,12 +425,14 @@ h6 {
   margin-left: 10%;
 }
 
+
 .option-img {
   width: 25px;
   height: 25px;
 }
 
-.option-text {
+.option-text,
+.logout-text {
   font-family: 'Poppins', sans-serif;
   font-size: 15px;
   font-weight: bold;
@@ -441,6 +443,53 @@ h6 {
   /* Margen superior e inferior de 50px, centrado horizontalmente */
   margin-left: 20%;
 }
+
+.profile-link,
+.logout-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.profile-link:hover,
+.logout-link:hover {
+  background-color: #f2f2f2;
+}
+
+.profile-link img,
+.logout-link img {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+
+}
+
+.profile-link p,
+.logout-link p {
+  margin: 0;
+}
+
+.logout-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logout-button:hover {
+  background-color: #f2f2f2;
+}
+
+
 
 #signup {
   cursor: pointer;

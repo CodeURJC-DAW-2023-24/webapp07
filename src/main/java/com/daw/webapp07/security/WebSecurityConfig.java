@@ -67,6 +67,7 @@ public class WebSecurityConfig {
                         // PUBLIC PAGES
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/signup").permitAll()
+                        .requestMatchers("/logout").permitAll()
                         .requestMatchers("/project-details/**").permitAll()
                         .requestMatchers("/inner-page").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
@@ -88,7 +89,7 @@ public class WebSecurityConfig {
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/inner-page")
+                        .logoutSuccessUrl("/")
                         .permitAll()
                 );
 
