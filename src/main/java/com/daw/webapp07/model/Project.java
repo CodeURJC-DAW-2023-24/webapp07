@@ -49,6 +49,7 @@ public class Project {
         this.images = new ArrayList<>();
         this.goal = 0;
         this.currentAmount = 0;
+        this.comments = new ArrayList<>();
 
     }
 
