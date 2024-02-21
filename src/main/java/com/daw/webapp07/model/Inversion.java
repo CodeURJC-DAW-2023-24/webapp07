@@ -1,5 +1,6 @@
 package com.daw.webapp07.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,6 +12,7 @@ public class Inversion {
     @ManyToOne
     private UserEntity user;
     @ManyToOne
+    @JsonIgnore
     private Project project;
     private int amount;
 

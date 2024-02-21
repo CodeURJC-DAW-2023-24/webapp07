@@ -29,7 +29,7 @@ public class Project {
     private int goal;
     private int currentAmount;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Inversion> inversions;
 
     public Project() {

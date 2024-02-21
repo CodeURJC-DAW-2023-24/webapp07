@@ -19,10 +19,10 @@ public class UserEntity{
     private List<String> roles;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private ArrayList<Inversion> inversions;
+    private List<Inversion> inversions;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private ArrayList<Project> projects;
+    private List<Project> projects;
 
     public UserEntity() {
     }
@@ -59,7 +59,7 @@ public class UserEntity{
         this.roles = roles;
     }
 
-    public ArrayList<Inversion> getInversions() {
+    public List<Inversion> getInversions() {
         return inversions;
     }
 
@@ -67,7 +67,7 @@ public class UserEntity{
         this.inversions = inversions;
     }
 
-    public ArrayList<Project> getProjects() {
+    public List<Project> getProjects() {
         return projects;
     }
 
