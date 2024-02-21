@@ -88,7 +88,7 @@ public class DatabaseInitializer {
                 "https://bewater.com",
                 50000,
                 0,
-                FILES_FOLDER + "/trustphone/trustphone1.jpg", FILES_FOLDER + "/trustphone/trustphone2.jpg", FILES_FOLDER + "/trustphone/trustphone3.jpg"
+                FILES_FOLDER + "/purewater/purewater1.png", FILES_FOLDER + "/purewater/purewater2.jpeg", FILES_FOLDER + "/purewater/purewater3.jpeg"
         );
 
         createAndSaveProject(
@@ -101,6 +101,91 @@ public class DatabaseInitializer {
                 7000,
                 0,
                 FILES_FOLDER + "/smartgarden/smartgarden1.jpg", FILES_FOLDER + "/smartgarden/smartgarden2.jpg", FILES_FOLDER + "/smartgarden/smartgarden3.jpg"
+        );
+
+
+        createAndSaveProject(
+                "PixelQuest",
+                "Un juego de aventuras en 2D con gráficos pixelados. Explora mundos fascinantes, resuelve acertijos y enfréntate a desafíos emocionantes en este juego indie desarrollado por un pequeño equipo apasionado.",
+                "PixelStudios",
+                "5 August, 2024",
+                Category.Gaming,
+                "https://pixelquest.com",
+                18000,
+                0,
+                FILES_FOLDER + "/pixelquest/pixelquest1.jpeg"
+        );
+
+        createAndSaveProject(
+                "MindWell",
+                "Una plataforma en línea que ofrece recursos y apoyo para la salud mental. Proporciona acceso a terapeutas, herramientas de meditación y comunidades de apoyo para mejorar el bienestar emocional.",
+                "MindCare",
+                "12 July, 2024",
+                Category.Health,
+                "https://mindwell.com",
+                25000,
+                0,
+                FILES_FOLDER + "/mindwell/mindwell1.jpeg", FILES_FOLDER + "/mindwell/mindwell2.png"
+        );
+
+        createAndSaveProject(
+                "LingoLearn",
+                "Una plataforma interactiva para aprender idiomas de manera eficaz. Ofrece cursos personalizados, práctica de conversación y seguimiento del progreso para ayudar a los usuarios a alcanzar la fluidez.",
+                "LingoTech",
+                "22 September, 2024",
+                Category.Education,
+                "https://lingolearn.com",
+                15000,
+                0,
+                FILES_FOLDER + "/lingolearn/lingolearn1.jpeg", FILES_FOLDER + "/lingolearn/lingolearn2.jpeg", FILES_FOLDER + "/lingolearn/lingolearn3.png"
+        );
+
+        createAndSaveProject(
+                "UrbanHarvest",
+                "Un sistema de agricultura urbana que permite a las comunidades cultivar alimentos frescos localmente. Utiliza tecnologías sostenibles para maximizar la producción en entornos urbanos.",
+                "GreenHarbor",
+                "10 October, 2024",
+                Category.Sustainability,
+                "https://urbanharvest.com",
+                22000,
+                0,
+                FILES_FOLDER + "/urbanharvest/urbanharvest1.jpeg", FILES_FOLDER + "/urbanharvest/urbanharvest2.jpeg", FILES_FOLDER + "/urbanharvest/urbanharvest3.jpeg"
+        );
+
+        createAndSaveProject(
+                "GalaxyGetaway",
+                "Explora el espacio exterior con esta aplicación que ofrece viajes espaciales virtuales. Descubre planetas lejanos, participa en misiones espaciales simuladas y aprende sobre el universo.",
+                "CosmicTech",
+                "15 November, 2024",
+                Category.Technology,
+                "https://galaxygetaway.com",
+                30000,
+                0,
+                FILES_FOLDER + "/galaxygetaway/galaxygetaway1.jpeg", FILES_FOLDER + "/galaxygetaway/galaxygetaway2.jpeg"
+        );
+
+        createAndSaveProject(
+                "LiveBeat",
+                "Disfruta de conciertos en vivo desde la comodidad de tu hogar. LiveBeat ofrece acceso a actuaciones exclusivas de artistas populares y emergentes, todo en alta definición y sonido envolvente.",
+                "LiveMusicEnt",
+                "18 January, 2025",
+                Category.Entertainment,
+                "https://livebeat.com",
+                25000,
+                0,
+                FILES_FOLDER + "/livebeat/liveBeat1.jpeg"
+        );
+
+        createAndSaveProject(
+                "NutriFuel",
+                "Fomentando hábitos alimenticios saludables con recetas nutritivas y planes de comidas personalizados. NutriFuel ayuda a las personas a alcanzar sus objetivos de bienestar a través de una alimentación equilibrada.",
+                "WellnessHub",
+                "7 February, 2025",
+                Category.Health,
+                "https://nutrifuel.com",
+                18000,
+                0,
+                FILES_FOLDER + "/nutrifuel/nutrifuel1.jpeg", FILES_FOLDER + "/nutrifuel/nutrifuel2.jpeg"
         );
 
 
