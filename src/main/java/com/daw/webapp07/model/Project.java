@@ -29,6 +29,9 @@ public class Project {
     private int goal;
     private int currentAmount;
 
+    @OneToMany
+    private List<Comment> comments;
+
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Inversion> inversions;
 
@@ -46,6 +49,7 @@ public class Project {
         this.images = new ArrayList<>();
         this.goal = 0;
         this.currentAmount = 0;
+
     }
 
     public Project( String name, String description, String owner, String date, Category category, String url, ArrayList<Blob> images, int goal, int currentAmount, ArrayList<Inversion> inversions) {
@@ -141,6 +145,14 @@ public class Project {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public void addInversion(Inversion inversion) {
