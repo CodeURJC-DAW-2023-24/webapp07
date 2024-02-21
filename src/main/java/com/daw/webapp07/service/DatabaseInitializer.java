@@ -3,7 +3,9 @@ package com.daw.webapp07.service;
 
 import com.daw.webapp07.model.Category;
 import com.daw.webapp07.model.Project;
+import com.daw.webapp07.model.UserEntity;
 import com.daw.webapp07.repository.ProjectRepository;
+import com.daw.webapp07.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,9 @@ public class DatabaseInitializer {
 
     @Autowired
     private ProjectRepository projectRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @PostConstruct
     public void init() {
@@ -189,77 +194,17 @@ public class DatabaseInitializer {
         );
 
 
+        //Users
+        UserEntity user1 = new UserEntity("user1@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
+        UserEntity user2 = new UserEntity("user2@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
+        UserEntity user3 = new UserEntity("user3@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
+        UserEntity user4 = new UserEntity("user4@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
 
-/**
-        p = new Project(
-                "Smart Garden",
-                "Un sistema automatizado de jardinería que utiliza sensores para monitorear las condiciones del suelo y las plantas, ajustando automáticamente el riego y la iluminación para un crecimiento óptimo.",
-                "MortezLab",
-                "20 February, 2024",
-                Category.Technology,
-                "https://smartgarden.com",
-                "/img/smartgarden/smartgarden1.jpg", "/img/smartgarden/smartgarden2.jpg", "/img/smartgarden/smartgarden3.jpg",
-                7000,
-                0,
-                new ArrayList<>());
-        projectRepository.save(p);
+        userRepository.save(user1);
+        userRepository.save(user2);
+        userRepository.save(user3);
+        userRepository.save(user4);
 
-        p = new Project(
-                "EcoBike: La bicicleta eléctrica todo terreno",
-                "Una bicicleta eléctrica diseñada para todo tipo de terrenos, desde montañas hasta calles urbanas. Equipada con baterías de larga duración y un motor potente, EcoBike busca revolucionar la movilidad sostenible.",
-                "ecoworld",
-                "2 February, 2024",
-                Category.Entertainment,
-                "https://ecobike.com",
-                "/img/ecobike/ecobike1.jpg", "/img/ecobike/ecobike2.jpg", "/img/ecobike/ecobike3.jpg",
-                12000,
-                0,
-                new ArrayList<>());
-        projectRepository.save(p);
-
-        p = new Project(
-                "CodeLearn",
-                "Una plataforma educativa en línea que ofrece cursos interactivos para aprender programación, desde conceptos básicos hasta habilidades avanzadas en varios lenguajes de programación.",
-                "proglearn",
-                "16 January, 2024",
-                Category.Education,
-                "https://proglearn.com",
-                "/img/proglearn/proglearn1.jpeg", "/img/proglearn/proglearn2.jpg", "/img/proglearn/proglearn3.jpg",
-                12000,
-                0,
-                new ArrayList<>());
-        projectRepository.save(p);
-
-        p = new Project(
-                "Trustphone",
-                "El teléfono del que te puedes fiar, funcionamiento perfecto y fácilmente reparable",
-                "Trustbusiness",
-                "5 January, 2024",
-                Category.Technology,
-                "https://trustbusiness.com",
-                "/img/trustphone/trustphone1.jpg", "/img/trustphone/trustphone2.jpg", "/img/trustphone/trustphone3.jpg",
-                50000,
-                0,
-                new ArrayList<>());
-        projectRepository.save(p);
-
-
-        p = new Project(
-                "Purewater",
-                "Un dispositivo compacto y portátil que utiliza tecnología de filtración avanzada para purificar el agua de fuentes no potables, haciéndola segura para beber en situaciones de emergencia o actividades al aire libre.",
-                "Bewater",
-                "5 February, 2024",
-                Category.Health,
-                "https://bewater.com",
-                "/img/bewater/trustphone1.jpg", "/img/trustphone/trustphone2.jpg", "/img/trustphone/trustphone3.jpg",
-                50000,
-                0,
-                new ArrayList<>());
-        projectRepository.save(p);
-
-
-
-    **/
     }
 
     private void createAndSaveProject(String projectName, String projectDescription, String creator, String date,
