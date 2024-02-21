@@ -54,10 +54,18 @@ public class ProjectController {
 
 
     @GetMapping("/project-details/{id}/")
-    public String home(Model model, @PathVariable Long id) {
+    public String home(Model model, @PathVariable Long id, HttpServletRequest request) {
         Project project = projectRepository.findById(id).orElseThrow();
+        if(request.isUserInRole("USER")){
+            Optional<UserEntity> user = userRepository.findByName(request.getUserPrincipal().getName());
+            if(user.isPresent() && user.get().hasInversions()){
+                model.addAttribute("projects", recommendationSimple(user.get()));
+            }
+
+        }
 
         model.addAttribute("project", project);
+        model.addAttribute("user", request.isUserInRole("USER"));
 
         return "project-details";
     }
