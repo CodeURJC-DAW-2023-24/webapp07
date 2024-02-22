@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -25,15 +28,26 @@ public class UserController {
     }
 
     @GetMapping("/signup")
-    public String signup() {
+    public String signup(Model model) {
+        model.addAttribute("newUser", new UserEntity());
         return "signup";
     }
+
+    @PostMapping("/signup")
+    public String newsignup(UserEntity user) {
+        user.setRoles(List.of("USER"));
+        userRepository.save(user);
+        //controlar error de repetición de usuarios
+        return "inner-page";
+    }
+
 
     @GetMapping("/landing-page")
     public String landing(Model model, HttpServletRequest request) {
 
         model.addAttribute("projects", projectRepository.findAll());
         model.addAttribute("user", request.isUserInRole("USER"));
+
         return "landing-page";
     }
 

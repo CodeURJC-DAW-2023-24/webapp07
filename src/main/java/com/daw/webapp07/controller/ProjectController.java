@@ -73,6 +73,7 @@ public class ProjectController {
     @GetMapping("/projects/{id}/images/{index}")
     public ResponseEntity<Object> displayImage(@PathVariable Long id, @PathVariable int index) throws SQLException{
         Project project = projectRepository.findById(id).orElseThrow();
+        index--; //index - 1 porque mustache empieza a contar desde 1
         if (index < project.getImages().size()){
             Resource file = new InputStreamResource(project.getImages().get(index).getBinaryStream());
 

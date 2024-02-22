@@ -16,6 +16,36 @@
     });
 
     });
+
+
+        function validarFormulario() {
+        var name = document.forms["formSign"]["name"].value;
+        var mail = document.forms["formSign"]["email"].value;
+        var password = document.forms["formSign"]["password"].value;
+        var password2 = document.forms["formSign"]["checkpassword"].value;
+
+        if (name == "") {
+        alert("Introduce User Name");
+        return false;
+    }
+        if (mail == "") {
+        alert("Introduce your Email");
+        return false;
+    }
+        if (password == "") {
+        alert("Introduce your Password");
+        return false;
+    }
+        if (password2 == "") {
+        alert("Introduce your Password Confirmation");
+        return false;
+    }
+        if (password != password2) {
+        alert("Passwords do not match");
+        return false;
+        }
+        return true;
+    }
 </script>
 
 <!-- ======= Hero Section ======= -->
@@ -42,10 +72,11 @@
 </section><!-- End Hero -->
 
 <div id="signup-modal" class="login-modal">
-    <form action="/signup" method="post"  class="form">
+
+    <form name = "formSign" action="/signup" method="post" class="form" onsubmit="return validarFormulario()">
         <a href="/" type="button" id="closeButtonSign" class="close-button">X</a>
         <div class="flex-column">
-            <label>Name </label>
+            <label>User Name </label>
             <div class="inputForm">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person"
                      viewBox="0 0 16 16">
@@ -53,20 +84,7 @@
                     <path
                             d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
                 </svg>
-                <input type="text" class="input" placeholder="Enter your Name">
-            </div>
-        </div>
-
-        <div class="flex-column">
-            <label>Last Name </label>
-            <div class="inputForm">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person"
-                     viewBox="0 0 16 16">
-                    <g id="Layer_3" data-name="Layer 3"></g>
-                    <path
-                            d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
-                </svg>
-                <input type="text" class="input" placeholder="Enter your Last Name">
+                <input name="name" type="text" class="input" placeholder="Enter your User Name">
             </div>
         </div>
 
@@ -81,7 +99,7 @@
                     </path>
                 </g>
             </svg>
-            <input type="text" class="input" placeholder="Enter your Email">
+            <input name="email" type="text" class="input" placeholder="Enter your Email">
         </div>
 
         <div class="flex-column">

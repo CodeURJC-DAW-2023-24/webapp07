@@ -19,13 +19,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-    @Value("${security.user}")
-    private String admin;
-
-    @Value("${security.encodedPassword}")
-    private String adminpass;
-
-
     @Autowired
     public RepositoryUserDetailsService userDetailService;
 
@@ -44,6 +37,7 @@ public class WebSecurityConfig {
         return authProvider;
     }
 
+    /**
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
         UserDetails user = User.builder()
@@ -53,6 +47,7 @@ public class WebSecurityConfig {
                 .build();
         return new InMemoryUserDetailsManager(user);
     }
+    **/
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -69,7 +64,6 @@ public class WebSecurityConfig {
                         .requestMatchers("/signup").permitAll()
                         .requestMatchers("/logout").permitAll()
                         .requestMatchers("/project-details/**").permitAll()
-                        .requestMatchers("/inner-page").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/projects/**").permitAll()
 
@@ -92,6 +86,7 @@ public class WebSecurityConfig {
                         .logoutSuccessUrl("/")
                         .permitAll()
                 );
+
 
         return http.build();
     }

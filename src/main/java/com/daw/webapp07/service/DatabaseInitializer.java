@@ -7,6 +7,11 @@ import com.daw.webapp07.model.UserEntity;
 import com.daw.webapp07.repository.ProjectRepository;
 import com.daw.webapp07.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Service;
 
 
@@ -25,6 +30,11 @@ import java.util.List;
 
 @Service
 public class DatabaseInitializer {
+    @Value("${security.user}")
+    private String admin;
+
+    @Value("${security.encodedPassword}")
+    private String adminpass;
     private static final Path FILES_FOLDER = Paths.get(System.getProperty("user.dir"), "images");
 
     @Autowired
@@ -39,6 +49,7 @@ public class DatabaseInitializer {
         UserEntity u2 = createAndSaveUser("User2","user2@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
         UserEntity u3 = createAndSaveUser("User3","user3@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
         UserEntity u4 = createAndSaveUser("User4","user4@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
+        UserEntity adm = createAndSaveUser("admin",admin, adminpass, "USER","ADMIN");
 
         UserEntity MarkiIndustries = createAndSaveUser("MarkiIndustries","markiindustries@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
         Project KebabFinder = createAndSaveProject(
@@ -209,6 +220,8 @@ public class DatabaseInitializer {
                 FILES_FOLDER + "/nutrifuel/nutrifuel1.jpeg", FILES_FOLDER + "/nutrifuel/nutrifuel2.jpeg"
         );
 
+
+
     }
 
     private Project createAndSaveProject(String projectName, String projectDescription, UserEntity creator, String date,
@@ -241,8 +254,8 @@ public class DatabaseInitializer {
         return project;
     }
 
-    private UserEntity createAndSaveUser(String name,String email, String encodedPassword, String role) {
-        UserEntity user = new UserEntity(name,email, encodedPassword, role);
+    private UserEntity createAndSaveUser(String name,String email, String encodedPassword, String... roles) {
+        UserEntity user = new UserEntity(name,email, encodedPassword, roles);
         userRepository.save(user);
         return user;
     }
