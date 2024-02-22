@@ -9,24 +9,21 @@
     </div>
 </section><!-- End Breadcrumbs -->
 
-
-<!-- ======= Portfolio Section ======= -->
+<!-- ======= Portfolio ======= -->
 <section id="portfolio" class="portfolio">
     <div class="container" data-aos="fade-up">
 
-        <form class="search-form">
-            <input type="text" placeholder="Search...">
-            <button type="submit"><i class="bi bi-search"></i></button>
-            <button type="button" class="filter-button" id="filter1">Technology</button>
-            <button type="button" class="filter-button" id="filter2">Books</button>
-            <button type="button" class="filter-button" id="filter3">Music</button>
-            <button type="button" class="filter-button" id="filter4">Art</button>
-        </form>
+        <div class="section-title">
+            <h2>Trending Proyects</h2>
+            <p>These projects are killing it !!</p>
+        </div>
 
-        {{#projects}}
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+
+            {{#projects}}
                 <div class="col-lg-4 col-md-6 portfolio-item filter-web">
                     <a href="project-details/{{id}}/">
-                        <div class="portfolio-img"><img src="https://localhost:8443/projects/{{id}}/images/1" class="img-fluid" alt=""></div>
+                        <div class="portfolio-img"><img src="https://localhost:8443/projects/{{id}}/images/0" class="img-fluid" alt=""></div>
                         <div class="portfolio-info">
                             <h4>{{name}}</h4>
                             <p>{{category}}</p>
@@ -61,22 +58,8 @@
     </div>
 </section><!-- End Portfolio Section -->
 
+
+
 {{> footer}}
 
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-        class="bi bi-arrow-up-short"></i></a>
 
-<!-- Vendor JS Files -->
-<script src="assets/vendor/aos/aos.js"></script>
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-<script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-<script src="assets/vendor/php-email-form/validate.js"></script>
-
-<!-- Template Main JS File -->
-<script src="assets/js/main.js"></script>
-
-</body>
-</html>
