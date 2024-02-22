@@ -1,8 +1,10 @@
 package com.daw.webapp07.model;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -28,14 +30,19 @@ public class UserEntity{
     @OneToMany(cascade = CascadeType.ALL)
     private List<Project> projects;
 
+    @Lob
+    @JsonIgnore
+    private Blob profilePhoto;
+
     public UserEntity() {
     }
 
-    public UserEntity(String name, String email, String encodedPassword, String... roles) {
+    public UserEntity(String name, String email, String encodedPassword, Blob photo, String... roles) {
         this.name = name;
         this.email = email;
         this.encodedPassword = encodedPassword;
         this.roles = List.of(roles);
+        this.profilePhoto = photo;
         this.inversions = new ArrayList<>();
         this.projects = new ArrayList<>();
     }
@@ -102,6 +109,14 @@ public class UserEntity{
 
     public String toString(){
         return this.name;
+    }
+
+    public Blob getProfilePhoto() {
+        return profilePhoto;
+    }
+
+    public void setProfilePhoto(Blob profilePhoto) {
+        this.profilePhoto = profilePhoto;
     }
 }
 

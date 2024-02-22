@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,12 +41,16 @@ public class UserController {
     }
 
 
-    @GetMapping("/landing-page")
-    public String landing(Model model, HttpServletRequest request) {
 
+    @GetMapping("/landing-page")
+    public String landing(Model model,  HttpServletRequest request) {
+        String userName = request.getUserPrincipal().getName();
+        Optional<UserEntity> user = userRepository.findByName(userName);
         model.addAttribute("projects", projectRepository.findAll());
         model.addAttribute("user", request.isUserInRole("USER"));
-
+        if(user.isPresent()){
+            model.addAttribute("id", user.get().getId()); //profile photo needs id
+        }
         return "landing-page";
     }
 

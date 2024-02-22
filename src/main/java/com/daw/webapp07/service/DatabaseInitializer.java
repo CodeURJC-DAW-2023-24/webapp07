@@ -45,13 +45,13 @@ public class DatabaseInitializer {
 
     @PostConstruct
     public void init() {
-        UserEntity u1 = createAndSaveUser("User1","user1@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
-        UserEntity u2 = createAndSaveUser("User2","user2@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
-        UserEntity u3 = createAndSaveUser("User3","user3@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
-        UserEntity u4 = createAndSaveUser("User4","user4@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
-        UserEntity adm = createAndSaveUser("admin",admin, adminpass, "USER","ADMIN");
+        UserEntity u1 = createAndSaveUser("User1","user1@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/profiles/user1.png","USER");
+        UserEntity u2 = createAndSaveUser("User2","user2@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/profiles/user2.png","USER");
+        UserEntity u3 = createAndSaveUser("User3","user3@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/profiles/user3.jpg","USER");
+        UserEntity u4 = createAndSaveUser("User4","user4@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/profiles/user1.png","USER");
+        UserEntity adm = createAndSaveUser("admin",admin, adminpass, FILES_FOLDER + "/profiles/admin.png","USER","ADMIN");
 
-        UserEntity MarkiIndustries = createAndSaveUser("MarkiIndustries","markiindustries@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
+        UserEntity MarkiIndustries = createAndSaveUser("MarkiIndustries","markiindustries@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/kf/OIG2.jpg","USER");
         Project KebabFinder = createAndSaveProject(
                 "KebabFinder",
                 "Kebab Finder es una aplicación que te permite encontrar los mejores kebabs de tu ciudad. Podrás ver las opiniones de otros usuarios, ver la carta de los kebabs y hacer tus propias reseñas. Además, podrás solicitar un kebab a domicilio y pagar con tarjeta.",
@@ -64,7 +64,7 @@ public class DatabaseInitializer {
                 FILES_FOLDER + "/kf/OIG2.jpg", FILES_FOLDER + "/kf/OIG4.jpg", FILES_FOLDER + "/kf/MENU-DONER-KEBAP-7.jpg"
         );
 
-        UserEntity ecoworld = createAndSaveUser("EcoWorld","ecowrld@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
+        UserEntity ecoworld = createAndSaveUser("EcoWorld","ecowrld@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/ecobike/ecobike1.jpg","USER");
         Project ecobike = createAndSaveProject(
                 "EcoBike: La bicicleta eléctrica todo terreno",
                 "Una bicicleta eléctrica diseñada para todo tipo de terrenos, desde montañas hasta calles urbanas. Equipada con baterías de larga duración y un motor potente, EcoBike busca revolucionar la movilidad sostenible.",
@@ -77,7 +77,7 @@ public class DatabaseInitializer {
                 FILES_FOLDER + "/ecobike/ecobike1.jpg", FILES_FOLDER + "/ecobike/ecobike2.jpg", FILES_FOLDER + "/ecobike/ecobike3.jpg"
         );
 
-        UserEntity proglearn = createAndSaveUser("proglearn","progolo@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
+        UserEntity proglearn = createAndSaveUser("proglearn","progolo@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/proglearn/proglearn1.jpeg","USER");
         Project CodeLearn = createAndSaveProject(
                 "CodeLearn",
                 "Una plataforma educativa en línea que ofrece cursos interactivos para aprender programación, desde conceptos básicos hasta habilidades avanzadas en varios lenguajes de programación.",
@@ -90,7 +90,7 @@ public class DatabaseInitializer {
                 FILES_FOLDER + "/proglearn/proglearn1.jpeg", FILES_FOLDER + "/proglearn/proglearn3.jpg"
         );
 
-        UserEntity Trustbusiness = createAndSaveUser("Trustbusiness","trustbusiness@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
+        UserEntity Trustbusiness = createAndSaveUser("Trustbusiness","trustbusiness@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/trustphone/trustphone1.jpg","USER");
         Project Trustphone = createAndSaveProject(
                 "Trustphone",
                 "El teléfono del que te puedes fiar, funcionamiento perfecto y fácilmente reparable",
@@ -103,7 +103,7 @@ public class DatabaseInitializer {
                 FILES_FOLDER + "/trustphone/trustphone1.jpg", FILES_FOLDER + "/trustphone/trustphone2.jpg", FILES_FOLDER + "/trustphone/trustphone3.jpg"
         );
 
-        UserEntity Bewater = createAndSaveUser("Bewater","bewater@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
+        UserEntity Bewater = createAndSaveUser("Bewater","bewater@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/purewater/purewater1.png","USER");
         Project Purewater = createAndSaveProject(
                 "Purewater",
                 "Un dispositivo compacto y portátil que utiliza tecnología de filtración avanzada para purificar el agua de fuentes no potables, haciéndola segura para beber en situaciones de emergencia o actividades al aire libre.",
@@ -116,7 +116,7 @@ public class DatabaseInitializer {
                 FILES_FOLDER + "/purewater/purewater1.png", FILES_FOLDER + "/purewater/purewater2.jpeg", FILES_FOLDER + "/purewater/purewater3.jpeg"
         );
 
-        UserEntity MortezLab = createAndSaveUser("MortezLab","moctezumez@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
+        UserEntity MortezLab = createAndSaveUser("MortezLab","moctezumez@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/smartgarden/smartgarden1.jpg","USER");
         Project SmartGarden = createAndSaveProject(
                 "Smart Garden",
                 "Un sistema automatizado de jardinería que utiliza sensores para monitorear las condiciones del suelo y las plantas, ajustando automáticamente el riego y la iluminación para un crecimiento óptimo.",
@@ -129,7 +129,7 @@ public class DatabaseInitializer {
                 FILES_FOLDER + "/smartgarden/smartgarden1.jpg", FILES_FOLDER + "/smartgarden/smartgarden2.jpg", FILES_FOLDER + "/smartgarden/smartgarden3.jpg"
         );
 
-        UserEntity PixelStudios = createAndSaveUser("PixelStudios","pixel@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
+        UserEntity PixelStudios = createAndSaveUser("PixelStudios","pixel@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/pixelquest/pixelquest1.jpeg","USER");
         Project PixelQuest = createAndSaveProject(
                 "PixelQuest",
                 "Un juego de aventuras en 2D con gráficos pixelados. Explora mundos fascinantes, resuelve acertijos y enfréntate a desafíos emocionantes en este juego indie desarrollado por un pequeño equipo apasionado.",
@@ -142,7 +142,7 @@ public class DatabaseInitializer {
                 FILES_FOLDER + "/pixelquest/pixelquest1.jpeg"
         );
 
-        UserEntity MindCare = createAndSaveUser("MindCare","mindcare@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
+        UserEntity MindCare = createAndSaveUser("MindCare","mindcare@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/mindwell/mindwell1.jpeg","USER");
         Project MindWell = createAndSaveProject(
                 "MindWell",
                 "Una plataforma en línea que ofrece recursos y apoyo para la salud mental. Proporciona acceso a terapeutas, herramientas de meditación y comunidades de apoyo para mejorar el bienestar emocional.",
@@ -155,7 +155,7 @@ public class DatabaseInitializer {
                 FILES_FOLDER + "/mindwell/mindwell1.jpeg", FILES_FOLDER + "/mindwell/mindwell2.png"
         );
 
-        UserEntity LingoTech = createAndSaveUser("LingoTech","Lingotech@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
+        UserEntity LingoTech = createAndSaveUser("LingoTech","Lingotech@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/lingolearn/lingolearn1.jpeg","USER");
         Project LingoLearn = createAndSaveProject(
                 "LingoLearn",
                 "Una plataforma interactiva para aprender idiomas de manera eficaz. Ofrece cursos personalizados, práctica de conversación y seguimiento del progreso para ayudar a los usuarios a alcanzar la fluidez.",
@@ -168,7 +168,7 @@ public class DatabaseInitializer {
                 FILES_FOLDER + "/lingolearn/lingolearn1.jpeg", FILES_FOLDER + "/lingolearn/lingolearn2.jpeg", FILES_FOLDER + "/lingolearn/lingolearn3.png"
         );
 
-        UserEntity GreenHarbor = createAndSaveUser("GreenHarbor","greenharbor@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
+        UserEntity GreenHarbor = createAndSaveUser("GreenHarbor","greenharbor@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/urbanharvest/urbanharvest1.jpeg","USER");
         Project UrbanHarvest = createAndSaveProject(
                 "UrbanHarvest",
                 "Un sistema de agricultura urbana que permite a las comunidades cultivar alimentos frescos localmente. Utiliza tecnologías sostenibles para maximizar la producción en entornos urbanos.",
@@ -181,7 +181,7 @@ public class DatabaseInitializer {
                 FILES_FOLDER + "/urbanharvest/urbanharvest1.jpeg", FILES_FOLDER + "/urbanharvest/urbanharvest2.jpeg", FILES_FOLDER + "/urbanharvest/urbanharvest3.jpeg"
         );
 
-        UserEntity CosmicTech = createAndSaveUser("CosmicTech","cosmictech@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
+        UserEntity CosmicTech = createAndSaveUser("CosmicTech","cosmictech@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/galaxygetaway/galaxygetaway1.jpeg","USER");
         Project GalaxyGetaway = createAndSaveProject(
                 "GalaxyGetaway",
                 "Explora el espacio exterior con esta aplicación que ofrece viajes espaciales virtuales. Descubre planetas lejanos, participa en misiones espaciales simuladas y aprende sobre el universo.",
@@ -194,7 +194,7 @@ public class DatabaseInitializer {
                 FILES_FOLDER + "/galaxygetaway/galaxygetaway1.jpeg", FILES_FOLDER + "/galaxygetaway/galaxygetaway2.jpeg"
         );
 
-        UserEntity LiveMusicEnt = createAndSaveUser("LiveMusicEnt","LiveMusicEnt@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
+        UserEntity LiveMusicEnt = createAndSaveUser("LiveMusicEnt","LiveMusicEnt@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/livebeat/liveBeat1.jpeg","USER");
         Project LiveBeat = createAndSaveProject(
                 "LiveBeat",
                 "Disfruta de conciertos en vivo desde la comodidad de tu hogar. LiveBeat ofrece acceso a actuaciones exclusivas de artistas populares y emergentes, todo en alta definición y sonido envolvente.",
@@ -207,7 +207,7 @@ public class DatabaseInitializer {
                 FILES_FOLDER + "/livebeat/liveBeat1.jpeg"
         );
 
-        UserEntity WellnessHub = createAndSaveUser("WellnessHub","wellnesHub@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.","USER");
+        UserEntity WellnessHub = createAndSaveUser("WellnessHub","wellnesHub@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/nutrifuel/nutrifuel1.jpeg", "USER");
         Project NutriFuel = createAndSaveProject(
                 "NutriFuel",
                 "Fomentando hábitos alimenticios saludables con recetas nutritivas y planes de comidas personalizados. NutriFuel ayuda a las personas a alcanzar sus objetivos de bienestar a través de una alimentación equilibrada.",
@@ -254,8 +254,15 @@ public class DatabaseInitializer {
         return project;
     }
 
-    private UserEntity createAndSaveUser(String name,String email, String encodedPassword, String... roles) {
-        UserEntity user = new UserEntity(name,email, encodedPassword, roles);
+    private UserEntity createAndSaveUser(String name,String email, String encodedPassword, String photo, String... roles) {
+        Blob profilePhoto;
+        try {
+            profilePhoto = createBlob(photo);
+
+        } catch (SQLException | IOException e) {
+            throw new RuntimeException(e);
+        }
+        UserEntity user = new UserEntity(name,email, encodedPassword, profilePhoto, roles);
         userRepository.save(user);
         return user;
     }

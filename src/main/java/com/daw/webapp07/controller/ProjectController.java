@@ -42,12 +42,14 @@ public class ProjectController {
             Optional<UserEntity> user = userRepository.findByName(request.getUserPrincipal().getName());
             if(user.isPresent() && user.get().hasInversions()){
                 model.addAttribute("projects", recommendationSimple(user.get()));
+                model.addAttribute("user", user);
+
             }
 
         }
 
         model.addAttribute("projects", projectRepository.findAll());
-        model.addAttribute("user", request.isUserInRole("USER"));
+
         return "inner-page";
     }
 
@@ -82,6 +84,18 @@ public class ProjectController {
                     .body(file);
         }
         return ResponseEntity.notFound().build();
+
+    }
+
+    @GetMapping("/users/{id}/profile")
+    public ResponseEntity<Object> displayProfilePhoto(@PathVariable Long id) throws SQLException{
+        UserEntity userEntity = userRepository.findById(id).orElseThrow();
+        Resource file = new InputStreamResource(userEntity.getProfilePhoto().getBinaryStream());
+
+            return ResponseEntity.ok()
+                    .contentLength(userEntity.getProfilePhoto().length())
+                    .body(file);
+
 
     }
 

@@ -66,6 +66,8 @@ public class WebSecurityConfig {
                         .requestMatchers("/project-details/**").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/projects/**").permitAll()
+                        .requestMatchers("/users/**").permitAll()
+
 
 
                         // PRIVATE PAGES
