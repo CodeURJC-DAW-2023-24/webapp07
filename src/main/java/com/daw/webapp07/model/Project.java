@@ -17,7 +17,9 @@ public class Project {
 
     private String name;
     private String description;
-    private String owner;
+
+    @ManyToOne
+    private UserEntity owner;
     private String date;
     private Category category;
     private String url;
@@ -35,7 +37,7 @@ public class Project {
     public Project() {
     }
 
-    public Project( String name, String description, String owner) {
+    public Project( String name, String description, UserEntity owner) {
         this.name = name;
         this.description = description;
         this.owner = owner;
@@ -48,7 +50,7 @@ public class Project {
         this.currentAmount = 0;
     }
 
-    public Project( String name, String description, String owner, String date, Category category, String url, ArrayList<Blob> images, int goal, int currentAmount, ArrayList<Inversion> inversions) {
+    public Project( String name, String description, UserEntity owner, String date, Category category, String url, ArrayList<Blob> images, int goal, int currentAmount, ArrayList<Inversion> inversions) {
         this.name = name;
         this.description = description;
         this.owner = owner;
@@ -85,11 +87,11 @@ public class Project {
         this.description = description;
     }
 
-    public String getOwner() {
+    public UserEntity getOwner() {
         return owner;
     }
 
-    public void setOwner(String owner) {
+    public void setOwner(UserEntity owner) {
         this.owner = owner;
     }
     public Category getCategory() {

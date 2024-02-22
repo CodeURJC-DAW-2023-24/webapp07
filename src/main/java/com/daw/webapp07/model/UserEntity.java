@@ -12,6 +12,8 @@ public class UserEntity{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String email;
+
     private String name;
 
     private String encodedPassword;
@@ -27,8 +29,9 @@ public class UserEntity{
     public UserEntity() {
     }
 
-    public UserEntity(String name, String encodedPassword, String... roles) {
+    public UserEntity(String name, String email, String encodedPassword, String... roles) {
         this.name = name;
+        this.email = email;
         this.encodedPassword = encodedPassword;
         this.roles = List.of(roles);
         this.inversions = new ArrayList<>();
@@ -41,6 +44,14 @@ public class UserEntity{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getEncodedPassword() {
@@ -85,6 +96,10 @@ public class UserEntity{
 
     public boolean hasInversions() {
         return !inversions.isEmpty();
+    }
+
+    public String toString(){
+        return this.name;
     }
 }
 
