@@ -63,7 +63,7 @@ public class UserController {
     // Hacer que esto funcione
     @GetMapping("/new-proyect")
     public String newproyect() {
-        return "create-proyect";
+        return "create-proyect.mustache";
     }
 
 
