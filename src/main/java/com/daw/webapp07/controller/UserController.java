@@ -1,8 +1,10 @@
 package com.daw.webapp07.controller;
 
+import com.daw.webapp07.model.Project;
 import com.daw.webapp07.model.UserEntity;
 import com.daw.webapp07.repository.ProjectRepository;
 import com.daw.webapp07.repository.UserRepository;
+import com.daw.webapp07.service.DatabaseInitializer;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,6 +48,7 @@ public class UserController {
     public String landing(Model model,  HttpServletRequest request) {
         String userName = request.getUserPrincipal().getName();
         Optional<UserEntity> user = userRepository.findByName(userName);
+
         model.addAttribute("projects", projectRepository.findAll());
         model.addAttribute("user", request.isUserInRole("USER"));
         if(user.isPresent()){
