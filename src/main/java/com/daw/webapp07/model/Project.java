@@ -1,11 +1,8 @@
 package com.daw.webapp07.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
 import java.sql.Blob;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -24,9 +21,9 @@ public class Project {
     private Category category;
     private String url;
 
-    @Lob
+    /*@Lob
     @JsonIgnore
-    private List<Blob> images;
+    private List<Blob> images;*/
 
     private int goal;
     private int currentAmount;
@@ -48,7 +45,7 @@ public class Project {
         this.category= Category.Other;
         this.date = "";
         this.url = "";
-        this.images = new ArrayList<>();
+        //this.images = new ArrayList<>();
         this.goal = 0;
         this.currentAmount = 0;
         this.comments = new ArrayList<>();
@@ -62,7 +59,7 @@ public class Project {
         this.date = date;
         this.category = category;
         this.url = url;
-        this.images = images;
+        //this.images = new ArrayList<>();//images;
         this.goal = goal;
         this.currentAmount = currentAmount;
         this.inversions = inversions;
@@ -116,15 +113,15 @@ public class Project {
     }
 
     public List<Blob> getImages() {
-        return images;
+        return null;
     }
 
     public void setImages(List<Blob> images) {
-        this.images = images;
+        //this.images = images;
     }
 
     public void addImage(Blob im){
-        this.images.add(im);
+        //this.images.add(im);
     }
     public int getGoal() {
         return goal;
