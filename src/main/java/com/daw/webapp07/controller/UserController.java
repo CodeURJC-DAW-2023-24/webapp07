@@ -60,17 +60,24 @@ public class UserController {
         return "landing-page";
     }
 
+    @GetMapping("/createProject/")
+    public String createProject(Model model, HttpServletRequest request){
+        String userName = request.getUserPrincipal().getName();
+        Optional<UserEntity> user = userRepository.findByName(userName);
+        model.addAttribute("user", request.isUserInRole("USER"));
+        if(user.isPresent()){
+            model.addAttribute("id", user.get().getId()); //profile photo needs id
+        }
+        return "create-project";
+    }
+
     @GetMapping("/loginerror")
     public String loginerror() {
         return "loginerror";
     }
 
 
-    // Hacer que esto funcione
-    @GetMapping("/new-proyect")
-    public String newproyect() {
-        return "create-proyect";
-    }
+
 
 
 }

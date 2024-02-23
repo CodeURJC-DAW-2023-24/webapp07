@@ -113,7 +113,7 @@ public class Project {
     }
 
     public List<Blob> getImages() {
-        return null;
+        return new ArrayList<>();
     }
 
     public void setImages(List<Blob> images) {

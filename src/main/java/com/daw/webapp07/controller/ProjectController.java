@@ -95,16 +95,7 @@ public class ProjectController {
     }
 
 
-    @GetMapping("/createProject")
-    public String createProject(Model model, HttpServletRequest request){
-        if(request.isUserInRole("USER")){
-            Optional<UserEntity> user = userRepository.findByName(request.getUserPrincipal().getName());
-            if(user.isPresent()){
-                model.addAttribute("user", user);
-            }
-        }
-        return "create-project";
-    }
+
 
 
     @PostMapping("/")
