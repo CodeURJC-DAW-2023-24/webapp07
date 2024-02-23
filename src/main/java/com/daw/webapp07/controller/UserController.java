@@ -5,10 +5,12 @@ import com.daw.webapp07.repository.ProjectRepository;
 import com.daw.webapp07.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +20,9 @@ public class UserController {
 
     @Autowired
     private ProjectRepository projectRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private UserRepository userRepository;
@@ -34,6 +39,8 @@ public class UserController {
 
     @PostMapping("/signup")
     public String newsignup(UserEntity user) {
+        //encode password
+        user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
         user.setRoles(List.of("USER"));
         userRepository.save(user);
         //controlar error de repetición de usuarios
