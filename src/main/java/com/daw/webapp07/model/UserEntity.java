@@ -3,7 +3,6 @@ package com.daw.webapp07.model;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
