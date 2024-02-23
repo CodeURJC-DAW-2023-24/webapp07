@@ -29,14 +29,13 @@ public class UserEntity{
     @OneToMany(cascade = CascadeType.ALL)
     private List<Project> projects;
 
-    @Lob
-    @JsonIgnore
-    private Blob profilePhoto;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Image profilePhoto;
 
     public UserEntity() {
     }
 
-    public UserEntity(String name, String email, String encodedPassword, Blob photo, String... roles) {
+    public UserEntity(String name, String email, String encodedPassword, Image photo, String... roles) {
         this.name = name;
         this.email = email;
         this.encodedPassword = encodedPassword;
@@ -110,11 +109,11 @@ public class UserEntity{
         return this.name;
     }
 
-    public Blob getProfilePhoto() {
+    public Image getProfilePhoto() {
         return profilePhoto;
     }
 
-    public void setProfilePhoto(Blob profilePhoto) {
+    public void setProfilePhoto(Image profilePhoto) {
         this.profilePhoto = profilePhoto;
     }
 }

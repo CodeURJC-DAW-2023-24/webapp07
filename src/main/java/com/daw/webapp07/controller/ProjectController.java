@@ -1,8 +1,7 @@
 package com.daw.webapp07.controller;
 
-import com.daw.webapp07.model.Category;
-import com.daw.webapp07.model.Inversion;
-import com.daw.webapp07.model.UserEntity;
+import com.daw.webapp07.model.*;
+import com.daw.webapp07.repository.ImageRepository;
 import com.daw.webapp07.repository.ProjectRepository;
 import com.daw.webapp07.repository.UserRepository;
 import com.daw.webapp07.service.DatabaseInitializer;
@@ -15,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.daw.webapp07.model.Project;
+
 import java.sql.SQLException;
 import java.util.*;
 
@@ -30,6 +29,9 @@ public class ProjectController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ImageRepository imageRepository;
 
     @GetMapping("/")
     public String innerPage(Model model, HttpServletRequest request) {
@@ -71,11 +73,12 @@ public class ProjectController {
     public ResponseEntity<Object> displayImage(@PathVariable Long id, @PathVariable int index) throws SQLException{
         Project project = projectRepository.findById(id).orElseThrow();
         index--; //index - 1 porque mustache empieza a contar desde 1
-        if (index < project.getImages().size()){
-            Resource file = new InputStreamResource(project.getImages().get(index).getBinaryStream());
+        List<Image> images = project.getImages();
+        if (index < images.size()){
+            Resource file = new InputStreamResource(images.get(index).getImageFile().getBinaryStream());
 
             return ResponseEntity.ok()
-                    .contentLength(project.getImages().get(index).length())
+                    .contentLength(images.get(index).getImageFile().length())
                     .body(file);
         }
         return ResponseEntity.notFound().build();
@@ -85,10 +88,10 @@ public class ProjectController {
     @GetMapping("/users/{id}/profile")
     public ResponseEntity<Object> displayProfilePhoto(@PathVariable Long id) throws SQLException{
         UserEntity userEntity = userRepository.findById(id).orElseThrow();
-        Resource file = new InputStreamResource(userEntity.getProfilePhoto().getBinaryStream());
+        Resource file = new InputStreamResource(userEntity.getProfilePhoto().getImageFile().getBinaryStream());
 
             return ResponseEntity.ok()
-                    .contentLength(userEntity.getProfilePhoto().length())
+                    .contentLength(userEntity.getProfilePhoto().getImageFile().length())
                     .body(file);
 
 

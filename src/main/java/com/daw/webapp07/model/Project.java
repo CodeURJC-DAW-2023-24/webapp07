@@ -21,9 +21,8 @@ public class Project {
     private Category category;
     private String url;
 
-    /*@Lob
-    @JsonIgnore
-    private List<Blob> images;*/
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Image> images;
 
     private int goal;
     private int currentAmount;
@@ -45,21 +44,21 @@ public class Project {
         this.category= Category.Other;
         this.date = "";
         this.url = "";
-        //this.images = new ArrayList<>();
+        this.images = new ArrayList<>();
         this.goal = 0;
         this.currentAmount = 0;
         this.comments = new ArrayList<>();
 
     }
 
-    public Project( String name, String description, UserEntity owner, String date, Category category, String url, ArrayList<Blob> images, int goal, int currentAmount, ArrayList<Inversion> inversions) {
+    public Project( String name, String description, UserEntity owner, String date, Category category, String url, ArrayList<Image> images, int goal, int currentAmount, ArrayList<Inversion> inversions) {
         this.name = name;
         this.description = description;
         this.owner = owner;
         this.date = date;
         this.category = category;
         this.url = url;
-        //this.images = new ArrayList<>();//images;
+        this.images = images;
         this.goal = goal;
         this.currentAmount = currentAmount;
         this.inversions = inversions;
@@ -112,16 +111,16 @@ public class Project {
         this.url = url;
     }
 
-    public List<Blob> getImages() {
-        return new ArrayList<>();
+    public List<Image> getImages() {
+        return this.images;
     }
 
-    public void setImages(List<Blob> images) {
-        //this.images = images;
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
-    public void addImage(Blob im){
-        //this.images.add(im);
+    public void addImage(Image im){
+        this.images.add(im);
     }
     public int getGoal() {
         return goal;

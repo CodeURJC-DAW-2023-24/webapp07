@@ -2,6 +2,7 @@ package com.daw.webapp07.service;
 
 
 import com.daw.webapp07.model.Category;
+import com.daw.webapp07.model.Image;
 import com.daw.webapp07.model.Project;
 import com.daw.webapp07.model.UserEntity;
 import com.daw.webapp07.repository.ProjectRepository;
@@ -234,16 +235,11 @@ public class DatabaseInitializer {
 
 
 
-        List<Blob> images = new ArrayList<>();
-        try {
-            for (String imagePath : imagePaths) {
-                Blob imageBlob = createBlob(imagePath);
-                images.add(imageBlob);
-            }
-        } catch (SQLException | IOException e) {
-            throw new RuntimeException(e);
+        List<Image> images = new ArrayList<>();
+        for (String imagePath : imagePaths) {
+            Image image = new Image(imagePath);
+            images.add(image);
         }
-
         project.setImages(images);
 
         projectRepository.save(project);
@@ -251,23 +247,11 @@ public class DatabaseInitializer {
     }
 
     private UserEntity createAndSaveUser(String name,String email, String encodedPassword, String photo, String... roles) {
-        Blob profilePhoto;
-        try {
-            profilePhoto = createBlob(photo);
-
-        } catch (SQLException | IOException e) {
-            throw new RuntimeException(e);
-        }
+        Image profilePhoto;
+        profilePhoto = new Image(photo);
         UserEntity user = new UserEntity(name,email, encodedPassword, profilePhoto, roles);
         userRepository.save(user);
         return user;
-    }
-
-    private Blob createBlob(String imagePath) throws IOException, SQLException {
-        try (FileInputStream fileInputStream = new FileInputStream(imagePath)) {
-            byte[] data = fileInputStream.readAllBytes();
-            return new javax.sql.rowset.serial.SerialBlob(data);
-        }
     }
 
 }
