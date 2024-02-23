@@ -62,7 +62,7 @@ public class Project {
         this.date = date;
         this.category = category;
         this.url = url;
-        //this.images = images;
+        //this.images = new ArrayList<>();//images;
         this.goal = goal;
         this.currentAmount = currentAmount;
         this.inversions = inversions;
@@ -117,7 +117,6 @@ public class Project {
 
     public List<Blob> getImages() {
         return null;
-        //return images;
     }
 
     public void setImages(List<Blob> images) {

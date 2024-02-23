@@ -5,6 +5,7 @@ import com.daw.webapp07.model.Inversion;
 import com.daw.webapp07.model.UserEntity;
 import com.daw.webapp07.repository.ProjectRepository;
 import com.daw.webapp07.repository.UserRepository;
+import com.daw.webapp07.service.DatabaseInitializer;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.antlr.v4.runtime.misc.Pair;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import com.daw.webapp07.model.Project;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
@@ -29,6 +31,9 @@ import java.util.stream.Collectors;
 
 @Controller
 public class ProjectController {
+
+    @Autowired
+    private DatabaseInitializer dbinit;
 
     @Autowired
     private ProjectRepository projectRepository;
