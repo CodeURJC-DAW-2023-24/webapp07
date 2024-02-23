@@ -29,22 +29,27 @@
 
 
     <div class="col-lg-4">
-        <div class="portfolio-info">
-            <input type="text" id="project-name" placeholder="Project title" class="form-control">
-            <ul>
-                <li><strong>Category</strong>: <input type="text" name="category" class="form-control" required></li>
-                <li><strong>Owner</strong>: <input type="text" name="owner" class="form-control" required></li>
-                <li><strong>Project date</strong>: <input type="date" name="date" class="form-control" required></li>
-                <li><strong>Project URL</strong>: <input type="text" name="url" class="form-control"></li>
-                <li><strong>Amount needed</strong>: <input type="number" name="goal" class="form-control"></li>
+        <form action="/newProject" method="post">
+            <div class="portfolio-info">
+                <input type="text" id="project-name" placeholder="Project title" class="form-control" name="name">
+                <ul>
+                    <li>
+                        <select id="category" name=category">
+                            <option value="Category.Technology">Technology</option>
+                        </select>
+                    </li>
+                    <li><strong>Project URL</strong>: <input type="text" name="url" class="form-control"></li>
+                    <li><strong>Amount needed</strong>: <input type="number" name="goal" class="form-control"></li>
 
-            </ul>
-        </div>
-        <div class="portfolio-description">
-            <h2>About this project</h2>
-            <textarea name="description" class="form-control" rows="5" required></textarea>
-        </div>
-        <button id="upload-project-btn" class="btn btn-primary">Upload Project</button>
+                </ul>
+            </div>
+            <div class="portfolio-description">
+                <h2>About this project</h2>
+                <textarea name="description" class="form-control" rows="5" required></textarea>
+            </div>
+            <input type="hidden" name="_csrf" value="{{token}}"/>
+            <button id="upload-project-btn" class="btn btn-primary" type="submit">Upload Project</button>
+        </form>
 
     </div>
 </div>
@@ -87,6 +92,12 @@
 
 
 <script>
+    const select = document.getElementById("category");
+    for(const key in Category){
+
+    }
+
+
     $(document).ready(function() {
         // Initialize Swiper
         var swiper = new Swiper('.portfolio-details-slider', {

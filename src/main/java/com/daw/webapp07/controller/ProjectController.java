@@ -101,10 +101,27 @@ public class ProjectController {
 
 
 
-    @PostMapping("/")
-    public String createBook(@RequestBody Project project, Model model) {
+    @PostMapping("/newProject")
+    public String createProject(Project project, Model model, HttpServletRequest request) {
+
+        project.setOwner(userRepository.findByName(request.getUserPrincipal().getName()).orElseThrow());
+        Calendar c = Calendar.getInstance();
+        String day = Integer.toString(c.get(Calendar.DATE));
+        String month = Integer.toString(c.get(Calendar.MONTH) + 1);
+        String year = Integer.toString(c.get(Calendar.YEAR));
+        project.setDate(day + "/" + month + "/" + year);
         projectRepository.save(project);
-        return "inner-page";
+
+
+        String userName = request.getUserPrincipal().getName();
+        Optional<UserEntity> user = userRepository.findByName(userName);
+        model.addAttribute("user", request.isUserInRole("USER"));
+        if(user.isPresent()){
+            model.addAttribute("id", user.get().getId()); //profile photo needs id
+        }
+        model.addAttribute(project);
+
+        return "project-details";
     }
 
 
