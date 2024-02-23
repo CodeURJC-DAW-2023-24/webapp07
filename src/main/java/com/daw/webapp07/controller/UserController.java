@@ -1,5 +1,6 @@
 package com.daw.webapp07.controller;
 
+import com.daw.webapp07.model.Project;
 import com.daw.webapp07.model.UserEntity;
 import com.daw.webapp07.repository.ProjectRepository;
 import com.daw.webapp07.repository.UserRepository;
@@ -66,9 +67,12 @@ public class UserController {
         Optional<UserEntity> user = userRepository.findByName(userName);
         model.addAttribute("user", request.isUserInRole("USER"));
         if(user.isPresent()){
+            model.addAttribute("project", new Project());
             model.addAttribute("id", user.get().getId()); //profile photo needs id
+            return "create-project";
         }
-        return "create-project";
+        return "login";
+
     }
 
     @GetMapping("/loginerror")

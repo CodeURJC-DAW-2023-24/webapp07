@@ -34,9 +34,9 @@
             <ul>
                 <li><strong>Category</strong>: <input type="text" name="category" class="form-control" required></li>
                 <li><strong>Owner</strong>: <input type="text" name="owner" class="form-control" required></li>
-                <li><strong>Project date</strong>: <input type="date" name="project_date" class="form-control" required></li>
-                <li><strong>Project URL</strong>: <input type="text" name="project_url" class="form-control"></li>
-                <li><strong>Amount needed</strong>: <input type="number" name="amount_needed" class="form-control"></li>
+                <li><strong>Project date</strong>: <input type="date" name="date" class="form-control" required></li>
+                <li><strong>Project URL</strong>: <input type="text" name="url" class="form-control"></li>
+                <li><strong>Amount needed</strong>: <input type="number" name="goal" class="form-control"></li>
 
             </ul>
         </div>
@@ -45,7 +45,6 @@
             <textarea name="description" class="form-control" rows="5" required></textarea>
         </div>
         <button id="upload-project-btn" class="btn btn-primary">Upload Project</button>
-        <input type="hidden" name = "_csrf" value="{{token}}">
 
     </div>
 </div>
@@ -86,6 +85,7 @@
 
 </body>
 
+
 <script>
     $(document).ready(function() {
         // Initialize Swiper
@@ -120,5 +120,6 @@
         });
     });
 </script>
+
 
 </html>
