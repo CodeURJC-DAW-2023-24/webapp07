@@ -97,6 +97,35 @@ public class ProjectController {
 
     }
 
+    @GetMapping("/editProfile/{id}")
+    public String editProfile(Model model, HttpServletRequest request) {
+        String userName = request.getUserPrincipal().getName();
+        Optional<UserEntity> user = userRepository.findByName(userName);
+        model.addAttribute("user", request.isUserInRole("USER"));
+        if(user.isPresent()){
+            model.addAttribute("id", user.get().getId()); //profile photo needs id
+            model.addAttribute("userEntity", user.get());
+        }
+        return "editProfile";
+    }
+
+    @PostMapping("/editProfile/{id}")
+    public String updateProfile(Model model, @PathVariable Long id,  UserEntity userEntity, HttpServletRequest request) {
+        String name = request.getUserPrincipal().getName();
+        Optional<UserEntity> user = userRepository.findByName(name);
+        if (user.isPresent() && user.get().getId() == id) {
+            user.get().setName(userEntity.getName());
+            user.get().setEmail(userEntity.getEmail());
+            if (userEntity.getProfilePhoto() != null) {
+                user.get().setProfilePhoto(userEntity.getProfilePhoto());
+            }
+            userRepository.save(user.get());
+
+        }
+        model.addAttribute("user", request.isUserInRole("USER"));
+        model.addAttribute("id", id); //profile photo needs id
+        return "landing-page";
+    }
 
 
 
