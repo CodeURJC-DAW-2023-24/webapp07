@@ -97,6 +97,17 @@ public class ProjectController {
 
     }
 
+    @GetMapping("/editProfile")
+    public String editProfile(Model model, HttpServletRequest request) {
+        String userName = request.getUserPrincipal().getName();
+        Optional<UserEntity> user = userRepository.findByName(userName);
+        model.addAttribute("user", request.isUserInRole("USER"));
+        if(user.isPresent()){
+            model.addAttribute("userEntity", user.get());
+            model.addAttribute("id", user.get().getId()); //profile photo needs id
+        }
+        return "editProfile";
+    }
 
 
 

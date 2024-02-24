@@ -1,0 +1,32 @@
+{{> header}}
+
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+        <br><br><br>
+        <h2>Edit Profile</h2>
+    </div>
+</section><!-- End Breadcrumbs -->
+
+{{#userEntity}}
+<div class="container">
+    <form action="/update-profile" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">Nombre:</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{name}}" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Correo:</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{email}}" required>
+        </div>
+        <div class="form-group">
+            <label for="photo">Foto de perfil:</label>
+            <input type="file" class="form-control" id="photo" name="photo">
+        </div>
+        <input type="hidden" name = "_csrf" value="{{token}}">
+        <button type="submit" class="btn btn-primary">Actualizar perfil</button>
+    </form>
+</div>
+
+{{/userEntity}}
+{{> footer}}

@@ -19,27 +19,9 @@
 
 
         function validarFormulario() {
-        var name = document.forms["formSign"]["name"].value;
-        var mail = document.forms["formSign"]["email"].value;
         var password = document.forms["formSign"]["password"].value;
         var password2 = document.forms["formSign"]["checkpassword"].value;
 
-        if (name == "") {
-        alert("Introduce User Name");
-        return false;
-    }
-        if (mail == "") {
-        alert("Introduce your Email");
-        return false;
-    }
-        if (password == "") {
-        alert("Introduce your Password");
-        return false;
-    }
-        if (password2 == "") {
-        alert("Introduce your Password Confirmation");
-        return false;
-    }
         if (password != password2) {
         alert("Passwords do not match");
         return false;
@@ -84,7 +66,7 @@
                     <path
                             d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
                 </svg>
-                <input name="name" type="text" class="input" placeholder="Enter your User Name">
+                <input name="name" type="text" class="input" placeholder="Enter your User Name" required>
             </div>
         </div>
 
@@ -99,7 +81,7 @@
                     </path>
                 </g>
             </svg>
-            <input name="email" type="text" class="input" placeholder="Enter your Email">
+            <input name="email" type="text" class="input" placeholder="Enter your Email" required>
         </div>
 
         <div class="flex-column">
@@ -114,7 +96,7 @@
                         d="m304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0">
                 </path>
             </svg>
-            <input id="passwordInputSign" type="password" class="input" name="encodedPassword" placeholder="Enter your Password">
+            <input id="passwordInputSign" type="password" class="input" name="encodedPassword" placeholder="Enter your Password" required>
             <svg id="passwordVisibleSign" class="passwordVisible" viewBox="0 0 576 512" height="1em"
                  xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -135,14 +117,10 @@
                         d="m304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0">
                 </path>
             </svg>
-            <input id="passwordInputSignConf" type="password" class="input" name="checkpassword" placeholder="Enter your Password">
+            <input id="passwordInputSignConf" type="password" class="input" name="checkpassword" placeholder="Enter your Password" required>
         </div>
 
         <div class="flex-row">
-            <div>
-                <input type="checkbox">
-                <label>Remember me </label>
-            </div>
         </div>
         <input type="hidden" name = "_csrf" value="{{token}}">
         <button type="submit" class="button-submit">Sign In</button>
