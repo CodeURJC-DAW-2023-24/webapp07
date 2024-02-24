@@ -10,7 +10,7 @@
 
 {{#userEntity}}
 <div class="container">
-    <form action="/update-profile" method="post" enctype="multipart/form-data">
+    <form action="/editProfile/{{id}}" method="post">
         <div class="form-group">
             <label for="name">Nombre:</label>
             <input type="text" class="form-control" id="name" name="name" value="{{name}}" required>
@@ -24,7 +24,7 @@
             <input type="file" class="form-control" id="photo" name="photo">
         </div>
         <input type="hidden" name = "_csrf" value="{{token}}">
-        <button type="submit" class="btn btn-primary">Actualizar perfil</button>
+        <button type="submit" class="btn btn-primary">Update Profile</button>
     </form>
 </div>
 
