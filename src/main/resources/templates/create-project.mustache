@@ -34,9 +34,9 @@
                 <input type="text" id="project-name" placeholder="Project title" class="form-control" name="name">
                 <ul>
                     <li>
-                        <select id="categories" name=category">
+                        <select id="categories" name="category">
                             {{#categories}}
-                            <option value="Category.{{.}}">{{.}}</option>
+                            <option value={{.}}>{{.}}</option>
                             {{/categories}}
                         </select>
                     </li>

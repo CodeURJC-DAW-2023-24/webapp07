@@ -34,7 +34,7 @@ public class Project {
     private List<Inversion> inversions;
 
     public Project() {
-        this.category = Category.Education;
+
     }
 
     public Project( String name, String description, UserEntity owner) {
