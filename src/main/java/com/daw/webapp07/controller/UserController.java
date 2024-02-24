@@ -1,5 +1,6 @@
 package com.daw.webapp07.controller;
 
+import com.daw.webapp07.model.Category;
 import com.daw.webapp07.model.Project;
 import com.daw.webapp07.model.UserEntity;
 import com.daw.webapp07.repository.ProjectRepository;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,6 +71,8 @@ public class UserController {
         if(user.isPresent()){
             model.addAttribute("project", new Project());
             model.addAttribute("id", user.get().getId()); //profile photo needs id
+            model.addAttribute("categories", Category.values());
+
             return "create-project";
         }
         return "login";
