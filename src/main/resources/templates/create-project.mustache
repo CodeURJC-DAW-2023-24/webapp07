@@ -34,8 +34,10 @@
                 <input type="text" id="project-name" placeholder="Project title" class="form-control" name="name">
                 <ul>
                     <li>
-                        <select id="category" name=category">
-                            <option value="Category.Technology">Technology</option>
+                        <select id="categories" name=category">
+                            {{#categories}}
+                            <option value="Category.{{.}}">{{.}}</option>
+                            {{/categories}}
                         </select>
                     </li>
                     <li><strong>Project URL</strong>: <input type="text" name="url" class="form-control"></li>
