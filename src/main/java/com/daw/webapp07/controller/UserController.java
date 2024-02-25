@@ -79,6 +79,15 @@ public class UserController {
 
     }
 
+    @GetMapping("/myProjects")
+    public String myProjects(Model model, HttpServletRequest request){
+        String userName = request.getUserPrincipal().getName();
+        List<Project> userProjects = projectRepository.findByOwnerName(userName);
+        model.addAttribute("projects", userProjects);
+        model.addAttribute("user", request.isUserInRole("USER"));
+        return "myProjects";
+    }
+
     @GetMapping("/loginerror")
     public String loginerror() {
         return "loginerror";
