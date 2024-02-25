@@ -8,12 +8,17 @@ import org.antlr.v4.runtime.misc.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -38,7 +43,7 @@ public class ProjectController {
     @Autowired
     InversionRepository inversionRepository;
     @GetMapping("/")
-    public String innerPage(Model model, HttpServletRequest request) {
+    public String innerPage(Model model, HttpServletRequest request, Pageable pageable) {
         if(request.isUserInRole("USER")){
             Optional<UserEntity> user = userRepository.findByName(request.getUserPrincipal().getName());
             if(user.isPresent() && user.get().hasInversions()){
@@ -48,8 +53,8 @@ public class ProjectController {
             }
 
         }
-
-        model.addAttribute("projects", projectRepository.findAll());
+        pageable = PageRequest.of(0, 6);
+        model.addAttribute("projects", projectRepository.findAll(pageable));
 
         return "inner-page";
     }
