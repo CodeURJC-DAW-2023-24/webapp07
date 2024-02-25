@@ -27,13 +27,14 @@ public class Project {
     private int goal;
     private int currentAmount;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Inversion> inversions;
 
     public Project() {
+        this.comments = new ArrayList<>();
 
     }
 
@@ -63,6 +64,7 @@ public class Project {
         this.goal = goal;
         this.currentAmount = currentAmount;
         this.inversions = inversions;
+        this.comments = new ArrayList<>();
     }
 
     public Long getId() {
@@ -153,6 +155,14 @@ public class Project {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public void addComment(Comment comment){
+        if(this.comments == null){
+            this.comments = new ArrayList<>();
+        }
+
+        this.comments.add(comment);
     }
 
     public void addInversion(Inversion inversion) {

@@ -1,9 +1,7 @@
 package com.daw.webapp07.controller;
 
 import com.daw.webapp07.model.*;
-import com.daw.webapp07.repository.ImageRepository;
-import com.daw.webapp07.repository.ProjectRepository;
-import com.daw.webapp07.repository.UserRepository;
+import com.daw.webapp07.repository.*;
 import com.daw.webapp07.service.DatabaseInitializer;
 import jakarta.servlet.http.HttpServletRequest;
 import org.antlr.v4.runtime.misc.Pair;
@@ -14,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -33,6 +32,11 @@ public class ProjectController {
     @Autowired
     private ImageRepository imageRepository;
 
+    @Autowired
+    CommentRepository commentRepository;
+
+    @Autowired
+    InversionRepository inversionRepository;
     @GetMapping("/")
     public String innerPage(Model model, HttpServletRequest request) {
         if(request.isUserInRole("USER")){
@@ -65,6 +69,7 @@ public class ProjectController {
 
         model.addAttribute("project", project);
         model.addAttribute("user", request.isUserInRole("USER"));
+        model.addAttribute("comment", new Comment());
 
         return "project-details";
     }
@@ -152,6 +157,24 @@ public class ProjectController {
 
         return "project-details";
     }
+
+
+    @PostMapping("/project-details/{id}/comment")
+    String comment(@PathVariable Long id, Comment comment, HttpServletRequest request, Model model){
+
+        Project project = projectRepository.findById(id).orElseThrow();
+
+        comment.setProject(project);
+        comment.setUser(userRepository.findByName(request.getUserPrincipal().getName()).orElseThrow());
+        commentRepository.save(comment);
+        project.addComment(comment);
+        projectRepository.save(project);
+
+        return "redirect:/project-details/" + id + "/";
+    }
+
+
+
 
 
 

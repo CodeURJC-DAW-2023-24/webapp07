@@ -231,19 +231,22 @@
                     <h2>Comentarios</h2>
 
                     {{#user}}
-                        <form action="/login" method="post" class="comment-form">
-                            <textarea name="comment" placeholder="Escribe tu comentario aquí..."></textarea>
+                        <form action="/project-details/{{project.id}}/comment" method="post" class="comment-form">
+                            <textarea name="text" placeholder="Escribe tu comentario aquí..."></textarea>
+                            <input type="hidden" name="_csrf" value="{{token}}"/>
                             <button type="submit">Enviar</button>
                         </form>
                     {{/user}}
 
                     <div class="comment-container">
+                        {{#project.comments}}
                         <div class="comment">
                             <img class="profile-pic" src="https://via.placeholder.com/50x50" alt="Profile picture">
 
-                            <div class="comment-author">John Doe</div>
-                            <div class="comment-text">This is a comment.</div>
+                            <div class="comment-author">{{user}}</div>
+                            <div class="comment-text">{{text}}</div>
                         </div>
+                        {{/project.comments}}
                         <!-- More comments go here -->
                     </div>
                 </div>
