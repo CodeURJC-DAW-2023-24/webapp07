@@ -8,6 +8,15 @@ function cargarlatarta(lab, dat) {
     dat = [100]
   }
   // Pie Chart Example
+  ne = lab.length/3 + 1
+  bcb = ['#4e73df', '#1cc88a', '#36b9cc']
+  hbcb =  ['#2e59d9', '#17a673', '#2c9faf']
+  bc = []
+  hbc = []
+  for (i = 0; i < ne; i++) {
+    bc = bc.concat(bcb)
+    hbc = hbc.concat(hbcb)
+  }
   var ctx = document.getElementById("myPieChart");
   var myPieChart = new Chart(ctx, {
     type: 'doughnut',
@@ -15,8 +24,8 @@ function cargarlatarta(lab, dat) {
       labels: lab,//["Direct", "Referral", "Social"],
       datasets: [{
         data: dat,// [55, 30, 15],
-        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+        backgroundColor: bc,//['#4e73df', '#1cc88a', '#36b9cc'],
+        hoverBackgroundColor: hbc,//['#2e59d9', '#17a673', '#2c9faf'],
         hoverBorderColor: "rgba(234, 236, 244, 1)",
       }],
     },

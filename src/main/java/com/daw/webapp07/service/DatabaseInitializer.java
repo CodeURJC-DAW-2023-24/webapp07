@@ -64,6 +64,8 @@ public class DatabaseInitializer {
         );
         Inversion inv1 = createAndSaveInversion(u1, KebabFinder, 1000);
         Inversion inv2 = createAndSaveInversion(u2, KebabFinder,2000);
+        Inversion inv3 = createAndSaveInversion(u3, KebabFinder,3000);
+        Inversion inv4 = createAndSaveInversion(u4, KebabFinder,4000);
 
         UserEntity ecoworld = createAndSaveUser("EcoWorld","ecowrld@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/ecobike/ecobike1.jpg","USER");
         Project ecobike = createAndSaveProject(
