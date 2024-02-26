@@ -217,7 +217,17 @@ public class DatabaseInitializer {
                 FILES_FOLDER + "/nutrifuel/nutrifuel1.jpeg", FILES_FOLDER + "/nutrifuel/nutrifuel2.jpeg"
         );
 
-
+        Project BerniBear = createAndSaveProject(
+                "Berni the Bear Season 3",
+                "The proposal seeks funding for the third season of \"Bernie Bear,\". Season three will showcase captivating storylines, character development, and stunning animation, emphasizing themes of friendship, perseverance, and environmental stewardship.",
+                u1,
+                "30 November, 2024",
+                Category.Entertainment,
+                "https://www.youtube.com/user/bernardbear",
+                150000,
+                0,
+                FILES_FOLDER + "/berni/berni1.jpg", FILES_FOLDER + "/berni/berni2.jpg", FILES_FOLDER + "/berni/berni3.jpg"
+        );
 
     }
 

@@ -88,9 +88,4 @@ public class UserController {
     public String loginerror() {
         return "loginerror";
     }
-
-
-
-
-
 }
