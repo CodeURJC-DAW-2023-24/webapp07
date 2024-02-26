@@ -202,20 +202,22 @@
                             <div class="card-body">
                                 <div class="chart-area">
                                     <div class="row">
-                                        <div class="col-lg-10">
-                                            <form class="formnd justify-content-center">
-                                                <input class="inputnd" id="howmuch" type="number" name="search" placeholder="0" min="0"/>
-                                            </form>
-                                        </div>
+                                        <form class="formnd justify-content-center" action="/project-details/{{project.id}}/donate" method="post">
+                                            <div class="col-lg-10">
+                                                <input class="inputnd" id="howmuch" type="number" name="donation" placeholder="0" min="0"/>
+                                                <div class="row justify-content-center">
+                                                    <input type="hidden" name="_csrf" value="{{token}}"/>
+                                                    <button type="submit"  class="buttonnd">
+                                                        <p class="textnd" >Donate now</p>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
 
                                     </div>
 
 
-                                    <div class="row justify-content-center">
-                                        <button class="buttonnd">
-                                            <p class="textnd" >Donate now</p>
-                                        </button>
-                                    </div>
+
 
                                 </div>
                             </div>

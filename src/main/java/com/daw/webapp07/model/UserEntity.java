@@ -36,6 +36,7 @@ public class UserEntity{
     private List<Comment> comments;
 
     public UserEntity() {
+        this.inversions = new ArrayList<>();
     }
 
     public UserEntity(String name, String email, String encodedPassword, Image photo, String... roles) {
@@ -135,6 +136,14 @@ public class UserEntity{
         }
 
         this.comments.add(comment);
+    }
+
+    public void addInversion(Inversion inversion){
+        if(this.inversions == null){
+            this.inversions = new ArrayList<>();
+        }
+
+        this.inversions.add(inversion);
     }
 }
 

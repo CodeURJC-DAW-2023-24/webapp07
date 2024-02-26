@@ -153,6 +153,23 @@ public class ProjectController {
         return "redirect:/project-details/" + id + "/";
     }
 
+    @PostMapping("/project-details/{id}/donate")
+    String donate(@PathVariable Long id, int donation, HttpServletRequest request, Model model){
+
+        Inversion newInversion = new Inversion(donation);
+        Project project = projectRepository.findById(id).orElseThrow();
+        newInversion.setProject(project);
+        UserEntity user = userRepository.findByName(request.getUserPrincipal().getName()).orElseThrow();
+        newInversion.setUser(user);
+        project.addInversion(newInversion);
+        projectRepository.save(project);
+        user.addInversion(newInversion);
+        userRepository.save(user);
+
+
+        return "redirect:/project-details/" + id + "/";
+    }
+
 
 
     private List<Pair<Float,UserEntity>> getSimilarUsers(UserEntity user, HashMap<UserEntity,HashMap<Category,Float>> percentages){
