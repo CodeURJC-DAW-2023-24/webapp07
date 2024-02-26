@@ -30,12 +30,13 @@ public class Project {
     @OneToMany(mappedBy = "project" ,cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Inversion> inversions;
 
     public Project() {
         this.comments = new ArrayList<>();
-
+        this.inversions = new ArrayList<>();
+        this.images = new ArrayList<>();
     }
 
     public Project( String name, String description, UserEntity owner) {

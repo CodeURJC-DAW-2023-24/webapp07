@@ -30,12 +30,19 @@
 
                                     <div class="col">
                                         <div class="progress progress-sm mr-2">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 10%" aria-valuenow="10"
-                                                 aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: 10%"
+                                                 aria-valuenow="{{project.currentAmount}}"
+                                                 aria-valuemin="0" aria-valuemax="{{project.goal}}"></div>
+                                            <script>
+                                                var percentage = ({{project.currentAmount}} / {{project.goal}}) * 100;
+                                                document.querySelector('.progress-bar').style.width = percentage + '%';
+                                            </script>
                                         </div>
                                     </div>
                                     <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{project.currentAmount}}€ / {{project.goal}}€</div>
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{project.currentAmount}}
+                                            € / {{project.goal}}€
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -49,12 +56,11 @@
             <br>
 
 
-
             <div class="row gy-4">
 
                 <div class="col-lg-8">
                     <div class="portfolio-details-slider swiper">
-                        <div id = "carrusel" class="swiper-wrapper align-items-center">
+                        <div id="carrusel" class="swiper-wrapper align-items-center">
                             {{#project.images}}
                                 <div class="swiper-slide">
                                     <img src="https://localhost:8443/projects/{{project.id}}/images/{{-index}}" alt="">
@@ -102,7 +108,8 @@
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                 <h6 class="portfolioText">Donations over time</h6>
                                 <div class="dropdown no-arrow">
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                       data-toggle="dropdown"
                                        aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                     </a>
@@ -128,7 +135,8 @@
                                         </div>
                                     </div>
                                     <canvas id="myAreaChart" width="512" height="400"
-                                            style="display: block; height: 320px; width: 410px;" class="chartjs-render-monitor"></canvas>
+                                            style="display: block; height: 320px; width: 410px;"
+                                            class="chartjs-render-monitor"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +149,8 @@
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                 <h6 class="portfolioText">Donations by user</h6>
                                 <div class="dropdown no-arrow">
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                       data-toggle="dropdown"
                                        aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                     </a>
@@ -167,34 +176,31 @@
                                         </div>
                                     </div>
                                     <canvas id="myPieChart" width="342" height="306"
-                                            style="display: block; height: 245px; width: 274px;" class="chartjs-render-monitor"></canvas>
+                                            style="display: block; height: 245px; width: 274px;"
+                                            class="chartjs-render-monitor"></canvas>
                                 </div>
                                 <div class="mt-4 text-center small">
                     <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Pablo
-                    </span>
-                                    <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Mangel
-                    </span>
-                                    <span class="mr-2">
-                      <i class="fas fa-circle text-info"></i> Quasi
+                      <i class="fas fa-circle text-primary"></i> Put the cursor over the sector to see the donors
                     </span>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
 
                 {{#user}}
 
-                <div class="row justify-content-center">
-                    <div class="col-xl-8 col-lg-7">
-                        <div class="card shadow mb-4">
-                            <!-- Card Header - Dropdown -->
-                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h5 class="portfolioText">Help this project grow</h5>
+                    <div class="row justify-content-center">
+                        <div class="col-xl-8 col-lg-7">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h5 class="portfolioText">Help this project grow</h5>
                                     <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                           data-toggle="dropdown"
                                            aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                         </a>
@@ -207,34 +213,33 @@
                                             <a class="dropdown-item" href="#">Something else here</a>
                                         </div>
                                     </div>
-                            </div>
-                            <!-- Card Body -->
-                            <div class="card-body">
-                                <div class="chart-area">
-                                    <div class="row">
-                                        <form class="formnd justify-content-center" action="/project-details/{{project.id}}/donate" method="post">
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <div class="row">
                                             <div class="col-lg-10">
-                                                <input class="inputnd" id="howmuch" type="number" name="donation" placeholder="0" min="0"/>
-                                                <div class="row justify-content-center">
-                                                    <input type="hidden" name="_csrf" value="{{token}}"/>
-                                                    <button type="submit"  class="buttonnd">
-                                                        <p class="textnd" >Donate now</p>
-                                                    </button>
-                                                </div>
+                                                <form class="formnd justify-content-center">
+                                                    <input class="inputnd" id="howmuch" type="number" name="search"
+                                                           placeholder="0" min="0"/>
+                                                </form>
                                             </div>
-                                        </form>
+
+                                        </div>
+
+
+                                        <div class="row justify-content-center">
+                                            <button class="buttonnd">
+                                                <p class="textnd">Donate now</p>
+                                            </button>
+                                        </div>
 
                                     </div>
-
-
-
-
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                </div>
+                    </div>
                 {{/user}}
 
 
@@ -252,12 +257,12 @@
 
                     <div class="comment-container">
                         {{#project.comments}}
-                        <div class="comment">
-                            <img class="profile-pic" src="https://localhost:8443/users/{{user.id}}/profile" alt="Profile picture">
+                            <div class="comment">
+                                <img class="profile-pic" src="https://via.placeholder.com/50x50" alt="Profile picture">
 
-                            <div class="comment-author">{{user}}</div>
-                            <div class="comment-text">{{text}}</div>
-                        </div>
+                                <div class="comment-author">{{user}}</div>
+                                <div class="comment-text">{{text}}</div>
+                            </div>
                         {{/project.comments}}
                         <!-- More comments go here -->
                     </div>
@@ -277,7 +282,6 @@
         class="bi bi-arrow-up-short"></i></a>
 
 
-
 <!-- Bootstrap core JavaScript-->
 <script src="/assets2/vendor/jquery/jquery.min.js"></script>
 <script src="/assets2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -294,6 +298,8 @@
 <!-- Page level custom scripts -->
 <script src="/assets2/js/demo/chart-area-demo.js"></script>
 <script src="/assets2/js/demo/chart-pie-demo.js"></script>
+<script>cargarlatarta({{{donors}}}, {{{quantities}}})</script>
+<script>cargarelarea()</script>
 
 <!-- Template Main JS File -->
 <script src="/js/main.js"></script>

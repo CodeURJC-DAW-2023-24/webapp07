@@ -73,6 +73,28 @@ public class ProjectController {
         model.addAttribute("id", id);
         model.addAttribute("comment", new Comment());
 
+        HashMap<String,Integer> donors = new HashMap<>();
+        int total = 0;
+        for(Inversion i: project.getInversions()){
+            total+=i.getAmount();
+            if(donors.containsKey(i.getUser().getName())){
+                donors.put(i.getUser().getName(),donors.get(i.getUser().getName())+i.getAmount());
+            }else{
+                donors.put(i.getUser().getName(),i.getAmount());
+            }
+        }
+
+        List<String> names = new ArrayList<>(donors.keySet());
+        List<Integer> quantities = new ArrayList<>(donors.values());
+        names.sort((a,b)->donors.get(b).compareTo(donors.get(a)));
+        quantities.sort((a,b)->b.compareTo(a));
+        System.out.println(names);
+        System.out.println(quantities);
+        System.out.println("gfwytgwygq3wyg3ry");
+
+        model.addAttribute("donors",array_to_string_jsarray(names));
+        model.addAttribute("quantities", array_to_int_jsarray(quantities));
+
         return "project-details";
     }
 
@@ -249,6 +271,28 @@ public class ProjectController {
 
     private List<Project> likelihoodOfDonation(UserEntity user){
         throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    private String array_to_string_jsarray(List<String> list){
+        String ar = "[";
+        for(String s: list){
+            ar += "'"+s+"',";
+        }
+        if (ar.length() > 1) {ar = ar.substring(0,ar.length()-1);}
+        ar += "]";
+        System.out.println(ar);
+        return ar;
+    }
+
+    private String array_to_int_jsarray(List<Integer> list){
+        String ar = "[";
+        for(Integer i: list){
+            ar += i+",";
+        }
+        if (ar.length() > 1) {ar = ar.substring(0,ar.length()-1);}
+        ar += "]";
+        System.out.println(ar);
+        return ar;
     }
 
 }
