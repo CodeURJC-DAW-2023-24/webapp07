@@ -19,6 +19,10 @@ public class Inversion {
     public Inversion() {
     }
 
+    public Inversion(int amount){
+        this.amount = amount;
+    }
+
     public Inversion(UserEntity user, Project project, int amount) {
         this.user = user;
         this.project = project;

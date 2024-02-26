@@ -74,6 +74,9 @@ public class WebSecurityConfig {
                         .requestMatchers("/newProject").hasAnyRole("USER")
                         .requestMatchers("/editProfile/**").hasAnyRole("USER")
                         .requestMatchers("/project-details/*/comment").hasAnyRole("USER")
+                        .requestMatchers("/project-details/*/donate").hasAnyRole("USER")
+                        .requestMatchers("/project-details/*/delete").hasAnyRole("USER")
+
 
 
                 )

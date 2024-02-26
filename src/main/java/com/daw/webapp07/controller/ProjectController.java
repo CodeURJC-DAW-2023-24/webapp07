@@ -62,9 +62,38 @@ public class ProjectController {
     public String home(Model model, @PathVariable Long id, HttpServletRequest request) {
         Project project = projectRepository.findById(id).orElseThrow();
 
+
+        UserEntity user = userRepository.findByName(request.getUserPrincipal().getName()).orElseThrow();
+
+        if  (user.getName().equals(project.getOwner().getName()) || request.isUserInRole("ADMIN")){
+            model.addAttribute("privileged",true);
+        }
+
         model.addAttribute("project", project);
         model.addAttribute("id", id);
         model.addAttribute("comment", new Comment());
+
+        HashMap<String,Integer> donors = new HashMap<>();
+        int total = 0;
+        for(Inversion i: project.getInversions()){
+            total+=i.getAmount();
+            if(donors.containsKey(i.getUser().getName())){
+                donors.put(i.getUser().getName(),donors.get(i.getUser().getName())+i.getAmount());
+            }else{
+                donors.put(i.getUser().getName(),i.getAmount());
+            }
+        }
+
+        List<String> names = new ArrayList<>(donors.keySet());
+        List<Integer> quantities = new ArrayList<>(donors.values());
+        names.sort((a,b)->donors.get(b).compareTo(donors.get(a)));
+        quantities.sort((a,b)->b.compareTo(a));
+        System.out.println(names);
+        System.out.println(quantities);
+        System.out.println("gfwytgwygq3wyg3ry");
+
+        model.addAttribute("donors",array_to_string_jsarray(names));
+        model.addAttribute("quantities", array_to_int_jsarray(quantities));
 
         return "project-details";
     }
@@ -153,6 +182,35 @@ public class ProjectController {
         return "redirect:/project-details/" + id + "/";
     }
 
+    @PostMapping("/project-details/{id}/donate")
+    String donate(@PathVariable Long id, int donation, HttpServletRequest request, Model model){
+
+        Inversion newInversion = new Inversion(donation);
+        Project project = projectRepository.findById(id).orElseThrow();
+        newInversion.setProject(project);
+        UserEntity user = userRepository.findByName(request.getUserPrincipal().getName()).orElseThrow();
+        newInversion.setUser(user);
+        project.addInversion(newInversion);
+        projectRepository.save(project);
+        user.addInversion(newInversion);
+        userRepository.save(user);
+
+
+        return "redirect:/project-details/" + id + "/";
+    }
+
+    @GetMapping ("/project-details/{id}/delete")
+    String deleteProject(@PathVariable Long id){
+        Optional<Project> project = projectRepository.findById(id);
+
+        if(project.isPresent()){
+            projectRepository.deleteById(id);
+            return "redirect:/";
+        } else{
+            return "redirect:/";
+        }
+    }
+
 
 
     private List<Pair<Float,UserEntity>> getSimilarUsers(UserEntity user, HashMap<UserEntity,HashMap<Category,Float>> percentages){
@@ -213,6 +271,28 @@ public class ProjectController {
 
     private List<Project> likelihoodOfDonation(UserEntity user){
         throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    private String array_to_string_jsarray(List<String> list){
+        String ar = "[";
+        for(String s: list){
+            ar += "'"+s+"',";
+        }
+        if (ar.length() > 1) {ar = ar.substring(0,ar.length()-1);}
+        ar += "]";
+        System.out.println(ar);
+        return ar;
+    }
+
+    private String array_to_int_jsarray(List<Integer> list){
+        String ar = "[";
+        for(Integer i: list){
+            ar += i+",";
+        }
+        if (ar.length() > 1) {ar = ar.substring(0,ar.length()-1);}
+        ar += "]";
+        System.out.println(ar);
+        return ar;
     }
 
 }
