@@ -10,6 +10,7 @@
         <div class="container">
             <h2>{{project.name}}</h2>
 
+
         </div>
     </section><!-- End Breadcrumbs -->
 
@@ -85,7 +86,13 @@
                         <p>
                             {{project.description}} <br><br>
                         </p>
+
+                        {{#privileged}}
+                            <button >Editar</button>
+                            <button >Borrar</button>
+                        {{/privileged}}
                     </div>
+
                 </div>
 
 
