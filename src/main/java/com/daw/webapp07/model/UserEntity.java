@@ -145,5 +145,7 @@ public class UserEntity{
 
         this.inversions.add(inversion);
     }
+
+
 }
 
