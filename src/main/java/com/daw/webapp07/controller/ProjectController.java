@@ -177,6 +177,18 @@ public class ProjectController {
         return "redirect:/project-details/" + id + "/";
     }
 
+    @GetMapping ("/project-details/{id}/delete")
+    String deleteProject(@PathVariable Long id){
+        Optional<Project> project = projectRepository.findById(id);
+
+        if(project.isPresent()){
+            projectRepository.deleteById(id);
+            return "redirect:/";
+        } else{
+            return "redirect:/";
+        }
+    }
+
 
 
     private List<Pair<Float,UserEntity>> getSimilarUsers(UserEntity user, HashMap<UserEntity,HashMap<Category,Float>> percentages){
