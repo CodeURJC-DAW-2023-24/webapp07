@@ -1,10 +1,8 @@
 package com.daw.webapp07.service;
 
 
-import com.daw.webapp07.model.Category;
-import com.daw.webapp07.model.Image;
-import com.daw.webapp07.model.Project;
-import com.daw.webapp07.model.UserEntity;
+import com.daw.webapp07.model.*;
+import com.daw.webapp07.repository.InversionRepository;
 import com.daw.webapp07.repository.ProjectRepository;
 import com.daw.webapp07.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +22,7 @@ import java.util.ArrayList;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DatabaseInitializer {
@@ -39,6 +38,9 @@ public class DatabaseInitializer {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private InversionRepository inversionRepository;
 
     @PostConstruct
     public void init() {
@@ -60,6 +62,8 @@ public class DatabaseInitializer {
                 0,
                 FILES_FOLDER + "/kf/OIG2.jpg", FILES_FOLDER + "/kf/OIG4.jpg", FILES_FOLDER + "/kf/MENU-DONER-KEBAP-7.jpg"
         );
+        Inversion inv1 = createAndSaveInversion(u1, KebabFinder, 1000);
+        Inversion inv2 = createAndSaveInversion(u2, KebabFinder,2000);
 
         UserEntity ecoworld = createAndSaveUser("EcoWorld","ecowrld@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/ecobike/ecobike1.jpg","USER");
         Project ecobike = createAndSaveProject(
@@ -264,4 +268,18 @@ public class DatabaseInitializer {
         return user;
     }
 
+    private Inversion createAndSaveInversion(UserEntity user, Project project, int amount) {
+        Inversion inversion = new Inversion(user, project, amount);
+        Optional<UserEntity> userb = userRepository.findById(user.getId());
+        Optional<Project> projectb = projectRepository.findById(project.getId());
+        if(userb.isPresent() && projectb.isPresent()){
+            userb.get().addInversion(inversion);
+            projectb.get().addInversion(inversion);
+            userRepository.save(userb.get());
+            projectRepository.save(projectb.get());
+            inversionRepository.save(inversion);
+        }
+
+        return inversion;
+    }
 }
