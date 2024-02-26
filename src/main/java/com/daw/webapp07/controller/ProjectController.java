@@ -2,22 +2,17 @@ package com.daw.webapp07.controller;
 
 import com.daw.webapp07.model.*;
 import com.daw.webapp07.repository.*;
-import com.daw.webapp07.service.DatabaseInitializer;
 import jakarta.servlet.http.HttpServletRequest;
 import org.antlr.v4.runtime.misc.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import java.sql.SQLException;
 import java.util.*;
@@ -114,7 +109,7 @@ public class ProjectController {
     }
 
     @PostMapping("/editProfile/{id}")
-    public String updateProfile(Model model, @PathVariable Long id,  UserEntity userEntity, HttpServletRequest request) {
+    public String updateProfile(@PathVariable Long id,  UserEntity userEntity, HttpServletRequest request) {
         String name = request.getUserPrincipal().getName();
         Optional<UserEntity> user = userRepository.findByName(name);
         if (user.isPresent() && user.get().getId() == id) {
@@ -177,6 +172,27 @@ public class ProjectController {
         return "redirect:/project-details/" + id + "/";
     }
 
+    @GetMapping("/edit-project/{id}")
+    public String editProject(Model model, @PathVariable long id, HttpServletRequest request) {
+        String userName = request.getUserPrincipal().getName();
+        Optional<Project> project = projectRepository.findById(id);
+        Optional<UserEntity> user = userRepository.findByName(userName);
+        if(user.isPresent() && project.isPresent()){
+            model.addAttribute("project", project.get());
+            model.addAttribute("categories", Category.values());
+        }
+        return "editProject";
+    }
+
+    @PostMapping("/edit-project/{id}")
+    public String replaceProject(@PathVariable long id, @RequestBody Project newProject) {
+        Optional<Project> project = projectRepository.findById(id);
+        if (project.isPresent()) {
+            newProject.setId(id);
+            projectRepository.save(newProject);
+        }
+        return "redirect:/project-details/" + id + "/";
+    }
 
 
     private List<Pair<Float,UserEntity>> getSimilarUsers(UserEntity user, HashMap<UserEntity,HashMap<Category,Float>> percentages){
