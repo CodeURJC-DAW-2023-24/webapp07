@@ -1,9 +1,10 @@
-package com.daw.webapp07.repository;
+package com.daw.webapp07.service;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.daw.webapp07.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.daw.webapp07.model.UserEntity;
+import org.springframework.ui.Model;
 
 
 @Service
@@ -37,6 +39,14 @@ public class RepositoryUserDetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getName(),
                 user.getEncodedPassword(), roles);
 
+    }
+
+    public String registerUser(UserEntity user) {
+        if(userRepository.findByName(user.getName()).isPresent() || userRepository.findByEmail(user.getEmail()).isPresent()){
+            return "mal";
+        }
+        userRepository.save(user);
+        return "bien";
     }
 
 

@@ -1,6 +1,6 @@
 package com.daw.webapp07.security;
 
-import com.daw.webapp07.repository.RepositoryUserDetailsService;
+import com.daw.webapp07.service.RepositoryUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -75,6 +75,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/editProfile/**").hasAnyRole("USER")
                         .requestMatchers("/project-details/*/comment").hasAnyRole("USER")
                         .requestMatchers("/project-details/*/donate").hasAnyRole("USER")
+                        .requestMatchers("/project-details/*/delete").hasAnyRole("USER")
 
 
 
