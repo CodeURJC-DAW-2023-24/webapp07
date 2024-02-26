@@ -57,33 +57,33 @@
             <ul>
               <li class="li-nav">
                 <a class="nav-container" href="/landing-page">
-                  <img class="nav-img" src="img/profile/dashboard.png">
+                  <img class="nav-img" src="/img/profile/dashboard.png">
                   <p class="nav-text">Dashboard</p>
                 </a>
               </li>
               <li class="li-nav">
                 <a class="nav-container" href="ranking.html">
-                  <img class="nav-img" src="img/profile/ranking.png">
+                  <img class="nav-img" src="/img/profile/ranking.png">
                   <p class="nav-text">Ranking</p>
                 </a>
               </li>
               <li class="li-nav">
                 <a class="nav-container" href="/createProject/">
-                  <img class="nav-img" src="img/profile/upload.png">
+                  <img class="nav-img" src="/img/profile/upload.png">
                   <p class="nav-text">Upload proyect</p>
                 </a>
               </li>
               <li class="li-nav">
                 <a class="nav-container" href="/myProjects">
-                  <img class="nav-img" src="img/profile/dashboard.png">
+                  <img class="nav-img" src="/img/profile/dashboard.png">
                   <p class="nav-text">My projects</p>
                 </a>
               </li>
-              <li class="dropdown"><a href="#"><img class="profile-img" src="/users/{{id}}/profile" alt="Foto de Perfil"></a>
+              <li class="dropdown"><a href="#"><img class="profile-img" src="https://localhost:8443/users/{{id}}/profile" alt="Foto de Perfil"></a>
                 <ul>
                     <li>
                         <a href="/editProfile/{{id}}" class="profile-link">
-                            <img class="option-img" src="img/profile/user.png">
+                            <img class="option-img" src="/img/profile/user.png">
                             <p class="option-text">Profile</p>
                         </a>
                     </li>
@@ -91,7 +91,7 @@
                         <form action="/logout" method="post" class="logout-link">
                             &nbsp;&nbsp;&nbsp;
                             <button type="submit" class="logout-button">
-                                <img class="option-img" src="img/profile/logout.png">
+                                <img class="option-img" src="/img/profile/logout.png">
                                 <p class="logout-text logout-text-right">Log out</p>
                             </button>
                             <input type="hidden" name="_csrf" value="{{token}}">

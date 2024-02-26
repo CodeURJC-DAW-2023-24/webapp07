@@ -27,7 +27,7 @@ public class Project {
     private int goal;
     private int currentAmount;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "project" ,cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

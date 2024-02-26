@@ -74,6 +74,7 @@ public class ProjectController {
 
         model.addAttribute("project", project);
         model.addAttribute("user", request.isUserInRole("USER"));
+        model.addAttribute("id", id);
         model.addAttribute("comment", new Comment());
 
         return "project-details";
@@ -167,12 +168,11 @@ public class ProjectController {
     @PostMapping("/project-details/{id}/comment")
     String comment(@PathVariable Long id, Comment comment, HttpServletRequest request, Model model){
 
+        Comment newComment = new Comment(comment.getText());
         Project project = projectRepository.findById(id).orElseThrow();
-
-        comment.setProject(project);
-        comment.setUser(userRepository.findByName(request.getUserPrincipal().getName()).orElseThrow());
-        commentRepository.save(comment);
-        project.addComment(comment);
+        newComment.setProject(project);
+        newComment.setUser(userRepository.findByName(request.getUserPrincipal().getName()).orElseThrow());
+        project.addComment(newComment);
         projectRepository.save(project);
 
         return "redirect:/project-details/" + id + "/";

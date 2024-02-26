@@ -32,6 +32,9 @@ public class UserEntity{
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Image profilePhoto;
 
+    @OneToMany(mappedBy = "user" ,cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments;
+
     public UserEntity() {
     }
 
@@ -43,6 +46,7 @@ public class UserEntity{
         this.profilePhoto = photo;
         this.inversions = new ArrayList<>();
         this.projects = new ArrayList<>();
+        this.comments = new ArrayList<>();
     }
 
     public String getName() {
@@ -115,6 +119,22 @@ public class UserEntity{
 
     public void setProfilePhoto(Image profilePhoto) {
         this.profilePhoto = profilePhoto;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public void addComment(Comment comment){
+        if(this.comments == null){
+            this.comments = new ArrayList<>();
+        }
+
+        this.comments.add(comment);
     }
 }
 
