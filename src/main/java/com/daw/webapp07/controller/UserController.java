@@ -84,7 +84,11 @@ public class UserController {
         String userName = request.getUserPrincipal().getName();
         List<Project> userProjects = projectRepository.findByOwnerName(userName);
         model.addAttribute("projects", userProjects);
-        model.addAttribute("user", request.isUserInRole("USER"));
+        Optional<UserEntity> user = userRepository.findByName(userName);
+        if(user.isPresent()){
+            model.addAttribute("user", user.get());
+            model.addAttribute("id", user.get().getId()); //profile photo needs id
+        }
         return "myProjects";
     }
 
