@@ -26,9 +26,6 @@ import java.util.*;
 public class ProjectController {
 
     @Autowired
-    private DatabaseInitializer dbinit;
-
-    @Autowired
     private ProjectRepository projectRepository;
 
     @Autowired
@@ -64,16 +61,8 @@ public class ProjectController {
     @GetMapping("/project-details/{id}/")
     public String home(Model model, @PathVariable Long id, HttpServletRequest request) {
         Project project = projectRepository.findById(id).orElseThrow();
-        if(request.isUserInRole("USER")){
-            Optional<UserEntity> user = userRepository.findByName(request.getUserPrincipal().getName());
-            if(user.isPresent() && user.get().hasInversions()){
-                model.addAttribute("projects", recommendationSimple(user.get()));
-            }
-
-        }
 
         model.addAttribute("project", project);
-        model.addAttribute("user", request.isUserInRole("USER"));
         model.addAttribute("id", id);
         model.addAttribute("comment", new Comment());
 
@@ -105,16 +94,13 @@ public class ProjectController {
                     .contentLength(userEntity.getProfilePhoto().getImageFile().length())
                     .body(file);
 
-
     }
 
     @GetMapping("/editProfile/{id}")
     public String editProfile(Model model, HttpServletRequest request) {
         String userName = request.getUserPrincipal().getName();
         Optional<UserEntity> user = userRepository.findByName(userName);
-        model.addAttribute("user", request.isUserInRole("USER"));
         if(user.isPresent()){
-            model.addAttribute("id", user.get().getId()); //profile photo needs id
             model.addAttribute("userEntity", user.get());
         }
         return "editProfile";
@@ -133,12 +119,8 @@ public class ProjectController {
             userRepository.save(user.get());
 
         }
-        model.addAttribute("user", request.isUserInRole("USER"));
-        model.addAttribute("id", id); //profile photo needs id
         return "landing-page";
     }
-
-
 
 
     @PostMapping("/newProject")
@@ -152,13 +134,6 @@ public class ProjectController {
         project.setDate(day + "/" + month + "/" + year);
         projectRepository.save(project);
 
-
-        String userName = request.getUserPrincipal().getName();
-        Optional<UserEntity> user = userRepository.findByName(userName);
-        model.addAttribute("user", request.isUserInRole("USER"));
-        if(user.isPresent()){
-            model.addAttribute("id", user.get().getId()); //profile photo needs id
-        }
         model.addAttribute(project);
 
         return "project-details";
@@ -177,12 +152,6 @@ public class ProjectController {
 
         return "redirect:/project-details/" + id + "/";
     }
-
-
-
-
-
-
 
 
 

@@ -49,17 +49,11 @@ public class UserController {
         return "inner-page";
     }
 
-
-
     @GetMapping("/landing-page")
     public String landing(Model model,  HttpServletRequest request) {
         String userName = request.getUserPrincipal().getName();
         Optional<UserEntity> user = userRepository.findByName(userName);
         model.addAttribute("projects", projectRepository.findAll());
-        model.addAttribute("user", request.isUserInRole("USER"));
-        if(user.isPresent()){
-            model.addAttribute("id", user.get().getId()); //profile photo needs id
-        }
         return "landing-page";
     }
 
@@ -67,10 +61,8 @@ public class UserController {
     public String createProject(Model model, HttpServletRequest request){
         String userName = request.getUserPrincipal().getName();
         Optional<UserEntity> user = userRepository.findByName(userName);
-        model.addAttribute("user", request.isUserInRole("USER"));
         if(user.isPresent()){
             model.addAttribute("project", new Project());
-            model.addAttribute("id", user.get().getId()); //profile photo needs id
             model.addAttribute("categories", Category.values());
 
             return "create-project";
