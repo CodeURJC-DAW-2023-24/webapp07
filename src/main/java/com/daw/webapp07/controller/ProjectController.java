@@ -213,6 +213,27 @@ public class ProjectController {
         }
     }
 
+    @GetMapping("/edit-project/{id}")
+    public String editProject(Model model, @PathVariable long id, HttpServletRequest request) {
+        String userName = request.getUserPrincipal().getName();
+        Optional<Project> project = projectRepository.findById(id);
+        Optional<UserEntity> user = userRepository.findByName(userName);
+        if(user.isPresent() && project.isPresent()){
+            model.addAttribute("project", project.get());
+            model.addAttribute("categories", Category.values());
+        }
+        return "editProject";
+    }
+
+    @PostMapping("/edit-project/{id}")
+    public String replaceProject(@PathVariable long id, @RequestBody Project newProject) {
+        Optional<Project> project = projectRepository.findById(id);
+        if (project.isPresent()) {
+            newProject.setId(id);
+            projectRepository.save(newProject);
+        }
+        return "redirect:/project-details/" + id + "/";
+    }
 
 
     private List<Pair<Float,UserEntity>> getSimilarUsers(UserEntity user, HashMap<UserEntity,HashMap<Category,Float>> percentages){
