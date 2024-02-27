@@ -44,14 +44,14 @@ public class RepositoryUserDetailsService implements UserDetailsService {
 
     }
 
-    public String registerUser(UserEntity user) {
+    public boolean registerUser(UserEntity user) {
         if(userRepository.findByName(user.getName()).isPresent() || userRepository.findByEmail(user.getEmail()).isPresent()){
-            return "mal";
+            return false;
         }
         userRepository.save(user);
         emailService.sendEmail(user.getName(), user.getEmail(), "Welcome to SeedVentures");
 
-        return "bien";
+        return true;
     }
 
 
