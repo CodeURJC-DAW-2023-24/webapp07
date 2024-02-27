@@ -67,11 +67,11 @@ public class WebSecurityConfig {
 
 
                         // PRIVATE PAGES
+                        .requestMatchers("/editproject/*").hasAnyRole("USER")
                         .requestMatchers("/landing-page").hasAnyRole("USER")
                         .requestMatchers("/createProject/").hasAnyRole("USER")
                         .requestMatchers("/myProjects").hasAnyRole("USER")
                         .requestMatchers("/newProject").hasAnyRole("USER")
-                        .requestMatchers("/editProject/**").hasAnyRole("USER")
                         .requestMatchers("/editProfile/**").hasAnyRole("USER")
                         .requestMatchers("/project-details/*/comment").hasAnyRole("USER")
                         .requestMatchers("/project-details/*/donate").hasAnyRole("USER")
