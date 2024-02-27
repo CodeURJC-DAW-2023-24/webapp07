@@ -5,6 +5,7 @@ import com.daw.webapp07.model.Project;
 import com.daw.webapp07.model.UserEntity;
 import com.daw.webapp07.repository.ProjectRepository;
 import com.daw.webapp07.repository.UserRepository;
+import com.daw.webapp07.service.EmailService;
 import com.daw.webapp07.service.RepositoryUserDetailsService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,7 @@ public class UserController {
         user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
         user.setRoles(List.of("USER"));
         userDetailsService.registerUser(user);
+
         return "inner-page";
     }
 
