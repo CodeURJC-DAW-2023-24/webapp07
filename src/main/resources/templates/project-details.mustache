@@ -40,8 +40,7 @@
                                         </div>
                                     </div>
                                     <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{project.currentAmount}}
-                                            € / {{project.goal}}€
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{project.currentAmount}}&#128; / {{project.goal}}&#128;
                                         </div>
                                     </div>
                                 </div>
@@ -257,7 +256,7 @@
                     {{/user}}
 
                     <div class="comment-container">
-                        {{#project.comments}}
+                        {{#project.comments}}  
                             <div class="comment">
                                     <img class="profile-pic" src="https://localhost:8443/users/{{user.id}}/profile" alt="Profile picture">
                                 <div class="comment-author">{{user}}</div>
@@ -299,7 +298,7 @@
 <script src="/assets2/js/demo/chart-area-demo.js"></script>
 <script src="/assets2/js/demo/chart-pie-demo.js"></script>
 <script>cargarlatarta({{{donors}}}, {{{quantities}}})</script>
-<script>cargarelarea()</script>
+<script>cargarelarea({{{times}}}, {{{pastmoney}}})</script>
 
 <!-- Template Main JS File -->
 <script src="/js/main.js"></script>

@@ -20,6 +20,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Controller
@@ -63,15 +66,17 @@ public class ProjectController {
         Project project = projectRepository.findById(id).orElseThrow();
 
 
-        UserEntity user = userRepository.findByName(request.getUserPrincipal().getName()).orElseThrow();
-
-        if  (user.getName().equals(project.getOwner().getName()) || request.isUserInRole("ADMIN")){
-            model.addAttribute("privileged",true);
+        if(request.isUserInRole("USER")){
+            if  (request.getUserPrincipal().getName().equals(project.getOwner().getName()) || request.isUserInRole("ADMIN")){
+                model.addAttribute("privileged",true);
+            }
         }
+
+
 
         model.addAttribute("project", project);
         model.addAttribute("id", id);
-        model.addAttribute("comment", new Comment());
+
 
         HashMap<String,Integer> donors = new HashMap<>();
         int total = 0;
@@ -88,12 +93,50 @@ public class ProjectController {
         List<Integer> quantities = new ArrayList<>(donors.values());
         names.sort((a,b)->donors.get(b).compareTo(donors.get(a)));
         quantities.sort((a,b)->b.compareTo(a));
-        System.out.println(names);
-        System.out.println(quantities);
-        System.out.println("gfwytgwygq3wyg3ry");
+
+        List<String> times = new ArrayList<>();
+        List<Integer> pastmoney = new ArrayList<>();
+        Calendar timeNow = Calendar.getInstance();
+        Calendar oldest = Calendar.getInstance();
+        oldest.set(project.getDate().getYear(), project.getDate().getMonthValue() -1, project.getDate().getDayOfMonth());
+        oldest.add(Calendar.YEAR,1);
+        boolean moreThanAYear = oldest.before(timeNow);
+        oldest.add(Calendar.YEAR, -1);
+        HashMap<String, Integer> where = new HashMap<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/yyyy");
+        List<String> months = new ArrayList<>(Arrays.asList("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"));
+        int i = 0;
+        while (oldest.before(timeNow)) {
+            System.out.println("Mesasd: "+oldest.get(Calendar.YEAR));
+            if(!moreThanAYear) {
+                times.add(months.get(oldest.get(Calendar.MONTH)));
+            }
+            else {
+                times.add(months.get(oldest.get(Calendar.MONTH)) + " " + oldest.get(Calendar.YEAR));
+            }
+            System.out.println(times);
+            where.put(sdf.format(oldest.getTime()),i);
+            oldest.add(Calendar.MONTH, 1);
+            i++;
+        }
+        for(int j = 0; j < times.size(); j++){
+            pastmoney.add(0);
+        }
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/yyyy", Locale.ENGLISH);
+        for(Inversion i2: project.getInversions()){
+            int index = where.get(i2.getDate().format(dtf));
+            pastmoney.set(index,pastmoney.get(index)+i2.getAmount());
+        }
+        System.out.println(pastmoney);
+        for(int k = 1; k < pastmoney.size(); k++){
+            pastmoney.set(k,pastmoney.get(k)+pastmoney.get(k-1));
+            System.out.println(pastmoney);
+        }
 
         model.addAttribute("donors",array_to_string_jsarray(names));
         model.addAttribute("quantities", array_to_int_jsarray(quantities));
+        model.addAttribute("times",array_to_string_jsarray(times));
+        model.addAttribute("pastmoney", array_to_int_jsarray(pastmoney));
 
         return "project-details";
     }
@@ -160,7 +203,8 @@ public class ProjectController {
         String day = Integer.toString(c.get(Calendar.DATE));
         String month = Integer.toString(c.get(Calendar.MONTH) + 1);
         String year = Integer.toString(c.get(Calendar.YEAR));
-        project.setDate(day + "/" + month + "/" + year);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH);
+        project.setDate(LocalDate.parse(day + "/" + month + "/" + year, formatter));
         projectRepository.save(project);
 
         model.addAttribute(project);
@@ -200,16 +244,17 @@ public class ProjectController {
     }
 
     @GetMapping ("/project-details/{id}/delete")
-    String deleteProject(@PathVariable Long id){
-        Optional<Project> project = projectRepository.findById(id);
+    String deleteProject(@PathVariable Long id, HttpServletRequest request){
+        Project project = projectRepository.findById(id).orElseThrow();
 
-        if(project.isPresent()){
+
+        if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName())){
             projectRepository.deleteById(id);
-            return "redirect:/";
-        } else{
-            return "redirect:/";
         }
-    }
+
+        return "redirect:/";
+        }
+
 
     @GetMapping("/edit-project/{id}")
     public String editProject(Model model, @PathVariable long id, HttpServletRequest request) {
