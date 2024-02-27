@@ -63,15 +63,17 @@ public class ProjectController {
         Project project = projectRepository.findById(id).orElseThrow();
 
 
-        UserEntity user = userRepository.findByName(request.getUserPrincipal().getName()).orElseThrow();
-
-        if  (user.getName().equals(project.getOwner().getName()) || request.isUserInRole("ADMIN")){
-            model.addAttribute("privileged",true);
+        if(request.isUserInRole("USER")){
+            if  (request.getUserPrincipal().getName().equals(project.getOwner().getName()) || request.isUserInRole("ADMIN")){
+                model.addAttribute("privileged",true);
+            }
         }
+
+
 
         model.addAttribute("project", project);
         model.addAttribute("id", id);
-        model.addAttribute("comment", new Comment());
+
 
         HashMap<String,Integer> donors = new HashMap<>();
         int total = 0;
