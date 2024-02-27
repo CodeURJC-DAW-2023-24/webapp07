@@ -58,7 +58,7 @@ public class DatabaseInitializer {
                 "KebabFinder",
                 "Kebab Finder es una aplicación que te permite encontrar los mejores kebabs de tu ciudad. Podrás ver las opiniones de otros usuarios, ver la carta de los kebabs y hacer tus propias reseñas. Además, podrás solicitar un kebab a domicilio y pagar con tarjeta.",
                 MarkiIndustries,
-                "28 January, 2024",
+                "28 January, 2022",
                 Category.Technology,
                 "https://kebabfinder.com",
                 150000,

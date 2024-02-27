@@ -27,13 +27,17 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
-function cargarelarea() {
+function cargarelarea(lab,dat) {
+  if(lab.length == 0){
+    lab = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    dat = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  }
   // Area Chart Example
   var ctx = document.getElementById("myAreaChart");
   var myLineChart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      labels: lab,
       datasets: [{
         label: "Earnings",
         lineTension: 0.3,
@@ -47,7 +51,7 @@ function cargarelarea() {
         pointHoverBorderColor: "rgba(78, 115, 223, 1)",
         pointHitRadius: 10,
         pointBorderWidth: 2,
-        data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+        data: dat,
       }],
     },
     options: {
@@ -111,7 +115,7 @@ function cargarelarea() {
         callbacks: {
           label: function (tooltipItem, chart) {
             var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-            return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+            return datasetLabel + ': ' + number_format(tooltipItem.yLabel)+'€';
           }
         }
       }
