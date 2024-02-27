@@ -88,7 +88,9 @@
                         </p>
 
                         {{#privileged}}
-                            <button >Editar</button>
+                            <button >
+                                <a href="/editProject/{{project.id}}">Editar</a>
+                            </button>
 
                             <button>
                                 <a href="/project-details/{{project.id}}/delete">Borrar</a>
