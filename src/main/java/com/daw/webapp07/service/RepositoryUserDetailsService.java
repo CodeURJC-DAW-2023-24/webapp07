@@ -24,6 +24,9 @@ public class RepositoryUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private EmailService emailService;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -46,6 +49,8 @@ public class RepositoryUserDetailsService implements UserDetailsService {
             return "mal";
         }
         userRepository.save(user);
+        emailService.sendEmail(user.getName(), user.getEmail(), "Welcome to SeedVentures");
+
         return "bien";
     }
 
