@@ -232,7 +232,7 @@ public class DatabaseInitializer {
                 "https://www.youtube.com/user/bernardbear",
                 150000,
                 0,
-                FILES_FOLDER + "/berni/berni1.jpg", FILES_FOLDER + "/berni/berni2.jpg", FILES_FOLDER + "/berni/berni3.jpg"
+                FILES_FOLDER + "/berni/berni2.jpg", FILES_FOLDER + "/berni/berni3.jpg"
         );
 
     }
