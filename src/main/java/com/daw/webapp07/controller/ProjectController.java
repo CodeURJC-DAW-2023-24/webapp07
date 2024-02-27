@@ -202,16 +202,17 @@ public class ProjectController {
     }
 
     @GetMapping ("/project-details/{id}/delete")
-    String deleteProject(@PathVariable Long id){
-        Optional<Project> project = projectRepository.findById(id);
+    String deleteProject(@PathVariable Long id, HttpServletRequest request){
+        Project project = projectRepository.findById(id).orElseThrow();
 
-        if(project.isPresent()){
+
+        if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName())){
             projectRepository.deleteById(id);
-            return "redirect:/";
-        } else{
-            return "redirect:/";
         }
-    }
+
+        return "redirect:/";
+        }
+
 
     @GetMapping("/edit-project/{id}")
     public String editProject(Model model, @PathVariable long id, HttpServletRequest request) {
