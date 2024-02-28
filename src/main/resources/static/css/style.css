@@ -2687,7 +2687,8 @@ section {
 /*--------------------------------------------------------------
 # CREATE PROJECT
 --------------------------------------------------------------*/
- .project-creation-container-unique {
+ .project-creation-container-unique
+ .profile-creation-container-unique{
    max-width: 800px;
    margin: 50px auto;
    padding: 30px 20px;
@@ -2696,7 +2697,8 @@ section {
    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
  }
 
-.project-name-unique {
+.project-name-unique
+.profile-name-unique{
   font-weight: bold;
   font-size: 2rem;
   margin-bottom: 50px;

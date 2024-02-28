@@ -9,27 +9,28 @@
 </section><!-- End Breadcrumbs -->
 
 {{#userEntity}}
-<div class="container">
-    <!-- Input field and button to upload new slide -->
-    <label for="profile">Profile Photo:</label>
-    <input type="file" id="new-slide-input" class="form-control" accept="image/*" hidden>
-    <button id="upload-slide-btn" class="btn btn-primary" type="submit">Upload photo</button>
+    <div class="container profile-creation-container-unique">
+        <form action="/editProfile" method="post" enctype="multipart/form-data">
 
-
-    <form action="/editProfile" method="post">
         <div class="form-group">
-            <label for="name">Nombre:</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{name}}" readonly>
+            <label for="profile-name-unique">User Name</label>
+            <input type="text" id="profile-name-unique" class="form-control" name="name" readonly value="{{name}}">
         </div>
+            <div class="form-group">
+                <label for="profile-mail-unique">Email</label>
+                <input type="text" id="profile-mail-unique" class="form-control" name="email" required value="{{email}}">
+            </div>
         <div class="form-group">
-            <label for="email">Correo:</label>
-            <input type="email" class="form-control" id="email" name="email" value="{{email}}" required>
+            <label for="profile-photo-unique">Profile Photo</label>
+            <input type="file" id="profile-photo-unique" name="photo" accept="image/*">
         </div>
+        <input type="hidden" name="_csrf" value="{{token}}">
 
-        <input type="hidden" name = "_csrf" value="{{token}}">
-        <button type="submit" class="btn btn-primary">Update Profile</button>
+        <button type="submit" class="btn btn-primary">Edit Profile</button>
+
     </form>
-</div>
+    </form>
+    </div>
 
 {{/userEntity}}
 {{> footer}}

@@ -178,31 +178,6 @@ public class ProjectController {
 
     }
 
-    @GetMapping("/editProfile")
-    public String editProfile(Model model, HttpServletRequest request) {
-        String userName = request.getUserPrincipal().getName();
-        Optional<UserEntity> user = userRepository.findByName(userName);
-        if(user.isPresent()){
-            model.addAttribute("userEntity", user.get());
-        }
-        return "editProfile";
-    }
-
-    @PostMapping("/editProfile")
-    public String updateProfile(UserEntity userEntity, HttpServletRequest request) {
-        String name = request.getUserPrincipal().getName();
-        Optional<UserEntity> user = userRepository.findByName(name);
-        if (user.isPresent()) {
-            user.get().setEmail(userEntity.getEmail());
-            if (userEntity.getProfilePhoto() != null) {
-                user.get().setProfilePhoto(userEntity.getProfilePhoto());
-            }
-            userRepository.save(user.get());
-
-        }
-        return "redirect:/landing-page";
-    }
-
 
     @PostMapping("/createProject")
     public String createProject(Project project,
