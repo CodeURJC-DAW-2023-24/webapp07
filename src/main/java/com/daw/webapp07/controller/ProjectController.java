@@ -3,6 +3,7 @@ package com.daw.webapp07.controller;
 import com.daw.webapp07.model.*;
 import com.daw.webapp07.repository.*;
 import com.daw.webapp07.service.DatabaseInitializer;
+import com.daw.webapp07.service.PdfService;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
@@ -22,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import org.springframework.data.domain.Page;
@@ -74,8 +76,10 @@ public class ProjectController {
 
     @GetMapping("/project-details/{id}/")
     public String home(Model model, @PathVariable Long id, HttpServletRequest request) {
-        Project project = projectRepository.findById(id).orElseThrow();
-
+        Optional<Project> checkProject = projectRepository.findById(id);
+        if (checkProject == null)
+            return "redirect:/error-page";
+        Project project = checkProject.get();
 
         if(request.isUserInRole("USER")){
             if  (request.getUserPrincipal().getName().equals(project.getOwner().getName()) || request.isUserInRole("ADMIN")){
@@ -179,57 +183,46 @@ public class ProjectController {
 
     }
 
-    @GetMapping("/editProfile")
-    public String editProfile(Model model, HttpServletRequest request) {
-        String userName = request.getUserPrincipal().getName();
-        Optional<UserEntity> user = userRepository.findByName(userName);
-        if(user.isPresent()){
-            model.addAttribute("userEntity", user.get());
+
+    @PostMapping("/createProject")
+    public String createProject(Project project,
+                                @RequestParam("file") MultipartFile[] files,
+                                HttpServletRequest request) {
+
+        Optional<UserEntity> checkQuery = userRepository.findByName(request.getUserPrincipal().getName());
+        if (checkQuery == null)
+            return "redirect:/error-page";
+        UserEntity query = checkQuery.get();
+        project.setOwner(query);
+        LocalDate date = LocalDate.now();
+        project.setDate(date);
+
+        for (MultipartFile file : files) {
+            Image image = new Image(file);
+            project.addImage(image);
         }
-        return "editProfile";
-    }
 
-    @PostMapping("/editProfile")
-    public String updateProfile(UserEntity userEntity, HttpServletRequest request) {
-        String name = request.getUserPrincipal().getName();
-        Optional<UserEntity> user = userRepository.findByName(name);
-        if (user.isPresent()) {
-            user.get().setEmail(userEntity.getEmail());
-            if (userEntity.getProfilePhoto() != null) {
-                user.get().setProfilePhoto(userEntity.getProfilePhoto());
-            }
-            userRepository.save(user.get());
-
-        }
-        return "redirect:/landing-page";
-    }
-
-
-    @PostMapping("/newProject")
-    public String createProject(Project project, Model model, HttpServletRequest request) {
-
-        project.setOwner(userRepository.findByName(request.getUserPrincipal().getName()).orElseThrow());
-        Calendar c = Calendar.getInstance();
-        String day = Integer.toString(c.get(Calendar.DATE));
-        String month = Integer.toString(c.get(Calendar.MONTH) + 1);
-        String year = Integer.toString(c.get(Calendar.YEAR));
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH);
-        project.setDate(LocalDate.parse(day + "/" + month + "/" + year, formatter));
         projectRepository.save(project);
-
-        model.addAttribute(project);
-
-        return "project-details";
+        return "redirect:/project-details/" + project.getId() + "/";
     }
+
 
 
     @PostMapping("/project-details/{id}/comment")
     String comment(@PathVariable Long id, Comment comment, HttpServletRequest request, Model model){
 
         Comment newComment = new Comment(comment.getText());
-        Project project = projectRepository.findById(id).orElseThrow();
+        Optional<Project> checkProject = projectRepository.findById(id);
+        if (checkProject == null)
+            return "redirect:/error-page";
+        Project project = checkProject.get();
+
         newComment.setProject(project);
-        newComment.setUser(userRepository.findByName(request.getUserPrincipal().getName()).orElseThrow());
+        Optional<UserEntity> checkQuery = userRepository.findByName(request.getUserPrincipal().getName());
+        if (checkQuery == null)
+            return "redirect:/error-page";
+        UserEntity query = checkQuery.get();
+        newComment.setUser(query);
         project.addComment(newComment);
         projectRepository.save(project);
 
@@ -240,9 +233,17 @@ public class ProjectController {
     String donate(@PathVariable Long id, int donation, HttpServletRequest request, Model model){
 
         Inversion newInversion = new Inversion(donation);
-        Project project = projectRepository.findById(id).orElseThrow();
+        LocalDate date = LocalDate.now();
+        newInversion.setDate(date);
+        Optional<Project> checkProject = projectRepository.findById(id);
+        if (checkProject == null)
+            return "redirect:/error-page";
+        Project project = checkProject.get();
         newInversion.setProject(project);
-        UserEntity user = userRepository.findByName(request.getUserPrincipal().getName()).orElseThrow();
+        Optional<UserEntity> checkQuery = userRepository.findByName(request.getUserPrincipal().getName());
+        if (checkQuery == null)
+            return "redirect:/error-page";
+        UserEntity user = checkQuery.get();
         newInversion.setUser(user);
         project.addInversion(newInversion);
         projectRepository.save(project);
@@ -255,7 +256,10 @@ public class ProjectController {
 
     @GetMapping ("/project-details/{id}/delete")
     String deleteProject(@PathVariable Long id, HttpServletRequest request){
-        Project project = projectRepository.findById(id).orElseThrow();
+        Optional<Project> checkProject = projectRepository.findById(id);
+        if (checkProject == null)
+            return "redirect:/error-page";
+        Project project = checkProject.get();
 
 
         if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName())){
@@ -272,102 +276,55 @@ public class ProjectController {
         Optional<Project> project = projectRepository.findById(id);
         Optional<UserEntity> user = userRepository.findByName(userName);
         if(user.isPresent() && project.isPresent() && (project.get().getOwner().equals(user.get()) || request.isUserInRole("ADMIN"))){
+            model.addAttribute("isEditing", true);
             model.addAttribute("project", project.get());
             model.addAttribute("categories", Category.values());
-            return "editProject";
+            return "create-project";
         }
         return "error-page";
 
     }
 
+
     @PostMapping("/editProject/{id}")
-    public String replaceProject(@PathVariable long id, @RequestBody Project newProject) {
+    public String replaceProject(@PathVariable long id, Project newProject,
+                                 @RequestParam("file") MultipartFile[] files) {
         Optional<Project> project = projectRepository.findById(id);
         if (project.isPresent()) {
-            newProject.setId(id);
-            projectRepository.save(newProject);
-        }
+            Project proj = project.get();
+            if(!files[0].isEmpty() ){
+                for (MultipartFile file : files) {
+                    Image image = new Image(file);
+                    proj.addImage(image);
+
+                }
+            }
+            proj.setName(newProject.getName());
+            proj.setDescription(newProject.getDescription());
+            proj.setCategory(newProject.getCategory());
+            proj.setUrl(newProject.getUrl());
+            proj.setGoal(newProject.getGoal());
+
+            projectRepository.save(proj);
+            }
+
         return "redirect:/project-details/" + id + "/";
     }
 
     @Controller
     public class PdfController {
 
+        @Autowired
+        private PdfService pdfGenerationService;
+
+        @Autowired
+        private ProjectRepository projectRepository;
+
         @GetMapping("/project-details/{id}/generate-pdf")
         public void generatePdf(@PathVariable long id, HttpServletResponse response) throws IOException {
             Optional<Project> project = projectRepository.findById(id);
             if (project.isPresent()) {
-                List<Inversion> inversions = project.get().getInversions();
-                response.setContentType("application/pdf");
-                response.setHeader("Content-Disposition", "attachment; filename=" + project.get().getName() + "-estadisticas.pdf");
-
-                PdfWriter writer = new PdfWriter(response.getOutputStream());
-                PdfDocument pdf = new PdfDocument(writer);
-                Document document = new Document(pdf);
-
-                document.add(new Paragraph(project.get().getName())
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setBold());
-
-                LocalDate currentDate = LocalDate.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                String formattedDate = currentDate.format(formatter);
-                document.add(new Paragraph(formattedDate)
-                        .setTextAlignment(TextAlignment.RIGHT));
-
-                document.add(new Paragraph()
-                        .add(new Text("Category: ").setBold())
-                        .add(project.get().getCategory().toString()));
-
-                document.add(new Paragraph()
-                        .add(new Text("Owner: ").setBold())
-                        .add(project.get().getOwner().getName()));
-
-                document.add(new Paragraph()
-                        .add(new Text("Project date: ").setBold())
-                        .add(project.get().getDate().format(formatter)));
-
-                document.add(new Paragraph()
-                        .add(new Text("Project url: ").setBold())
-                        .add(project.get().getUrl()));
-
-                document.add(new Paragraph()
-                        .add(new Text("Description: ").setBold())
-                        .add(project.get().getDescription()));
-
-                document.add(new Paragraph()
-                        .add(new Text("Goal: ").setBold())
-                        .add(project.get().getGoal() + "€"));
-
-                document.add(new Paragraph()
-                        .add(new Text("Raised money: ").setBold())
-                        .add(project.get().getCurrentAmount() + "€"));
-
-                document.add(new Paragraph("Inversions: ")
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setBold());
-
-                if (inversions.isEmpty())
-                    document.add(new Paragraph()
-                            .add(new Text("No inversions")));
-                else {
-                    for (int i = 0; i < inversions.size(); i++) {
-                        Inversion inversion = inversions.get(i);
-                        document.add(new Paragraph()
-                                .add(new Text("Investor: ").setBold())
-                                .add(inversion.getUser().getName()));
-                        document.add(new Paragraph()
-                                .add(new Text("Amount: ").setBold())
-                                .add(String.valueOf(inversion.getAmount())));
-                        document.add(new Paragraph()
-                                .add(new Text("Date: ").setBold())
-                                .add(inversion.getDate().format(formatter)));
-                        document.add(new Paragraph()
-                                .add(new Text("----------------------------------------")));
-                    }
-                }
-
-                document.close();
+                pdfGenerationService.generatePdf(project.get(), response, id);
             }
         }
     }
