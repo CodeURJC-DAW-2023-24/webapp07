@@ -68,7 +68,7 @@
                 <p>These projects are killing it !!</p>
             </div>
 
-            <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+            <div id="projects-container" class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
                 {{#projects}}
                 <div class="col-lg-4 col-md-6 portfolio-item filter-web">
@@ -101,7 +101,7 @@
             </div>
             <div class="row">
                 <div class="col-12 text-center">
-                    <a class="btn btn-primary" >Load more</a>
+                    <a id="load-more-btn" class="btn btn-primary" data-page="0">Load more</a>
                 </div>
             </div>
 
@@ -612,7 +612,6 @@
 
         </div>
     </section><!-- End Contact Section -->
-
 </main><!-- End #main -->
 
 {{> footer}}

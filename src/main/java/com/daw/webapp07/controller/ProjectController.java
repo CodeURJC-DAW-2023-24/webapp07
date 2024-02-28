@@ -3,6 +3,7 @@ package com.daw.webapp07.controller;
 import com.daw.webapp07.model.*;
 import com.daw.webapp07.repository.*;
 import com.daw.webapp07.service.DatabaseInitializer;
+import com.daw.webapp07.service.ProjectService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.antlr.v4.runtime.misc.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.querydsl.QPageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.w3c.dom.events.Event;
+
 import java.sql.SQLException;
 import java.util.*;
 
@@ -39,6 +43,10 @@ public class ProjectController {
 
     @Autowired
     InversionRepository inversionRepository;
+
+    @Autowired
+    ProjectService projectService;
+
     @GetMapping("/")
     public String innerPage(Model model, HttpServletRequest request, Pageable pageable) {
         if(request.isUserInRole("USER")){
@@ -50,10 +58,18 @@ public class ProjectController {
             }
 
         }
-        pageable = PageRequest.of(0, 6);
-        model.addAttribute("projects", projectRepository.findAll(pageable));
+
+        model.addAttribute("projects", projectService.searchProjects(0, 3));
 
         return "inner-page";
+    }
+
+
+    @GetMapping("/projects")
+    @ResponseBody
+    public List<Project> getProjects(@RequestParam(name = "page", defaultValue = "0") int page,
+                                   @RequestParam(name = "size", defaultValue = "6") int size ) {
+       return projectService.searchProjects(page, size).getContent();
     }
 
 

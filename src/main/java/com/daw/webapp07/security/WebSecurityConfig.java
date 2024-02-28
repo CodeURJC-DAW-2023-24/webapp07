@@ -62,6 +62,8 @@ public class WebSecurityConfig {
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/projects/**").permitAll()
                         .requestMatchers("/users/**").permitAll()
+                        .requestMatchers("/projects").permitAll()
+
 
 
 
