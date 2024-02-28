@@ -84,7 +84,8 @@ public class PdfService{
                         .add(inversion.getUser().getName()));
                 document.add(new Paragraph()
                         .add(new Text("Amount: ").setBold())
-                        .add(String.valueOf(inversion.getAmount())));
+                        .add(String.valueOf(inversion.getAmount()))
+                        .add(" €"));
                 document.add(new Paragraph()
                         .add(new Text("Date: ").setBold())
                         .add(inversion.getDate().format(formatter)));
