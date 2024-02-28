@@ -1,8 +1,10 @@
 package com.daw.webapp07.repository;
 
 import com.daw.webapp07.model.Project;
+import jakarta.transaction.Transactional;
 import org.hibernate.annotations.processing.SQL;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -10,7 +12,9 @@ import java.util.List;
 public interface ProjectRepository extends JpaRepository<Project, Long> {
     List<Project> findByOwnerName(String ownerName);
 
-    /*@SQL("""
+    @Transactional
+    @Modifying
+    @Query(value=""" 
     DROP VIEW UCategoryInvestment;
     DROP VIEW UCategoryPercentage;
     DROP VIEW UCategoryDifference;
@@ -35,7 +39,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
              
     	CREATE VIEW UCategoryPercentage
             AS
-                SELECT\s
+                SELECT
     			uci.
             user_entity_id,
                 uci.category,
@@ -45,7 +49,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     		FROM
                 UCategoryInvestment uci
     				JO
-              			(SELECT\s
+              			(SELECT
     				user_entity_id, SUM(total_investment) AS
                 total_investment
     			FROM
@@ -57,7 +61,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     		
     	CREATE VIEW
                 UCategoryDifference AS
-    		SELECT\s
+    		SELECT
     			u1.
             user_entity_id AS user1,
     			u2
@@ -75,7 +79,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
             user_entity_id
              		
     	CREATE VIEW USimilarity AS
-    		SELECT\s
+    		SELECT
     			u1.user1
             , u2.
             user2, SUM(u1.difference)
@@ -90,7 +94,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
                 GROUP BY u1.
             user1 , u2.user2;
                     CREATE VIEW UProjectDonationSum AS
-    		SELECT\s
+    		SELECT
     			user_id AS
                 user_entity_id,
                 project_id AS project,
@@ -100,10 +104,10 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     		FROM
     			Inversion
                 GROUP BY user_id, project_id;
-       \s
+       
     CREATE VIEW
             UProjectRelation AS
-        SELECT\s
+        SELECT
             u.id AS user_entity_id,
             p.id AS projec,
             COALESCE(
@@ -118,18 +122,16 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
             UProjectDonationSum upds ON upds.project = p.id
             LEFT JOIN USimilarity us ON (us.user1 = u.id  AND us.user2 = user_entity_id)
         GROUP BY u.id, p.id;
-    """)
-    @Query("""
               
               
               SELECT
-                          	p
-                          FROM
-                          	UProjectRelation u, Project p
-                          WHERE
-                          	u.user_entity_id = ?1 AND
-                              u.projec = p.id
-                          ORDER BY u.relation_number
-    """)
-    public List<Project> getRecomendedProjects(Long userid);*/
+                p
+              FROM
+                UProjectRelation u, Project p
+              WHERE
+                u.user_entity_id = ?1 AND
+                  u.projec = p.id
+              ORDER BY u.relation_number
+    """, nativeQuery = true)
+    public List<Project> recomendedProjects(Long userid);
 }
