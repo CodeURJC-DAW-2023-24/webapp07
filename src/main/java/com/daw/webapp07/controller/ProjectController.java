@@ -3,6 +3,7 @@ package com.daw.webapp07.controller;
 import com.daw.webapp07.model.*;
 import com.daw.webapp07.repository.*;
 import com.daw.webapp07.service.DatabaseInitializer;
+import com.daw.webapp07.service.PdfService;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
@@ -291,81 +292,17 @@ public class ProjectController {
     @Controller
     public class PdfController {
 
+        @Autowired
+        private PdfService pdfGenerationService;
+
+        @Autowired
+        private ProjectRepository projectRepository;
+
         @GetMapping("/project-details/{id}/generate-pdf")
         public void generatePdf(@PathVariable long id, HttpServletResponse response) throws IOException {
             Optional<Project> project = projectRepository.findById(id);
             if (project.isPresent()) {
-                List<Inversion> inversions = project.get().getInversions();
-                response.setContentType("application/pdf");
-                response.setHeader("Content-Disposition", "attachment; filename=" + project.get().getName() + "-estadisticas.pdf");
-
-                PdfWriter writer = new PdfWriter(response.getOutputStream());
-                PdfDocument pdf = new PdfDocument(writer);
-                Document document = new Document(pdf);
-
-                document.add(new Paragraph(project.get().getName())
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setBold());
-
-                LocalDate currentDate = LocalDate.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                String formattedDate = currentDate.format(formatter);
-                document.add(new Paragraph(formattedDate)
-                        .setTextAlignment(TextAlignment.RIGHT));
-
-                document.add(new Paragraph()
-                        .add(new Text("Category: ").setBold())
-                        .add(project.get().getCategory().toString()));
-
-                document.add(new Paragraph()
-                        .add(new Text("Owner: ").setBold())
-                        .add(project.get().getOwner().getName()));
-
-                document.add(new Paragraph()
-                        .add(new Text("Project date: ").setBold())
-                        .add(project.get().getDate().format(formatter)));
-
-                document.add(new Paragraph()
-                        .add(new Text("Project url: ").setBold())
-                        .add(project.get().getUrl()));
-
-                document.add(new Paragraph()
-                        .add(new Text("Description: ").setBold())
-                        .add(project.get().getDescription()));
-
-                document.add(new Paragraph()
-                        .add(new Text("Goal: ").setBold())
-                        .add(project.get().getGoal() + "€"));
-
-                document.add(new Paragraph()
-                        .add(new Text("Raised money: ").setBold())
-                        .add(project.get().getCurrentAmount() + "€"));
-
-                document.add(new Paragraph("Inversions: ")
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setBold());
-
-                if (inversions.isEmpty())
-                    document.add(new Paragraph()
-                            .add(new Text("No inversions")));
-                else {
-                    for (int i = 0; i < inversions.size(); i++) {
-                        Inversion inversion = inversions.get(i);
-                        document.add(new Paragraph()
-                                .add(new Text("Investor: ").setBold())
-                                .add(inversion.getUser().getName()));
-                        document.add(new Paragraph()
-                                .add(new Text("Amount: ").setBold())
-                                .add(String.valueOf(inversion.getAmount())));
-                        document.add(new Paragraph()
-                                .add(new Text("Date: ").setBold())
-                                .add(inversion.getDate().format(formatter)));
-                        document.add(new Paragraph()
-                                .add(new Text("----------------------------------------")));
-                    }
-                }
-
-                document.close();
+                pdfGenerationService.generatePdf(project.get(), response, id);
             }
         }
     }
