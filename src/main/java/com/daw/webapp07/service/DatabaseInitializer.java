@@ -83,6 +83,8 @@ public class DatabaseInitializer {
                 FILES_FOLDER + "/ecobike/ecobike1.jpg", FILES_FOLDER + "/ecobike/ecobike2.jpg", FILES_FOLDER + "/ecobike/ecobike3.jpg"
         );
 
+        Inversion inv5 = createAndSaveInversion(u1, ecobike, 1000, LocalDate.of(2023, 12, 2));
+
         UserEntity proglearn = createAndSaveUser("proglearn","progolo@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/proglearn/proglearn1.jpeg","USER");
         Project CodeLearn = createAndSaveProject(
                 "CodeLearn",
