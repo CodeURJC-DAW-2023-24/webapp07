@@ -74,8 +74,10 @@ public class ProjectController {
 
     @GetMapping("/project-details/{id}/")
     public String home(Model model, @PathVariable Long id, HttpServletRequest request) {
-        Project project = projectRepository.findById(id).orElseThrow();
-
+        Optional<Project> checkProject = projectRepository.findById(id);
+        if (checkProject == null)
+            return "redirect:/error-page";
+        Project project = checkProject.get();
 
         if(request.isUserInRole("USER")){
             if  (request.getUserPrincipal().getName().equals(project.getOwner().getName()) || request.isUserInRole("ADMIN")){
@@ -185,7 +187,11 @@ public class ProjectController {
                                 @RequestParam("file") MultipartFile[] files,
                                 HttpServletRequest request) {
 
-        project.setOwner(userRepository.findByName(request.getUserPrincipal().getName()).orElseThrow());
+        Optional<UserEntity> checkQuery = userRepository.findByName(request.getUserPrincipal().getName());
+        if (checkQuery == null)
+            return "redirect:/error-page";
+        UserEntity query = checkQuery.get();
+        project.setOwner(query);
         LocalDate date = LocalDate.now();
         project.setDate(date);
 
@@ -204,9 +210,17 @@ public class ProjectController {
     String comment(@PathVariable Long id, Comment comment, HttpServletRequest request, Model model){
 
         Comment newComment = new Comment(comment.getText());
-        Project project = projectRepository.findById(id).orElseThrow();
+        Optional<Project> checkProject = projectRepository.findById(id);
+        if (checkProject == null)
+            return "redirect:/error-page";
+        Project project = checkProject.get();
+
         newComment.setProject(project);
-        newComment.setUser(userRepository.findByName(request.getUserPrincipal().getName()).orElseThrow());
+        Optional<UserEntity> checkQuery = userRepository.findByName(request.getUserPrincipal().getName());
+        if (checkQuery == null)
+            return "redirect:/error-page";
+        UserEntity query = checkQuery.get();
+        newComment.setUser(query);
         project.addComment(newComment);
         projectRepository.save(project);
 
@@ -217,9 +231,15 @@ public class ProjectController {
     String donate(@PathVariable Long id, int donation, HttpServletRequest request, Model model){
 
         Inversion newInversion = new Inversion(donation);
-        Project project = projectRepository.findById(id).orElseThrow();
+        Optional<Project> checkProject = projectRepository.findById(id);
+        if (checkProject == null)
+            return "redirect:/error-page";
+        Project project = checkProject.get();
         newInversion.setProject(project);
-        UserEntity user = userRepository.findByName(request.getUserPrincipal().getName()).orElseThrow();
+        Optional<UserEntity> checkQuery = userRepository.findByName(request.getUserPrincipal().getName());
+        if (checkQuery == null)
+            return "redirect:/error-page";
+        UserEntity user = checkQuery.get();
         newInversion.setUser(user);
         project.addInversion(newInversion);
         projectRepository.save(project);
@@ -232,7 +252,10 @@ public class ProjectController {
 
     @GetMapping ("/project-details/{id}/delete")
     String deleteProject(@PathVariable Long id, HttpServletRequest request){
-        Project project = projectRepository.findById(id).orElseThrow();
+        Optional<Project> checkProject = projectRepository.findById(id);
+        if (checkProject == null)
+            return "redirect:/error-page";
+        Project project = checkProject.get();
 
 
         if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName())){
