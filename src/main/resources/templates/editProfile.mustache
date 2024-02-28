@@ -10,19 +10,22 @@
 
 {{#userEntity}}
 <div class="container">
-    <form action="/editProfile/{{id}}" method="post">
+    <!-- Input field and button to upload new slide -->
+    <label for="profile">Profile Photo:</label>
+    <input type="file" id="new-slide-input" class="form-control" accept="image/*" hidden>
+    <button id="upload-slide-btn" class="btn btn-primary" type="submit">Upload photo</button>
+
+
+    <form action="/editProfile" method="post">
         <div class="form-group">
             <label for="name">Nombre:</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{name}}" required>
+            <input type="text" class="form-control" id="name" name="name" value="{{name}}" readonly>
         </div>
         <div class="form-group">
             <label for="email">Correo:</label>
             <input type="email" class="form-control" id="email" name="email" value="{{email}}" required>
         </div>
-        <div class="form-group">
-            <label for="photo">Foto de perfil:</label>
-            <input type="file" class="form-control" id="photo" name="photo">
-        </div>
+
         <input type="hidden" name = "_csrf" value="{{token}}">
         <button type="submit" class="btn btn-primary">Update Profile</button>
     </form>
@@ -30,3 +33,23 @@
 
 {{/userEntity}}
 {{> footer}}
+
+<script>
+    $(document).ready(function() {
+        // Upload slide button click event
+        $('#upload-slide-btn').click(function() {
+            $('#new-slide-input').click();
+        });
+
+        // New input change event
+        $('#new-slide-input').on('change', function(event) {
+            var fileInput = $(this)[0];
+            var file = fileInput.files[0];
+
+            if (file) {
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+</script>

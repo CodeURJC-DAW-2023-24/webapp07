@@ -3,7 +3,12 @@ package com.daw.webapp07.controller;
 import com.daw.webapp07.model.*;
 import com.daw.webapp07.repository.*;
 import com.daw.webapp07.service.DatabaseInitializer;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.antlr.v4.runtime.misc.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -19,6 +24,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -168,7 +175,7 @@ public class ProjectController {
 
     }
 
-    @GetMapping("/editProfile/{id}")
+    @GetMapping("/editProfile")
     public String editProfile(Model model, HttpServletRequest request) {
         String userName = request.getUserPrincipal().getName();
         Optional<UserEntity> user = userRepository.findByName(userName);
@@ -178,12 +185,11 @@ public class ProjectController {
         return "editProfile";
     }
 
-    @PostMapping("/editProfile/{id}")
-    public String updateProfile(Model model, @PathVariable Long id,  UserEntity userEntity, HttpServletRequest request) {
+    @PostMapping("/editProfile")
+    public String updateProfile(UserEntity userEntity, HttpServletRequest request) {
         String name = request.getUserPrincipal().getName();
         Optional<UserEntity> user = userRepository.findByName(name);
-        if (user.isPresent() && user.get().getId() == id) {
-            user.get().setName(userEntity.getName());
+        if (user.isPresent()) {
             user.get().setEmail(userEntity.getEmail());
             if (userEntity.getProfilePhoto() != null) {
                 user.get().setProfilePhoto(userEntity.getProfilePhoto());
@@ -191,7 +197,7 @@ public class ProjectController {
             userRepository.save(user.get());
 
         }
-        return "landing-page";
+        return "redirect:/landing-page";
     }
 
 
@@ -256,19 +262,21 @@ public class ProjectController {
         }
 
 
-    @GetMapping("/edit-project/{id}")
+    @GetMapping("/editProject/{id}")
     public String editProject(Model model, @PathVariable long id, HttpServletRequest request) {
         String userName = request.getUserPrincipal().getName();
         Optional<Project> project = projectRepository.findById(id);
         Optional<UserEntity> user = userRepository.findByName(userName);
-        if(user.isPresent() && project.isPresent()){
+        if(user.isPresent() && project.isPresent() && (project.get().getOwner().equals(user.get()) || request.isUserInRole("ADMIN"))){
             model.addAttribute("project", project.get());
             model.addAttribute("categories", Category.values());
+            return "editProject";
         }
-        return "editProject";
+        return "error-page";
+
     }
 
-    @PostMapping("/edit-project/{id}")
+    @PostMapping("/editProject/{id}")
     public String replaceProject(@PathVariable long id, @RequestBody Project newProject) {
         Optional<Project> project = projectRepository.findById(id);
         if (project.isPresent()) {
@@ -276,6 +284,25 @@ public class ProjectController {
             projectRepository.save(newProject);
         }
         return "redirect:/project-details/" + id + "/";
+    }
+
+    @Controller
+    public class PdfController {
+
+        @GetMapping("/project-details/{id}/generate-pdf")
+        public void generatePdf(@PathVariable long id, HttpServletResponse response) throws IOException {
+            Optional<Project> project = projectRepository.findById(id);
+            response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=" + project.get().getName() +"-estadisticas.pdf");
+
+            PdfWriter writer = new PdfWriter(response.getOutputStream());
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf);
+
+            document.add(new Paragraph("¡Diego es un maricon, este es el proyecto " + project.get().getName() + "!"));
+
+            document.close();
+        }
     }
 
 

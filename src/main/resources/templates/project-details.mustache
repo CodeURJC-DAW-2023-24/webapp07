@@ -87,13 +87,13 @@
                         </p>
 
                         {{#privileged}}
-                            <button >
-                                <a href="/editProject/{{project.id}}">Editar</a>
-                            </button>
+                            <div class="button-container">
 
-                            <button>
-                                <a href="/project-details/{{project.id}}/delete">Borrar</a>
-                            </button>
+                                <a class="buttonProject" href="/editProject/{{project.id}}">Edit</a>
+                                <a class="buttonProject" href="/project-details/{{project.id}}/delete">Delete</a>
+                                <a class="buttonProject" href="/project-details/{{project.id}}/generate-pdf">Download PDF</a>
+
+                            </div>
                         {{/privileged}}
                     </div>
 

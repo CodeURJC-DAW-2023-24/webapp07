@@ -50,9 +50,11 @@ public class UserController {
         //encode password
         user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
         user.setRoles(List.of("USER"));
-        userDetailsService.registerUser(user);
+        if (userDetailsService.registerUser(user)){
+            return "login";
+        }
 
-        return "inner-page";
+        return "error-page";
     }
 
     @GetMapping("/landing-page")

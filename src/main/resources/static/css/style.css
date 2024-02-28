@@ -1369,6 +1369,31 @@ section {
   background-color: #f2f2f2;
 }
 
+.buttonProject {
+  font-family: "Jost", sans-serif;
+  font-weight: 1000;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 10px 28px 11px 28px;
+  border-radius: 50px;
+  transition: 0.5s;
+  margin: 10px 0 0 0;
+  color: #fff;
+  background: #3ae977;
+  cursor: pointer;
+}
+
+.buttonProject:hover {
+  background: #20bf57;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+}
 /*--------------------------------------------------------------
 # Team
 --------------------------------------------------------------*/
