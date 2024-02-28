@@ -231,6 +231,8 @@ public class ProjectController {
     String donate(@PathVariable Long id, int donation, HttpServletRequest request, Model model){
 
         Inversion newInversion = new Inversion(donation);
+        LocalDate date = LocalDate.now();
+        newInversion.setDate(date);
         Optional<Project> checkProject = projectRepository.findById(id);
         if (checkProject == null)
             return "redirect:/error-page";
