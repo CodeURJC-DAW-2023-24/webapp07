@@ -85,7 +85,7 @@ SELECT
 FROM 
 	UProjectRelation u, Project p
 WHERE 
-	user_entity_id = 2 AND
+	user_entity_id = ?1 AND
     u.projec = p.id
 ORDER BY u.relation_number;
     """, nativeQuery = true)
