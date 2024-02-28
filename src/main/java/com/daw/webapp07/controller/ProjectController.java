@@ -3,7 +3,12 @@ package com.daw.webapp07.controller;
 import com.daw.webapp07.model.*;
 import com.daw.webapp07.repository.*;
 import com.daw.webapp07.service.DatabaseInitializer;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.antlr.v4.runtime.misc.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -19,6 +24,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -277,6 +284,25 @@ public class ProjectController {
             projectRepository.save(newProject);
         }
         return "redirect:/project-details/" + id + "/";
+    }
+
+    @Controller
+    public class PdfController {
+
+        @GetMapping("/project-details/{id}/generate-pdf")
+        public void generatePdf(@PathVariable long id, HttpServletResponse response) throws IOException {
+            Optional<Project> project = projectRepository.findById(id);
+            response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=" + project.get().getName() +"-estadisticas.pdf");
+
+            PdfWriter writer = new PdfWriter(response.getOutputStream());
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf);
+
+            document.add(new Paragraph("¡Diego es un maricon, este es el proyecto " + project.get().getName() + "!"));
+
+            document.close();
+        }
     }
 
 
