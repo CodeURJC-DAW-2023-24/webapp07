@@ -56,15 +56,17 @@ public class ProjectController {
         if(request.isUserInRole("USER")){
             Optional<UserEntity> user = userRepository.findByName(request.getUserPrincipal().getName());
             if(user.isPresent() && user.get().hasInversions()){
-                model.addAttribute("projects", projectRepository.findAll(pageable));//projectRepository.recomendedProjects(user.get().getId()));
+                System.out.println("Recomendando");
+                model.addAttribute("projects", projectRepository.recomendedProjects(user.get().getId()));
                 model.addAttribute("user", user);
 
             }
 
         }
-        pageable = PageRequest.of(0, 6);
-        model.addAttribute("projects", projectRepository.findAll(pageable));
-
+        else {
+            pageable = PageRequest.of(0, 6);
+            model.addAttribute("projects", projectRepository.findAll(pageable));
+        }
         return "inner-page";
     }
 
