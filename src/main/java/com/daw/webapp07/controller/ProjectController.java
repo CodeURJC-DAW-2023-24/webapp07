@@ -273,21 +273,38 @@ public class ProjectController {
         Optional<Project> project = projectRepository.findById(id);
         Optional<UserEntity> user = userRepository.findByName(userName);
         if(user.isPresent() && project.isPresent() && (project.get().getOwner().equals(user.get()) || request.isUserInRole("ADMIN"))){
+            model.addAttribute("isEditing", true);
             model.addAttribute("project", project.get());
             model.addAttribute("categories", Category.values());
-            return "editProject";
+            return "create-project";
         }
         return "error-page";
 
     }
 
+
     @PostMapping("/editProject/{id}")
-    public String replaceProject(@PathVariable long id, @RequestBody Project newProject) {
+    public String replaceProject(@PathVariable long id, Project newProject,
+                                 @RequestParam("file") MultipartFile[] files) {
         Optional<Project> project = projectRepository.findById(id);
         if (project.isPresent()) {
-            newProject.setId(id);
-            projectRepository.save(newProject);
-        }
+            Project proj = project.get();
+            if(!files[0].isEmpty() ){
+                for (MultipartFile file : files) {
+                    Image image = new Image(file);
+                    proj.addImage(image);
+
+                }
+            }
+            proj.setName(newProject.getName());
+            proj.setDescription(newProject.getDescription());
+            proj.setCategory(newProject.getCategory());
+            proj.setUrl(newProject.getUrl());
+            proj.setGoal(newProject.getGoal());
+
+            projectRepository.save(proj);
+            }
+
         return "redirect:/project-details/" + id + "/";
     }
 

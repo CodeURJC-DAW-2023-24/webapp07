@@ -70,6 +70,7 @@ public class UserController {
         String userName = request.getUserPrincipal().getName();
         Optional<UserEntity> user = userRepository.findByName(userName);
         if(user.isPresent()){
+            model.addAttribute("isEditing", false);
             model.addAttribute("project", new Project());
             model.addAttribute("categories", Category.values());
             return "create-project";
