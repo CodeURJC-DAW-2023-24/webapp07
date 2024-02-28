@@ -22,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import org.springframework.data.domain.Page;
@@ -203,22 +204,24 @@ public class ProjectController {
     }
 
 
-    @PostMapping("/newProject")
-    public String createProject(Project project, Model model, HttpServletRequest request) {
+    @PostMapping("/createProject")
+    public String createProject(Project project,
+                                @RequestParam("file") MultipartFile[] files,
+                                HttpServletRequest request) {
 
         project.setOwner(userRepository.findByName(request.getUserPrincipal().getName()).orElseThrow());
-        Calendar c = Calendar.getInstance();
-        String day = Integer.toString(c.get(Calendar.DATE));
-        String month = Integer.toString(c.get(Calendar.MONTH) + 1);
-        String year = Integer.toString(c.get(Calendar.YEAR));
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH);
-        project.setDate(LocalDate.parse(day + "/" + month + "/" + year, formatter));
+        LocalDate date = LocalDate.now();
+        project.setDate(date);
+
+        for (MultipartFile file : files) {
+            Image image = new Image(file);
+            project.addImage(image);
+        }
+
         projectRepository.save(project);
-
-        model.addAttribute(project);
-
-        return "project-details";
+        return "redirect:/project-details/" + project.getId() + "/";
     }
+
 
 
     @PostMapping("/project-details/{id}/comment")

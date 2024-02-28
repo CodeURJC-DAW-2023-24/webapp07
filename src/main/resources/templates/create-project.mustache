@@ -1,59 +1,90 @@
 {{> header}}
 
-<!-- ======= Breadcrumbs ======= -->
+<style>
+
+    .project-creation-container-unique {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 30px 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .project-name-unique {
+        font-weight: bold;
+        font-size: 2rem;
+        margin-bottom: 50px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+    }
+</style>
+
+
+
+{{! <!-- ======= Breadcrumbs ======= --> }}
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
-        <br><br><br>
-        <h2>New project</h2>
+        <br><br>
+        <h2>Create Project</h2>
+
     </div>
 </section><!-- End Breadcrumbs -->
 
-<!-- ======= Portfolio Details Section ======= -->
 
-<div class="row gy-4 create-project-form">
-    <div class="col-lg-8">
-        <div id="slides" class="portfolio-details-slider swiper">
-            <!-- Slides container -->
-            <div class="swiper-wrapper align-items-center">
-
-            </div>
-            <!-- Pagination -->
-            <div class="swiper-pagination"></div>
+<!-- Project creation container -->
+<!-- Project creation container -->
+<div class="container project-creation-container-unique">
+    <h1 class="project-name-unique">New project</h1>
+    <form action="/createProject" method="post" enctype="multipart/form-data"> <!-- Add enctype attribute for file uploads -->
+        <div class="form-group">
+            <label for="project-name-unique">Project title</label>
+            <input type="text" id="project-name-unique" placeholder="Project title" class="form-control" name="name" required>
         </div>
-
-        <!-- Input field and button to upload new slide -->
-        <input type="file" id="new-slide-input" class="form-control" accept="image/*" hidden>
-        <button id="upload-slide-btn" class="btn btn-primary" type="submit">Upload slide</button>
-
-    </div>
-
-
-    <div class="col-lg-4">
-        <form action="/newProject" method="post">
-            <div class="portfolio-info">
-                <input type="text" id="project-name" placeholder="Project title" class="form-control" name="name">
-                <ul>
-                    <li>
-                        <select id="categories" name="category">
-                            {{#categories}}
-                            <option value={{.}}>{{.}}</option>
-                            {{/categories}}
-                        </select>
-                    </li>
-                    <li><strong>Project URL</strong>: <input type="text" name="url" class="form-control"></li>
-                    <li><strong>Amount needed</strong>: <input type="number" name="goal" class="form-control"></li>
-
-                </ul>
-            </div>
-            <div class="portfolio-description">
-                <h2>About this project</h2>
-                <textarea name="description" class="form-control" rows="5" required></textarea>
-            </div>
-            <input type="hidden" name="_csrf" value="{{token}}"/>
-            <button id="upload-project-btn" class="btn btn-primary" type="submit">Upload Project</button>
-        </form>
-
-    </div>
+        <div class="form-group">
+            <label for="categories">Category</label>
+            <select id="categories" name="category" class="form-control">
+                {{#categories}}
+                    <option value="{{.}}">{{.}}</option>
+                {{/categories}}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="project-url-unique">Project URL</label>
+            <input type="text" id="project-url-unique" placeholder="Project URL" class="form-control" name="url" required>
+        </div>
+        <div class="form-group">
+            <label for="project-goal-unique">Amount needed</label>
+            <input type="number" id="project-goal-unique" placeholder="Amount needed" class="form-control" name="goal" required>
+        </div>
+        <div class="form-group">
+            <label for="project-description-unique">About this project</label>
+            <textarea id="project-description-unique" class="form-control" rows="5" name="description" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="project-images-unique">Project Images</label>
+            <input type="file" id="project-images-unique" name="file" multiple class="form-control" accept="image/*">
+            <small class="form-text text-muted">Maximum upload size: 2MB per image</small>
+        </div>
+        <input type="hidden" name="_csrf" value="{{token}}">
+        <button type="submit" class="btn btn-primary">Upload Project</button>
+    </form>
 </div>
 
 {{> footer}}
@@ -94,7 +125,7 @@
 
 
 <script>
-    const select = document.getElementById("category");
+    const select = document.getElementById("categories");
     for(const key in Category){
 
     }

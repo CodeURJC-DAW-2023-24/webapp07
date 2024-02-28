@@ -75,7 +75,7 @@ public class DatabaseInitializer {
                 "EcoBike: La bicicleta eléctrica todo terreno",
                 "Una bicicleta eléctrica diseñada para todo tipo de terrenos, desde montañas hasta calles urbanas. Equipada con baterías de larga duración y un motor potente, EcoBike busca revolucionar la movilidad sostenible.",
                 ecoworld,
-                "2 February, 2024",
+                "28 January, 2022",
                 Category.Entertainment,
                 "https://ecobike.com",
                 12000,

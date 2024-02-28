@@ -65,14 +65,13 @@ public class UserController {
         return "landing-page";
     }
 
-    @GetMapping("/createProject/")
+    @GetMapping("/createProject")
     public String createProject(Model model, HttpServletRequest request){
         String userName = request.getUserPrincipal().getName();
         Optional<UserEntity> user = userRepository.findByName(userName);
         if(user.isPresent()){
             model.addAttribute("project", new Project());
             model.addAttribute("categories", Category.values());
-
             return "create-project";
         }
         return "login";
