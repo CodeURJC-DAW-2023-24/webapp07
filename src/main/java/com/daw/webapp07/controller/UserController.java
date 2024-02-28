@@ -1,6 +1,7 @@
 package com.daw.webapp07.controller;
 
 import com.daw.webapp07.model.Category;
+import com.daw.webapp07.model.Image;
 import com.daw.webapp07.model.Project;
 import com.daw.webapp07.model.UserEntity;
 import com.daw.webapp07.repository.ProjectRepository;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Arrays;
 import java.util.List;
@@ -65,14 +68,14 @@ public class UserController {
         return "landing-page";
     }
 
-    @GetMapping("/createProject/")
+    @GetMapping("/createProject")
     public String createProject(Model model, HttpServletRequest request){
         String userName = request.getUserPrincipal().getName();
         Optional<UserEntity> user = userRepository.findByName(userName);
         if(user.isPresent()){
+            model.addAttribute("isEditing", false);
             model.addAttribute("project", new Project());
             model.addAttribute("categories", Category.values());
-
             return "create-project";
         }
         return "login";
@@ -96,4 +99,33 @@ public class UserController {
     public String loginerror() {
         return "loginerror";
     }
+
+
+@GetMapping("/editProfile")
+public String editProfile(Model model, HttpServletRequest request) {
+    String userName = request.getUserPrincipal().getName();
+    Optional<UserEntity> user = userRepository.findByName(userName);
+    if(user.isPresent()){
+        model.addAttribute("userEntity", user.get());
+    }
+    return "editProfile";
+}
+
+@PostMapping("/editProfile")
+public String updateProfile(UserEntity userEntity,
+                            HttpServletRequest request,
+                            @RequestParam("photo") MultipartFile profilePhoto) {
+    String name = request.getUserPrincipal().getName();
+    Optional<UserEntity> user = userRepository.findByName(name);
+    if (user.isPresent()) {
+        user.get().setEmail(userEntity.getEmail());
+        if (!profilePhoto.isEmpty()) {
+            user.get().setProfilePhoto(new Image(profilePhoto));
+        }
+        userRepository.save(user.get());
+
+    }
+    return "redirect:/landing-page";
+}
+
 }

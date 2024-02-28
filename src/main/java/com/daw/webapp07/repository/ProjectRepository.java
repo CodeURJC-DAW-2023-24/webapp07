@@ -15,13 +15,12 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     @Transactional
     @Modifying
     @Query(value=""" 
-    DROP VIEW UCategoryInvestment;
-    DROP VIEW UCategoryPercentage;
-    DROP VIEW UCategoryDifference;
-    DROP VIEW USimilarity;
-    DROP VIEW UProjectDonationSum;
-    DROP VIEW
-            UProjectRelation;
+    DROP VIEW IF EXISTS UCategoryInvestment;
+    DROP VIEW IF EXISTS UCategoryPercentage;
+    DROP VIEW IF EXISTS UCategoryDifference;
+    DROP VIEW IF EXISTS USimilarity;
+    DROP VIEW IF EXISTS UProjectDonationSum;
+    DROP VIEW IF EXISTS UProjectRelation;
     
     
     	CREATE VIEW UCategoryInvestment AS

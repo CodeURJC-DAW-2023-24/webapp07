@@ -23,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import org.springframework.data.domain.Page;
@@ -57,7 +58,7 @@ public class ProjectController {
         if(request.isUserInRole("USER")){
             Optional<UserEntity> user = userRepository.findByName(request.getUserPrincipal().getName());
             if(user.isPresent() && user.get().hasInversions()){
-                model.addAttribute("projects", recommendationSimple(user.get()));
+                model.addAttribute("projects", projectRepository.findAll(pageable));//projectRepository.recomendedProjects(user.get().getId()));
                 model.addAttribute("user", user);
 
             }
@@ -178,48 +179,25 @@ public class ProjectController {
 
     }
 
-    @GetMapping("/editProfile")
-    public String editProfile(Model model, HttpServletRequest request) {
-        String userName = request.getUserPrincipal().getName();
-        Optional<UserEntity> user = userRepository.findByName(userName);
-        if(user.isPresent()){
-            model.addAttribute("userEntity", user.get());
-        }
-        return "editProfile";
-    }
 
-    @PostMapping("/editProfile")
-    public String updateProfile(UserEntity userEntity, HttpServletRequest request) {
-        String name = request.getUserPrincipal().getName();
-        Optional<UserEntity> user = userRepository.findByName(name);
-        if (user.isPresent()) {
-            user.get().setEmail(userEntity.getEmail());
-            if (userEntity.getProfilePhoto() != null) {
-                user.get().setProfilePhoto(userEntity.getProfilePhoto());
-            }
-            userRepository.save(user.get());
-
-        }
-        return "redirect:/landing-page";
-    }
-
-
-    @PostMapping("/newProject")
-    public String createProject(Project project, Model model, HttpServletRequest request) {
+    @PostMapping("/createProject")
+    public String createProject(Project project,
+                                @RequestParam("file") MultipartFile[] files,
+                                HttpServletRequest request) {
 
         project.setOwner(userRepository.findByName(request.getUserPrincipal().getName()).orElseThrow());
-        Calendar c = Calendar.getInstance();
-        String day = Integer.toString(c.get(Calendar.DATE));
-        String month = Integer.toString(c.get(Calendar.MONTH) + 1);
-        String year = Integer.toString(c.get(Calendar.YEAR));
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH);
-        project.setDate(LocalDate.parse(day + "/" + month + "/" + year, formatter));
+        LocalDate date = LocalDate.now();
+        project.setDate(date);
+
+        for (MultipartFile file : files) {
+            Image image = new Image(file);
+            project.addImage(image);
+        }
+
         projectRepository.save(project);
-
-        model.addAttribute(project);
-
-        return "project-details";
+        return "redirect:/project-details/" + project.getId() + "/";
     }
+
 
 
     @PostMapping("/project-details/{id}/comment")
@@ -271,21 +249,38 @@ public class ProjectController {
         Optional<Project> project = projectRepository.findById(id);
         Optional<UserEntity> user = userRepository.findByName(userName);
         if(user.isPresent() && project.isPresent() && (project.get().getOwner().equals(user.get()) || request.isUserInRole("ADMIN"))){
+            model.addAttribute("isEditing", true);
             model.addAttribute("project", project.get());
             model.addAttribute("categories", Category.values());
-            return "editProject";
+            return "create-project";
         }
         return "error-page";
 
     }
 
+
     @PostMapping("/editProject/{id}")
-    public String replaceProject(@PathVariable long id, @RequestBody Project newProject) {
+    public String replaceProject(@PathVariable long id, Project newProject,
+                                 @RequestParam("file") MultipartFile[] files) {
         Optional<Project> project = projectRepository.findById(id);
         if (project.isPresent()) {
-            newProject.setId(id);
-            projectRepository.save(newProject);
-        }
+            Project proj = project.get();
+            if(!files[0].isEmpty() ){
+                for (MultipartFile file : files) {
+                    Image image = new Image(file);
+                    proj.addImage(image);
+
+                }
+            }
+            proj.setName(newProject.getName());
+            proj.setDescription(newProject.getDescription());
+            proj.setCategory(newProject.getCategory());
+            proj.setUrl(newProject.getUrl());
+            proj.setGoal(newProject.getGoal());
+
+            projectRepository.save(proj);
+            }
+
         return "redirect:/project-details/" + id + "/";
     }
 

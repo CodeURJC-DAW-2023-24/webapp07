@@ -75,7 +75,7 @@ public class DatabaseInitializer {
                 "EcoBike: La bicicleta eléctrica todo terreno",
                 "Una bicicleta eléctrica diseñada para todo tipo de terrenos, desde montañas hasta calles urbanas. Equipada con baterías de larga duración y un motor potente, EcoBike busca revolucionar la movilidad sostenible.",
                 ecoworld,
-                "2 February, 2024",
+                "28 January, 2022",
                 Category.Entertainment,
                 "https://ecobike.com",
                 12000,
@@ -149,6 +149,8 @@ public class DatabaseInitializer {
                 0,
                 FILES_FOLDER + "/pixelquest/pixelquest1.jpeg"
         );
+
+        Inversion inv6 = createAndSaveInversion(u3, PixelQuest, 1000, LocalDate.of(2023, 12, 2));
 
         UserEntity MindCare = createAndSaveUser("MindCare","mindcare@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/mindwell/mindwell1.jpeg","USER");
         Project MindWell = createAndSaveProject(

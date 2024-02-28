@@ -1,60 +1,72 @@
 {{> header}}
 
-<!-- ======= Breadcrumbs ======= -->
+{{! <!-- ======= Breadcrumbs ======= --> }}
 <section id="breadcrumbs" class="breadcrumbs">
     <div class="container">
-        <br><br><br>
-        <h2>New project</h2>
+        <br><br>
+        {{#isEditing}}
+            <h2>Edit Project</h2>
+        {{/isEditing}}
+        {{^isEditing}}
+            <h2>Create Project</h2>
+        {{/isEditing}}
+
     </div>
 </section><!-- End Breadcrumbs -->
 
-<!-- ======= Portfolio Details Section ======= -->
 
-<div class="row gy-4 create-project-form">
-    <div class="col-lg-8">
-        <div id="slides" class="portfolio-details-slider swiper">
-            <!-- Slides container -->
-            <div class="swiper-wrapper align-items-center">
+<!-- Project creation container -->
+<div class="container project-creation-container-unique">
+    {{#isEditing}}
+        <h1 class="project-name-unique">Edit project</h1>
+    <form action="/editProject/{{project.id}}" method="post" enctype="multipart/form-data">
+    {{/isEditing}}
 
-            </div>
-            <!-- Pagination -->
-            <div class="swiper-pagination"></div>
-        </div>
-
-        <!-- Input field and button to upload new slide -->
-        <input type="file" id="new-slide-input" class="form-control" accept="image/*" hidden>
-        <button id="upload-slide-btn" class="btn btn-primary" type="submit">Upload slide</button>
-
+    {{^isEditing}}
+        <h1 class="project-name-unique">New project</h1>
+    <form action="/createProject" method="post" enctype="multipart/form-data">
+    {{/isEditing}}
+    <div class="form-group">
+        <label for="project-name-unique">Project title</label>
+        <input type="text" id="project-name-unique" placeholder="Project title" class="form-control" name="name" required {{#isEditing}}value="{{project.name}}"{{/isEditing}}>
     </div>
-
-
-    <div class="col-lg-4">
-        <form action="/newProject" method="post">
-            <div class="portfolio-info">
-                <input type="text" id="project-name" placeholder="Project title" class="form-control" name="name">
-                <ul>
-                    <li>
-                        <select id="categories" name="category">
-                            {{#categories}}
-                            <option value={{.}}>{{.}}</option>
-                            {{/categories}}
-                        </select>
-                    </li>
-                    <li><strong>Project URL</strong>: <input type="text" name="url" class="form-control"></li>
-                    <li><strong>Amount needed</strong>: <input type="number" name="goal" class="form-control"></li>
-
-                </ul>
-            </div>
-            <div class="portfolio-description">
-                <h2>About this project</h2>
-                <textarea name="description" class="form-control" rows="5" required></textarea>
-            </div>
-            <input type="hidden" name="_csrf" value="{{token}}"/>
-            <button id="upload-project-btn" class="btn btn-primary" type="submit">Upload Project</button>
-        </form>
-
+    <div class="form-group">
+        <label for="categories">Category</label>
+        <select id="categories" name="category" class="form-control">
+            {{#categories}}
+                <option value="{{.}}">{{.}}</option>
+            {{/categories}}
+        </select>
     </div>
+    <div class="form-group">
+        <label for="project-url-unique">Project URL</label>
+        <input type="text" id="project-url-unique" placeholder="Project URL" class="form-control" name="url" required {{#isEditing}}value="{{project.url}}"{{/isEditing}}>
+    </div>
+    <div class="form-group">
+        <label for="project-goal-unique">Amount needed</label>
+        <input type="number" id="project-goal-unique" placeholder="Amount needed" class="form-control" name="goal" required {{#isEditing}}value="{{project.goal}}"{{/isEditing}}>
+    </div>
+    <div class="form-group">
+        <label for="project-description-unique">About this project</label>
+        <textarea id="project-description-unique" class="form-control" rows="5" name="description" required>{{#isEditing}}{{project.description}}{{/isEditing}}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="project-images-unique">Project Images</label>
+        <input type="file" id="project-images-unique" name="file" multiple class="form-control" accept="image/*">
+        <small class="form-text text-muted">Maximum upload size: 2MB per image</small>
+    </div>
+    <input type="hidden" name="_csrf" value="{{token}}">
+    {{#isEditing}}
+        <button type="submit" class="btn btn-primary">Update Project</button>
+    {{/isEditing}}
+
+    {{^isEditing}}
+        <button type="submit" class="btn btn-primary">Upload Project</button>
+    {{/isEditing}}
+</form>
+</form>
 </div>
+
 
 {{> footer}}
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
@@ -94,7 +106,7 @@
 
 
 <script>
-    const select = document.getElementById("category");
+    const select = document.getElementById("categories");
     for(const key in Category){
 
     }
