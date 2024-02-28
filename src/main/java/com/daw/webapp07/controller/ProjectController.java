@@ -54,7 +54,7 @@ public class ProjectController {
         if(request.isUserInRole("USER")){
             Optional<UserEntity> user = userRepository.findByName(request.getUserPrincipal().getName());
             if(user.isPresent() && user.get().hasInversions()){
-                model.addAttribute("projects", recommendationSimple(user.get()));
+                model.addAttribute("projects", projectRepository.findAll(pageable));//projectRepository.recomendedProjects(user.get().getId()));
                 model.addAttribute("user", user);
 
             }

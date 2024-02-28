@@ -150,6 +150,8 @@ public class DatabaseInitializer {
                 FILES_FOLDER + "/pixelquest/pixelquest1.jpeg"
         );
 
+        Inversion inv6 = createAndSaveInversion(u3, PixelQuest, 1000, LocalDate.of(2023, 12, 2));
+
         UserEntity MindCare = createAndSaveUser("MindCare","mindcare@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/mindwell/mindwell1.jpeg","USER");
         Project MindWell = createAndSaveProject(
                 "MindWell",
