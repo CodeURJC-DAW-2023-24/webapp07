@@ -69,7 +69,7 @@ public class UserController {
     public String landing(Model model,  HttpServletRequest request) {
         String userName = request.getUserPrincipal().getName();
         Optional<UserEntity> user = userRepository.findByName(userName);
-        model.addAttribute("projects", projectRepository.recomendedProjects(user.get().getId()));
+        model.addAttribute("projects", projectService.searchRecommendedProjects(0,12,user.get().getId()));
 
         return "landing-page";
     }

@@ -3,6 +3,8 @@ package com.daw.webapp07.repository;
 import com.daw.webapp07.model.Project;
 import jakarta.transaction.Transactional;
 import org.hibernate.annotations.processing.SQL;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,15 +17,15 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     @Query(value="""
 WITH UCategoryInvestment AS (
 		 SELECT
-			 u.id AS user_entity_id,
+			 ua.id AS user_entity_id,
 			 p.category AS category,
 			 SUM(i.amount) AS total_investment
 		 FROM
-			 user_entity u
-		 JOIN Inversion i ON i.user_id = u.id
+			 user_entity ua
+		 JOIN Inversion i ON i.user_id = ua.id
 		 JOIN Project p ON i.project_id = p.id
 		 GROUP BY
-			 u.id, p.category),
+			 ua.id, p.category),
 UCategoryPercentage AS (
 		SELECT 
 			uci.user_entity_id,
@@ -80,14 +82,18 @@ UCategoryDifference AS (
     GROUP BY u.id, p.id)
 
 SELECT 
-	p.*,
-    u.relation_number
+	p.*
 FROM 
 	UProjectRelation u, Project p
 WHERE 
-	user_entity_id = ?1 AND
+	u.user_entity_id = ?1 AND
     u.projec = p.id
 ORDER BY u.relation_number;
-    """, nativeQuery = true)
-    public List<Project> recomendedProjects(Long userid);
+    """,countQuery = """ 
+SELECT 
+    COUNT(*)
+FROM
+Project p
+""", nativeQuery = true)
+    public Page<Project> recomendedProjects(long userid, Pageable pageable);
 }

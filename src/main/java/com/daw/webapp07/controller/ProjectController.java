@@ -68,8 +68,7 @@ public class ProjectController {
             Optional<UserEntity> user = userRepository.findByName(request.getUserPrincipal().getName());
             if(user.isPresent() && user.get().hasInversions()){
                 System.out.println("Recomendando");
-                List<Project> list = projectRepository.recomendedProjects(user.get().getId());
-                model.addAttribute("projects", projectService.searchRecommendedProjects(list));
+                model.addAttribute("projects", projectService.searchRecommendedProjects(0,12,user.get().getId()));
                 model.addAttribute("user", user);
 
             }

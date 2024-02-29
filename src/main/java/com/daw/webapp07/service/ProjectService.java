@@ -25,8 +25,8 @@ public class ProjectService {
         return  projectRepository.findAll(pageable);
     }
 
-   public List<Project> searchRecommendedProjects(List<Project> list)
+   public Page<Project> searchRecommendedProjects(int page, int size, long id)
     {
-        return  list.subList(0, Math.min(list.size(), 12));
+        return projectRepository.recomendedProjects(id, PageRequest.of(page, size));
     }
 }
