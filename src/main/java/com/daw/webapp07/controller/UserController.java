@@ -7,6 +7,7 @@ import com.daw.webapp07.model.UserEntity;
 import com.daw.webapp07.repository.ProjectRepository;
 import com.daw.webapp07.repository.UserRepository;
 import com.daw.webapp07.service.EmailService;
+import com.daw.webapp07.service.ProjectService;
 import com.daw.webapp07.service.RepositoryUserDetailsService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +38,14 @@ public class UserController {
     @Autowired
     private RepositoryUserDetailsService userDetailsService;
 
+    @Autowired
+    private ProjectService projectService;
+
     @GetMapping("/login")
     public String login() {
         return "login";
     }
+
 
     @GetMapping("/signup")
     public String signup(Model model) {
@@ -65,6 +70,7 @@ public class UserController {
         String userName = request.getUserPrincipal().getName();
         Optional<UserEntity> user = userRepository.findByName(userName);
         model.addAttribute("projects", projectRepository.recomendedProjects(user.get().getId()));
+
         return "landing-page";
     }
 
@@ -107,7 +113,7 @@ public String editProfile(Model model, HttpServletRequest request) {
 }
 
 @PostMapping("/editProfile")
-public String updateProfile(UserEntity userEntity,
+public String updateProfile(Model model, UserEntity userEntity,
                             HttpServletRequest request,
                             @RequestParam("photo") MultipartFile profilePhoto) {
     String name = request.getUserPrincipal().getName();
@@ -120,6 +126,7 @@ public String updateProfile(UserEntity userEntity,
         userRepository.save(user.get());
 
     }
+
     return "redirect:/landing-page";
 }
 

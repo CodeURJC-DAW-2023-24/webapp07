@@ -2913,7 +2913,7 @@ h6 {
 
 .portfolio-item {
   /* Ajusta el tamaño de los elementos según sea necesario */
-  width: 100%;
+  width: 90%;
 }
 
 .image-portfolio img {
@@ -3946,7 +3946,6 @@ section {
 .portfolio .portfolio-item .portfolio-info {
   opacity: 0.9;
   position: absolute;
-  left: 15px;
   bottom: 0;
   z-index: 3;
   right: 15px;

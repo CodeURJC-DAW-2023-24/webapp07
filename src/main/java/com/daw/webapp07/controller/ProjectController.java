@@ -63,7 +63,7 @@ public class ProjectController {
     ProjectService projectService;
 
     @GetMapping("/")
-    public String innerPage(Model model, HttpServletRequest request, Pageable pageable) {
+    public String innerPage(Model model, HttpServletRequest request) {
         if(request.isUserInRole("USER")){
             Optional<UserEntity> user = userRepository.findByName(request.getUserPrincipal().getName());
             if(user.isPresent() && user.get().hasInversions()){
@@ -73,9 +73,10 @@ public class ProjectController {
 
             }
 
+        }else
+        {
+            model.addAttribute("projects", projectService.searchProjects(0, 12));
         }
-
-        model.addAttribute("projects", projectService.searchProjects(0, 6));
 
 
         return "inner-page";

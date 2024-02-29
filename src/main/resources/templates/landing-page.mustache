@@ -9,7 +9,7 @@
     </div>
 </section><!-- End Breadcrumbs -->
 
-<!-- ======= Portfolio ======= -->
+<!-- ======= Portfolio Section ======= -->
 <section id="portfolio" class="portfolio">
     <div class="container" data-aos="fade-up">
 
@@ -18,40 +18,14 @@
             <p>These projects are killing it !!</p>
         </div>
 
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+        <div id="projects-container" class="grid-container" data-aos="fade-up" data-aos-delay="200">
 
-            {{#projects}}
-                <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                    <a href="project-details/{{id}}/">
-                        <div class="portfolio-img"><img src="https://localhost:8443/projects/{{id}}/images/1" class="img-fluid" alt=""></div>
-                        <div class="portfolio-info">
-                            <h4>{{name}}</h4>
-                            <p>{{category}}</p>
-                            <a class="details-link" title="More Details">
-
-                                <label class="ui-bookmark" style="position: absolute; top: 0; right: 0;">
-                                    <input type="checkbox">
-                                    <div class="bookmark">
-                                        <svg viewBox="0 0 32 32">
-                                            <g>
-                                                <path
-                                                        d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z">
-                                                </path>
-                                            </g>
-                                        </svg>
-                                    </div>
-                                </label>
-                            </a>
-
-                        </div>
-                    </a>
-                </div>
-            {{/projects}}
+            {{> portfolio}}
 
         </div>
         <div class="row">
             <div class="col-12 text-center">
-                <a class="btn btn-primary" >See all projects</a>
+                <a id="load-more-btn" class="btn btn-primary" data-page="0">Load more</a>
             </div>
         </div>
 
