@@ -95,11 +95,6 @@ public class UserController {
         return "myProjects";
     }
 
-    @GetMapping("/loginerror")
-    public String loginerror() {
-        return "loginerror";
-    }
-
 
 @GetMapping("/editProfile")
 public String editProfile(Model model, HttpServletRequest request) {
@@ -127,9 +122,6 @@ public String updateProfile(UserEntity userEntity,
     }
     return "redirect:/landing-page";
 }
-    @GetMapping("/error-page")
-    public String error() {
-        return "error-page";
-    }
+
 
 }

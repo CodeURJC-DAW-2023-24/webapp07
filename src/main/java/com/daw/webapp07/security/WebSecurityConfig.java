@@ -62,8 +62,8 @@ public class WebSecurityConfig {
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/projects/**").permitAll()
                         .requestMatchers("/users/**").permitAll()
-
-
+                        .requestMatchers("/error-page").permitAll()
+                        .requestMatchers("/error").permitAll()
 
 
                         // PRIVATE PAGES
@@ -78,7 +78,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/project-details/*/donate").hasAnyRole("USER")
                         .requestMatchers("/project-details/*/delete").hasAnyRole("USER")
 
-
+                        .anyRequest().anonymous()
 
                 )
 
