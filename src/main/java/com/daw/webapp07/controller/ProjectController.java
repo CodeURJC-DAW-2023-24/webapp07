@@ -59,17 +59,19 @@ public class ProjectController {
 
         }
 
-        model.addAttribute("projects", projectService.searchProjects(0, 3));
+        model.addAttribute("projects", projectService.searchProjects(0, 6));
 
         return "inner-page";
     }
 
 
     @GetMapping("/projects")
-    @ResponseBody
-    public List<Project> getProjects(@RequestParam(name = "page", defaultValue = "0") int page,
+    public String getProjects(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
                                    @RequestParam(name = "size", defaultValue = "6") int size ) {
-       return projectService.searchProjects(page, size).getContent();
+
+        model.addAttribute("projects", projectService.searchProjects(page, size));
+
+        return "portfolio";
     }
 
 
