@@ -2738,3 +2738,11 @@ section {
   /* Ajusta el tamaño de los elementos según sea necesario */
   width: 100%;
 }
+
+.image-portfolio img {
+  transition: all 0.6s;
+  background: grey;
+  width: 320px; /* Ancho fijo */
+  height: 320px; /* Alto fijo */
+  object-fit: cover;
+}
