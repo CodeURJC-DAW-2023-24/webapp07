@@ -44,7 +44,7 @@
     </div>
     <div class="form-group">
         <label for="project-goal-unique">Amount needed</label>
-        <input type="number" id="project-goal-unique" placeholder="Amount needed" class="form-control" name="goal" required {{#isEditing}}value="{{project.goal}}"{{/isEditing}}>
+        <input type="number"  min="0" max="10000000" id="project-goal-unique" placeholder="Amount needed" class="form-control" name="goal" required {{#isEditing}}value="{{project.goal}}"{{/isEditing}}>
     </div>
     <div class="form-group">
         <label for="project-description-unique">About this project</label>
