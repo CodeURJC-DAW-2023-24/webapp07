@@ -172,6 +172,7 @@ public class ProjectController {
         model.addAttribute("quantities", array_to_int_jsarray(quantities));
         model.addAttribute("times",array_to_string_jsarray(times));
         model.addAttribute("pastmoney", array_to_int_jsarray(pastmoney));
+        model.addAttribute("hasInversions", !project.getInversions().isEmpty());
 
         return "project-details";
     }
@@ -280,7 +281,8 @@ public class ProjectController {
         if (checkProject == null)
             return "redirect:/error-page";
         Project project = checkProject.get();
-
+        if (!project.getInversions().isEmpty())
+            return "redirect:/error-page";
 
         if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName())){
             projectRepository.deleteById(id);

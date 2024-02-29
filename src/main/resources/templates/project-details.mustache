@@ -90,7 +90,9 @@
                             <div class="button-container">
 
                                 <a class="buttonProject" href="/editProject/{{project.id}}">Edit</a>
+                                {{^hasInversions}}
                                 <a class="buttonProject" href="/project-details/{{project.id}}/delete">Delete</a>
+                                {{/hasInversions}}
                                 <a class="buttonProject" href="/project-details/{{project.id}}/generate-pdf">Download PDF</a>
 
                             </div>
