@@ -1,6 +1,7 @@
 package com.daw.webapp07.service;
 
 import com.daw.webapp07.model.Project;
+import com.daw.webapp07.model.UserEntity;
 import com.daw.webapp07.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProjectService {
@@ -23,10 +25,8 @@ public class ProjectService {
         return  projectRepository.findAll(pageable);
     }
 
-   /*public Page<Project> searchRecommendedProjects(int page, int size, User user)
+   public List<Project> searchRecommendedProjects(List<Project> list)
     {
-        Pageable pageable = PageRequest.of(page, size);
-        return  projectRepository.projectRepository.recomendedProjects(pageable);
-    }*/
-
+        return  list.subList(0, Math.min(list.size(), 12));
+    }
 }
