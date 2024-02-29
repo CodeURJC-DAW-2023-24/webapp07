@@ -56,7 +56,7 @@ public class DatabaseInitializer {
         UserEntity MarkiIndustries = createAndSaveUser("MarkiIndustries","markiindustries@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/kf/OIG2.jpg","USER");
         Project KebabFinder = createAndSaveProject(
                 "KebabFinder",
-                "Kebab Finder es una aplicación que te permite encontrar los mejores kebabs de tu ciudad. Podrás ver las opiniones de otros usuarios, ver la carta de los kebabs y hacer tus propias reseñas. Además, podrás solicitar un kebab a domicilio y pagar con tarjeta.",
+                "Kebab Finder is an application that allows you to find the best kebab places in your city. You can view reviews from other users, check out the menu of kebab restaurants, and write your own reviews. Additionally, you can order a kebab for delivery and pay with a card.",
                 MarkiIndustries,
                 "28 January, 2022",
                 Category.Technology,
@@ -72,8 +72,8 @@ public class DatabaseInitializer {
 
         UserEntity ecoworld = createAndSaveUser("EcoWorld","ecowrld@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/ecobike/ecobike1.jpg","USER");
         Project ecobike = createAndSaveProject(
-                "EcoBike: La bicicleta eléctrica todo terreno",
-                "Una bicicleta eléctrica diseñada para todo tipo de terrenos, desde montañas hasta calles urbanas. Equipada con baterías de larga duración y un motor potente, EcoBike busca revolucionar la movilidad sostenible.",
+                "EcoBike: The all-terrain electric bicycle",
+                "An electric bicycle designed for all types of terrain, from mountains to urban streets. Equipped with long-lasting batteries and a powerful motor, EcoBike aims to revolutionize sustainable mobility.",
                 ecoworld,
                 "28 January, 2022",
                 Category.Entertainment,
@@ -88,7 +88,7 @@ public class DatabaseInitializer {
         UserEntity proglearn = createAndSaveUser("proglearn","progolo@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/proglearn/proglearn1.jpeg","USER");
         Project CodeLearn = createAndSaveProject(
                 "CodeLearn",
-                "Una plataforma educativa en línea que ofrece cursos interactivos para aprender programación, desde conceptos básicos hasta habilidades avanzadas en varios lenguajes de programación.",
+                "An online educational platform offering interactive courses to learn programming, from basic concepts to advanced skills in various programming languages.",
                 proglearn,
                 "16 January, 2024",
                 Category.Education,
@@ -101,7 +101,7 @@ public class DatabaseInitializer {
         UserEntity Trustbusiness = createAndSaveUser("Trustbusiness","trustbusiness@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/trustphone/trustphone1.jpg","USER");
         Project Trustphone = createAndSaveProject(
                 "Trustphone",
-                "El teléfono del que te puedes fiar, funcionamiento perfecto y fácilmente reparable",
+                "The trustworthy phone: flawless performance and easily repairable.",
                 Trustbusiness,
                 "5 January, 2024",
                 Category.Technology,
@@ -114,7 +114,7 @@ public class DatabaseInitializer {
         UserEntity Bewater = createAndSaveUser("Bewater","bewater@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/purewater/purewater1.png","USER");
         Project Purewater = createAndSaveProject(
                 "Purewater",
-                "Un dispositivo compacto y portátil que utiliza tecnología de filtración avanzada para purificar el agua de fuentes no potables, haciéndola segura para beber en situaciones de emergencia o actividades al aire libre.",
+                "A compact and portable device that uses advanced filtration technology to purify water from non-potable sources, making it safe for drinking in emergency situations or outdoor activities.",
                 Bewater,
                 "5 February, 2024",
                 Category.Health,
@@ -127,7 +127,7 @@ public class DatabaseInitializer {
         UserEntity MortezLab = createAndSaveUser("MortezLab","moctezumez@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/smartgarden/smartgarden1.jpg","USER");
         Project SmartGarden = createAndSaveProject(
                 "Smart Garden",
-                "Un sistema automatizado de jardinería que utiliza sensores para monitorear las condiciones del suelo y las plantas, ajustando automáticamente el riego y la iluminación para un crecimiento óptimo.",
+                "An automated gardening system that utilizes sensors to monitor soil conditions and plants, automatically adjusting watering and lighting for optimal growth.",
                 MortezLab,
                 "20 February, 2024",
                 Category.Technology,
@@ -140,7 +140,7 @@ public class DatabaseInitializer {
         UserEntity PixelStudios = createAndSaveUser("PixelStudios","pixel@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/pixelquest/pixelquest1.jpeg","USER");
         Project PixelQuest = createAndSaveProject(
                 "PixelQuest",
-                "Un juego de aventuras en 2D con gráficos pixelados. Explora mundos fascinantes, resuelve acertijos y enfréntate a desafíos emocionantes en este juego indie desarrollado por un pequeño equipo apasionado.",
+                "A 2D adventure game with pixelated graphics. Explore fascinating worlds, solve puzzles, and face exciting challenges in this indie game developed by a small passionate team.",
                 PixelStudios,
                 "5 August, 2023",
                 Category.Gaming,
@@ -155,7 +155,7 @@ public class DatabaseInitializer {
         UserEntity MindCare = createAndSaveUser("MindCare","mindcare@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/mindwell/mindwell1.jpeg","USER");
         Project MindWell = createAndSaveProject(
                 "MindWell",
-                "Una plataforma en línea que ofrece recursos y apoyo para la salud mental. Proporciona acceso a terapeutas, herramientas de meditación y comunidades de apoyo para mejorar el bienestar emocional.",
+                "An online platform that offers resources and support for mental health. It provides access to therapists, meditation tools, and support communities to enhance emotional well-being.",
                 MindCare,
                 "12 July, 2024",
                 Category.Health,
@@ -168,7 +168,7 @@ public class DatabaseInitializer {
         UserEntity LingoTech = createAndSaveUser("LingoTech","Lingotech@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/lingolearn/lingolearn1.jpeg","USER");
         Project LingoLearn = createAndSaveProject(
                 "LingoLearn",
-                "Una plataforma interactiva para aprender idiomas de manera eficaz. Ofrece cursos personalizados, práctica de conversación y seguimiento del progreso para ayudar a los usuarios a alcanzar la fluidez.",
+                "An interactive platform for effective language learning. It offers personalized courses, conversation practice, and progress tracking to help users achieve fluency.",
                 LingoTech,
                 "22 September, 2024",
                 Category.Education,
@@ -181,7 +181,7 @@ public class DatabaseInitializer {
         UserEntity GreenHarbor = createAndSaveUser("GreenHarbor","greenharbor@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/urbanharvest/urbanharvest1.jpeg","USER");
         Project UrbanHarvest = createAndSaveProject(
                 "UrbanHarvest",
-                "Un sistema de agricultura urbana que permite a las comunidades cultivar alimentos frescos localmente. Utiliza tecnologías sostenibles para maximizar la producción en entornos urbanos.",
+                "An urban farming system that enables communities to grow fresh food locally. It utilizes sustainable technologies to maximize production in urban environments.",
                 GreenHarbor,
                 "10 October, 2024",
                 Category.Sustainability,
@@ -194,7 +194,7 @@ public class DatabaseInitializer {
         UserEntity CosmicTech = createAndSaveUser("CosmicTech","cosmictech@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/galaxygetaway/galaxygetaway1.jpeg","USER");
         Project GalaxyGetaway = createAndSaveProject(
                 "GalaxyGetaway",
-                "Explora el espacio exterior con esta aplicación que ofrece viajes espaciales virtuales. Descubre planetas lejanos, participa en misiones espaciales simuladas y aprende sobre el universo.",
+                "Explore outer space with this app that offers virtual space travel. Discover distant planets, participate in simulated space missions, and learn about the universe.",
                 CosmicTech,
                 "15 November, 2024",
                 Category.Technology,
@@ -207,7 +207,7 @@ public class DatabaseInitializer {
         UserEntity LiveMusicEnt = createAndSaveUser("LiveMusicEnt","LiveMusicEnt@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/livebeat/liveBeat1.jpeg","USER");
         Project LiveBeat = createAndSaveProject(
                 "LiveBeat",
-                "Disfruta de conciertos en vivo desde la comodidad de tu hogar. LiveBeat ofrece acceso a actuaciones exclusivas de artistas populares y emergentes, todo en alta definición y sonido envolvente.",
+                "Enjoy live concerts from the comfort of your home. LiveBeat provides access to exclusive performances by popular and emerging artists, all in high definition and surround sound.",
                 LiveMusicEnt,
                 "18 January, 2025",
                 Category.Entertainment,
@@ -220,7 +220,7 @@ public class DatabaseInitializer {
         UserEntity WellnessHub = createAndSaveUser("WellnessHub","wellnesHub@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/nutrifuel/nutrifuel1.jpeg", "USER");
         Project NutriFuel = createAndSaveProject(
                 "NutriFuel",
-                "Fomentando hábitos alimenticios saludables con recetas nutritivas y planes de comidas personalizados. NutriFuel ayuda a las personas a alcanzar sus objetivos de bienestar a través de una alimentación equilibrada.",
+                "Promoting healthy eating habits with nutritious recipes and personalized meal plans. NutriFuel helps individuals achieve their wellness goals through balanced nutrition.",
                 WellnessHub,
                 "7 February, 2025",
                 Category.Health,

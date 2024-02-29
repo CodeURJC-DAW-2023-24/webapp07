@@ -221,13 +221,13 @@
 
                 <!-- Comments section-->
                 <div class="comments-section">
-                    <h2>Comentarios</h2>
+                    <h2>Comments</h2>
 
                     {{#user}}
                         <form action="/project-details/{{project.id}}/comment" method="post" class="comment-form">
-                            <textarea name="text" placeholder="Escribe tu comentario aquí..."></textarea>
+                            <textarea name="text" placeholder="Write your comment here..."></textarea>
                             <input type="hidden" name="_csrf" value="{{token}}"/>
-                            <button type="submit">Enviar</button>
+                            <button type="submit">Send</button>
                         </form>
                     {{/user}}
 
