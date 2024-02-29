@@ -3,6 +3,7 @@ package com.daw.webapp07.controller;
 import com.daw.webapp07.model.*;
 import com.daw.webapp07.repository.*;
 import com.daw.webapp07.service.DatabaseInitializer;
+import com.daw.webapp07.service.ProjectService;
 import com.daw.webapp07.service.PdfService;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -10,6 +11,7 @@ import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.property.TextAlignment;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.antlr.v4.runtime.misc.Pair;
@@ -19,6 +21,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.querydsl.QPageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +31,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.w3c.dom.events.Event;
+
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -53,6 +58,10 @@ public class ProjectController {
 
     @Autowired
     InversionRepository inversionRepository;
+
+    @Autowired
+    ProjectService projectService;
+
     @GetMapping("/")
     public String innerPage(Model model, HttpServletRequest request, Pageable pageable) {
         if(request.isUserInRole("USER")){
@@ -65,11 +74,21 @@ public class ProjectController {
             }
 
         }
-        else {
-            pageable = PageRequest.of(0, 6);
-            model.addAttribute("projects", projectRepository.findAll(pageable));
-        }
+
+        model.addAttribute("projects", projectService.searchProjects(0, 6));
+
+
         return "inner-page";
+    }
+
+
+    @GetMapping("/projects")
+    public String getProjects(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
+                                   @RequestParam(name = "size", defaultValue = "6") int size ) {
+
+        model.addAttribute("projects", projectService.searchProjects(page, size));
+
+        return "portfolio";
     }
 
 

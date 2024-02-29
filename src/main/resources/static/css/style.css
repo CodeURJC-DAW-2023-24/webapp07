@@ -1197,71 +1197,54 @@ section {
 }
 
 .portfolio .portfolio-item {
+  position: relative; /* Añadido: para que .portfolio-info se posicione correctamente */
   margin-bottom: 30px;
   width: 20em;
   height: 20em;
   overflow: hidden;
 }
 
-.portfolio .portfolio-item .portfolio-img {
-  overflow: hidden;
-}
-
-.portfolio .portfolio-item .portfolio-img img {
-  transition: all 0.6s;
-  background: grey;
-  width: 20em;
-  height: 20em;
-  object-fit: cover;
-}
-
 .portfolio .portfolio-item .portfolio-info {
   opacity: 0.9;
   position: absolute;
-  left: 15px;
+  left: 0; /* Modificado: Posición inicial */
   bottom: 0;
   z-index: 3;
-  right: 15px;
-  /*transition: all 0.3s;*/
+  width: 100%; /* Añadido: para que ocupe todo el ancho del .portfolio-item */
   background: #FA8A4B;
   padding: 10px 15px;
+  box-sizing: border-box; /* Añadido: para que el padding no afecte el ancho */
 }
 
 .portfolio .portfolio-item .portfolio-info h4 {
   font-size: 18px;
-  color: #fff;
   font-weight: 600;
   color: #fff;
-  margin-bottom: 0px;
+  margin-bottom: 5px; /* Modificado: Ajuste de margen inferior */
 }
 
 .portfolio .portfolio-item .portfolio-info p {
   color: #f9fcfe;
   font-size: 14px;
-  margin-bottom: 0;
+  margin-bottom: 0; /* Modificado: Eliminar margen inferior */
 }
 
 .portfolio .portfolio-item .portfolio-info .preview-link,
 .portfolio .portfolio-item .portfolio-info .details-link {
   position: absolute;
-  right: 40px;
+  bottom: 35px; /* Añadido: Ajuste de posición */
   font-size: 24px;
-  top: calc(50% - 18px);
   color: #fff;
   transition: 0.3s;
 }
 
-.portfolio .portfolio-item .portfolio-info .preview-link:hover,
-.portfolio .portfolio-item .portfolio-info .details-link:hover {
-  color: #3ae977;
+.portfolio .portfolio-item .portfolio-info .details-link {
+  right: 30px; /* Modificado: Ajuste de posición */
 }
 
-.portfolio .portfolio-item .portfolio-info .details-link {
-  right: 10px;
-}
 
 .portfolio .portfolio-item:hover .portfolio-img img {
-  transform: scale(1.15);
+  transform: scale(1.20);
 }
 
 .portfolio .portfolio-item:hover .portfolio-info {
@@ -2918,6 +2901,27 @@ h6 {
 #header.header-scrolled,
 #header.header-inner-pages {
   background: #169e75;
+}
+
+
+/* GRID porfolio*/
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.portfolio-item {
+  /* Ajusta el tamaño de los elementos según sea necesario */
+  width: 100%;
+}
+
+.image-portfolio img {
+  transition: all 0.6s;
+  background: grey;
+  width: 320px; /* Ancho fijo */
+  height: 320px; /* Alto fijo */
+  object-fit: cover;
 }
 
 #header .logo {
@@ -5451,4 +5455,3 @@ section {
   max-width: 300px;
   margin-bottom: 50px;
 }
-
