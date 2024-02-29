@@ -127,5 +127,9 @@ public String updateProfile(UserEntity userEntity,
     }
     return "redirect:/landing-page";
 }
+    @GetMapping("/error-page")
+    public String error() {
+        return "error-page";
+    }
 
 }
