@@ -142,7 +142,7 @@ public class DatabaseInitializer {
                 "PixelQuest",
                 "Un juego de aventuras en 2D con gráficos pixelados. Explora mundos fascinantes, resuelve acertijos y enfréntate a desafíos emocionantes en este juego indie desarrollado por un pequeño equipo apasionado.",
                 PixelStudios,
-                "5 August, 2024",
+                "5 August, 2023",
                 Category.Gaming,
                 "https://pixelquest.com",
                 18000,
