@@ -1,10 +1,8 @@
 package com.daw.webapp07.service;
 
 
-import com.daw.webapp07.model.Category;
-import com.daw.webapp07.model.Image;
-import com.daw.webapp07.model.Project;
-import com.daw.webapp07.model.UserEntity;
+import com.daw.webapp07.model.*;
+import com.daw.webapp07.repository.InversionRepository;
 import com.daw.webapp07.repository.ProjectRepository;
 import com.daw.webapp07.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +18,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 
 import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 
 @Service
 public class DatabaseInitializer {
@@ -40,6 +42,9 @@ public class DatabaseInitializer {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private InversionRepository inversionRepository;
+
     @PostConstruct
     public void init() {
         UserEntity u1 = createAndSaveUser("User1","user1@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/profiles/user1.png","USER");
@@ -53,26 +58,32 @@ public class DatabaseInitializer {
                 "KebabFinder",
                 "Kebab Finder es una aplicación que te permite encontrar los mejores kebabs de tu ciudad. Podrás ver las opiniones de otros usuarios, ver la carta de los kebabs y hacer tus propias reseñas. Además, podrás solicitar un kebab a domicilio y pagar con tarjeta.",
                 MarkiIndustries,
-                "28 January, 2024",
+                "28 January, 2022",
                 Category.Technology,
                 "https://kebabfinder.com",
                 150000,
                 0,
                 FILES_FOLDER + "/kf/OIG2.jpg", FILES_FOLDER + "/kf/OIG4.jpg", FILES_FOLDER + "/kf/MENU-DONER-KEBAP-7.jpg"
         );
+        Inversion inv1 = createAndSaveInversion(u1, KebabFinder, 1000, LocalDate.of(2023, 12, 2));
+        Inversion inv2 = createAndSaveInversion(u2, KebabFinder,2000, LocalDate.of(2023, 1, 23));
+        Inversion inv3 = createAndSaveInversion(u3, KebabFinder,3000, LocalDate.of(2023, 6, 30));
+        Inversion inv4 = createAndSaveInversion(u4, KebabFinder,4000, LocalDate.of(2023, 4, 25));
 
         UserEntity ecoworld = createAndSaveUser("EcoWorld","ecowrld@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/ecobike/ecobike1.jpg","USER");
         Project ecobike = createAndSaveProject(
                 "EcoBike: La bicicleta eléctrica todo terreno",
                 "Una bicicleta eléctrica diseñada para todo tipo de terrenos, desde montañas hasta calles urbanas. Equipada con baterías de larga duración y un motor potente, EcoBike busca revolucionar la movilidad sostenible.",
                 ecoworld,
-                "2 February, 2024",
+                "28 January, 2022",
                 Category.Entertainment,
                 "https://ecobike.com",
                 12000,
                 0,
                 FILES_FOLDER + "/ecobike/ecobike1.jpg", FILES_FOLDER + "/ecobike/ecobike2.jpg", FILES_FOLDER + "/ecobike/ecobike3.jpg"
         );
+
+        Inversion inv5 = createAndSaveInversion(u1, ecobike, 1000, LocalDate.of(2023, 12, 2));
 
         UserEntity proglearn = createAndSaveUser("proglearn","progolo@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/proglearn/proglearn1.jpeg","USER");
         Project CodeLearn = createAndSaveProject(
@@ -131,13 +142,15 @@ public class DatabaseInitializer {
                 "PixelQuest",
                 "Un juego de aventuras en 2D con gráficos pixelados. Explora mundos fascinantes, resuelve acertijos y enfréntate a desafíos emocionantes en este juego indie desarrollado por un pequeño equipo apasionado.",
                 PixelStudios,
-                "5 August, 2024",
+                "5 August, 2023",
                 Category.Gaming,
                 "https://pixelquest.com",
                 18000,
                 0,
                 FILES_FOLDER + "/pixelquest/pixelquest1.jpeg"
         );
+
+        Inversion inv6 = createAndSaveInversion(u3, PixelQuest, 1000, LocalDate.of(2023, 12, 2));
 
         UserEntity MindCare = createAndSaveUser("MindCare","mindcare@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/mindwell/mindwell1.jpeg","USER");
         Project MindWell = createAndSaveProject(
@@ -226,18 +239,50 @@ public class DatabaseInitializer {
                 "https://www.youtube.com/user/bernardbear",
                 150000,
                 0,
-                FILES_FOLDER + "/berni/berni1.jpg", FILES_FOLDER + "/berni/berni2.jpg", FILES_FOLDER + "/berni/berni3.jpg"
+                FILES_FOLDER + "/berni/berni2.jpg", FILES_FOLDER + "/berni/berni3.jpg"
         );
 
+        Inversion inversion1 = createAndSaveInversion(
+                u1,
+                KebabFinder,
+                10000,
+                LocalDate.of(2023, 3, 15)
+        );
+        Inversion inversion2 = createAndSaveInversion(
+                u2,
+                KebabFinder,
+                5250,
+                LocalDate.of(2023, 5, 10)
+        );
+        Inversion inversion3 = createAndSaveInversion(
+                u3,
+                KebabFinder,
+                12000,
+                LocalDate.of(2023, 7, 17)
+        );
+        Inversion inversion4 = createAndSaveInversion(
+                u4,
+                KebabFinder,
+                20000,
+                LocalDate.of(2023, 8, 11)
+        );
+        Inversion inversion5 = createAndSaveInversion(
+                u1,
+                KebabFinder,
+                7500,
+                LocalDate.of(2023, 11, 9)
+        );
     }
 
     private Project createAndSaveProject(String projectName, String projectDescription, UserEntity creator, String date,
                                       Category category, String website, int goal, int currentAmount, String... imagePaths) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM, yyyy", Locale.ENGLISH);
+
         Project project = new Project();
         project.setName(projectName);
         project.setDescription(projectDescription);
         project.setOwner(creator);
-        project.setDate(date);
+        project.setDate(LocalDate.parse(date, formatter));
         project.setCategory(category);
         project.setUrl(website);
         project.setGoal(goal);
@@ -264,4 +309,18 @@ public class DatabaseInitializer {
         return user;
     }
 
+    private Inversion createAndSaveInversion(UserEntity user, Project project, int amount, LocalDate date) {
+        Inversion inversion = new Inversion(user, project, amount, date);
+        Optional<UserEntity> userb = userRepository.findById(user.getId());
+        Optional<Project> projectb = projectRepository.findById(project.getId());
+        if(userb.isPresent() && projectb.isPresent()){
+            userb.get().addInversion(inversion);
+            projectb.get().addInversion(inversion);
+            userRepository.save(userb.get());
+            projectRepository.save(projectb.get());
+            inversionRepository.save(inversion);
+        }
+
+        return inversion;
+    }
 }

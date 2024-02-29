@@ -2,8 +2,11 @@ package com.daw.webapp07.model;
 
 import jakarta.persistence.*;
 import java.sql.Blob;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Entity
 public class Project {
@@ -17,7 +20,7 @@ public class Project {
 
     @ManyToOne
     private UserEntity owner;
-    private String date;
+    private LocalDate date;
     private Category category;
     private String url;
 
@@ -30,12 +33,13 @@ public class Project {
     @OneToMany(mappedBy = "project" ,cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Inversion> inversions;
 
     public Project() {
         this.comments = new ArrayList<>();
-
+        this.inversions = new ArrayList<>();
+        this.images = new ArrayList<>();
     }
 
     public Project( String name, String description, UserEntity owner) {
@@ -44,7 +48,7 @@ public class Project {
         this.owner = owner;
         this.inversions = new ArrayList<>();
         this.category= Category.Other;
-        this.date = "";
+        this.date = null;
         this.url = "";
         this.images = new ArrayList<>();
         this.goal = 0;
@@ -54,6 +58,22 @@ public class Project {
     }
 
     public Project( String name, String description, UserEntity owner, String date, Category category, String url, ArrayList<Image> images, int goal, int currentAmount, ArrayList<Inversion> inversions) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM, yyyy", Locale.ENGLISH);
+
+        this.name = name;
+        this.description = description;
+        this.owner = owner;
+        this.date = LocalDate.parse(date, formatter);
+        this.category = category;
+        this.url = url;
+        this.images = images;
+        this.goal = goal;
+        this.currentAmount = currentAmount;
+        this.inversions = inversions;
+        this.comments = new ArrayList<>();
+    }
+
+    public Project( String name, String description, UserEntity owner, LocalDate date, Category category, String url, ArrayList<Image> images, int goal, int currentAmount, ArrayList<Inversion> inversions) {
         this.name = name;
         this.description = description;
         this.owner = owner;
@@ -141,11 +161,11 @@ public class Project {
         this.currentAmount = currentAmount;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

@@ -2,15 +2,26 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
-    <title></title>
-    <link rel="stylesheet" href="/static/css/error-page.css">
+    <title>Error</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1cb98b;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
 <body>
-<div class="container-error">
-    <h2>Oops! Page not found.</h2>
-    <h1>404</h1>
-    <p>We can't find the page you're looking for.</p>
-    <a href="#">Go back home</a>
+<div class="error-container">
+    <img src="/img/hero-img.png" alt="Error Image" class="error-image">
+    <h2 class="error-name-unique"><span>Oops!</span> Something happened.</h2>
+    <p>We can't find the page you're looking for, you should try again.</p>
+    <a href="/" class="error-name-unique">Go back home</a>
 </div>
 </body>
 </html>

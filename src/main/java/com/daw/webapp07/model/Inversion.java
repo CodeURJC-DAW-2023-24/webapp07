@@ -3,6 +3,9 @@ package com.daw.webapp07.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Entity
 public class Inversion {
 
@@ -15,14 +18,20 @@ public class Inversion {
     @JsonIgnore
     private Project project;
     private int amount;
+    private LocalDate date;
 
     public Inversion() {
     }
 
-    public Inversion(UserEntity user, Project project, int amount) {
+    public Inversion(int amount){
+        this.amount = amount;
+    }
+
+    public Inversion(UserEntity user, Project project, int amount, LocalDate date) {
         this.user = user;
         this.project = project;
         this.amount = amount;
+        this.date = date;
     }
 
     public UserEntity getUser() {
@@ -49,4 +58,11 @@ public class Inversion {
         this.amount = amount;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
 }

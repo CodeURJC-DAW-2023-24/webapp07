@@ -23,19 +23,20 @@ public class UserEntity{
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Inversion> inversions;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Project> projects;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Image profilePhoto;
 
-    @OneToMany(mappedBy = "user" ,cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user" ,cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Comment> comments;
 
     public UserEntity() {
+        this.inversions = new ArrayList<>();
     }
 
     public UserEntity(String name, String email, String encodedPassword, Image photo, String... roles) {
@@ -136,5 +137,14 @@ public class UserEntity{
 
         this.comments.add(comment);
     }
+
+    public void addInversion(Inversion inversion){
+        if(this.inversions == null){
+            this.inversions = new ArrayList<>();
+        }
+        this.inversions.add(inversion);
+    }
+
+
 }
 

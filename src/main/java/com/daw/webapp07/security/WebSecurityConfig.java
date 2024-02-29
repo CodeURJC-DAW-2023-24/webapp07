@@ -1,6 +1,6 @@
 package com.daw.webapp07.security;
 
-import com.daw.webapp07.repository.RepositoryUserDetailsService;
+import com.daw.webapp07.service.RepositoryUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -63,20 +63,24 @@ public class WebSecurityConfig {
                         .requestMatchers("/projects/**").permitAll()
                         .requestMatchers("/users/**").permitAll()
                         .requestMatchers("/projects").permitAll()
-
-
+                        .requestMatchers("/error-page").permitAll()
+                        .requestMatchers("/error").permitAll()
 
 
 
                         // PRIVATE PAGES
                         .requestMatchers("/editproject/*").hasAnyRole("USER")
                         .requestMatchers("/landing-page").hasAnyRole("USER")
-                        .requestMatchers("/createProject/").hasAnyRole("USER")
+                        .requestMatchers("/createProject").hasAnyRole("USER")
                         .requestMatchers("/myProjects").hasAnyRole("USER")
                         .requestMatchers("/newProject").hasAnyRole("USER")
-                        .requestMatchers("/editProfile/**").hasAnyRole("USER")
+                        .requestMatchers("/editProject/*").hasAnyRole("USER")
+                        .requestMatchers("/editProfile").hasAnyRole("USER")
                         .requestMatchers("/project-details/*/comment").hasAnyRole("USER")
+                        .requestMatchers("/project-details/*/donate").hasAnyRole("USER")
+                        .requestMatchers("/project-details/*/delete").hasAnyRole("USER")
 
+                        .anyRequest().anonymous()
 
                 )
 

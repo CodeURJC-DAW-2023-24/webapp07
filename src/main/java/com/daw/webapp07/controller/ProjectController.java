@@ -4,7 +4,16 @@ import com.daw.webapp07.model.*;
 import com.daw.webapp07.repository.*;
 import com.daw.webapp07.service.DatabaseInitializer;
 import com.daw.webapp07.service.ProjectService;
+import com.daw.webapp07.service.PdfService;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Text;
+import com.itextpdf.layout.property.TextAlignment;
+
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.antlr.v4.runtime.misc.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -17,13 +26,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.w3c.dom.events.Event;
 
+
+import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Controller
@@ -52,7 +67,8 @@ public class ProjectController {
         if(request.isUserInRole("USER")){
             Optional<UserEntity> user = userRepository.findByName(request.getUserPrincipal().getName());
             if(user.isPresent() && user.get().hasInversions()){
-                model.addAttribute("projects", recommendationSimple(user.get()));
+                System.out.println("Recomendando");
+                model.addAttribute("projects", projectRepository.recomendedProjects(user.get().getId()));
                 model.addAttribute("user", user);
 
             }
@@ -60,6 +76,7 @@ public class ProjectController {
         }
 
         model.addAttribute("projects", projectService.searchProjects(0, 6));
+
 
         return "inner-page";
     }
@@ -78,11 +95,82 @@ public class ProjectController {
 
     @GetMapping("/project-details/{id}/")
     public String home(Model model, @PathVariable Long id, HttpServletRequest request) {
-        Project project = projectRepository.findById(id).orElseThrow();
+        Optional<Project> checkProject = projectRepository.findById(id);
+        if (checkProject == null)
+            return "redirect:/error-page";
+        Project project = checkProject.get();
+
+        if(request.isUserInRole("USER")){
+            if  (request.getUserPrincipal().getName().equals(project.getOwner().getName()) || request.isUserInRole("ADMIN")){
+                model.addAttribute("privileged",true);
+            }
+        }
+
+
 
         model.addAttribute("project", project);
         model.addAttribute("id", id);
-        model.addAttribute("comment", new Comment());
+
+
+        HashMap<String,Integer> donors = new HashMap<>();
+        int total = 0;
+        for(Inversion i: project.getInversions()){
+            total+=i.getAmount();
+            if(donors.containsKey(i.getUser().getName())){
+                donors.put(i.getUser().getName(),donors.get(i.getUser().getName())+i.getAmount());
+            }else{
+                donors.put(i.getUser().getName(),i.getAmount());
+            }
+        }
+
+        List<String> names = new ArrayList<>(donors.keySet());
+        List<Integer> quantities = new ArrayList<>(donors.values());
+        names.sort((a,b)->donors.get(b).compareTo(donors.get(a)));
+        quantities.sort((a,b)->b.compareTo(a));
+
+        List<String> times = new ArrayList<>();
+        List<Integer> pastmoney = new ArrayList<>();
+        Calendar timeNow = Calendar.getInstance();
+        Calendar oldest = Calendar.getInstance();
+        oldest.set(project.getDate().getYear(), project.getDate().getMonthValue() -1, project.getDate().getDayOfMonth());
+        oldest.add(Calendar.YEAR,1);
+        boolean moreThanAYear = oldest.before(timeNow);
+        oldest.add(Calendar.YEAR, -1);
+        HashMap<String, Integer> where = new HashMap<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/yyyy");
+        List<String> months = new ArrayList<>(Arrays.asList("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"));
+        int i = 0;
+        while (oldest.before(timeNow)) {
+            System.out.println("Mesasd: "+oldest.get(Calendar.YEAR));
+            if(!moreThanAYear) {
+                times.add(months.get(oldest.get(Calendar.MONTH)));
+            }
+            else {
+                times.add(months.get(oldest.get(Calendar.MONTH)) + " " + oldest.get(Calendar.YEAR));
+            }
+            System.out.println(times);
+            where.put(sdf.format(oldest.getTime()),i);
+            oldest.add(Calendar.MONTH, 1);
+            i++;
+        }
+        for(int j = 0; j < times.size(); j++){
+            pastmoney.add(0);
+        }
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/yyyy", Locale.ENGLISH);
+        for(Inversion i2: project.getInversions()){
+            int index = where.get(i2.getDate().format(dtf));
+            pastmoney.set(index,pastmoney.get(index)+i2.getAmount());
+        }
+        System.out.println(pastmoney);
+        for(int k = 1; k < pastmoney.size(); k++){
+            pastmoney.set(k,pastmoney.get(k)+pastmoney.get(k-1));
+            System.out.println(pastmoney);
+        }
+
+        model.addAttribute("donors",array_to_string_jsarray(names));
+        model.addAttribute("quantities", array_to_int_jsarray(quantities));
+        model.addAttribute("times",array_to_string_jsarray(times));
+        model.addAttribute("pastmoney", array_to_int_jsarray(pastmoney));
 
         return "project-details";
     }
@@ -114,63 +202,151 @@ public class ProjectController {
 
     }
 
-    @GetMapping("/editProfile/{id}")
-    public String editProfile(Model model, HttpServletRequest request) {
-        String userName = request.getUserPrincipal().getName();
-        Optional<UserEntity> user = userRepository.findByName(userName);
-        if(user.isPresent()){
-            model.addAttribute("userEntity", user.get());
+
+    @PostMapping("/createProject")
+    public String createProject(Project project,
+                                @RequestParam("file") MultipartFile[] files,
+                                HttpServletRequest request) {
+
+        Optional<UserEntity> checkQuery = userRepository.findByName(request.getUserPrincipal().getName());
+        if (checkQuery == null)
+            return "redirect:/error-page";
+        UserEntity query = checkQuery.get();
+        project.setOwner(query);
+        LocalDate date = LocalDate.now();
+        project.setDate(date);
+
+        for (MultipartFile file : files) {
+            Image image = new Image(file);
+            project.addImage(image);
         }
-        return "editProfile";
-    }
 
-    @PostMapping("/editProfile/{id}")
-    public String updateProfile(Model model, @PathVariable Long id,  UserEntity userEntity, HttpServletRequest request) {
-        String name = request.getUserPrincipal().getName();
-        Optional<UserEntity> user = userRepository.findByName(name);
-        if (user.isPresent() && user.get().getId() == id) {
-            user.get().setName(userEntity.getName());
-            user.get().setEmail(userEntity.getEmail());
-            if (userEntity.getProfilePhoto() != null) {
-                user.get().setProfilePhoto(userEntity.getProfilePhoto());
-            }
-            userRepository.save(user.get());
-
-        }
-        return "landing-page";
-    }
-
-
-    @PostMapping("/newProject")
-    public String createProject(Project project, Model model, HttpServletRequest request) {
-
-        project.setOwner(userRepository.findByName(request.getUserPrincipal().getName()).orElseThrow());
-        Calendar c = Calendar.getInstance();
-        String day = Integer.toString(c.get(Calendar.DATE));
-        String month = Integer.toString(c.get(Calendar.MONTH) + 1);
-        String year = Integer.toString(c.get(Calendar.YEAR));
-        project.setDate(day + "/" + month + "/" + year);
         projectRepository.save(project);
-
-        model.addAttribute(project);
-
-        return "project-details";
+        return "redirect:/project-details/" + project.getId() + "/";
     }
+
 
 
     @PostMapping("/project-details/{id}/comment")
     String comment(@PathVariable Long id, Comment comment, HttpServletRequest request, Model model){
 
         Comment newComment = new Comment(comment.getText());
-        Project project = projectRepository.findById(id).orElseThrow();
+        Optional<Project> checkProject = projectRepository.findById(id);
+        if (checkProject == null)
+            return "redirect:/error-page";
+        Project project = checkProject.get();
+
         newComment.setProject(project);
-        newComment.setUser(userRepository.findByName(request.getUserPrincipal().getName()).orElseThrow());
+        Optional<UserEntity> checkQuery = userRepository.findByName(request.getUserPrincipal().getName());
+        if (checkQuery == null)
+            return "redirect:/error-page";
+        UserEntity query = checkQuery.get();
+        newComment.setUser(query);
         project.addComment(newComment);
         projectRepository.save(project);
 
         return "redirect:/project-details/" + id + "/";
     }
 
+    @PostMapping("/project-details/{id}/donate")
+    String donate(@PathVariable Long id, int donation, HttpServletRequest request, Model model){
+
+        Inversion newInversion = new Inversion(donation);
+        LocalDate date = LocalDate.now();
+        newInversion.setDate(date);
+        Optional<Project> checkProject = projectRepository.findById(id);
+        if (checkProject == null)
+            return "redirect:/error-page";
+        Project project = checkProject.get();
+        newInversion.setProject(project);
+        Optional<UserEntity> checkQuery = userRepository.findByName(request.getUserPrincipal().getName());
+        if (checkQuery == null)
+            return "redirect:/error-page";
+        UserEntity user = checkQuery.get();
+        newInversion.setUser(user);
+        project.addInversion(newInversion);
+        projectRepository.save(project);
+        user.addInversion(newInversion);
+        userRepository.save(user);
+
+
+        return "redirect:/project-details/" + id + "/";
+    }
+
+    @GetMapping ("/project-details/{id}/delete")
+    String deleteProject(@PathVariable Long id, HttpServletRequest request){
+        Optional<Project> checkProject = projectRepository.findById(id);
+        if (checkProject == null)
+            return "redirect:/error-page";
+        Project project = checkProject.get();
+
+
+        if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName())){
+            projectRepository.deleteById(id);
+        }
+
+        return "redirect:/";
+        }
+
+
+    @GetMapping("/editProject/{id}")
+    public String editProject(Model model, @PathVariable long id, HttpServletRequest request) {
+        String userName = request.getUserPrincipal().getName();
+        Optional<Project> project = projectRepository.findById(id);
+        Optional<UserEntity> user = userRepository.findByName(userName);
+        if(user.isPresent() && project.isPresent() && (project.get().getOwner().equals(user.get()) || request.isUserInRole("ADMIN"))){
+            model.addAttribute("isEditing", true);
+            model.addAttribute("project", project.get());
+            model.addAttribute("categories", Category.values());
+            return "create-project";
+        }
+        return "error-page";
+
+    }
+
+
+    @PostMapping("/editProject/{id}")
+    public String replaceProject(@PathVariable long id, Project newProject,
+                                 @RequestParam("file") MultipartFile[] files) {
+        Optional<Project> project = projectRepository.findById(id);
+        if (project.isPresent()) {
+            Project proj = project.get();
+            if(!files[0].isEmpty() ){
+                for (MultipartFile file : files) {
+                    Image image = new Image(file);
+                    proj.addImage(image);
+
+                }
+            }
+            proj.setName(newProject.getName());
+            proj.setDescription(newProject.getDescription());
+            proj.setCategory(newProject.getCategory());
+            proj.setUrl(newProject.getUrl());
+            proj.setGoal(newProject.getGoal());
+
+            projectRepository.save(proj);
+            }
+
+        return "redirect:/project-details/" + id + "/";
+    }
+
+    @Controller
+    public class PdfController {
+
+        @Autowired
+        private PdfService pdfGenerationService;
+
+        @Autowired
+        private ProjectRepository projectRepository;
+
+        @GetMapping("/project-details/{id}/generate-pdf")
+        public void generatePdf(@PathVariable long id, HttpServletResponse response) throws IOException {
+            Optional<Project> project = projectRepository.findById(id);
+            if (project.isPresent()) {
+                pdfGenerationService.generatePdf(project.get(), response, id);
+            }
+        }
+    }
 
 
     private List<Pair<Float,UserEntity>> getSimilarUsers(UserEntity user, HashMap<UserEntity,HashMap<Category,Float>> percentages){
@@ -231,6 +407,28 @@ public class ProjectController {
 
     private List<Project> likelihoodOfDonation(UserEntity user){
         throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    private String array_to_string_jsarray(List<String> list){
+        String ar = "[";
+        for(String s: list){
+            ar += "'"+s+"',";
+        }
+        if (ar.length() > 1) {ar = ar.substring(0,ar.length()-1);}
+        ar += "]";
+        System.out.println(ar);
+        return ar;
+    }
+
+    private String array_to_int_jsarray(List<Integer> list){
+        String ar = "[";
+        for(Integer i: list){
+            ar += i+",";
+        }
+        if (ar.length() > 1) {ar = ar.substring(0,ar.length()-1);}
+        ar += "]";
+        System.out.println(ar);
+        return ar;
     }
 
 }
