@@ -74,6 +74,7 @@ public class ProjectController {
                 System.out.println("Recomendando");
                 model.addAttribute("projects", projectService.searchRecommendedProjects(0,10,user.get().getId()));
             }
+            model.addAttribute("projects", projectService.searchProjects(0, 10));
 
         }else
         {
