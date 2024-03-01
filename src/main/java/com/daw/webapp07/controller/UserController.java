@@ -65,15 +65,6 @@ public class UserController {
         return "error-page";
     }
 
-    @GetMapping("/landing-page")
-    public String landing(Model model,  HttpServletRequest request) {
-        String userName = request.getUserPrincipal().getName();
-        Optional<UserEntity> user = userRepository.findByName(userName);
-        model.addAttribute("projects", projectService.searchRecommendedProjects(0,12,user.get().getId()));
-
-        return "landing-page";
-    }
-
     @GetMapping("/createProject")
     public String createProject(Model model, HttpServletRequest request){
         String userName = request.getUserPrincipal().getName();
@@ -127,7 +118,7 @@ public String updateProfile(Model model, UserEntity userEntity,
 
     }
 
-    return "redirect:/landing-page";
+    return "redirect:/";
 }
 
 

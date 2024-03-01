@@ -72,14 +72,12 @@ public class ProjectController {
             Optional<UserEntity> user = userRepository.findByName(request.getUserPrincipal().getName());
             if(user.isPresent() && user.get().hasInversions()){
                 System.out.println("Recomendando");
-                model.addAttribute("projects", projectService.searchRecommendedProjects(0,12,user.get().getId()));
-                model.addAttribute("user", user);
-
+                model.addAttribute("projects", projectService.searchRecommendedProjects(0,10,user.get().getId()));
             }
 
         }else
         {
-            model.addAttribute("projects", projectService.searchProjects(0, 12));
+            model.addAttribute("projects", projectService.searchProjects(0, 10));
         }
 
 
@@ -89,7 +87,7 @@ public class ProjectController {
 
     @GetMapping("/projects")
     public String getProjects(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
-                                   @RequestParam(name = "size", defaultValue = "6") int size ) {
+                                   @RequestParam(name = "size", defaultValue = "10") int size ) {
 
         model.addAttribute("projects", projectService.searchProjects(page, size));
 
@@ -99,7 +97,7 @@ public class ProjectController {
 
     @GetMapping("/recomendedprojects")
     public String getRecomendedProjects(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
-                              @RequestParam(name = "size", defaultValue = "6") int size ) {
+                              @RequestParam(name = "size", defaultValue = "10") int size ) {
 
         model.addAttribute("projects", projectService.searchProjects(page, size));
 
