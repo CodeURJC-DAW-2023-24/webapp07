@@ -3,6 +3,7 @@ package com.daw.webapp07.controller;
 import com.daw.webapp07.model.*;
 import com.daw.webapp07.repository.*;
 import com.daw.webapp07.service.DatabaseInitializer;
+import com.daw.webapp07.service.GraphicsService;
 import com.daw.webapp07.service.ProjectService;
 import com.daw.webapp07.service.PdfService;
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -62,6 +63,9 @@ public class ProjectController {
     @Autowired
     ProjectService projectService;
 
+    @Autowired
+    GraphicsService graphicsService;
+
     @GetMapping("/")
     public String innerPage(Model model, HttpServletRequest request) {
         if(request.isUserInRole("USER")){
@@ -115,72 +119,14 @@ public class ProjectController {
                 model.addAttribute("privileged",true);
             }
         }
-
-
-
         model.addAttribute("project", project);
         model.addAttribute("id", id);
 
-
-        HashMap<String,Integer> donors = new HashMap<>();
-        int total = 0;
-        for(Inversion i: project.getInversions()){
-            total+=i.getAmount();
-            if(donors.containsKey(i.getUser().getName())){
-                donors.put(i.getUser().getName(),donors.get(i.getUser().getName())+i.getAmount());
-            }else{
-                donors.put(i.getUser().getName(),i.getAmount());
-            }
-        }
-
-        List<String> names = new ArrayList<>(donors.keySet());
-        List<Integer> quantities = new ArrayList<>(donors.values());
-        names.sort((a,b)->donors.get(b).compareTo(donors.get(a)));
-        quantities.sort((a,b)->b.compareTo(a));
-
-        List<String> times = new ArrayList<>();
-        List<Integer> pastmoney = new ArrayList<>();
-        Calendar timeNow = Calendar.getInstance();
-        Calendar oldest = Calendar.getInstance();
-        oldest.set(project.getDate().getYear(), project.getDate().getMonthValue() -1, project.getDate().getDayOfMonth());
-        oldest.add(Calendar.YEAR,1);
-        boolean moreThanAYear = oldest.before(timeNow);
-        oldest.add(Calendar.YEAR, -1);
-        HashMap<String, Integer> where = new HashMap<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/yyyy");
-        List<String> months = new ArrayList<>(Arrays.asList("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"));
-        int i = 0;
-        while (oldest.before(timeNow)) {
-            System.out.println("Mesasd: "+oldest.get(Calendar.YEAR));
-            if(!moreThanAYear) {
-                times.add(months.get(oldest.get(Calendar.MONTH)));
-            }
-            else {
-                times.add(months.get(oldest.get(Calendar.MONTH)) + " " + oldest.get(Calendar.YEAR));
-            }
-            System.out.println(times);
-            where.put(sdf.format(oldest.getTime()),i);
-            oldest.add(Calendar.MONTH, 1);
-            i++;
-        }
-        for(int j = 0; j < times.size(); j++){
-            pastmoney.add(0);
-        }
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/yyyy", Locale.ENGLISH);
-        for(Inversion i2: project.getInversions()){
-            int index = where.get(i2.getDate().format(dtf));
-            pastmoney.set(index,pastmoney.get(index)+i2.getAmount());
-        }
-        System.out.println(pastmoney);
-        for(int k = 1; k < pastmoney.size(); k++){
-            pastmoney.set(k,pastmoney.get(k)+pastmoney.get(k-1));
-            System.out.println(pastmoney);
-        }
-
-        model.addAttribute("donors",array_to_string_jsarray(names));
-        model.addAttribute("quantities", array_to_int_jsarray(quantities));
-        model.addAttribute("times",array_to_string_jsarray(times));
-        model.addAttribute("pastmoney", array_to_int_jsarray(pastmoney));
+        graphicsService.initializeWith(project);
+        model.addAttribute("donors",graphicsService.getNames());
+        model.addAttribute("quantities", graphicsService.getQuantities());
+        model.addAttribute("times",graphicsService.getTimes());
+        model.addAttribute("pastmoney", graphicsService.getPastmoney());
         model.addAttribute("hasInversions", !project.getInversions().isEmpty());
 
         return "project-details";
@@ -421,26 +367,6 @@ public class ProjectController {
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
-    private String array_to_string_jsarray(List<String> list){
-        String ar = "[";
-        for(String s: list){
-            ar += "'"+s+"',";
-        }
-        if (ar.length() > 1) {ar = ar.substring(0,ar.length()-1);}
-        ar += "]";
-        System.out.println(ar);
-        return ar;
-    }
 
-    private String array_to_int_jsarray(List<Integer> list){
-        String ar = "[";
-        for(Integer i: list){
-            ar += i+",";
-        }
-        if (ar.length() > 1) {ar = ar.substring(0,ar.length()-1);}
-        ar += "]";
-        System.out.println(ar);
-        return ar;
-    }
 
 }
