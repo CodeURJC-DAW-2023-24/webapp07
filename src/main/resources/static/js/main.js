@@ -1,11 +1,11 @@
 /**
-* Template Name: Arsha
-* Updated: Jan 29 2024 with Bootstrap v5.3.2
-* Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-(function() {
+ * Template Name: Arsha
+ * Updated: Jan 29 2024 with Bootstrap v5.3.2
+ * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
+ * Author: BootstrapMade.com
+ * License: https://bootstrapmade.com/license/
+ */
+(function () {
   "use strict";
 
   /**
@@ -35,7 +35,7 @@
   }
 
   /**
-   * Easy on scroll event listener 
+   * Easy on scroll event listener
    */
   const onscroll = (el, listener) => {
     el.addEventListener('scroll', listener)
@@ -110,7 +110,7 @@
   /**
    * Mobile nav toggle
    */
-  on('click', '.mobile-nav-toggle', function(e) {
+  on('click', '.mobile-nav-toggle', function (e) {
     select('#navbar').classList.toggle('navbar-mobile')
     this.classList.toggle('bi-list')
     this.classList.toggle('bi-x')
@@ -119,7 +119,7 @@
   /**
    * Mobile nav dropdowns activate
    */
-  on('click', '.navbar .dropdown > a', function(e) {
+  on('click', '.navbar .dropdown > a', function (e) {
     if (select('#navbar').classList.contains('navbar-mobile')) {
       e.preventDefault()
       this.nextElementSibling.classList.toggle('dropdown-active')
@@ -129,7 +129,7 @@
   /**
    * Scrool with ofset on links with a class name .scrollto
    */
-  on('click', '.scrollto', function(e) {
+  on('click', '.scrollto', function (e) {
     if (select(this.hash)) {
       e.preventDefault()
 
@@ -166,7 +166,7 @@
   }
 
   /**
-   * Initiate  glightbox 
+   * Initiate  glightbox
    */
   const glightbox = GLightbox({
     selector: '.glightbox'
@@ -180,7 +180,7 @@
     new Waypoint({
       element: skilsContent,
       offset: '80%',
-      handler: function(direction) {
+      handler: function (direction) {
         let progress = select('.progress .progress-bar', true);
         progress.forEach((el) => {
           el.style.width = el.getAttribute('aria-valuenow') + '%'
@@ -201,9 +201,9 @@
 
       let portfolioFilters = select('#portfolio-flters li', true);
 
-      on('click', '#portfolio-flters li', function(e) {
+      on('click', '#portfolio-flters li', function (e) {
         e.preventDefault();
-        portfolioFilters.forEach(function(el) {
+        portfolioFilters.forEach(function (el) {
           el.classList.remove('filter-active');
         });
         this.classList.add('filter-active');
@@ -211,7 +211,7 @@
         portfolioIsotope.arrange({
           filter: this.getAttribute('data-filter')
         });
-        portfolioIsotope.on('arrangeComplete', function() {
+        portfolioIsotope.on('arrangeComplete', function () {
           AOS.refresh()
         });
       }, true);
@@ -220,7 +220,7 @@
   });
 
   /**
-   * Initiate portfolio lightbox 
+   * Initiate portfolio lightbox
    */
   const portfolioLightbox = GLightbox({
     selector: '.portfolio-lightbox'
@@ -258,15 +258,145 @@
   /**
    * Project page donatation
    */
-  $("#moremoney").on("click", function() {
-    $("#howmuch").attr("value",parseInt($("#howmuch").val())+1);
+  $("#moremoney").on("click", function () {
+    $("#howmuch").attr("value", parseInt($("#howmuch").val()) + 1);
   });
-  $("#lessmoney").on("click", function() {
-    if($("#howmuch").val() > 0){
-      $("#howmuch").attr("value",parseInt($("#howmuch").val())-1);
+  $("#lessmoney").on("click", function () {
+    if ($("#howmuch").val() > 0) {
+      $("#howmuch").attr("value", parseInt($("#howmuch").val()) - 1);
     }
   });
 
-  
 
 })()
+
+/**
+ * Create project scripts
+ */
+
+const select = document.getElementById("categories");
+for (const key in Category) {
+
+}
+
+
+$(document).ready(function () {
+  // Initialize Swiper
+  var swiper = new Swiper('.portfolio-details-slider', {
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+  });
+
+  // Upload slide button click event
+  $('#upload-slide-btn').click(function () {
+    $('#new-slide-input').click();
+  });
+
+  // New slide input change event
+  $('#new-slide-input').on('change', function (event) {
+    var fileInput = $(this)[0];
+    var file = fileInput.files[0];
+
+    if (file) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        var imageSrc = e.target.result;
+        swiper.appendSlide(`<div class="swiper-slide"><img class = "responsive-image" src="${imageSrc}" alt=""></div>`);
+        swiper.update(); // Actualizar Swiper para que reconozca los nuevos slides
+      };
+
+      reader.readAsDataURL(file);
+    }
+  });
+});
+
+/**
+ * Edit profile scripts
+ */
+
+
+$(document).ready(function () {
+  // Upload slide button click event
+  $('#upload-slide-btn').click(function () {
+    $('#new-slide-input').click();
+  });
+
+  // New input change event
+  $('#new-slide-input').on('change', function (event) {
+    var fileInput = $(this)[0];
+    var file = fileInput.files[0];
+
+    if (file) {
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+    }
+  });
+});
+
+/**
+ * Login scripts
+ */
+
+
+$(document).ready(function () {
+  $('#passwordVisibleLog').on('click', function () {
+    var passwordInput = $('#passwordInputLog');
+    if (passwordInput.attr('type') === 'password') {
+      passwordInput.attr('type', 'text');
+    } else {
+      passwordInput.attr('type', 'password');
+    }
+  });
+
+});
+
+function validarFormulario() {
+  var name = document.forms["formLog"]["username"].value;
+  var password = document.forms["formLog"]["password"].value;
+
+  if (name == "") {
+    alert("Introduce your Email");
+    return false;
+  }
+  if (password == "") {
+    alert("Introduce your Password");
+    return false;
+  }
+
+  return false;
+}
+
+/**
+ * Signup scripts
+ */
+
+  $(document).ready(function () {
+  $('#passwordVisibleSign').on('click', function () {
+    var passwordInput = $('#passwordInputSign');
+    var passwordConfirmation = $('#passwordInputSignConf');
+
+    if (passwordInput.attr('type') === 'password') {
+      passwordInput.attr('type', 'text');
+      passwordConfirmation.attr('type', 'text');
+    } else {
+      passwordInput.attr('type', 'password');
+      passwordConfirmation.attr('type', 'password');
+    }
+  });
+
+});
+
+
+  function validarFormulario() {
+  var password = document.forms["formSign"]["password"].value;
+  var password2 = document.forms["formSign"]["checkpassword"].value;
+
+  if (password != password2) {
+  alert("Passwords do not match");
+  return false;
+}
+  return true;
+}
