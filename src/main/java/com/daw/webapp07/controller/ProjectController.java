@@ -73,8 +73,8 @@ public class ProjectController {
             if(user.isPresent() && user.get().hasInversions()){
                 System.out.println("Recomendando");
                 model.addAttribute("projects", projectService.searchRecommendedProjects(0,10,user.get().getId()));
-            }
-            model.addAttribute("projects", projectService.searchProjects(0, 10));
+            }else
+                model.addAttribute("projects", projectService.searchProjects(0, 10));
 
         }else
         {
@@ -85,7 +85,7 @@ public class ProjectController {
         return "inner-page";
     }
 
-
+    // Returns more projects to not logged-in user
     @GetMapping("/projects")
     public String getProjects(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
                                    @RequestParam(name = "size", defaultValue = "10") int size ) {
@@ -96,13 +96,22 @@ public class ProjectController {
     }
 
 
-    @GetMapping("/recomendedprojects")
-    public String getRecomendedProjects(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
-                              @RequestParam(name = "size", defaultValue = "10") int size ) {
+    // Returns more recommended projects to de user
+    @GetMapping("/rec-projects")
+    public String getRecProjects(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
+                              @RequestParam(name = "size", defaultValue = "10") int size ,  HttpServletRequest request) {
 
-        model.addAttribute("projects", projectService.searchProjects(page, size));
-
-        return "portfolio";
+        Principal principal = request.getUserPrincipal();
+        if (principal == null) {
+            // If user is not logged it gets redirected to login page
+            return "redirect:/login";
+        } else {
+            Optional<UserEntity> user = userRepository.findByName(principal.getName());
+            if (user.isPresent()) {
+                model.addAttribute("projects", projectService.searchRecommendedProjects(page,size,user.get().getId()));
+            }
+            return "portfolio";
+        }
     }
 
 
