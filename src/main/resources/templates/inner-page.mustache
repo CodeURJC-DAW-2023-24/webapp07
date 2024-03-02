@@ -89,12 +89,19 @@
     {{> portfolio}}
 
             </div>
+
             <div class="row">
                 <div class="col-12 text-center">
-                    <a id="load-more-btn" class="btn btn-primary" data-page="0">Load more</a>
+                    {{#user}}
+                        <!-- Buttom for users-->
+                        <a id="load-more-btn-rec" class="btn btn-primary">Load more</a>
+                    {{/user}}
+                    {{^user}}
+                        <!-- Buttom for not logged users -->
+                        <a id="load-more-btn" class="btn btn-primary" data-page="0">Load more</a>
+                    {{/user}}
                 </div>
             </div>
-
         </div>
     </section><!-- End Portfolio Section -->
 
