@@ -220,8 +220,8 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 - WebSecurityConfig
 - EmailService
 - Image
-- ProjectController
-- UserController
+- [ProjectController](src/main/java/com/daw/webapp07/controller/ProjectController.java)
+- [UserController](src/main/java/com/daw/webapp07/controller/UserController.java)
 
 ### Pablo
 
