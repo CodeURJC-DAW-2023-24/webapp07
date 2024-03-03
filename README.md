@@ -233,9 +233,9 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
    Participation
 </h2>
 
-
-
-### Pablo
+<h3>
+  Pablo
+</h3>
 
 **Tasks:**
 - I created mustache templates from the previous phase HTMLs.
@@ -261,7 +261,9 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 - [UserController](src/main/java/com/daw/webapp07/controller/UserController.java)
 - [DatabaseInitializer](src/main/java/com/daw/webapp07/service/DatabaseInitializer.java)
 
-### Diego
+<h3>
+  Diego
+</h3>
 
 **Tasks:** 
 - I created mustache templates from the previous phase HTMLs.
@@ -289,7 +291,10 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 - [ProjectController](src/main/java/com/daw/webapp07/controller/ProjectController.java)
 - [UserController](src/main/java/com/daw/webapp07/controller/UserController.java)
 
-### Miguel Ángel
+<h3>
+  Miguel Angel
+</h3>
+
 **Tasks:***
 - I created some mustache templates from the previous phase HTMLs.
 - I created example projects.
@@ -311,4 +316,31 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 - [WebSecurityConfig](src/main/java/com/daw/webapp07/security/WebSecurityConfig.java)
 - [User Controller](src/main/java/com/daw/webapp07/controller/UserController.java)
 - [Comment](src/main/java/com/daw/webapp07/model/Comment.java)
+- [DatabaseInitializer](src/main/java/com/daw/webapp07/service/DatabaseInitializer.java)
+
+<h3>
+  Marcos Hernangil
+</h3>
+
+**Tasks:**
+- I made My Projects section, where users can see their projects.
+- I made the functionality to edit projects.
+- I made the pdf conversion functionality where users can download the stats from their projects into .pdf format.
+- I made the ranking part.
+- I created some mustache templates from the previous phase HTMLs and new ones.
+- I added new investments and projects in database for testing graphics.
+- Some minor adjustments like project deletion protection.
+
+**Top 5 commits:**
+- [My Projects](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/207be75e68ca1781028f349aa3437c798760d69e)
+- [Edit Project](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/e76ba167ec468248c8b1ce319b135932006b0f3d)
+- [PDF download](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/84e450ad0244e53f41319a196a41186342f29cf8)
+- [Ranking](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/7f94bc4dc47237be83402dd6ce2f41f0bc7c9c72)
+- [Project deletion protection](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/905bd29cf5da24faf98cf0201f7e3587d4cdd424)
+
+**Top 5 files:**
+- [Project Controller](src/main/java/com/daw/webapp07/controller/ProjectController.java)
+- [User Controller](src/main/java/com/daw/webapp07/controller/UserController.java)
+- [PDF Controller](src/main/java/com/daw/webapp07/controller/PdfController.java)
+- [PDF service](src/main/java/com/daw/webapp07/service/PdfService.java)
 - [DatabaseInitializer](src/main/java/com/daw/webapp07/service/DatabaseInitializer.java)
