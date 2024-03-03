@@ -210,11 +210,11 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 - I optimized the codebase by removing redundant code and templates. This involved redesigning some functions and templates to perform differently when necessary while retaining shared functionality.
 
 **Top 5 commits:** 
-- [security](86ec575ea3e6442141270efa49a27b67eb9af97e) 
-- [images database](e66091db4831532cb9d1e2ed8db549708a4d4c39)
-- [edit profile](a20978f2a903dde1dc130033ada9c96668d9172e)
-- [dynamic navbar](0fef15573f05916c94e93572e38913d055088f26)
-- [send email welcome](6074f6c4aed8ddf901e064069f701cee1d462187)
+- [security](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/86ec575ea3e6442141270efa49a27b67eb9af97e) 
+- [images database](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/e66091db4831532cb9d1e2ed8db549708a4d4c39)
+- [edit profile](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/a20978f2a903dde1dc130033ada9c96668d9172e)
+- [dynamic navbar](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/0fef15573f05916c94e93572e38913d055088f26)
+- [send email welcome](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/6074f6c4aed8ddf901e064069f701cee1d462187)
 
 **Top 5 files:** 
 - WebSecurityConfig
@@ -236,11 +236,11 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 - I changed from h2 to SQL, and helped my teammates in doing so in their devices
 
 **Top 5 commits:**
-- [SQL recomendation algorithm](6f28fda996394f5a825ac8748a31485063f77ebe)
-- [money over time chart](83dcec498356e944609a921c856be5718ffffbfe)
-- [pie chart](8c998a55b3e0e7dd467300ccbc66a2d3bc48c0e8)
-- [Java recomendation algorithm](51ee0ea512f9bad6276b744f2a0e08bc45769678)
-- [bbdd projects](commit/658270dff83f7f09ddd44cef9d229d683ce0eee7)
+- [SQL recomendation algorithm](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/6f28fda996394f5a825ac8748a31485063f77ebe)
+- [money over time chart](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/83dcec498356e944609a921c856be5718ffffbfe)
+- [pie chart](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/8c998a55b3e0e7dd467300ccbc66a2d3bc48c0e8)
+- [Java recomendation algorithm](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/51ee0ea512f9bad6276b744f2a0e08bc45769678)
+- [bbdd projects](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/658270dff83f7f09ddd44cef9d229d683ce0eee7)
 
 **Top 5 files:**
 - [ProjectRepository](src/main/java/com/daw/webapp07/repository/ProjectRepository.java)
