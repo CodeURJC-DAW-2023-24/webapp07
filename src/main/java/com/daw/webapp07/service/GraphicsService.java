@@ -2,8 +2,6 @@ package com.daw.webapp07.service;
 
 import com.daw.webapp07.model.Inversion;
 import com.daw.webapp07.model.Project;
-import com.daw.webapp07.repository.ProjectRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -17,9 +15,6 @@ public class GraphicsService {
     private String stimes;
     private String spastmoney;
 
-
-    @Autowired
-    private ProjectRepository projectRepository;
 
     public void initializeWith(Project project) {
         HashMap<String,Integer> donors = new HashMap<>();

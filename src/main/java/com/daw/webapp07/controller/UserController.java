@@ -6,8 +6,6 @@ import com.daw.webapp07.model.Project;
 import com.daw.webapp07.model.UserEntity;
 import com.daw.webapp07.repository.ProjectRepository;
 import com.daw.webapp07.repository.UserRepository;
-import com.daw.webapp07.service.EmailService;
-import com.daw.webapp07.service.ProjectService;
 import com.daw.webapp07.service.RepositoryUserDetailsService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,9 +34,6 @@ public class UserController {
 
     @Autowired
     private RepositoryUserDetailsService userDetailsService;
-
-    @Autowired
-    private ProjectService projectService;
 
     @GetMapping("/login")
     public String login() {
