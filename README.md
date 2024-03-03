@@ -198,16 +198,16 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 </h3>
 
 **Tasks:** 
--I created the mustache templates from the previous phase HTMLs.
--I developed the Image class along with its functionality, enabling the management of multiple photos in the database. Additionally, I implemented the necessary controllers to display photos from the database.
--I implemented web security measures, including the functionality for the login and signup pages.
--I designed a controller that runs universally, inserting data required in the header for each controller.
--I assisted in providing examples for the data initializer.
--I introduced the functionality for editing profiles, as well as the ability to change the template style.
--I contributed to resolving errors related to photos during the editing and creation of projects. Moreover, I revamped the associated templates.
--I integrated an email service, allowing our application to send emails to users when signing up or when their project reaches its goal.
--I developed controllers to handle general errors and created templates for login errors and general errors.
--I optimized the codebase by removing redundant code and templates. This involved redesigning some functions and templates to perform differently when necessary while retaining shared functionality.
+- I created the mustache templates from the previous phase HTMLs.
+- I developed the Image class along with its functionality, enabling the management of multiple photos in the database. Additionally, I implemented the necessary controllers to display photos from the database.
+- I implemented web security measures, including the functionality for the login and signup pages.
+- I designed a controller that runs universally, inserting data required in the header for each controller.
+- I assisted in providing examples for the data initializer.
+- I introduced the functionality for editing profiles, as well as the ability to change the template style.
+- I contributed to resolving errors related to photos during the editing and creation of projects. Moreover, I revamped the associated templates.
+- I integrated an email service, allowing our application to send emails to users when signing up or when their project reaches its goal.
+- I developed controllers to handle general errors and created templates for login errors and general errors.
+- I optimized the codebase by removing redundant code and templates. This involved redesigning some functions and templates to perform differently when necessary while retaining shared functionality.
 
 **5 commits:** 
 - [security](86ec575ea3e6442141270efa49a27b67eb9af97e) 
