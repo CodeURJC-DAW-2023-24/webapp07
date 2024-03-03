@@ -240,7 +240,7 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 - [money over time chart](83dcec498356e944609a921c856be5718ffffbfe)
 - [pie chart](8c998a55b3e0e7dd467300ccbc66a2d3bc48c0e8)
 - [Java recomendation algorithm](51ee0ea512f9bad6276b744f2a0e08bc45769678)
-- [bbdd projects](658270dff83f7f09ddd44cef9d229d683ce0eee7)
+- [bbdd projects](commit/658270dff83f7f09ddd44cef9d229d683ce0eee7)
 
 **Top 5 files:**
 - [ProjectRepository](src/main/java/com/daw/webapp07/repository/ProjectRepository.java)
