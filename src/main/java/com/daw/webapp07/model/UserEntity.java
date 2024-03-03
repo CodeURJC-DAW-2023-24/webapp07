@@ -145,6 +145,13 @@ public class UserEntity{
         this.inversions.add(inversion);
     }
 
+    public int getTotalInvested() {
+        int total = 0;
 
+        for (int i = 0; i < inversions.size(); i++) {
+            total += inversions.get(i).getAmount();
+        }
+        return total;
+    }
 }
 

@@ -1,0 +1,37 @@
+.case {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8%;
+}
+.podium {
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+    align-items: center;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-height: 400px;
+}
+.bar {
+    margin-bottom: 0px;
+    width: 150px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    height: 500px;
+}
+.name {
+    text-align: center;
+    max-width: 150px;
+}
+.rankingTitle {
+    font-weight: bold;
+    color: #1cb98b;
+}
