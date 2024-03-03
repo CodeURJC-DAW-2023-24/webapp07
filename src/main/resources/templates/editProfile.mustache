@@ -36,14 +36,14 @@
 {{> footer}}
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Upload slide button click event
-        $('#upload-slide-btn').click(function() {
+        $('#upload-slide-btn').click(function () {
             $('#new-slide-input').click();
         });
 
         // New input change event
-        $('#new-slide-input').on('change', function(event) {
+        $('#new-slide-input').on('change', function (event) {
             var fileInput = $(this)[0];
             var file = fileInput.files[0];
 

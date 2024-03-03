@@ -14,18 +14,18 @@
                 passwordInput.attr('type', 'password');
                 passwordConfirmation.attr('type', 'password');
             }
-    });
+        });
 
     });
 
 
-        function validarFormulario() {
+    function validarFormulario() {
         var password = document.forms["formSign"]["password"].value;
         var password2 = document.forms["formSign"]["checkpassword"].value;
 
         if (password != password2) {
-        alert("Passwords do not match");
-        return false;
+            alert("Passwords do not match");
+            return false;
         }
         return true;
     }

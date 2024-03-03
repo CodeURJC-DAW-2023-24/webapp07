@@ -70,10 +70,10 @@ public class WebSecurityConfig {
 
                         // PRIVATE PAGES
                         .requestMatchers("/editproject/*").hasAnyRole("USER")
-                        .requestMatchers("/landing-page").hasAnyRole("USER")
                         .requestMatchers("/createProject").hasAnyRole("USER")
                         .requestMatchers("/myProjects").hasAnyRole("USER")
                         .requestMatchers("/newProject").hasAnyRole("USER")
+                        .requestMatchers("/rec-projects").hasAnyRole("USER")
                         .requestMatchers("/editProject/*").hasAnyRole("USER")
                         .requestMatchers("/editProfile").hasAnyRole("USER")
                         .requestMatchers("/project-details/*/comment").hasAnyRole("USER")
@@ -87,7 +87,7 @@ public class WebSecurityConfig {
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .failureUrl("/loginerror")
-                        .defaultSuccessUrl("/landing-page")
+                        .defaultSuccessUrl("/")
                         .permitAll()
                 )
                 .logout(logout -> logout

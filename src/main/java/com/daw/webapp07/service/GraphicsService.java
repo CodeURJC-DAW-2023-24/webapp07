@@ -42,7 +42,7 @@ public class GraphicsService {
         List<Integer> pastmoney = new ArrayList<>();
         Calendar timeNow = Calendar.getInstance();
         Calendar oldest = Calendar.getInstance();
-        oldest.set(project.getDate().getYear(), project.getDate().getMonthValue() -1, project.getDate().getDayOfMonth());
+        oldest.set(project.getDate().getYear(), project.getDate().getMonthValue() -1, 1);
         oldest.add(Calendar.YEAR,1);
         boolean moreThanAYear = oldest.before(timeNow);
         oldest.add(Calendar.YEAR, -1);
@@ -50,7 +50,7 @@ public class GraphicsService {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/yyyy");
         List<String> months = new ArrayList<>(Arrays.asList("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"));
         int i = 0;
-        while (oldest.before(timeNow)) {
+        while (!oldest.after(timeNow)){
             System.out.println("Mesasd: "+oldest.get(Calendar.YEAR));
             if(!moreThanAYear) {
                 times.add(months.get(oldest.get(Calendar.MONTH)));

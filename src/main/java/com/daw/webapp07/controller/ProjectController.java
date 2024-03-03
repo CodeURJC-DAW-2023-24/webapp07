@@ -2,10 +2,7 @@ package com.daw.webapp07.controller;
 
 import com.daw.webapp07.model.*;
 import com.daw.webapp07.repository.*;
-import com.daw.webapp07.service.DatabaseInitializer;
-import com.daw.webapp07.service.GraphicsService;
-import com.daw.webapp07.service.ProjectService;
-import com.daw.webapp07.service.PdfService;
+import com.daw.webapp07.service.*;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
@@ -36,6 +33,7 @@ import org.w3c.dom.events.Event;
 
 
 import java.io.IOException;
+import java.security.Principal;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -52,7 +50,7 @@ public class ProjectController {
     private UserRepository userRepository;
 
     @Autowired
-    private ImageRepository imageRepository;
+    private EmailService emailService;
 
     @Autowired
     CommentRepository commentRepository;
@@ -72,24 +70,23 @@ public class ProjectController {
             Optional<UserEntity> user = userRepository.findByName(request.getUserPrincipal().getName());
             if(user.isPresent() && user.get().hasInversions()){
                 System.out.println("Recomendando");
-                model.addAttribute("projects", projectService.searchRecommendedProjects(0,12,user.get().getId()));
-                model.addAttribute("user", user);
-
-            }
+                model.addAttribute("projects", projectService.searchRecommendedProjects(0,10,user.get().getId()));
+            }else
+                model.addAttribute("projects", projectService.searchProjects(0, 10));
 
         }else
         {
-            model.addAttribute("projects", projectService.searchProjects(0, 12));
+            model.addAttribute("projects", projectService.searchProjects(0, 10));
         }
 
 
         return "inner-page";
     }
 
-
+    // Returns more projects to not logged-in user
     @GetMapping("/projects")
     public String getProjects(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
-                                   @RequestParam(name = "size", defaultValue = "6") int size ) {
+                                   @RequestParam(name = "size", defaultValue = "10") int size ) {
 
         model.addAttribute("projects", projectService.searchProjects(page, size));
 
@@ -97,13 +94,22 @@ public class ProjectController {
     }
 
 
-    @GetMapping("/recomendedprojects")
-    public String getRecomendedProjects(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
-                              @RequestParam(name = "size", defaultValue = "6") int size ) {
+    // Returns more recommended projects to de user
+    @GetMapping("/rec-projects")
+    public String getRecProjects(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
+                              @RequestParam(name = "size", defaultValue = "10") int size ,  HttpServletRequest request) {
 
-        model.addAttribute("projects", projectService.searchProjects(page, size));
-
-        return "portfolio";
+        Principal principal = request.getUserPrincipal();
+        if (principal == null) {
+            // If user is not logged it gets redirected to login page
+            return "redirect:/login";
+        } else {
+            Optional<UserEntity> user = userRepository.findByName(principal.getName());
+            if (user.isPresent()) {
+                model.addAttribute("projects", projectService.searchRecommendedProjects(page,size,user.get().getId()));
+            }
+            return "portfolio";
+        }
     }
 
 
@@ -223,6 +229,9 @@ public class ProjectController {
         newInversion.setUser(user);
         project.addInversion(newInversion);
         projectRepository.save(project);
+        if(checkProject.get().getGoal() <= project.getCurrentAmount()){
+            emailService.sendEmail(project.getOwner().getName(), project.getOwner().getEmail(),"Your project has reached its goal");
+        }
         user.addInversion(newInversion);
         userRepository.save(user);
 

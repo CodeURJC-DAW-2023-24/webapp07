@@ -1,5 +1,12 @@
 {{> header}}
 
+{{#user}}
+    <section>
+
+    </section><!-- End Hero -->
+{{/user}}
+
+{{^user}}
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center">
 
@@ -22,6 +29,7 @@
     </div>
 
 </section><!-- End Hero -->
+
 
 <main id="main">
     <!-- ======= Clients Section ======= -->
@@ -59,13 +67,21 @@
         </div>
     </section><!-- End Cliens Section -->
 
+{{/user}}
+
     <!-- ======= Portfolio Section ======= -->
     <section id="portfolio" class="portfolio">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
                 <h2>Trending Proyects</h2>
-                <p>These projects are killing it !!</p>
+                {{#user}}
+                <p>These projects may interest you. ¡Take a look!</p>
+                {{/user}}
+
+                {{^user}}
+                <p>¡¡ These projects are killing it !!</p>
+                {{/user}}
             </div>
 
             <div id="projects-container" class="grid-container" data-aos="fade-up" data-aos-delay="200">
@@ -73,12 +89,19 @@
     {{> portfolio}}
 
             </div>
+
             <div class="row">
                 <div class="col-12 text-center">
-                    <a id="load-more-btn" class="btn btn-primary" data-page="0">Load more</a>
+                    {{#user}}
+                        <!-- Buttom for users-->
+                        <a id="load-more-btn-rec" class="btn btn-primary">Load more</a>
+                    {{/user}}
+                    {{^user}}
+                        <!-- Buttom for not logged users -->
+                        <a id="load-more-btn" class="btn btn-primary" data-page="0">Load more</a>
+                    {{/user}}
                 </div>
             </div>
-
         </div>
     </section><!-- End Portfolio Section -->
 

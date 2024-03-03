@@ -24,8 +24,20 @@ public class EmailService {
             MimeMessage message = javaMailSender.createMimeMessage();
             message.setFrom(new InternetAddress("seedVentures3@gmail.com"));
             message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(to));
+            String template = "email-template.html";
 
-            String htmlTemplate = readTemplate("src/main/resources/templates/email-template.html");
+            switch (subject) {
+                case "Your project has reached its goal":
+                    template = "email-template-goal.html";
+                    break;
+                case "Welcome to SeedVentures":
+                    template = "email-template.html";
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + subject);
+            }
+
+            String htmlTemplate = readTemplate("src/main/resources/templates/" + template);
             String htmlContent = htmlTemplate.replace("${user}", name);
 
             message.setContent(htmlContent, "text/html; charset=utf-8");
