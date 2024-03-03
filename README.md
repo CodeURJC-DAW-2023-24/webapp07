@@ -209,14 +209,14 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 - I developed controllers to handle general errors and created templates for login errors and general errors.
 - I optimized the codebase by removing redundant code and templates. This involved redesigning some functions and templates to perform differently when necessary while retaining shared functionality.
 
-**5 commits:** 
+**Top 5 commits:** 
 - [security](86ec575ea3e6442141270efa49a27b67eb9af97e) 
 - [images database](e66091db4831532cb9d1e2ed8db549708a4d4c39)
 - [edit profile](a20978f2a903dde1dc130033ada9c96668d9172e)
 - [dynamic navbar](0fef15573f05916c94e93572e38913d055088f26)
 - [send email welcome](6074f6c4aed8ddf901e064069f701cee1d462187)
 
-**5 files:** 
+**Top 5 files:** 
 - WebSecurityConfig
 - EmailService
 - Image
