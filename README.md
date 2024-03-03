@@ -320,11 +320,11 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 - [scripts](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/8e03f2a9eea3445b05adfb4acd232daeecf98015)
 
 **Top 5 files:** 
-- [WebSecurityConfig](src/main/java/com/daw/webapp07/security/WebSecurityConfig.java)
-- [EmailService](src/main/java/com/daw/webapp07/service/EmailService.java)
-- [Image](src/main/java/com/daw/webapp07/model/Image.java)
+- [Ajax.js](src/main/resources/static/js/ajax.js)
 - [ProjectController](src/main/java/com/daw/webapp07/controller/ProjectController.java)
-- [UserController](src/main/java/com/daw/webapp07/controller/UserController.java)
+- [ProjectServie](src/main/java/com/daw/webapp07/service/ProjectService.java)
+- [Main.js](src/main/resources/static/js/main.js)
+- [Error](src/main/resources/templates/error-page.mustache)
 
 
 
