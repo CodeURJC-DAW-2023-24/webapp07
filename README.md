@@ -269,6 +269,6 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 **Top 5 files:**
 - [Project Controller](src/main/java/com/daw/webapp07/controller/ProjectController.java)
 - [WebSecurityConfig](src/main/java/com/daw/webapp07/security/WebSecurityConfig.java)
-- [Inversion]((src/main/java/com/daw/webapp07/model/Inversion.java)
-- [Comment]((src/main/java/com/daw/webapp07/model/Comment.java)
+- [Inversion](src/main/java/com/daw/webapp07/model/Inversion.java)
+- [Comment](src/main/java/com/daw/webapp07/model/Comment.java)
 - [DatabaseInitializer](src/main/java/com/daw/webapp07/service/DatabaseInitializer.java)
