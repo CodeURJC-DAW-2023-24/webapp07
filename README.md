@@ -262,9 +262,9 @@ The following software is required to run the application:
 > ```
 > - Windows:
 > Go to the [MySQL website](https://dev.mysql.com/downloads/) and download the installer in the linked associated with the text __"MySQL Installer for Windows"__, then follow the instructions, it's important to select full installation if you want workbench as well.  
+>
+>
 > In the installation process, it's important to select the following options:
->   
-> 
 >   - Port: 3306
 >   - User: root
 >   - Password: sqlsql  
