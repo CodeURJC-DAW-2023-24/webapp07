@@ -99,23 +99,26 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
   📸 Screenshots
 </h2>
 <p align="center">
-	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/1cdc5f7d-3c64-4752-b205-07273abb9c00">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/118292819/1b896b39-6f35-4cef-b8c2-4aa52b974b1f">
 </p>
+
 
 **Main page:** On this screen, you can see the options to log in and register, as well as access information about the page such as collaborators, the team, contact, and others.
 
 ---
 
 <p align="center">
-	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/124e07bb-7eb8-4ff7-951f-62c6649acfa2">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/118292819/16443736-510e-445a-9ba4-2a20afad59a8">
 </p>
+
+
 
 **Trending projects:** By scrolling the main page, the user will see the most popular projects at the time, which can be opened to see more information about it. If the user is logged, the page will show personalised reccomendations.
 
 ---
 
 <p align="center">
-	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/d905932b-09b8-4746-9e08-3b7149a9446e">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/118292819/91d00038-dcaa-44b7-917c-4669e9c6e93b">
 </p>
 
 **Sign in:** This page allows new users to create an account. In order to create it, the user will have to fill in all the neccessary information.
@@ -123,31 +126,36 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 ---
 
 <p align="center">
-	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/217779be-7c87-4e61-889e-b85f6ec58384">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/118292819/8efd070a-5835-4a99-9b13-364a289ac3c4">
 </p>
+
 
 **Log in:** This page will allow both users and administrators to log in in order to access the web's functionalities. If the user doesn´t have an account, he will be able to create one.
 
 ---
 
 <p align="center">
-	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/ca0f55a0-6486-4e41-be6c-05a8af983b4d">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/118292819/c7984c9e-9eaa-4cb8-8469-0e9a43e103bc">
 </p>
+
+---
+
+<p align="center">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/118292819/4f5dc6fd-683e-49c4-8ae0-5d77e4e80519">
+</p>
+
+
+
+**Recommended projects:** When the user is logged in the projects shown according to users preferences.
+
+---
 
 **Project:** This page shows more information about a project, besides its graphics and statistics.
 
 ---
 
 <p align="center">
-	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/d5f57c4e-5115-4c02-bd09-21f607a7397c">
-</p>
-
-**Dashboard:** This page allows users to search and filter over the different active projects.
-
----
-
-<p align="center">
-	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/105402e3-3002-4c97-a89e-c65c691f068c">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/118292819/c8474c7f-a3da-414b-873e-08f58219b8b2">
 </p>
 
 **My projects:** This page allows logged users to see their own projects.
@@ -155,7 +163,7 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 ---
 
 <p align="center">
-	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/45bbd8e1-2df3-428c-8162-a6809291930a">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/118292819/e542c798-1774-48d0-bf33-b73f710c8c01">
 </p>
 
 **Upload project:** This page allows a logged user to upload a new project, filling in the different information needed for the project, as well as the image gallery.
@@ -163,7 +171,15 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 ---
 
 <p align="center">
-	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/b3c2ea67-d926-485a-8b4b-e493282ca32d">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/118292819/a86077e3-1456-4a73-9dfa-85f1a7ffae25">
+</p>
+
+**Edit project:** This page allows a logged user to edit their projects.
+
+---
+
+<p align="center">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/118292819/91442e51-ad35-4c65-bdaf-1fdc5b4cb9f2">
 </p>
 
 **Profile photo:** By clicking in the photo, logged users can both see and edit their personal information and log out, which would send them back to the guest page.
@@ -171,10 +187,22 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 ---
 
 <p align="center">
-	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/ad15a0d2-a678-43ab-80a1-67adf74b89cc">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/118292819/f0646666-edec-4bf1-9d25-52b0548c6d9a">
 </p>
 
-**Profile information:** This page shows a logged user his/her account information, including an option to edit the latter.
+**Edit profile:** This page shows a logged user his/her account information in order to change their information.
+
+---
+<p align="center">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/118292819/e5762204-d62c-4e31-9dc4-6b75da81be25">
+</p>
+
+<p align="center">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/118292819/66eb5ff6-7c2b-4809-ac7c-8e8df154bf56">
+</p>
+
+
+**Error page:** This pages show an error in case something goes wrong.
 
 ---
 
@@ -185,17 +213,55 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/ff64960e-244e-46de-a9f5-d71a772f38a7">
 </p>
 
-<h1 align="center" id="phase-1">
-  📏 Phase 2
-</h1>
+<h2>
+   Database diagram
+</h2>
+
+<p align="center">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/118292819/b10c524e-6fcb-4a46-9f7c-190e442a76d4">
+</p>
+
+<h2>
+   Classes and templates diagram
+</h2>
+
+<p align="center">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/118292819/350916b4-c49d-470c-a56f-2bf619008c7f">
+</p>
 
 <h2>
    Participation
 </h2>
 
-<h3>
-   Diego
-</h3>
+
+
+### Pablo
+
+**Tasks:**
+- I created mustache templates from the previous phase HTMLs.
+- I made a recomendation algorithm in Java.
+- I made exactly the same recomendation algorithm but now in SQL.
+- I assisted in providing examples for the data initializer. And used them to test the database and algorithms.
+- I helped in the creation of various controllers.
+- I converted all the models to JPA entities.
+- I contributed to resolving errors with pagination and bbdd.
+- I changed from h2 to SQL, and helped my teammates in doing so in their devices.
+
+**Top 5 commits:**
+- [SQL recomendation algorithm](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/6f28fda996394f5a825ac8748a31485063f77ebe)
+- [money over time chart](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/83dcec498356e944609a921c856be5718ffffbfe)
+- [pie chart](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/8c998a55b3e0e7dd467300ccbc66a2d3bc48c0e8)
+- [Java recomendation algorithm](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/51ee0ea512f9bad6276b744f2a0e08bc45769678)
+- [bbdd projects](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/658270dff83f7f09ddd44cef9d229d683ce0eee7)
+
+**Top 5 files:**
+- [ProjectRepository](src/main/java/com/daw/webapp07/repository/ProjectRepository.java)
+- [GraphicsService](src/main/java/com/daw/webapp07/service/GraphicsService.java)
+- [ProjectController](src/main/java/com/daw/webapp07/controller/ProjectController.java)
+- [UserController](src/main/java/com/daw/webapp07/controller/UserController.java)
+- [DatabaseInitializer](src/main/java/com/daw/webapp07/service/DatabaseInitializer.java)
+
+### Diego
 
 **Tasks:** 
 - I created mustache templates from the previous phase HTMLs.
@@ -223,40 +289,14 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 - [ProjectController](src/main/java/com/daw/webapp07/controller/ProjectController.java)
 - [UserController](src/main/java/com/daw/webapp07/controller/UserController.java)
 
-### Pablo
-
-**Tasks:**
-- I created mustache templates from the previous phase HTMLs.
-- I made a recomendation algorithm in Java
-- I made exactly the same recomendation algorithm but now in SQL
-- I assisted in providing examples for the data initializer. And used them to test the database and algorithms
-- I helped in the creation of various controllers
-- I converted all the models to JPA entities
-- I contributed to resolving errors with pagination and bbdd
-- I changed from h2 to SQL, and helped my teammates in doing so in their devices
-
-**Top 5 commits:**
-- [SQL recomendation algorithm](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/6f28fda996394f5a825ac8748a31485063f77ebe)
-- [money over time chart](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/83dcec498356e944609a921c856be5718ffffbfe)
-- [pie chart](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/8c998a55b3e0e7dd467300ccbc66a2d3bc48c0e8)
-- [Java recomendation algorithm](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/51ee0ea512f9bad6276b744f2a0e08bc45769678)
-- [bbdd projects](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/658270dff83f7f09ddd44cef9d229d683ce0eee7)
-
-**Top 5 files:**
-- [ProjectRepository](src/main/java/com/daw/webapp07/repository/ProjectRepository.java)
-- [GraphicsService](src/main/java/com/daw/webapp07/service/GraphicsService.java)
-- [ProjectController](src/main/java/com/daw/webapp07/controller/ProjectController.java)
-- [UserController](src/main/java/com/daw/webapp07/controller/UserController.java)
-- [DatabaseInitializer](src/main/java/com/daw/webapp07/service/DatabaseInitializer.java)
-
 ### Miguel Ángel
 **Tasks:***
 - I created some mustache templates from the previous phase HTMLs.
-- I created example projects
-- I made the create project functionality and security
-- I made the donations functionality and security
-- I made the comments entity, functionality and security
-- I made the delete projects functionality and security
+- I created example projects.
+- I made the create project functionality and security.
+- I made the donations functionality and security.
+- I made the comments entity, functionality and security.
+- I made the delete projects functionality and security.
 - I participated in solving some errors regarding the login, edit project, and general security access.
 
 **Top 5 commits:**
