@@ -223,3 +223,28 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 - ProjectController
 - UserController
 
+### Pablo
+
+**Tasks:**
+- I created the mustache templates from the previous phase HTMLs.
+- I made a recomendation algorithm in Java
+- I made exactly the same recomendation algorithm but now in SQL
+- I assisted in providing examples for the data initializer. And used them to test the database and algorithms
+- I helped in the creation of various controllers
+- I converted all the models to JPA entities
+- I contributed to resolving errors with pagination and bbdd
+- I changed from h2 to SQL, and helped my teammates in doing so in their devices
+
+**Top 5 commits:**
+- [SQL recomendation algorithm](6f28fda996394f5a825ac8748a31485063f77ebe)
+- [money over time chart](83dcec498356e944609a921c856be5718ffffbfe)
+- [pie chart](8c998a55b3e0e7dd467300ccbc66a2d3bc48c0e8)
+- [Java recomendation algorithm](51ee0ea512f9bad6276b744f2a0e08bc45769678)
+- [bbdd projects](658270dff83f7f09ddd44cef9d229d683ce0eee7)
+
+**Top 5 files:**
+- [ProjectRepository](src/main/java/com/daw/webapp07/repository/ProjectRepository.java)
+- [GraphicsService](src/main/java/com/daw/webapp07/service/GraphicsService.java)
+- [ProjectController](src/main/java/com/daw/webapp07/controller/ProjectController.java)
+- [UserController](src/main/java/com/daw/webapp07/controller/UserController.java)
+- [DatabaseInitializer](src/main/java/com/daw/webapp07/service/DatabaseInitializer.java)
