@@ -138,6 +138,8 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/118292819/c7984c9e-9eaa-4cb8-8469-0e9a43e103bc">
 </p>
 
+**Project:** This page shows more information about a project, besides its graphics and statistics.
+
 ---
 
 <p align="center">
@@ -148,9 +150,6 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 
 **Recommended projects:** When the user is logged in the projects shown according to users preferences.
 
----
-
-**Project:** This page shows more information about a project, besides its graphics and statistics.
 
 ---
 
@@ -191,6 +190,15 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 </p>
 
 **Edit profile:** This page shows a logged user his/her account information in order to change their information.
+
+
+---
+
+<p align="center">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/118292819/1e9ae59b-afa9-4a2c-aded-9702fcc26d84">
+</p>
+
+**Ranking:** This page shows a ranking of the top investors and allso the current top projects.
 
 ---
 <p align="center">
@@ -292,10 +300,39 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 - [UserController](src/main/java/com/daw/webapp07/controller/UserController.java)
 
 <h3>
+  Fernando
+</h3>
+
+**Tasks:** 
+- I developed the Pageable in order to load more projects, implementing depending on which type of user is trying to load more.
+- If a logged user loads more projects, it will see some more recommeded projects.
+- I created mustache new templates for errors and previous phase HTMLs.
+- I created a responsive grid using a portfolio template that it also varies depending of the user.
+- I designed a controller which makes requests to the service to get some projects from repository.
+- I assisted in providing examples for the data initializer.
+- I designed ajax functions and organised the mustache functions.
+  
+**Top 5 commits:** 
+- [Load-more](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/f28753327306ad30f581f0e65b4632d5f9100cbc)
+- [Load-recommended](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/d53d0bec850274e004b5da282d41781fc87ad732)
+- [ProjectService](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/c1a8d8d2c5f5a163d27d8e1da273b6f91a633277)
+- [error-page](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/59f1056807bead75f8a2c8d2c4c6697af94fec3b)
+- [scripts](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/8e03f2a9eea3445b05adfb4acd232daeecf98015)
+
+**Top 5 files:** 
+- [WebSecurityConfig](src/main/java/com/daw/webapp07/security/WebSecurityConfig.java)
+- [EmailService](src/main/java/com/daw/webapp07/service/EmailService.java)
+- [Image](src/main/java/com/daw/webapp07/model/Image.java)
+- [ProjectController](src/main/java/com/daw/webapp07/controller/ProjectController.java)
+- [UserController](src/main/java/com/daw/webapp07/controller/UserController.java)
+
+
+
+<h3>
   Miguel Angel
 </h3>
 
-**Tasks:***
+**Tasks:**
 - I created some mustache templates from the previous phase HTMLs.
 - I created example projects.
 - I made the create project functionality and security.
