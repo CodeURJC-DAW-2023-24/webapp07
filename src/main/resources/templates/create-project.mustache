@@ -104,5 +104,47 @@
 
 </body>
 
+<script>
+
+    const select = document.getElementById("categories");
+    for (const key in Category) {
+
+    }
+
+
+    $(document).ready(function () {
+        // Initialize Swiper
+        var swiper = new Swiper('.portfolio-details-slider', {
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
+        // Upload slide button click event
+        $('#upload-slide-btn').click(function () {
+            $('#new-slide-input').click();
+        });
+
+        // New slide input change event
+        $('#new-slide-input').on('change', function (event) {
+            var fileInput = $(this)[0];
+            var file = fileInput.files[0];
+
+            if (file) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var imageSrc = e.target.result;
+                    swiper.appendSlide(`<div class="swiper-slide"><img class = "responsive-image" src="${imageSrc}" alt=""></div>`);
+                    swiper.update(); // Actualizar Swiper para que reconozca los nuevos slides
+                };
+
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+
+</script>
 
 </html>

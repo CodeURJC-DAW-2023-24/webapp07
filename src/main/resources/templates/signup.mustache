@@ -1,6 +1,36 @@
 {{> header}}
 {{> header}}
 
+<script>
+    $(document).ready(function () {
+        $('#passwordVisibleSign').on('click', function () {
+            var passwordInput = $('#passwordInputSign');
+            var passwordConfirmation = $('#passwordInputSignConf');
+
+            if (passwordInput.attr('type') === 'password') {
+                passwordInput.attr('type', 'text');
+                passwordConfirmation.attr('type', 'text');
+            } else {
+                passwordInput.attr('type', 'password');
+                passwordConfirmation.attr('type', 'password');
+            }
+        });
+
+    });
+
+
+    function validarFormulario() {
+        var password = document.forms["formSign"]["password"].value;
+        var password2 = document.forms["formSign"]["checkpassword"].value;
+
+        if (password != password2) {
+            alert("Passwords do not match");
+            return false;
+        }
+        return true;
+    }
+</script>
+
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center">
 
