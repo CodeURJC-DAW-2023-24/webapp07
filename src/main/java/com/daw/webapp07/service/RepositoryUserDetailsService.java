@@ -14,7 +14,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.daw.webapp07.model.UserEntity;
-import org.springframework.ui.Model;
 
 
 @Service

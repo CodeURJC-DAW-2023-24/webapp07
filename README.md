@@ -185,3 +185,90 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/ff64960e-244e-46de-a9f5-d71a772f38a7">
 </p>
 
+<h1 align="center" id="phase-1">
+  📏 Phase 2
+</h1>
+
+<h2>
+   Participation
+</h2>
+
+<h3>
+   Diego
+</h3>
+
+**Tasks:** 
+- I created mustache templates from the previous phase HTMLs.
+- I developed the Image class along with its functionality, enabling the management of multiple photos in the database. Additionally, I implemented the necessary controllers to display photos from the database.
+- I implemented web security measures, including the functionality for the login and signup pages.
+- I designed a controller that runs universally, inserting data required in the header for each controller.
+- I assisted in providing examples for the data initializer.
+- I introduced the functionality for editing profiles, as well as the ability to change the template style.
+- I contributed to resolving errors related to photos during the editing and creation of projects. Moreover, I revamped the associated templates.
+- I integrated an email service, allowing our application to send emails to users when signing up or when their project reaches its goal.
+- I developed controllers to handle general errors and created templates for login errors and general errors.
+- I optimized the codebase by removing redundant code and templates. This involved redesigning some functions and templates to perform differently when necessary while retaining shared functionality.
+
+**Top 5 commits:** 
+- [security](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/86ec575ea3e6442141270efa49a27b67eb9af97e) 
+- [images database](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/e66091db4831532cb9d1e2ed8db549708a4d4c39)
+- [edit profile](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/a20978f2a903dde1dc130033ada9c96668d9172e)
+- [dynamic navbar](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/0fef15573f05916c94e93572e38913d055088f26)
+- [send email welcome](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/6074f6c4aed8ddf901e064069f701cee1d462187)
+
+**Top 5 files:** 
+- [WebSecurityConfig](src/main/java/com/daw/webapp07/security/WebSecurityConfig.java)
+- [EmailService](src/main/java/com/daw/webapp07/service/EmailService.java)
+- [Image](src/main/java/com/daw/webapp07/model/Image.java)
+- [ProjectController](src/main/java/com/daw/webapp07/controller/ProjectController.java)
+- [UserController](src/main/java/com/daw/webapp07/controller/UserController.java)
+
+### Pablo
+
+**Tasks:**
+- I created mustache templates from the previous phase HTMLs.
+- I made a recomendation algorithm in Java
+- I made exactly the same recomendation algorithm but now in SQL
+- I assisted in providing examples for the data initializer. And used them to test the database and algorithms
+- I helped in the creation of various controllers
+- I converted all the models to JPA entities
+- I contributed to resolving errors with pagination and bbdd
+- I changed from h2 to SQL, and helped my teammates in doing so in their devices
+
+**Top 5 commits:**
+- [SQL recomendation algorithm](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/6f28fda996394f5a825ac8748a31485063f77ebe)
+- [money over time chart](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/83dcec498356e944609a921c856be5718ffffbfe)
+- [pie chart](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/8c998a55b3e0e7dd467300ccbc66a2d3bc48c0e8)
+- [Java recomendation algorithm](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/51ee0ea512f9bad6276b744f2a0e08bc45769678)
+- [bbdd projects](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/658270dff83f7f09ddd44cef9d229d683ce0eee7)
+
+**Top 5 files:**
+- [ProjectRepository](src/main/java/com/daw/webapp07/repository/ProjectRepository.java)
+- [GraphicsService](src/main/java/com/daw/webapp07/service/GraphicsService.java)
+- [ProjectController](src/main/java/com/daw/webapp07/controller/ProjectController.java)
+- [UserController](src/main/java/com/daw/webapp07/controller/UserController.java)
+- [DatabaseInitializer](src/main/java/com/daw/webapp07/service/DatabaseInitializer.java)
+
+### Miguel Ángel
+**Tasks:***
+- I created some mustache templates from the previous phase HTMLs.
+- I created example projects
+- I made the create project functionality and security
+- I made the donations functionality and security
+- I made the comments entity, functionality and security
+- I made the delete projects functionality and security
+- I participated in solving some errors regarding the login, edit project, and general security access.
+
+**Top 5 commits:**
+- [Create project](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/c27867383b8e829c94436651bb492e673d653028)
+- [Delete project](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/67258c24d10590305710d8f81e660a9c64ede5e7)
+- [Donation](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/47a4907e7510c0cf05490a18ca741f65d032571e)
+- [Comments](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/6779a2c2a5284f456128c322a992817ae3e510f3)
+- [Privileged access to project details](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/91abffca5f7191f8e2ce661f7a8864420af17f94)
+
+**Top 5 files:**
+- [Project Controller](src/main/java/com/daw/webapp07/controller/ProjectController.java)
+- [WebSecurityConfig](src/main/java/com/daw/webapp07/security/WebSecurityConfig.java)
+- [User Controller](src/main/java/com/daw/webapp07/controller/UserController.java)
+- [Comment](src/main/java/com/daw/webapp07/model/Comment.java)
+- [DatabaseInitializer](src/main/java/com/daw/webapp07/service/DatabaseInitializer.java)

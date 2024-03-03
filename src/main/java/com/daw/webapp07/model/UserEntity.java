@@ -1,5 +1,7 @@
 package com.daw.webapp07.model;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +10,7 @@ import jakarta.persistence.*;
 
 @Entity
 public class UserEntity{
+    private static final Path FILES_FOLDER = Paths.get(System.getProperty("user.dir"), "images");
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,6 +40,7 @@ public class UserEntity{
 
     public UserEntity() {
         this.inversions = new ArrayList<>();
+        this.profilePhoto = new Image(FILES_FOLDER + "/profiles/user1.png");
     }
 
     public UserEntity(String name, String email, String encodedPassword, Image photo, String... roles) {

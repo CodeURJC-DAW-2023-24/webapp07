@@ -3,41 +3,24 @@ package com.daw.webapp07.controller;
 import com.daw.webapp07.model.*;
 import com.daw.webapp07.repository.*;
 import com.daw.webapp07.service.*;
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.element.Text;
-import com.itextpdf.layout.property.TextAlignment;
+
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.antlr.v4.runtime.misc.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.querydsl.QPageRequest;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.w3c.dom.events.Event;
 
 
-import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Controller
@@ -297,21 +280,66 @@ public class ProjectController {
         return "redirect:/project-details/" + id + "/";
     }
 
-    @Controller
-    public class PdfController {
+    private List<Pair<Float,UserEntity>> getSimilarUsers(UserEntity user, HashMap<UserEntity,HashMap<Category,Float>> percentages){
+        HashMap<Category, Float> base = percentages.get(user);
+        List<Pair<Float,UserEntity>> similar = new ArrayList<>();
+        for(UserEntity u: percentages.keySet()){
+            if(u.equals(user)){
+                continue;
+            }
+            float points = 0;
+            for(Category c: Category.values()){
+                points+=Math.abs(base.get(c)-percentages.get(u).get(c));
+            }
+            similar.add(new Pair<>(points,u));
+        }
+        similar.sort((a,b)->a.a.compareTo(b.a));
+        return similar;
+    }
 
-        @Autowired
-        private PdfService pdfGenerationService;
+    private HashMap<UserEntity,HashMap<Category,Float>> getPercentages(){
+        HashMap<UserEntity,HashMap<Category,Float>> ups = new HashMap<>();
+        for(UserEntity u: userRepository.findAll()) {
+            HashMap<Category,Float> up = new HashMap<>();
+            float total = 0;
+            for(Category c: Category.values()){
+                up.put(c,0f);
+            }
+            for(Inversion i: u.getInversions()){
+                up.put(i.getProject().getCategory(),up.get(i.getProject().getCategory())+i.getAmount());
+                total+=i.getAmount();
+            }
+            for(Category c: Category.values()){
+                up.put(c,up.get(c)/total);
+            }
+                ups.put(u,up);
+        }
+        return ups;
+    }
 
-        @Autowired
-        private ProjectRepository projectRepository;
-
-        @GetMapping("/project-details/{id}/generate-pdf")
-        public void generatePdf(@PathVariable long id, HttpServletResponse response) throws IOException {
-            Optional<Project> project = projectRepository.findById(id);
-            if (project.isPresent()) {
-                pdfGenerationService.generatePdf(project.get(), response, id);
+    private List<Project> recommendationSimple(UserEntity user){
+        HashMap<UserEntity,HashMap<Category,Float>> percentages = getPercentages();
+        List<Pair<Float, UserEntity>> users = getSimilarUsers(user, percentages);
+        List<Project> projects = new ArrayList<>();
+        HashSet<Project> set = new HashSet<>();
+        for(Inversion i: user.getInversions()){
+            set.add(i.getProject());
+        }
+        for(Pair<Float,UserEntity> p: users){
+            for(Inversion i: p.b.getInversions()){
+                if(!set.contains(i.getProject())){
+                    projects.add(i.getProject());
+                    set.add(i.getProject());
+                }
             }
         }
+        return projects;
     }
+
+    private List<Project> likelihoodOfDonation(UserEntity user){
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+
+
 }
