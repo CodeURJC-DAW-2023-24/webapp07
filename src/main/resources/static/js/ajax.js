@@ -2,7 +2,7 @@
 let page = 1;
 
 document.addEventListener('DOMContentLoaded', () => {
-    const pageSize = 6;
+    const pageSize = 10;
     const loadMoreBtn = document.getElementById("load-more-btn");
 
     loadMoreBtn.addEventListener('click', () => {
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 let Recpage = 1;
 
 document.addEventListener('DOMContentLoaded', () => {
-    const pageSize = 6;
+    const pageSize = 10;
     const loadMoreBtn = document.getElementById("load-more-btn-rec");
 
     loadMoreBtn.addEventListener('click', () => {
