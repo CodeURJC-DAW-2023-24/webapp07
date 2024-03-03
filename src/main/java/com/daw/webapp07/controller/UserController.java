@@ -9,6 +9,7 @@ import com.daw.webapp07.repository.UserRepository;
 import com.daw.webapp07.service.RepositoryUserDetailsService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,33 +90,89 @@ public class UserController {
     }
 
 
-@GetMapping("/editProfile")
-public String editProfile(Model model, HttpServletRequest request) {
-    String userName = request.getUserPrincipal().getName();
-    Optional<UserEntity> user = userRepository.findByName(userName);
-    if(user.isPresent()){
-        model.addAttribute("userEntity", user.get());
-    }
-    return "editProfile";
-}
-
-@PostMapping("/editProfile")
-public String updateProfile(Model model, UserEntity userEntity,
-                            HttpServletRequest request,
-                            @RequestParam("photo") MultipartFile profilePhoto) {
-    String name = request.getUserPrincipal().getName();
-    Optional<UserEntity> user = userRepository.findByName(name);
-    if (user.isPresent()) {
-        user.get().setEmail(userEntity.getEmail());
-        if (!profilePhoto.isEmpty()) {
-            user.get().setProfilePhoto(new Image(profilePhoto));
+    @GetMapping("/editProfile")
+    public String editProfile(Model model, HttpServletRequest request) {
+        String userName = request.getUserPrincipal().getName();
+        Optional<UserEntity> user = userRepository.findByName(userName);
+        if(user.isPresent()){
+            model.addAttribute("userEntity", user.get());
         }
-        userRepository.save(user.get());
-
+        return "editProfile";
     }
 
-    return "redirect:/";
-}
+    @PostMapping("/editProfile")
+    public String updateProfile(Model model, UserEntity userEntity,
+                                HttpServletRequest request,
+                                @RequestParam("photo") MultipartFile profilePhoto) {
+        String name = request.getUserPrincipal().getName();
+        Optional<UserEntity> user = userRepository.findByName(name);
+        if (user.isPresent()) {
+            user.get().setEmail(userEntity.getEmail());
+            if (!profilePhoto.isEmpty()) {
+                user.get().setProfilePhoto(new Image(profilePhoto));
+            }
+            userRepository.save(user.get());
+        }
+        return "redirect:/";
+    }
 
+    @GetMapping("/ranking")
+    public String ranking(Model model, HttpServletRequest request) {
+        List<UserEntity> users = getTopInvestors();
+        model.addAttribute("inv1", users.get(0));
+        model.addAttribute("inv2", users.get(1));
+        model.addAttribute("inv3", users.get(2));
+        model.addAttribute("inv1am", users.get(0).getTotalInvested());
+        model.addAttribute("inv2am", users.get(1).getTotalInvested());
+        model.addAttribute("inv3am", users.get(2).getTotalInvested());
+        List<Project> projects = getTopProjects();
+        model.addAttribute("pro1", projects.get(0).getName());
+        model.addAttribute("pro2", projects.get(1).getName());
+        model.addAttribute("pro3", projects.get(2).getName());
+        model.addAttribute("pro1am", projects.get(0).getCurrentAmount());
+        model.addAttribute("pro2am", projects.get(1).getCurrentAmount());
+        model.addAttribute("pro3am", projects.get(2).getCurrentAmount());
+        return "/ranking";
+    }
+
+    private List<UserEntity> getTopInvestors() {
+        List<UserEntity> users = userRepository.findAll();
+        int n = users.size();
+        boolean swapped;
+
+        do {
+            swapped = false;
+            for (int i = 0; i < n - 1; i++) {
+                if (users.get(i).getTotalInvested() < users.get(i + 1).getTotalInvested()) {
+                    UserEntity temp = users.get(i);
+                    users.set(i, users.get(i + 1));
+                    users.set(i + 1, temp);
+                    swapped = true;
+                }
+            }
+            n--;
+        } while (swapped && n > 0);
+        return users;
+    }
+
+    private List<Project> getTopProjects() {
+        List<Project> projects = projectRepository.findAll();
+        int n = projects.size();
+        boolean swapped;
+
+        do {
+            swapped = false;
+            for (int i = 0; i < n - 1; i++) {
+                if (projects.get(i).getCurrentAmount() < projects.get(i + 1).getCurrentAmount()) {
+                    Project temp = projects.get(i);
+                    projects.set(i, projects.get(i + 1));
+                    projects.set(i + 1, temp);
+                    swapped = true;
+                }
+            }
+            n--;
+        } while (swapped && n > 0);
+        return projects;
+    }
 
 }

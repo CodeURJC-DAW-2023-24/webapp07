@@ -79,6 +79,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/project-details/*/comment").hasAnyRole("USER")
                         .requestMatchers("/project-details/*/donate").hasAnyRole("USER")
                         .requestMatchers("/project-details/*/delete").hasAnyRole("USER")
+                        .requestMatchers("/ranking").hasAnyRole("USER")
 
                         .anyRequest().anonymous()
 

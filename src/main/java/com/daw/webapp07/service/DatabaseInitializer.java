@@ -72,7 +72,7 @@ public class DatabaseInitializer {
 
         UserEntity ecoworld = createAndSaveUser("EcoWorld","ecowrld@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/ecobike/ecobike1.jpg","USER");
         Project ecobike = createAndSaveProject(
-                "EcoBike: The all-terrain electric bicycle",
+                "EcoBike",
                 "An electric bicycle designed for all types of terrain, from mountains to urban streets. Equipped with long-lasting batteries and a powerful motor, EcoBike aims to revolutionize sustainable mobility.",
                 ecoworld,
                 "28 January, 2022",
