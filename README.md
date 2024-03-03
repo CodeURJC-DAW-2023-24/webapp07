@@ -248,3 +248,27 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 - [ProjectController](src/main/java/com/daw/webapp07/controller/ProjectController.java)
 - [UserController](src/main/java/com/daw/webapp07/controller/UserController.java)
 - [DatabaseInitializer](src/main/java/com/daw/webapp07/service/DatabaseInitializer.java)
+
+### Miguel Ángel
+**Tasks:***
+- I created some mustache templates from the previous phase HTMLs.
+- I created example projects
+- I made the create project functionality and security
+- I made the donations functionality and security
+- I made the comments entity, functionality and security
+- I made the delete projects functionality and security
+- I participated in solving some errors regarding the login, edit project, and general security access.
+
+**Top 5 commits:**
+- [Delete project] (https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/67258c24d10590305710d8f81e660a9c64ede5e7)
+- [Donation] (https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/47a4907e7510c0cf05490a18ca741f65d032571e)
+- [Comments] (https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/6779a2c2a5284f456128c322a992817ae3e510f3)
+- [Create project] (https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/c27867383b8e829c94436651bb492e673d653028)
+- [Privileged access to project details] (https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/91abffca5f7191f8e2ce661f7a8864420af17f94)
+
+**Top 5 files:**
+- [Project Controller](src/main/java/com/daw/webapp07/controller/ProjectController.java)
+- [WebSecurityConfig](src/main/java/com/daw/webapp07/security/WebSecurityConfig.java)
+- [Inversion]((src/main/java/com/daw/webapp07/model/Inversion.java)
+- [Comment]((src/main/java/com/daw/webapp07/model/Comment.java)
+- [DatabaseInitializer](src/main/java/com/daw/webapp07/service/DatabaseInitializer.java)
