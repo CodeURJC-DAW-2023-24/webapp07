@@ -2,10 +2,7 @@ package com.daw.webapp07.controller;
 
 import com.daw.webapp07.model.*;
 import com.daw.webapp07.repository.*;
-import com.daw.webapp07.service.DatabaseInitializer;
-import com.daw.webapp07.service.GraphicsService;
-import com.daw.webapp07.service.ProjectService;
-import com.daw.webapp07.service.PdfService;
+import com.daw.webapp07.service.*;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
@@ -53,7 +50,7 @@ public class ProjectController {
     private UserRepository userRepository;
 
     @Autowired
-    private ImageRepository imageRepository;
+    private EmailService emailService;
 
     @Autowired
     CommentRepository commentRepository;
@@ -232,6 +229,9 @@ public class ProjectController {
         newInversion.setUser(user);
         project.addInversion(newInversion);
         projectRepository.save(project);
+        if(checkProject.get().getGoal() <= project.getCurrentAmount()){
+            emailService.sendEmail(project.getOwner().getName(), project.getOwner().getEmail(),"Your project has reached its goal");
+        }
         user.addInversion(newInversion);
         userRepository.save(user);
 
