@@ -198,7 +198,7 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 </h3>
 
 **Tasks:** 
-- I created the mustache templates from the previous phase HTMLs.
+- I created mustache templates from the previous phase HTMLs.
 - I developed the Image class along with its functionality, enabling the management of multiple photos in the database. Additionally, I implemented the necessary controllers to display photos from the database.
 - I implemented web security measures, including the functionality for the login and signup pages.
 - I designed a controller that runs universally, inserting data required in the header for each controller.
@@ -217,16 +217,16 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 - [send email welcome](https://github.com/CodeURJC-DAW-2023-24/webapp07/commit/6074f6c4aed8ddf901e064069f701cee1d462187)
 
 **Top 5 files:** 
-- WebSecurityConfig
-- EmailService
-- Image
+- [WebSecurityConfig](src/main/java/com/daw/webapp07/security/WebSecurityConfig.java)
+- [EmailService](src/main/java/com/daw/webapp07/service/EmailService.java)
+- [Image](src/main/java/com/daw/webapp07/model/Image.java)
 - [ProjectController](src/main/java/com/daw/webapp07/controller/ProjectController.java)
 - [UserController](src/main/java/com/daw/webapp07/controller/UserController.java)
 
 ### Pablo
 
 **Tasks:**
-- I created the mustache templates from the previous phase HTMLs.
+- I created mustache templates from the previous phase HTMLs.
 - I made a recomendation algorithm in Java
 - I made exactly the same recomendation algorithm but now in SQL
 - I assisted in providing examples for the data initializer. And used them to test the database and algorithms
