@@ -47,6 +47,8 @@ public class ProjectController {
     @Autowired
     GraphicsService graphicsService;
 
+    //This method will load the main page, differentiating the logged users from the guests.
+    //Apart from executing the recommendation algorithm
     @GetMapping("/")
     public String innerPage(Model model, HttpServletRequest request) {
         if(request.isUserInRole("USER")){
@@ -96,6 +98,8 @@ public class ProjectController {
     }
 
 
+
+    //Shows more details about the project, differentiating between logged users, guest and admin
     @GetMapping("/project-details/{id}/")
     public String home(Model model, @PathVariable Long id, HttpServletRequest request) {
         Optional<Project> checkProject = projectRepository.findById(id);
@@ -121,6 +125,8 @@ public class ProjectController {
         return "project-details";
     }
 
+
+    //Get method for retrieving images
     @GetMapping("/projects/{id}/images/{index}")
     public ResponseEntity<Object> displayImage(@PathVariable Long id, @PathVariable int index) throws SQLException{
         Project project = projectRepository.findById(id).orElseThrow();
@@ -137,6 +143,8 @@ public class ProjectController {
 
     }
 
+
+    //Edit profile page
     @GetMapping("/users/{id}/profile")
     public ResponseEntity<Object> displayProfilePhoto(@PathVariable Long id) throws SQLException{
         UserEntity userEntity = userRepository.findById(id).orElseThrow();
@@ -149,6 +157,7 @@ public class ProjectController {
     }
 
 
+    //Post method for creating a new project
     @PostMapping("/createProject")
     public String createProject(Project project,
                                 @RequestParam("file") MultipartFile[] files,
@@ -173,6 +182,7 @@ public class ProjectController {
 
 
 
+    //Post method for writing a comment
     @PostMapping("/project-details/{id}/comment")
     String comment(@PathVariable Long id, Comment comment, HttpServletRequest request, Model model){
 
@@ -194,6 +204,8 @@ public class ProjectController {
         return "redirect:/project-details/" + id + "/";
     }
 
+
+    //Post method fot donating
     @PostMapping("/project-details/{id}/donate")
     String donate(@PathVariable Long id, int donation, HttpServletRequest request, Model model){
 
@@ -222,6 +234,8 @@ public class ProjectController {
         return "redirect:/project-details/" + id + "/";
     }
 
+
+    //Get method for deleting project
     @GetMapping ("/project-details/{id}/delete")
     String deleteProject(@PathVariable Long id, HttpServletRequest request){
         Optional<Project> checkProject = projectRepository.findById(id);
@@ -239,6 +253,7 @@ public class ProjectController {
         }
 
 
+        //Get method fot edit project page
     @GetMapping("/editProject/{id}")
     public String editProject(Model model, @PathVariable long id, HttpServletRequest request) {
         String userName = request.getUserPrincipal().getName();
@@ -255,6 +270,7 @@ public class ProjectController {
     }
 
 
+    //Post method for editing an existing project
     @PostMapping("/editProject/{id}")
     public String replaceProject(@PathVariable long id, Project newProject,
                                  @RequestParam("file") MultipartFile[] files) {
@@ -280,6 +296,8 @@ public class ProjectController {
         return "redirect:/project-details/" + id + "/";
     }
 
+
+    //Methods used for the reccomendation algorithm
     private List<Pair<Float,UserEntity>> getSimilarUsers(UserEntity user, HashMap<UserEntity,HashMap<Category,Float>> percentages){
         HashMap<Category, Float> base = percentages.get(user);
         List<Pair<Float,UserEntity>> similar = new ArrayList<>();
