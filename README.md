@@ -221,7 +221,9 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/117302583/f4038a71-15b6-4863-890e-73e6c845ba1d">
 
 </p>
-
+<h1 align="center" id="phase-0">
+  💡 Phase 2
+</h1>
 ## Execution instructions
 
 You'll have to download the code from the repository and unzip it, open the code with an ide preferably IntelliJ Idea, we used the Ultimate version 2023.3.4  
