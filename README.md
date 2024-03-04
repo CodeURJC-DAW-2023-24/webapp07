@@ -221,6 +221,61 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/ff64960e-244e-46de-a9f5-d71a772f38a7">
 </p>
 
+## Execution instructions
+
+You'll have to download the code from the repository and unzip it, open the code with an ide preferably IntelliJ Idea, we used the Ultimate version 2023.3.4  
+The following software is required to run the application:
+- Java 21.0.2
+> Installing Java 21
+> - Linux:  
+> Write in the terminal:
+> ```shell
+> sudo apt install openjdk-21
+> ```
+> - Windows:
+> Go to the [Oracle website](https://www.oracle.com/java/technologies/downloads/) and download the installer __jdk-21_windows-x64_bin__, then follow the instructions.
+- Apache Maven 4.0.0
+> - Linux:  
+> 
+> Go to the [Apache Maven website](https://maven.apache.org/download.cgi) and download the binary tar.gz file __apache-maven-4.0.0-alpha-12-src.tar.gz__.
+> Then open the terminal and go to the folder where the file was downloaded and write the following command:
+> ```shell
+> sudo tar xf apache-maven-*.tar.gz -C /opt
+> sudo ln -s /opt/apache-maven-3.8.4 /opt/maven
+> sudo nano /etc/profile.d/maven.sh
+> ```
+> Then write in the file:
+> ```shell
+> export JAVA_HOME=/usr/lib/jvm/default-java
+> export M2_HOME=/opt/maven
+> export MAVEN_HOME=/opt/maven
+> export PATH=${M2_HOME}/bin:${PATH}
+> ```
+> - Windows:  
+> Go to the [Apache Maven website](https://maven.apache.org/download.cgi) and download the binary zip file __apache-maven-4.0.0-alpha-12-bin.zip__, then follow the instructions.
+
+- MySQL Server 8.0
+> - Linux:
+> Write in the terminal:
+> ```shell
+> sudo apt install mysql-server=8.0.36
+> ```
+> - Windows:
+> Go to the [MySQL website](https://dev.mysql.com/downloads/) and download the installer in the linked associated with the text __"MySQL Installer for Windows"__, then follow the instructions, it's important to select full installation if you want workbench as well.  
+>
+>
+> In the installation process, it's important to select the following options:
+>   - Port: 3306
+>   - User: root
+>   - Password: sqlsql  
+> 
+You'll have to create a database in MySQL with the following command in the MySQL terminal or in a MySQL client, like MySQL Workbench:
+```sql
+CREATE SCHEMA seedventures;
+```
+The run the main class [src/main/java/com/daw/webapp07/Webapp07Application.java](src/main/java/com/daw/webapp07/Webapp07Application.java)  
+After that you should be able to use the web at [https://https://localhost:8443/](https://https://localhost:8443/)
+
 <h2>
    Database diagram
 </h2>
@@ -268,6 +323,7 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 - [ProjectController](src/main/java/com/daw/webapp07/controller/ProjectController.java)
 - [UserController](src/main/java/com/daw/webapp07/controller/UserController.java)
 - [DatabaseInitializer](src/main/java/com/daw/webapp07/service/DatabaseInitializer.java)
+
 
 <h3>
   Diego
