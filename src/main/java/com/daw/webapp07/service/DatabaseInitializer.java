@@ -29,9 +29,11 @@ import java.util.Optional;
 
 @Service
 public class DatabaseInitializer {
+    // we take the values from the application.properties file
     @Value("${security.user}")
     private String admin;
 
+    // we take the values from the application.properties file
     @Value("${security.encodedPassword}")
     private String adminpass;
     private static final Path FILES_FOLDER = Paths.get(System.getProperty("user.dir"), "images");

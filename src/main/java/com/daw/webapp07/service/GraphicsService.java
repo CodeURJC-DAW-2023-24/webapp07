@@ -45,6 +45,8 @@ public class GraphicsService {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/yyyy");
         List<String> months = new ArrayList<>(Arrays.asList("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"));
         int i = 0;
+
+        //We add the months to the list until we reach the current month
         while (!oldest.after(timeNow)){
             System.out.println("Mesasd: "+oldest.get(Calendar.YEAR));
             if(!moreThanAYear) {
@@ -58,10 +60,14 @@ public class GraphicsService {
             oldest.add(Calendar.MONTH, 1);
             i++;
         }
+
+        //We initialize the pastmoney list with 0s
         for(int j = 0; j < times.size(); j++){
             pastmoney.add(0);
         }
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/yyyy", Locale.ENGLISH);
+
+        //We add the money received to the corresponding month
         for(Inversion i2: project.getInversions()){
             int index = where.get(i2.getDate().format(dtf));
             pastmoney.set(index,pastmoney.get(index)+i2.getAmount());

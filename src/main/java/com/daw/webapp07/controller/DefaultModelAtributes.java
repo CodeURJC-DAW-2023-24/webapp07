@@ -15,6 +15,7 @@ public class DefaultModelAtributes {
     @Autowired
     private UserRepository userRepository;
 
+    // Add user to model if logged in and the id of the user, this is neccessary to show the user's data in the navbar
     @ModelAttribute("user")
     public boolean addUserToModel(HttpServletRequest request){
         return request.isUserInRole("USER");
