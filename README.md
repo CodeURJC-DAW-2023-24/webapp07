@@ -218,7 +218,8 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
   🚢 Navigation diagram
 </h2>
 <p align="center">
-	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/123759990/ff64960e-244e-46de-a9f5-d71a772f38a7">
+	<img alt="screenshot" src="https://github.com/CodeURJC-DAW-2023-24/webapp07/assets/117302583/f4038a71-15b6-4863-890e-73e6c845ba1d">
+
 </p>
 
 ## Execution instructions
