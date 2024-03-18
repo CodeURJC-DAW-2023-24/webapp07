@@ -6,7 +6,9 @@ import com.daw.webapp07.model.Project;
 import com.daw.webapp07.model.UserEntity;
 import com.daw.webapp07.repository.ProjectRepository;
 import com.daw.webapp07.repository.UserRepository;
+import com.daw.webapp07.service.ProjectService;
 import com.daw.webapp07.service.RepositoryUserDetailsService;
+import com.daw.webapp07.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -26,14 +28,16 @@ import java.util.Optional;
 @Controller
 public class UserController {
 
+
     @Autowired
-    private ProjectRepository projectRepository;
+    private ProjectService projectService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private RepositoryUserDetailsService userDetailsService;
@@ -69,7 +73,7 @@ public class UserController {
     @GetMapping("/createProject")
     public String createProject(Model model, HttpServletRequest request){
         String userName = request.getUserPrincipal().getName();
-        Optional<UserEntity> user = userRepository.findByName(userName);
+        Optional<UserEntity> user = userService.findUserByName(userName);
         if(user.isPresent()){
             model.addAttribute("isEditing", false);
             model.addAttribute("project", new Project());
@@ -84,9 +88,9 @@ public class UserController {
     @GetMapping("/myProjects")
     public String myProjects(Model model, HttpServletRequest request){
         String userName = request.getUserPrincipal().getName();
-        List<Project> userProjects = projectRepository.findByOwnerName(userName);
+        List<Project> userProjects = projectService.findByOwnerName(userName);
         model.addAttribute("projects", userProjects);
-        Optional<UserEntity> user = userRepository.findByName(userName);
+        Optional<UserEntity> user = userService.findUserByName(userName);
         if(user.isPresent()){
             model.addAttribute("user", user.get());
             model.addAttribute("id", user.get().getId()); //profile photo needs id
@@ -98,7 +102,7 @@ public class UserController {
     @GetMapping("/editProfile")
     public String editProfile(Model model, HttpServletRequest request) {
         String userName = request.getUserPrincipal().getName();
-        Optional<UserEntity> user = userRepository.findByName(userName);
+        Optional<UserEntity> user = userService.findUserByName(userName);
         if(user.isPresent()){
             model.addAttribute("userEntity", user.get());
         }
@@ -111,13 +115,13 @@ public class UserController {
                                 HttpServletRequest request,
                                 @RequestParam("photo") MultipartFile profilePhoto) {
         String name = request.getUserPrincipal().getName();
-        Optional<UserEntity> user = userRepository.findByName(name);
+        Optional<UserEntity> user = userService.findUserByName(name);
         if (user.isPresent()) {
             user.get().setEmail(userEntity.getEmail());
             if (!profilePhoto.isEmpty()) {
                 user.get().setProfilePhoto(new Image(profilePhoto));
             }
-            userRepository.save(user.get());
+            userService.saveUser(user.get());
         }
         return "redirect:/";
     }
@@ -144,7 +148,7 @@ public class UserController {
 
     // This is a method that returns the top 3 investors
     private List<UserEntity> getTopInvestors() {
-        List<UserEntity> users = userRepository.findAll();
+        List<UserEntity> users = userService.findAll();
         int n = users.size();
         boolean swapped;
 
@@ -165,7 +169,7 @@ public class UserController {
 
     // This is a method that returns the top 3 projects
     private List<Project> getTopProjects() {
-        List<Project> projects = projectRepository.findAll();
+        List<Project> projects = projectService.findAll();
         int n = projects.size();
         boolean swapped;
 

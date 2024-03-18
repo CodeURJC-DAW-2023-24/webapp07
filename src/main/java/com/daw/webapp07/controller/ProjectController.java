@@ -28,7 +28,7 @@ public class ProjectController {
 
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Autowired
     private EmailService emailService;
@@ -50,7 +50,7 @@ public class ProjectController {
     @GetMapping("/")
     public String innerPage(Model model, HttpServletRequest request) {
         if(request.isUserInRole("USER")){
-            Optional<UserEntity> user = userRepository.findByName(request.getUserPrincipal().getName());
+            Optional<UserEntity> user = userService.findUserByName(request.getUserPrincipal().getName());
             if(user.isPresent() && user.get().hasInversions()){
                 System.out.println("Recomendando");
                 model.addAttribute("projects", projectService.searchRecommendedProjects(0,10,user.get().getId()));
@@ -87,7 +87,7 @@ public class ProjectController {
             // If user is not logged it gets redirected to login page
             return "redirect:/login";
         } else {
-            Optional<UserEntity> user = userRepository.findByName(principal.getName());
+            Optional<UserEntity> user = userService.findUserByName(principal.getName());
             if (user.isPresent()) {
                 model.addAttribute("projects", projectService.searchRecommendedProjects(page,size,user.get().getId()));
             }
@@ -149,7 +149,7 @@ public class ProjectController {
     //Edit profile page
     @GetMapping("/users/{id}/profile")
     public ResponseEntity<Object> displayProfilePhoto(@PathVariable Long id) throws SQLException{
-        UserEntity userEntity = userRepository.findById(id).orElseThrow();
+        UserEntity userEntity = userService.findUserById(id).orElseThrow();
         Resource file = new InputStreamResource(userEntity.getProfilePhoto().getImageFile().getBinaryStream());
 
             return ResponseEntity.ok()
@@ -165,7 +165,7 @@ public class ProjectController {
                                 @RequestParam("file") MultipartFile[] files,
                                 HttpServletRequest request) {
 
-        Optional<UserEntity> checkQuery = userRepository.findByName(request.getUserPrincipal().getName());
+        Optional<UserEntity> checkQuery = userService.findUserByName(request.getUserPrincipal().getName());
         if (checkQuery == null)
             return "redirect:/error-page";
         UserEntity query = checkQuery.get();
@@ -195,7 +195,7 @@ public class ProjectController {
         Project project = checkProject.get();
 
         newComment.setProject(project);
-        Optional<UserEntity> checkQuery = userRepository.findByName(request.getUserPrincipal().getName());
+        Optional<UserEntity> checkQuery = userService.findUserByName(request.getUserPrincipal().getName());
         if (checkQuery == null)
             return "redirect:/error-page";
         UserEntity query = checkQuery.get();
@@ -219,7 +219,7 @@ public class ProjectController {
             return "redirect:/error-page";
         Project project = checkProject.get();
         newInversion.setProject(project);
-        Optional<UserEntity> checkQuery = userRepository.findByName(request.getUserPrincipal().getName());
+        Optional<UserEntity> checkQuery = userService.findUserByName(request.getUserPrincipal().getName());
         if (checkQuery == null)
             return "redirect:/error-page";
         UserEntity user = checkQuery.get();
@@ -230,7 +230,7 @@ public class ProjectController {
             emailService.sendEmail(project.getOwner().getName(), project.getOwner().getEmail(),"Your project has reached its goal");
         }
         user.addInversion(newInversion);
-        userRepository.save(user);
+        userService.saveUser(user);
 
 
         return "redirect:/project-details/" + id + "/";
@@ -260,7 +260,7 @@ public class ProjectController {
     public String editProject(Model model, @PathVariable long id, HttpServletRequest request) {
         String userName = request.getUserPrincipal().getName();
         Optional<Project> project = projectService.getOptionalProject(id);
-        Optional<UserEntity> user = userRepository.findByName(userName);
+        Optional<UserEntity> user = userService.findUserByName(userName);
         if(user.isPresent() && project.isPresent() && (project.get().getOwner().equals(user.get()) || request.isUserInRole("ADMIN"))){
             model.addAttribute("isEditing", true);
             model.addAttribute("project", project.get());
@@ -319,7 +319,7 @@ public class ProjectController {
 
     private HashMap<UserEntity,HashMap<Category,Float>> getPercentages(){
         HashMap<UserEntity,HashMap<Category,Float>> ups = new HashMap<>();
-        for(UserEntity u: userRepository.findAll()) {
+        for(UserEntity u: userService.findAll()) {
             HashMap<Category,Float> up = new HashMap<>();
             float total = 0;
             for(Category c: Category.values()){

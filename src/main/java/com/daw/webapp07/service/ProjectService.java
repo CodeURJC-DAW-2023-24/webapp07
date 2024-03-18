@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -38,6 +39,13 @@ public class ProjectService {
 
     public void deleteProject(Long id){
         projectRepository.deleteById(id);
+    }
 
+    public List<Project> findByOwnerName(String name){
+        return projectRepository.findByOwnerName(name);
+    }
+
+    public List<Project> findAll(){
+        return projectRepository.findAll();
     }
 }
