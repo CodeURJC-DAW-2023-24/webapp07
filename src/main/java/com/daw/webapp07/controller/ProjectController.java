@@ -246,6 +246,7 @@ public class ProjectController {
             return "redirect:/error-page";
 
         if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName())){
+            commentRepository.deleteByProjectId(id);
             projectRepository.deleteById(id);
         }
 

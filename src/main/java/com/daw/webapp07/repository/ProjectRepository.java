@@ -96,4 +96,6 @@ FROM
 Project p
 """, nativeQuery = true)
     public Page<Project> recomendedProjects(long userid, Pageable pageable);
+
+    public void deleteById(long id);
 }
