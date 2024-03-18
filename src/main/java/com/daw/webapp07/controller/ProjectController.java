@@ -26,8 +26,6 @@ import java.util.*;
 @Controller
 public class ProjectController {
 
-    @Autowired
-    private ProjectRepository projectRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -102,7 +100,7 @@ public class ProjectController {
     //Shows more details about the project, differentiating between logged users, guest and admin
     @GetMapping("/project-details/{id}/")
     public String home(Model model, @PathVariable Long id, HttpServletRequest request) {
-        Optional<Project> checkProject = projectRepository.findById(id);
+        Optional<Project> checkProject = projectService.getOptionalProject(id);
         if (checkProject == null)
             return "redirect:/error-page";
         Project project = checkProject.get();
@@ -129,7 +127,11 @@ public class ProjectController {
     //Get method for retrieving images
     @GetMapping("/projects/{id}/images/{index}")
     public ResponseEntity<Object> displayImage(@PathVariable Long id, @PathVariable int index) throws SQLException{
-        Project project = projectRepository.findById(id).orElseThrow();
+        Optional<Project> checkProject = projectService.getOptionalProject(id);
+        if(checkProject == null){
+            return ResponseEntity.notFound().build();
+        }
+        Project project = checkProject.get();
         index--; //index - 1 porque mustache empieza a contar desde 1
         List<Image> images = project.getImages();
         if (index < images.size()){
@@ -176,7 +178,7 @@ public class ProjectController {
             project.addImage(image);
         }
 
-        projectRepository.save(project);
+        projectService.saveProject(project);
         return "redirect:/project-details/" + project.getId() + "/";
     }
 
@@ -187,7 +189,7 @@ public class ProjectController {
     String comment(@PathVariable Long id, Comment comment, HttpServletRequest request, Model model){
 
         Comment newComment = new Comment(comment.getText());
-        Optional<Project> checkProject = projectRepository.findById(id);
+        Optional<Project> checkProject = projectService.getOptionalProject(id);
         if (checkProject == null)
             return "redirect:/error-page";
         Project project = checkProject.get();
@@ -199,7 +201,7 @@ public class ProjectController {
         UserEntity query = checkQuery.get();
         newComment.setUser(query);
         project.addComment(newComment);
-        projectRepository.save(project);
+        projectService.saveProject(project);
 
         return "redirect:/project-details/" + id + "/";
     }
@@ -212,7 +214,7 @@ public class ProjectController {
         Inversion newInversion = new Inversion(donation);
         LocalDate date = LocalDate.now();
         newInversion.setDate(date);
-        Optional<Project> checkProject = projectRepository.findById(id);
+        Optional<Project> checkProject = projectService.getOptionalProject(id);
         if (checkProject == null)
             return "redirect:/error-page";
         Project project = checkProject.get();
@@ -223,7 +225,7 @@ public class ProjectController {
         UserEntity user = checkQuery.get();
         newInversion.setUser(user);
         project.addInversion(newInversion);
-        projectRepository.save(project);
+        projectService.saveProject(project);
         if(checkProject.get().getGoal() <= project.getCurrentAmount()){
             emailService.sendEmail(project.getOwner().getName(), project.getOwner().getEmail(),"Your project has reached its goal");
         }
@@ -238,7 +240,7 @@ public class ProjectController {
     //Get method for deleting project
     @GetMapping ("/project-details/{id}/delete")
     String deleteProject(@PathVariable Long id, HttpServletRequest request){
-        Optional<Project> checkProject = projectRepository.findById(id);
+        Optional<Project> checkProject = projectService.getOptionalProject(id);
         if (checkProject == null)
             return "redirect:/error-page";
         Project project = checkProject.get();
@@ -246,7 +248,7 @@ public class ProjectController {
             return "redirect:/error-page";
 
         if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName())){
-            projectRepository.deleteById(id);
+            projectService.deleteProject(id);
         }
 
         return "redirect:/";
@@ -257,7 +259,7 @@ public class ProjectController {
     @GetMapping("/editProject/{id}")
     public String editProject(Model model, @PathVariable long id, HttpServletRequest request) {
         String userName = request.getUserPrincipal().getName();
-        Optional<Project> project = projectRepository.findById(id);
+        Optional<Project> project = projectService.getOptionalProject(id);
         Optional<UserEntity> user = userRepository.findByName(userName);
         if(user.isPresent() && project.isPresent() && (project.get().getOwner().equals(user.get()) || request.isUserInRole("ADMIN"))){
             model.addAttribute("isEditing", true);
@@ -274,7 +276,7 @@ public class ProjectController {
     @PostMapping("/editProject/{id}")
     public String replaceProject(@PathVariable long id, Project newProject,
                                  @RequestParam("file") MultipartFile[] files) {
-        Optional<Project> project = projectRepository.findById(id);
+        Optional<Project> project = projectService.getOptionalProject(id);
         if (project.isPresent()) {
             Project proj = project.get();
             if(!files[0].isEmpty() ){
@@ -290,7 +292,7 @@ public class ProjectController {
             proj.setUrl(newProject.getUrl());
             proj.setGoal(newProject.getGoal());
 
-            projectRepository.save(proj);
+            projectService.saveProject(proj);
             }
 
         return "redirect:/project-details/" + id + "/";

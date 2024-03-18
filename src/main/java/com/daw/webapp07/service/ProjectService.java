@@ -8,6 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 
 @Service
 public class ProjectService {
@@ -24,5 +26,18 @@ public class ProjectService {
    public Page<Project> searchRecommendedProjects(int page, int size, long id)
     {
         return projectRepository.recomendedProjects(id, PageRequest.of(page, size));
+    }
+
+    public Optional<Project> getOptionalProject(Long id){
+        return projectRepository.findById(id);
+    }
+
+    public void saveProject(Project p){
+        projectRepository.save(p);
+    }
+
+    public void deleteProject(Long id){
+        projectRepository.deleteById(id);
+
     }
 }
