@@ -224,7 +224,9 @@ To coordinate the team, we will use [trello](https://trello.com/b/jgaJf9H5/fundm
 <h1 align="center" id="phase-0">
   💡 Phase 2
 </h1>
-## Execution instructions
+<h2> 
+	Execution instructions
+ </h2>
 
 You'll have to download the code from the repository and unzip it, open the code with an ide preferably IntelliJ Idea, we used the Ultimate version 2023.3.4  
 The following software is required to run the application:

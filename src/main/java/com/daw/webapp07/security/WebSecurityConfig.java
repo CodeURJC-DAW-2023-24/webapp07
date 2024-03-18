@@ -18,11 +18,13 @@ public class WebSecurityConfig {
     public RepositoryUserDetailsService userDetailService;
 
 
+    //we need to encode the password
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    //we need to create an authentication provider and insert the userDetailService with the users and their passwords
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -84,7 +86,7 @@ public class WebSecurityConfig {
                         .anyRequest().anonymous()
 
                 )
-
+                // LOGIN AND LOGOUT
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .failureUrl("/loginerror")

@@ -19,11 +19,16 @@ public class EmailService {
     public boolean sendEmail(String name, String to, String subject) {
 
         try {
+            // Create a new email
             MimeMessage message = javaMailSender.createMimeMessage();
+            // Set the email's sender
             message.setFrom(new InternetAddress("seedVentures3@gmail.com"));
+            // Set the email's recipient
             message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(to));
+
             String template = "email-template.html";
 
+            // Set the email's content depending on the subject given
             switch (subject) {
                 case "Your project has reached its goal":
                     template = "email-template-goal.html";
@@ -35,9 +40,11 @@ public class EmailService {
                     throw new IllegalStateException("Unexpected value: " + subject);
             }
 
+            // Read the template and replace the user's name
             String htmlTemplate = readTemplate("src/main/resources/templates/" + template);
             String htmlContent = htmlTemplate.replace("${user}", name);
 
+            // Set the email's content, subject and send it
             message.setContent(htmlContent, "text/html; charset=utf-8");
             message.setSubject(subject);
             javaMailSender.send(message);
@@ -48,6 +55,7 @@ public class EmailService {
         }
     }
 
+    // Read the template from the file system
     public String readTemplate(String path) throws IOException {
         Path filePath = Path.of(path);
         return Files.readString(filePath, StandardCharsets.UTF_8);

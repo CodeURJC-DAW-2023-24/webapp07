@@ -38,18 +38,21 @@ public class UserController {
     @Autowired
     private RepositoryUserDetailsService userDetailsService;
 
+    // This method is called when the user tries to access the login page
     @GetMapping("/login")
     public String login() {
         return "login";
     }
 
 
+    // This method is called when the user tries to access the signup page
     @GetMapping("/signup")
     public String signup(Model model) {
         model.addAttribute("newUser", new UserEntity());
         return "signup";
     }
 
+    // This method is called when the user submits the signup form
     @PostMapping("/signup")
     public String newsignup(UserEntity user, Model model) {
         //encode password
@@ -62,6 +65,7 @@ public class UserController {
         return "error-page";
     }
 
+    // This method is called when the user tries to access the create project page
     @GetMapping("/createProject")
     public String createProject(Model model, HttpServletRequest request){
         String userName = request.getUserPrincipal().getName();
@@ -76,6 +80,7 @@ public class UserController {
 
     }
 
+    // This method is called when the user submits the create project form
     @GetMapping("/myProjects")
     public String myProjects(Model model, HttpServletRequest request){
         String userName = request.getUserPrincipal().getName();
@@ -89,7 +94,7 @@ public class UserController {
         return "myProjects";
     }
 
-
+    // This method is called when the user tries to access the edit project page
     @GetMapping("/editProfile")
     public String editProfile(Model model, HttpServletRequest request) {
         String userName = request.getUserPrincipal().getName();
@@ -100,6 +105,7 @@ public class UserController {
         return "editProfile";
     }
 
+    // This method is called when the user submits the edit project form
     @PostMapping("/editProfile")
     public String updateProfile(Model model, UserEntity userEntity,
                                 HttpServletRequest request,
@@ -116,6 +122,7 @@ public class UserController {
         return "redirect:/";
     }
 
+    // This method is called when the user tries to access the ranking page
     @GetMapping("/ranking")
     public String ranking(Model model, HttpServletRequest request) {
         List<UserEntity> users = getTopInvestors();
@@ -135,6 +142,7 @@ public class UserController {
         return "/ranking";
     }
 
+    // This is a method that returns the top 3 investors
     private List<UserEntity> getTopInvestors() {
         List<UserEntity> users = userRepository.findAll();
         int n = users.size();
@@ -155,6 +163,7 @@ public class UserController {
         return users;
     }
 
+    // This is a method that returns the top 3 projects
     private List<Project> getTopProjects() {
         List<Project> projects = projectRepository.findAll();
         int n = projects.size();

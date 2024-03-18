@@ -21,6 +21,7 @@ public class PdfController {
     @Autowired
     private ProjectRepository projectRepository;
 
+    // This method is called when the user tries to generate a pdf
     @GetMapping("/project-details/{id}/generate-pdf")
     public void generatePdf(@PathVariable long id, HttpServletResponse response) throws IOException {
         Optional<Project> project = projectRepository.findById(id);
