@@ -13,8 +13,6 @@ import java.util.Optional;
 
 @ControllerAdvice
 public class DefaultModelAtributes {
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private UserService userService;
