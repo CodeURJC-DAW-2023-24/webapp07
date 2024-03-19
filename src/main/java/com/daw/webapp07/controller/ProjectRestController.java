@@ -72,6 +72,20 @@ public class ProjectRestController {
         }
     }
 
+    @PutMapping("/project/{id}")
+    public ResponseEntity<Project> replaceProject(@PathVariable long id,
+                                                @RequestBody Project newProject) {
+        Optional<Project> post = projectService.getOptionalProject(id);
+        if (post.isPresent()) {
+            newProject.setId(id);
+            // añadir cosas por defecto?
+            projectService.saveProject(newProject);
+            return ResponseEntity.ok(post.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 
 
