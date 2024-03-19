@@ -77,12 +77,14 @@ public class ProjectRestController {
                                                 @RequestBody Project newProject) {
         Optional<Project> project = projectService.getOptionalProject(id);
         if (project.isPresent()) {
-            if(newProject.getCurrentAmount()!=project.get().getCurrentAmount()){
-                if(!newProject.getInversions().equals(project.get().getInversions())){
-                    if(!newProject.getDate().equals(project.get().getDate())) {
-                        return ResponseEntity.badRequest().build();
-                    }
-                }
+            if(newProject.getCurrentAmount()!=project.get().getCurrentAmount()) {
+                return ResponseEntity.badRequest().build();
+            }
+            if(!newProject.getInversions().equals(project.get().getInversions())){
+                    return ResponseEntity.badRequest().build();
+            }
+            if(!newProject.getDate().equals(project.get().getDate())) {
+                return ResponseEntity.badRequest().build();
             }
             newProject.setId(id);
             projectService.saveProject(newProject);
