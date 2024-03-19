@@ -27,6 +27,7 @@ import java.util.*;
 public class ProjectController {
 
 
+
     @Autowired
     private UserService userService;
 
@@ -293,7 +294,7 @@ public class ProjectController {
             proj.setUrl(newProject.getUrl());
             proj.setGoal(newProject.getGoal());
 
-            projectRepository.save(proj);
+            projectService.saveProject(proj);
             }
 
         return "redirect:/project-details/" + id + "/";
@@ -301,7 +302,7 @@ public class ProjectController {
 
 
     @GetMapping("/comment/{projectId}/{id}/delete")
-    String deleteComment(@PathVariable Long id, @PathVariable Long projectId, HttpServletRequest request){
+    String deleteComment(@PathVariable Long id, @PathVariable Long projectId, HttpServletRequest request) {
         Optional<Project> checkProject = projectService.getOptionalProject(projectId);
         if (checkProject == null)
             return "redirect:/error-page";
@@ -324,7 +325,7 @@ public class ProjectController {
         }
         return "redirect:/error-page";
 
-
+    }
 
 
 }
