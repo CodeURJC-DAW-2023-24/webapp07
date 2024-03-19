@@ -194,4 +194,8 @@ public class Project {
         return inversions;
     }
 
+    public void deleteComment(Comment checkComment) {
+        this.comments.remove(checkComment);
+
+    }
 }

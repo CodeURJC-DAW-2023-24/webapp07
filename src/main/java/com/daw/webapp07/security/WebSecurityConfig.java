@@ -76,12 +76,13 @@ public class WebSecurityConfig {
                         .requestMatchers("/myProjects").hasAnyRole("USER")
                         .requestMatchers("/newProject").hasAnyRole("USER")
                         .requestMatchers("/rec-projects").hasAnyRole("USER")
-                        .requestMatchers("/editProject/*").hasAnyRole("USER")
+                        .requestMatchers("/editProject/**").hasAnyRole("USER")
                         .requestMatchers("/editProfile").hasAnyRole("USER")
                         .requestMatchers("/project-details/*/comment").hasAnyRole("USER")
                         .requestMatchers("/project-details/*/donate").hasAnyRole("USER")
                         .requestMatchers("/project-details/*/delete").hasAnyRole("USER")
                         .requestMatchers("/ranking").hasAnyRole("USER")
+                        .requestMatchers("/comment/**").hasAnyRole("USER")
 
                         .anyRequest().anonymous()
 

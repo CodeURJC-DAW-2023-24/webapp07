@@ -91,7 +91,7 @@
 
                                 <a class="buttonProject" href="/editProject/{{project.id}}">Edit</a>
                                 {{^hasInversions}}
-                                <a class="buttonProject" href="/project-details/{{project.id}}/delete">Delete</a>
+                                <a class="buttonProjectDanger" href="/project-details/{{project.id}}/delete">Delete</a>
                                 {{/hasInversions}}
                                 <a class="buttonProject" href="/project-details/{{project.id}}/generate-pdf">Download PDF</a>
 
@@ -239,7 +239,13 @@
                                     <img class="profile-pic" src="https://localhost:8443/users/{{user.id}}/profile" alt="Profile picture">
                                 <div class="comment-author">{{user}}</div>
                                 <div class="comment-text">{{text}}</div>
+                                {{#privileged}}
+                                    <div class="button-container">
+                                        <a class="buttonProjectDanger" href="/comment/{{project.id}}/{{id}}/delete" >Delete</a>
+                                    </div>
+                                {{/privileged}}
                             </div>
+
                         {{/project.comments}}
                         <!-- More comments go here -->
                     </div>

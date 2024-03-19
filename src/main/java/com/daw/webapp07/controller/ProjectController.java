@@ -26,11 +26,9 @@ import java.util.*;
 @Controller
 public class ProjectController {
 
-    @Autowired
-    private ProjectRepository projectRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Autowired
     private EmailService emailService;
@@ -52,7 +50,7 @@ public class ProjectController {
     @GetMapping("/")
     public String innerPage(Model model, HttpServletRequest request) {
         if(request.isUserInRole("USER")){
-            Optional<UserEntity> user = userRepository.findByName(request.getUserPrincipal().getName());
+            Optional<UserEntity> user = userService.findUserByName(request.getUserPrincipal().getName());
             if(user.isPresent() && user.get().hasInversions()){
                 System.out.println("Recomendando");
                 model.addAttribute("projects", projectService.searchRecommendedProjects(0,10,user.get().getId()));
@@ -89,7 +87,7 @@ public class ProjectController {
             // If user is not logged it gets redirected to login page
             return "redirect:/login";
         } else {
-            Optional<UserEntity> user = userRepository.findByName(principal.getName());
+            Optional<UserEntity> user = userService.findUserByName(principal.getName());
             if (user.isPresent()) {
                 model.addAttribute("projects", projectService.searchRecommendedProjects(page,size,user.get().getId()));
             }
@@ -102,7 +100,7 @@ public class ProjectController {
     //Shows more details about the project, differentiating between logged users, guest and admin
     @GetMapping("/project-details/{id}/")
     public String home(Model model, @PathVariable Long id, HttpServletRequest request) {
-        Optional<Project> checkProject = projectRepository.findById(id);
+        Optional<Project> checkProject = projectService.getOptionalProject(id);
         if (checkProject == null)
             return "redirect:/error-page";
         Project project = checkProject.get();
@@ -129,7 +127,11 @@ public class ProjectController {
     //Get method for retrieving images
     @GetMapping("/projects/{id}/images/{index}")
     public ResponseEntity<Object> displayImage(@PathVariable Long id, @PathVariable int index) throws SQLException{
-        Project project = projectRepository.findById(id).orElseThrow();
+        Optional<Project> checkProject = projectService.getOptionalProject(id);
+        if(checkProject == null){
+            return ResponseEntity.notFound().build();
+        }
+        Project project = checkProject.get();
         index--; //index - 1 porque mustache empieza a contar desde 1
         List<Image> images = project.getImages();
         if (index < images.size()){
@@ -147,7 +149,7 @@ public class ProjectController {
     //Edit profile page
     @GetMapping("/users/{id}/profile")
     public ResponseEntity<Object> displayProfilePhoto(@PathVariable Long id) throws SQLException{
-        UserEntity userEntity = userRepository.findById(id).orElseThrow();
+        UserEntity userEntity = userService.findUserById(id).orElseThrow();
         Resource file = new InputStreamResource(userEntity.getProfilePhoto().getImageFile().getBinaryStream());
 
             return ResponseEntity.ok()
@@ -163,7 +165,7 @@ public class ProjectController {
                                 @RequestParam("file") MultipartFile[] files,
                                 HttpServletRequest request) {
 
-        Optional<UserEntity> checkQuery = userRepository.findByName(request.getUserPrincipal().getName());
+        Optional<UserEntity> checkQuery = userService.findUserByName(request.getUserPrincipal().getName());
         if (checkQuery == null)
             return "redirect:/error-page";
         UserEntity query = checkQuery.get();
@@ -176,7 +178,7 @@ public class ProjectController {
             project.addImage(image);
         }
 
-        projectRepository.save(project);
+        projectService.saveProject(project);
         return "redirect:/project-details/" + project.getId() + "/";
     }
 
@@ -187,19 +189,19 @@ public class ProjectController {
     String comment(@PathVariable Long id, Comment comment, HttpServletRequest request, Model model){
 
         Comment newComment = new Comment(comment.getText());
-        Optional<Project> checkProject = projectRepository.findById(id);
+        Optional<Project> checkProject = projectService.getOptionalProject(id);
         if (checkProject == null)
             return "redirect:/error-page";
         Project project = checkProject.get();
 
         newComment.setProject(project);
-        Optional<UserEntity> checkQuery = userRepository.findByName(request.getUserPrincipal().getName());
+        Optional<UserEntity> checkQuery = userService.findUserByName(request.getUserPrincipal().getName());
         if (checkQuery == null)
             return "redirect:/error-page";
         UserEntity query = checkQuery.get();
         newComment.setUser(query);
         project.addComment(newComment);
-        projectRepository.save(project);
+        projectService.saveProject(project);
 
         return "redirect:/project-details/" + id + "/";
     }
@@ -212,23 +214,23 @@ public class ProjectController {
         Inversion newInversion = new Inversion(donation);
         LocalDate date = LocalDate.now();
         newInversion.setDate(date);
-        Optional<Project> checkProject = projectRepository.findById(id);
+        Optional<Project> checkProject = projectService.getOptionalProject(id);
         if (checkProject == null)
             return "redirect:/error-page";
         Project project = checkProject.get();
         newInversion.setProject(project);
-        Optional<UserEntity> checkQuery = userRepository.findByName(request.getUserPrincipal().getName());
+        Optional<UserEntity> checkQuery = userService.findUserByName(request.getUserPrincipal().getName());
         if (checkQuery == null)
             return "redirect:/error-page";
         UserEntity user = checkQuery.get();
         newInversion.setUser(user);
         project.addInversion(newInversion);
-        projectRepository.save(project);
+        projectService.saveProject(project);
         if(checkProject.get().getGoal() <= project.getCurrentAmount()){
             emailService.sendEmail(project.getOwner().getName(), project.getOwner().getEmail(),"Your project has reached its goal");
         }
         user.addInversion(newInversion);
-        userRepository.save(user);
+        userService.saveUser(user);
 
 
         return "redirect:/project-details/" + id + "/";
@@ -238,7 +240,7 @@ public class ProjectController {
     //Get method for deleting project
     @GetMapping ("/project-details/{id}/delete")
     String deleteProject(@PathVariable Long id, HttpServletRequest request){
-        Optional<Project> checkProject = projectRepository.findById(id);
+        Optional<Project> checkProject = projectService.getOptionalProject(id);
         if (checkProject == null)
             return "redirect:/error-page";
         Project project = checkProject.get();
@@ -247,7 +249,7 @@ public class ProjectController {
 
         if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName())){
             commentRepository.deleteByProjectId(id);
-            projectRepository.deleteById(id);
+            projectService.deleteProject(id);
         }
 
         return "redirect:/";
@@ -258,8 +260,8 @@ public class ProjectController {
     @GetMapping("/editProject/{id}")
     public String editProject(Model model, @PathVariable long id, HttpServletRequest request) {
         String userName = request.getUserPrincipal().getName();
-        Optional<Project> project = projectRepository.findById(id);
-        Optional<UserEntity> user = userRepository.findByName(userName);
+        Optional<Project> project = projectService.getOptionalProject(id);
+        Optional<UserEntity> user = userService.findUserByName(userName);
         if(user.isPresent() && project.isPresent() && (project.get().getOwner().equals(user.get()) || request.isUserInRole("ADMIN"))){
             model.addAttribute("isEditing", true);
             model.addAttribute("project", project.get());
@@ -275,7 +277,7 @@ public class ProjectController {
     @PostMapping("/editProject/{id}")
     public String replaceProject(@PathVariable long id, Project newProject,
                                  @RequestParam("file") MultipartFile[] files) {
-        Optional<Project> project = projectRepository.findById(id);
+        Optional<Project> project = projectService.getOptionalProject(id);
         if (project.isPresent()) {
             Project proj = project.get();
             if(!files[0].isEmpty() ){
@@ -298,66 +300,30 @@ public class ProjectController {
     }
 
 
-    //Methods used for the reccomendation algorithm
-    private List<Pair<Float,UserEntity>> getSimilarUsers(UserEntity user, HashMap<UserEntity,HashMap<Category,Float>> percentages){
-        HashMap<Category, Float> base = percentages.get(user);
-        List<Pair<Float,UserEntity>> similar = new ArrayList<>();
-        for(UserEntity u: percentages.keySet()){
-            if(u.equals(user)){
-                continue;
-            }
-            float points = 0;
-            for(Category c: Category.values()){
-                points+=Math.abs(base.get(c)-percentages.get(u).get(c));
-            }
-            similar.add(new Pair<>(points,u));
-        }
-        similar.sort((a,b)->a.a.compareTo(b.a));
-        return similar;
-    }
+    @GetMapping("/comment/{projectId}/{id}/delete")
+    String deleteComment(@PathVariable Long id, @PathVariable Long projectId, HttpServletRequest request){
+        Optional<Project> checkProject = projectService.getOptionalProject(projectId);
+        if (checkProject == null)
+            return "redirect:/error-page";
 
-    private HashMap<UserEntity,HashMap<Category,Float>> getPercentages(){
-        HashMap<UserEntity,HashMap<Category,Float>> ups = new HashMap<>();
-        for(UserEntity u: userRepository.findAll()) {
-            HashMap<Category,Float> up = new HashMap<>();
-            float total = 0;
-            for(Category c: Category.values()){
-                up.put(c,0f);
-            }
-            for(Inversion i: u.getInversions()){
-                up.put(i.getProject().getCategory(),up.get(i.getProject().getCategory())+i.getAmount());
-                total+=i.getAmount();
-            }
-            for(Category c: Category.values()){
-                up.put(c,up.get(c)/total);
-            }
-                ups.put(u,up);
-        }
-        return ups;
-    }
+        if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(checkProject.get().getOwner().getName())) {
+            Comment checkComment = commentRepository.findById(id).orElseThrow();
+            if (checkComment == null)
+                return "redirect:/error-page";
 
-    private List<Project> recommendationSimple(UserEntity user){
-        HashMap<UserEntity,HashMap<Category,Float>> percentages = getPercentages();
-        List<Pair<Float, UserEntity>> users = getSimilarUsers(user, percentages);
-        List<Project> projects = new ArrayList<>();
-        HashSet<Project> set = new HashSet<>();
-        for(Inversion i: user.getInversions()){
-            set.add(i.getProject());
-        }
-        for(Pair<Float,UserEntity> p: users){
-            for(Inversion i: p.b.getInversions()){
-                if(!set.contains(i.getProject())){
-                    projects.add(i.getProject());
-                    set.add(i.getProject());
-                }
-            }
-        }
-        return projects;
-    }
+            Project project = checkProject.get();
 
-    private List<Project> likelihoodOfDonation(UserEntity user){
-        throw new UnsupportedOperationException("Not implemented yet");
-    }
+            Optional<UserEntity> checkQuery = userService.findUserByName(request.getUserPrincipal().getName());
+            if (checkQuery == null)
+                return "redirect:/error-page";
+
+            project.deleteComment(checkComment);
+            projectService.saveProject(project);
+
+            return "redirect:/project-details/" + projectId + "/";
+        }
+        return "redirect:/error-page";
+
 
 
 
