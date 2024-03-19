@@ -190,6 +190,10 @@ public class Project {
         this.currentAmount += inversion.getAmount();
     }
 
+    public void setInversions(List<Inversion> inversions) {
+        this.inversions = inversions;
+    }
+
     public List<Inversion> getInversions() {
         return inversions;
     }
