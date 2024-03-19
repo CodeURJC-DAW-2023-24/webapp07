@@ -60,6 +60,18 @@ public class ProjectRestController {
         return new ResponseEntity<>(project, HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Project> deleteProject(@PathVariable long id) {
+        Optional<Project> checkProject = projectService.getOptionalProject(id);
+        if (checkProject.isPresent()) {
+            Project project = checkProject.get();
+            projectService.deleteProject(id);
+            return new ResponseEntity<>(project, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 
 
 
