@@ -1,6 +1,8 @@
 package com.daw.webapp07.service;
 
+import com.daw.webapp07.model.Comment;
 import com.daw.webapp07.model.Project;
+import com.daw.webapp07.repository.CommentRepository;
 import com.daw.webapp07.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +18,9 @@ import java.util.Optional;
 public class ProjectService {
     @Autowired
     private ProjectRepository projectRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
 
 
     public Page<Project> searchProjects(int page, int size)
@@ -48,4 +53,5 @@ public class ProjectService {
     public List<Project> findAll(){
         return projectRepository.findAll();
     }
+
 }

@@ -299,65 +299,30 @@ public class ProjectController {
     }
 
 
-    //Methods used for the reccomendation algorithm
-    private List<Pair<Float,UserEntity>> getSimilarUsers(UserEntity user, HashMap<UserEntity,HashMap<Category,Float>> percentages){
-        HashMap<Category, Float> base = percentages.get(user);
-        List<Pair<Float,UserEntity>> similar = new ArrayList<>();
-        for(UserEntity u: percentages.keySet()){
-            if(u.equals(user)){
-                continue;
-            }
-            float points = 0;
-            for(Category c: Category.values()){
-                points+=Math.abs(base.get(c)-percentages.get(u).get(c));
-            }
-            similar.add(new Pair<>(points,u));
-        }
-        similar.sort((a,b)->a.a.compareTo(b.a));
-        return similar;
-    }
+    @GetMapping("/comment/{projectId}/{id}/delete")
+    String deleteComment(@PathVariable Long id, @PathVariable Long projectId, HttpServletRequest request){
+        Optional<Project> checkProject = projectService.getOptionalProject(projectId);
+        if (checkProject == null)
+            return "redirect:/error-page";
 
-    private HashMap<UserEntity,HashMap<Category,Float>> getPercentages(){
-        HashMap<UserEntity,HashMap<Category,Float>> ups = new HashMap<>();
-        for(UserEntity u: userService.findAll()) {
-            HashMap<Category,Float> up = new HashMap<>();
-            float total = 0;
-            for(Category c: Category.values()){
-                up.put(c,0f);
-            }
-            for(Inversion i: u.getInversions()){
-                up.put(i.getProject().getCategory(),up.get(i.getProject().getCategory())+i.getAmount());
-                total+=i.getAmount();
-            }
-            for(Category c: Category.values()){
-                up.put(c,up.get(c)/total);
-            }
-                ups.put(u,up);
-        }
-        return ups;
-    }
+        if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(checkProject.get().getOwner().getName())) {
+            Comment checkComment = commentRepository.findById(id).orElseThrow();
+            if (checkComment == null)
+                return "redirect:/error-page";
 
-    private List<Project> recommendationSimple(UserEntity user){
-        HashMap<UserEntity,HashMap<Category,Float>> percentages = getPercentages();
-        List<Pair<Float, UserEntity>> users = getSimilarUsers(user, percentages);
-        List<Project> projects = new ArrayList<>();
-        HashSet<Project> set = new HashSet<>();
-        for(Inversion i: user.getInversions()){
-            set.add(i.getProject());
-        }
-        for(Pair<Float,UserEntity> p: users){
-            for(Inversion i: p.b.getInversions()){
-                if(!set.contains(i.getProject())){
-                    projects.add(i.getProject());
-                    set.add(i.getProject());
-                }
-            }
-        }
-        return projects;
-    }
+            Project project = checkProject.get();
 
-    private List<Project> likelihoodOfDonation(UserEntity user){
-        throw new UnsupportedOperationException("Not implemented yet");
+            Optional<UserEntity> checkQuery = userService.findUserByName(request.getUserPrincipal().getName());
+            if (checkQuery == null)
+                return "redirect:/error-page";
+
+            project.deleteComment(checkComment);
+            projectService.saveProject(project);
+
+            return "redirect:/project-details/" + projectId + "/";
+        }
+        return "redirect:/error-page";
+
     }
 
 
