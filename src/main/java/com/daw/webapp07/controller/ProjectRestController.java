@@ -27,7 +27,7 @@ public class ProjectRestController {
     @Autowired
     private UserService userService;
     @GetMapping("/project-details/{id}/")
-    public ResponseEntity<Project> getBook(@PathVariable long id) {
+    public ResponseEntity<Project> getProject(@PathVariable long id) {
 
         Optional<Project> checkProject = projectService.getOptionalProject(id);
         if (checkProject.isPresent()) {
@@ -38,8 +38,8 @@ public class ProjectRestController {
         }
     }
 
-    @PostMapping("/")
-    public ResponseEntity<Project> createBook(@RequestBody Project project,
+    @PostMapping("/create")
+    public ResponseEntity<Project> createProject(@RequestBody Project project,
                               @RequestParam("file") MultipartFile[] files,
                               HttpServletRequest request) {
 
