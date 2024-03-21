@@ -1,5 +1,8 @@
-package com.daw.webapp07.controller;
+package com.daw.webapp07.controller.REST;
 
+import com.daw.webapp07.DTO.CommentDTO;
+import com.daw.webapp07.DTO.ProjectDetailsDTO;
+import com.daw.webapp07.DTO.ProjectPreviewDTO;
 import com.daw.webapp07.model.Image;
 import com.daw.webapp07.model.Project;
 import com.daw.webapp07.model.UserEntity;
@@ -7,6 +10,7 @@ import com.daw.webapp07.service.ProjectService;
 import com.daw.webapp07.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -27,13 +31,25 @@ public class ProjectRestController {
 
     @Autowired
     private UserService userService;
-    @GetMapping("/project-details/{id}/")
-    public ResponseEntity<Project> getProject(@PathVariable long id) {
+
+    @GetMapping("/projects")
+    public ResponseEntity<Iterable<ProjectPreviewDTO>> getProjects() {
+        Page<Project> projects = projectService.searchProjects(0, 10);
+        Collection<ProjectPreviewDTO> projectPreviewDTO = new ArrayList<>();
+        for (Project project : projects) {
+            projectPreviewDTO.add(new ProjectPreviewDTO(project));
+        }
+        return new ResponseEntity<>(projectPreviewDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/projects/{id}/")
+    public ResponseEntity<ProjectDetailsDTO> getProject(@PathVariable long id) {
 
         Optional<Project> checkProject = projectService.getOptionalProject(id);
         if (checkProject.isPresent()) {
             Project project = checkProject.get();
-            return new ResponseEntity<>(project, HttpStatus.OK);
+            ProjectDetailsDTO projectDetailsDTO = new ProjectDetailsDTO(project);
+            return new ResponseEntity<>(projectDetailsDTO, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -106,6 +122,8 @@ public class ProjectRestController {
             return ResponseEntity.notFound().build();
         }
     }
+
+
 
 
 
