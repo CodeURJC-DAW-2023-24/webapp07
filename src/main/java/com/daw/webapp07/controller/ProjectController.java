@@ -182,6 +182,11 @@ public class ProjectController {
             project.addImage(image);
         }
 
+        ArrayList<Project> userProjects = new ArrayList<Project>(query.getProjects());
+        userProjects.add(project);
+        query.setProjects(userProjects);
+        userService.saveUser(query);
+
         projectService.saveProject(project);
         return "redirect:/project-details/" + project.getId() + "/";
     }

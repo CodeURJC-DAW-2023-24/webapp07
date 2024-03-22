@@ -1,9 +1,8 @@
 package com.daw.webapp07.controller.REST;
 
-import com.daw.webapp07.DTO.ProjectDetailsDTO;
-import com.daw.webapp07.DTO.ProjectPreviewDTO;
-import com.daw.webapp07.DTO.UserDetailsDTO;
-import com.daw.webapp07.DTO.UserPreviewDTO;
+import com.daw.webapp07.DTO.*;
+import com.daw.webapp07.model.Comment;
+import com.daw.webapp07.model.Inversion;
 import com.daw.webapp07.model.Project;
 import com.daw.webapp07.model.UserEntity;
 import com.daw.webapp07.service.ProjectService;
@@ -57,6 +56,52 @@ public class UserRestController {
             UserEntity user = userdb.get();
             UserDetailsDTO userDTO = new UserDetailsDTO(user);
             return new ResponseEntity<>(userDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/user/{id}/inversions")
+    public ResponseEntity<Iterable<InversionDTO>> getUserInversions(@PathVariable long id) {
+        Optional<UserEntity> userdb = userService.findUserById(id);
+        if (userdb.isPresent()) {
+            List<Inversion> inversions = userdb.get().getInversions();
+            Collection<InversionDTO> inversionsDTO = new ArrayList<>();
+            for (Inversion inversion : inversions) {
+                inversionsDTO.add(new InversionDTO(inversion));
+            }
+            return new ResponseEntity<>(inversionsDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/user/{id}/comments")
+    public ResponseEntity<Iterable<CommentDTO>> getUserComments(@PathVariable long id) {
+        Optional<UserEntity> userdb = userService.findUserById(id);
+        if (userdb.isPresent()) {
+            List<Comment> comments = userdb.get().getComments();
+            Collection<CommentDTO> commentsDTO = new ArrayList<>();
+            for (Comment comment : comments) {
+                commentsDTO.add(new CommentDTO(comment));
+            }
+            return new ResponseEntity<>(commentsDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/user/{id}/projects")
+    public ResponseEntity<Iterable<ProjectPreviewDTO>> getUserProjects(@PathVariable long id) {
+        Optional<UserEntity> userdb = userService.findUserById(id);
+        if (userdb.isPresent()) {
+            List<Project> projects = userdb.get().getProjects();
+            System.out.println("AAAAAAAAAAAAA" + projects.size());
+            Collection<ProjectPreviewDTO> projectsDTO = new ArrayList<>();
+            for (Project project : projects) {
+                projectsDTO.add(new ProjectPreviewDTO(project));
+            }
+            return new ResponseEntity<>(projectsDTO, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

@@ -40,6 +40,9 @@ public class DatabaseInitializer {
     private static final Path FILES_FOLDER = Paths.get(System.getProperty("user.dir"), "images");
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private ProjectRepository projectRepository;
 
     @Autowired
@@ -320,6 +323,11 @@ public class DatabaseInitializer {
             images.add(image);
         }
         project.setImages(images);
+
+        ArrayList<Project> userProjects = new ArrayList<Project>(creator.getProjects());
+        userProjects.add(project);
+        creator.setProjects(userProjects);
+        userService.saveUser(creator);
 
         projectRepository.save(project);
         return project;
