@@ -4,6 +4,7 @@ import com.daw.webapp07.model.*;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectDetailsDTO {
@@ -14,7 +15,7 @@ public class ProjectDetailsDTO {
     private LocalDate date;
     private Category category;
     private String url;
-    private String images;
+    private List<String> images;
     private int goal;
     private int currentAmount;
 
@@ -99,16 +100,19 @@ public class ProjectDetailsDTO {
         this.date = project.getDate();
         this.category = project.getCategory();
         this.url = project.getUrl();
-        this.images =  "http://localhost:8443/api/proyects/" + this.id + "/images";
+        this.images = new ArrayList<>();
+        for (Image image : project.getImages()) {
+            this.images.add("http://localhost:8443/api/projects/" + project.getId() + "/images/" + image.getId() + "/");
+        }
         this.goal = project.getGoal();
         this.currentAmount = project.getCurrentAmount();
     }
 
-    public String getImages() {
+    public List<String> getImages() {
         return images;
     }
 
-    public void setImages(String images) {
+    public void setImages(List<String> images) {
         this.images = images;
     }
 }

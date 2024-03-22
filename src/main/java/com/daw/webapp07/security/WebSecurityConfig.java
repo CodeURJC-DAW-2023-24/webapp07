@@ -1,10 +1,10 @@
 package com.daw.webapp07.security;
 
-/*
+
 import com.daw.webapp07.security.jwt.JwtRequestFilter;
 import com.daw.webapp07.security.jwt.UnauthorizedHandlerJwt;
 
- */
+
 import com.daw.webapp07.service.RepositoryUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -27,14 +27,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-/*
+
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
     @Autowired
     private UnauthorizedHandlerJwt unauthorizedHandlerJwt;
 
- */
+
 
     @Autowired
     public RepositoryUserDetailsService userDetailService;
@@ -75,7 +75,7 @@ public class WebSecurityConfig {
     }
     **/
 
-    /*
+
     @Bean
     @Order(1)
     public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
@@ -89,9 +89,13 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         // PRIVATE ENDPOINTS
-                        .requestMatchers(HttpMethod.POST,"/api/project/").hasRole("USER")
-                        .requestMatchers(HttpMethod.PUT,"/api/project/**").hasRole("USER")
-                        .requestMatchers(HttpMethod.DELETE,"/api/project/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.POST,"/api/projects/").hasAnyRole("USER")
+                        .requestMatchers(HttpMethod.PUT,"/api/projects/**").hasAnyRole("USER")
+                        .requestMatchers(HttpMethod.DELETE,"/api/projects/**").hasAnyRole("USER")
+
+                        .requestMatchers(HttpMethod.POST,"/api/comments/**").hasAnyRole("USER")
+                        .requestMatchers(HttpMethod.PUT,"/api/comments/**").hasAnyRole("USER")
+                        .requestMatchers(HttpMethod.DELETE,"/api/comments/**").hasAnyRole("USER")
                         // PUBLIC ENDPOINTS
                         .anyRequest().permitAll()
                 );
@@ -113,7 +117,7 @@ public class WebSecurityConfig {
 
         return http.build();
     }
-*/
+
 
     @Bean
     @Order(2)
