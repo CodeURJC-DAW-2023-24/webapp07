@@ -76,9 +76,8 @@ public class CommentRestController {
         }
     }
 
-    //FALTA METER CHECK DE SER EL DUEÑO DEL PROYECTO O ADMINISTRADOR
     @DeleteMapping("/comments/{id}/")
-    public ResponseEntity<CommentDTO> deleteComment(@PathVariable long id) {
+    public ResponseEntity<CommentDTO> deleteComment(@PathVariable long id, HttpServletRequest request) {
         Optional<Comment> checkComment = commentService.getComment(id);
         if (checkComment.isPresent()) {
             Comment comment = checkComment.get();
@@ -86,27 +85,35 @@ public class CommentRestController {
             Optional<Project> checkProject = projectService.getOptionalProject(projectId);
             if (!checkProject.isEmpty()){
                 Project project = checkProject.get();
-                project.deleteComment(comment);
-                projectService.saveProject(project);
-                return new ResponseEntity<>(new CommentDTO(comment), HttpStatus.OK);
+                if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName())) {
+                    project.deleteComment(comment);
+                    projectService.saveProject(project);
+                    return new ResponseEntity<>(new CommentDTO(comment), HttpStatus.OK);
+                }else{
+                    return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+                }
             }
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    //FALTA METER CHECK DE SER EL DUEÑO DEL PROYECTO O ADMINISTRADOR
     @DeleteMapping("/comments/{projectId}/{id}/")
-    public ResponseEntity<CommentDTO> deleteComment(@PathVariable long id, @PathVariable long projectId) {
+    public ResponseEntity<CommentDTO> deleteComment(@PathVariable long id, @PathVariable long projectId, HttpServletRequest request) {
         Optional<Comment> checkComment = commentService.getComment(id);
         if (checkComment.isPresent()) {
             Comment comment = checkComment.get();
             Optional<Project> checkProject = projectService.getOptionalProject(projectId);
             if (!checkProject.isEmpty()){
                 Project project = checkProject.get();
-                project.deleteComment(comment);
-                projectService.saveProject(project);
-                return new ResponseEntity<>(new CommentDTO(comment), HttpStatus.OK);
+                if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName())) {
+                    project.deleteComment(comment);
+                    projectService.saveProject(project);
+                    return new ResponseEntity<>(new CommentDTO(comment), HttpStatus.OK);
+                }else{
+                    return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+                }
             }
+
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
@@ -138,9 +145,8 @@ public class CommentRestController {
 
     }
 
-    //FALTA METER CHECK DE SER EL DUEÑO DEL PROYECTO O ADMINISTRADOR
     @PutMapping("/comments/{projectId}/{id}/")
-    public ResponseEntity<CommentDTO> modifyComment(@PathVariable long id, @PathVariable long projectId, @RequestBody String text) {
+    public ResponseEntity<CommentDTO> modifyComment(@PathVariable long id, @PathVariable long projectId, @RequestBody String text, HttpServletRequest request) {
         Optional<Comment> checkComment = commentService.getComment(id);
         if (checkComment.isPresent()) {
             Comment comment = checkComment.get();
@@ -148,27 +154,35 @@ public class CommentRestController {
             Optional<Project> checkProject = projectService.getOptionalProject(projectId);
             if (!checkProject.isEmpty()){
                 Project project = checkProject.get();
-                projectService.saveProject(project);
-                return new ResponseEntity<>(new CommentDTO(comment), HttpStatus.OK);
+                if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName())) {
+                    comment.setText(text);
+                    projectService.saveProject(project);
+                    return new ResponseEntity<>(new CommentDTO(comment), HttpStatus.OK);
+                }else{
+                    return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+                }
             }
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
     }
 
-    //FALTA METER CHECK DE SER EL DUEÑO DEL PROYECTO O ADMINISTRADOR
     @PutMapping("/comments/{id}/")
-    public ResponseEntity<CommentDTO> deleteComment(@PathVariable long id, @RequestBody String text) {
+    public ResponseEntity<CommentDTO> deleteComment(@PathVariable long id, @RequestBody String text, HttpServletRequest request) {
         Optional<Comment> checkComment = commentService.getComment(id);
         if (checkComment.isPresent()) {
             Comment comment = checkComment.get();
-            comment.setText(text);
             long projectId = comment.getProject().getId();
             Optional<Project> checkProject = projectService.getOptionalProject(projectId);
             if (!checkProject.isEmpty()){
                 Project project = checkProject.get();
-                projectService.saveProject(project);
-                return new ResponseEntity<>(new CommentDTO(comment), HttpStatus.OK);
+                if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName())) {
+                    comment.setText(text);
+                    projectService.saveProject(project);
+                    return new ResponseEntity<>(new CommentDTO(comment), HttpStatus.OK);
+                }else{
+                    return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+                }
             }
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
