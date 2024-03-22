@@ -200,6 +200,5 @@ public class Project {
 
     public void deleteComment(Comment checkComment) {
         this.comments.remove(checkComment);
-
     }
 }

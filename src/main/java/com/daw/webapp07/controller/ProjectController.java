@@ -46,6 +46,9 @@ public class ProjectController {
     @Autowired
     GraphicsService graphicsService;
 
+    @Autowired
+    CommentService commentService;
+
     //This method will load the main page, differentiating the logged users from the guests.
     //Apart from executing the recommendation algorithm
     @GetMapping("/")
@@ -320,6 +323,7 @@ public class ProjectController {
                 return "redirect:/error-page";
 
             project.deleteComment(checkComment);
+            commentService.deleteComment(id);
             projectService.saveProject(project);
 
             return "redirect:/project-details/" + projectId + "/";

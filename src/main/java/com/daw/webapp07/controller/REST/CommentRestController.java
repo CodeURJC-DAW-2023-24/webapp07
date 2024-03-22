@@ -46,7 +46,7 @@ public class CommentRestController {
 
         Optional<Project> checkProject = projectService.getOptionalProject(projectId);
         if (checkProject.isPresent() ) {
-            Page<Comment> comments = commentService.searchComments(pageNumber, pageSize);
+            Page<Comment> comments = commentService.searchCommentsProject(pageNumber, pageSize, projectId);
             return new ResponseEntity<>(commentService.toDTO(comments), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -87,6 +87,7 @@ public class CommentRestController {
                 Project project = checkProject.get();
                 if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName())) {
                     project.deleteComment(comment);
+                    commentService.deleteComment(id);
                     projectService.saveProject(project);
                     return new ResponseEntity<>(new CommentDTO(comment), HttpStatus.OK);
                 }else{
@@ -98,7 +99,7 @@ public class CommentRestController {
     }
 
     @DeleteMapping("/comments/{projectId}/{id}/")
-    public ResponseEntity<CommentDTO> deleteComment(@PathVariable long id, @PathVariable long projectId, HttpServletRequest request) {
+    public ResponseEntity<CommentDTO> deleteProjectComment(@PathVariable long id, @PathVariable long projectId, HttpServletRequest request) {
         Optional<Comment> checkComment = commentService.getComment(id);
         if (checkComment.isPresent()) {
             Comment comment = checkComment.get();
@@ -107,6 +108,7 @@ public class CommentRestController {
                 Project project = checkProject.get();
                 if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName())) {
                     project.deleteComment(comment);
+                    commentService.deleteComment(id);
                     projectService.saveProject(project);
                     return new ResponseEntity<>(new CommentDTO(comment), HttpStatus.OK);
                 }else{
@@ -146,7 +148,7 @@ public class CommentRestController {
     }
 
     @PutMapping("/comments/{projectId}/{id}/")
-    public ResponseEntity<CommentDTO> modifyComment(@PathVariable long id, @PathVariable long projectId, @RequestBody String text, HttpServletRequest request) {
+    public ResponseEntity<CommentDTO> updateProjectComment(@PathVariable long id, @PathVariable long projectId, @RequestBody String text, HttpServletRequest request) {
         Optional<Comment> checkComment = commentService.getComment(id);
         if (checkComment.isPresent()) {
             Comment comment = checkComment.get();
@@ -168,7 +170,7 @@ public class CommentRestController {
     }
 
     @PutMapping("/comments/{id}/")
-    public ResponseEntity<CommentDTO> deleteComment(@PathVariable long id, @RequestBody String text, HttpServletRequest request) {
+    public ResponseEntity<CommentDTO> updateComment(@PathVariable long id, @RequestBody String text, HttpServletRequest request) {
         Optional<Comment> checkComment = commentService.getComment(id);
         if (checkComment.isPresent()) {
             Comment comment = checkComment.get();

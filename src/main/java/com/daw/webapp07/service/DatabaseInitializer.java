@@ -2,6 +2,7 @@ package com.daw.webapp07.service;
 
 
 import com.daw.webapp07.model.*;
+import com.daw.webapp07.repository.CommentRepository;
 import com.daw.webapp07.repository.InversionRepository;
 import com.daw.webapp07.repository.ProjectRepository;
 import com.daw.webapp07.repository.UserRepository;
@@ -46,6 +47,9 @@ public class DatabaseInitializer {
 
     @Autowired
     private InversionRepository inversionRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
 
     @PostConstruct
     public void init() {
@@ -274,6 +278,24 @@ public class DatabaseInitializer {
                 7500,
                 LocalDate.of(2023, 11, 9)
         );
+
+        BerniBear.addComment(new Comment(u2, BerniBear, "I love the animation style! Can't wait to see more."));
+        BerniBear.addComment(new Comment(u3, BerniBear, "I've been a fan since the first season. Looking forward to the next one!"));
+        BerniBear.addComment(new Comment(u4, BerniBear, "I'm happy to support this project. Keep up the good work!"));
+        projectRepository.save(BerniBear);
+
+        KebabFinder.addComment(new Comment(u1, KebabFinder, "I'm excited to see this project come to life!"));
+        KebabFinder.addComment(new Comment(u2, KebabFinder, "I love kebabs! Can't wait to try this app."));
+        KebabFinder.addComment(new Comment(u3, KebabFinder, "I've been waiting for an app like this!"));
+        KebabFinder.addComment(new Comment(u4, KebabFinder, "I'm happy to support this project. Keep up the good work!"));
+        projectRepository.save(KebabFinder);
+
+        GalaxyGetaway.addComment(new Comment(u1, GalaxyGetaway, "I love space exploration! Looking forward to trying this app."));
+        GalaxyGetaway.addComment(new Comment(u2, GalaxyGetaway, "This looks like a fun way to learn about the universe!"));
+        GalaxyGetaway.addComment(new Comment(u3, GalaxyGetaway, "I'm excited to see what this app has to offer."));
+        GalaxyGetaway.addComment(new Comment(u4, GalaxyGetaway, "I'm happy to support this project. Keep up the good work!"));
+        projectRepository.save(GalaxyGetaway);
+
     }
 
     private Project createAndSaveProject(String projectName, String projectDescription, UserEntity creator, String date,

@@ -36,11 +36,17 @@ public class CommentService {
 
     public void deleteComment(long id) {
         commentRepository.deleteById(id);
+        
     }
 
     public Page<Comment> searchComments(int page, int size)
     {
         Pageable pageable = PageRequest.of(page, size);
         return  commentRepository.findAll(pageable);
+    }
+
+    public Page<Comment> searchCommentsProject(int pageNumber, int pageSize, long projectId) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return commentRepository.findByProjectId(projectId, pageable);
     }
 }
