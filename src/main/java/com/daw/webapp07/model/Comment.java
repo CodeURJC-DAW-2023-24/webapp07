@@ -31,6 +31,7 @@ public class Comment {
 
     public Comment(UserEntity user, Project project, String text){
         this.user = user;
+        this.userName = user.getName();
         this.project = project;
         this.text = text;
     }

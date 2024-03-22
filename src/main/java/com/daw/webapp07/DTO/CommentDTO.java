@@ -8,16 +8,16 @@ import java.util.List;
 
 public class CommentDTO {
     private Long id;
-
     private UserPreviewDTO user;
     private String text;
+    private Long projectId;
 
 
     public CommentDTO(Comment comment) {
         this.id = comment.getId();
-        Long id1 = comment.getUser().getProfilePhoto().getId();
         this.text = comment.getText();
         this.user = new UserPreviewDTO(comment.getUser());
+        this.projectId = comment.getProject().getId();
 
     }
 
@@ -62,6 +62,14 @@ public class CommentDTO {
 
     public void setUser(UserPreviewDTO user) {
         this.user = user;
+    }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
 
 }

@@ -201,6 +201,7 @@ public class ProjectController {
             return "redirect:/error-page";
         UserEntity query = checkQuery.get();
         newComment.setUser(query);
+        newComment.setUserName(query.getName());
         project.addComment(newComment);
         projectService.saveProject(project);
 

@@ -10,7 +10,7 @@ public class UserPreviewDTO {
 
     public UserPreviewDTO(UserEntity user) {
         this.profileImage = "http://localhost:8443/api/users/" + user.getId() + "/profile";
-        this.username = username;
+        this.username = user.getName();
 
     }
 
