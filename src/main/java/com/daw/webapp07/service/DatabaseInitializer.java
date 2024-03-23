@@ -348,6 +348,7 @@ public class DatabaseInitializer {
         if(userb.isPresent() && projectb.isPresent()){
             userb.get().addInversion(inversion);
             projectb.get().addInversion(inversion);
+            project.addInversion(inversion);
             userRepository.save(userb.get());
             projectRepository.save(projectb.get());
             inversionRepository.save(inversion);

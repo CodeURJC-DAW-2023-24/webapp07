@@ -14,6 +14,7 @@ import java.util.List;
 public interface ProjectRepository extends JpaRepository<Project, Long> {
     List<Project> findByOwnerName(String ownerName);
 
+
     @Query(value="""
 WITH UCategoryInvestment AS (
 		 SELECT
