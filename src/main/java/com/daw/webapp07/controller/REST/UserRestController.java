@@ -1,13 +1,11 @@
 package com.daw.webapp07.controller.REST;
 
 import com.daw.webapp07.DTO.*;
-import com.daw.webapp07.model.Comment;
-import com.daw.webapp07.model.Inversion;
-import com.daw.webapp07.model.Project;
-import com.daw.webapp07.model.UserEntity;
+import com.daw.webapp07.model.*;
 import com.daw.webapp07.service.ProjectService;
 import com.daw.webapp07.service.RepositoryUserDetailsService;
 import com.daw.webapp07.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -17,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URI;
 import java.sql.SQLException;
@@ -132,6 +131,23 @@ public class UserRestController {
 
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
+
+    @PutMapping("/users/{id}/")
+    public ResponseEntity<UserEntity> editUser(@PathVariable long id,
+                                               @RequestBody UserEntity newUser,
+                                               HttpServletRequest request) {
+
+        String name = request.getUserPrincipal().getName();
+        Optional<UserEntity> user = userService.findUserByName(name);
+        if (user.isPresent()) {
+            user.get().setEmail(newUser.getEmail());
+            userService.saveUser(user.get());
+            return ResponseEntity.ok().build();
+        }
+
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    }
+
 
 
 

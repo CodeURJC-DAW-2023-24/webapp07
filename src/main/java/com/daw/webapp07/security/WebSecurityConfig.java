@@ -100,6 +100,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.DELETE,"/api/comments/**").hasAnyRole("USER")
 
                         .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/users").hasAnyRole("USER")
                         // PUBLIC ENDPOINTS
                         .anyRequest().permitAll()
                 );
