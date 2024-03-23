@@ -124,82 +124,121 @@ public class ProjectRestController {
         Optional<Project> checkProject = projectService.getOptionalProject(id);
         if (checkProject.isPresent()) {
             Project project = checkProject.get();
-                if (!project.getInversions().isEmpty() && request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName())) {
+                if (project.getInversions().isEmpty() && (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName()))) {
                     projectService.deleteProject(id);
                     return new ResponseEntity<>(new ProjectDetailsDTO(project), HttpStatus.OK);
+                }else{
+                    return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+
                 }
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-
     @PostMapping("/projects")
-    public ResponseEntity<ProjectDetailsDTO> createProject(@RequestBody ProjectDetailsDTO project,
-                              HttpServletRequest request) {
-
+    public ResponseEntity<ProjectDetailsDTO> createProject(@RequestBody Project project,
+                                                           HttpServletRequest request) {
         if(project == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
-        Project newProject = new Project();
-
         if(project.getCurrentAmount()!=0) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         if(project.getDate()!=null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         if(project.getOwner()!=null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
         Optional<UserEntity> checkQuery = userService.findUserByName(request.getUserPrincipal().getName());
-        if (checkQuery.isEmpty())
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        UserEntity query = checkQuery.get();
-        newProject.setOwner(query);
-        LocalDate date = LocalDate.now();
-        newProject.setDate(date);
+        if (!checkQuery.isEmpty()){
+            UserEntity query = checkQuery.get();
+            project.setOwner(query);
+            LocalDate date = LocalDate.now();
+            project.setDate(date);
 
-        projectService.saveProject(newProject);
+            ArrayList<Project> userProjects = new ArrayList<>(query.getProjects());
+            userProjects.add(project);
+            query.setProjects(userProjects);
 
-        return new ResponseEntity<>(new ProjectDetailsDTO(newProject), HttpStatus.CREATED);
+            userService.saveUser(query);
+            projectService.saveProject(project);
+            return new ResponseEntity<>(new ProjectDetailsDTO(project), HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/projects/{projectId}/images")
-    public ResponseEntity<Object> uploadImage(@PathVariable long id,
-                                              @RequestParam MultipartFile[] files){
-        Optional<Project> checkProject = projectService.getOptionalProject(id);
+    public ResponseEntity<Object> uploadImages(@PathVariable long projectId,
+                                               @RequestParam MultipartFile[] files, HttpServletRequest request){
+        Optional<Project> checkProject = projectService.getOptionalProject(projectId);
         if (checkProject.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         Project project = checkProject.get();
 
-        for (MultipartFile file : files) {
-            Image image = new Image(file);
-            project.addImage(image);
-        }
+        if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName())) {
+
+            project.getImages().clear();
+
+            for (MultipartFile file : files) {
+                Image image = new Image(file);
+                project.addImage(image);
+            }
             projectService.saveProject(project);
             return ResponseEntity.ok().build();
-
-
         }
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    }
 
-
-
-
-    @PutMapping("/projects/{id}")
-    public ResponseEntity<Project> replaceProject(@PathVariable long id,
-                                                @RequestBody Project newProject) {
-        Optional<Project> project = projectService.getOptionalProject(id);
-        if (project.isPresent()) {
-            if(newProject.getCurrentAmount()!=project.get().getCurrentAmount()) return ResponseEntity.badRequest().build();
-            if(!newProject.getInversions().equals(project.get().getInversions())) return ResponseEntity.badRequest().build();
-            if(!newProject.getDate().equals(project.get().getDate())) return ResponseEntity.badRequest().build();
-            newProject.setId(id);
-            projectService.saveProject(newProject);
-            return ResponseEntity.ok(project.get());
-        } else {
+    @PutMapping("/projects/{projectId}/images")
+    public ResponseEntity<Object> updateImages(@PathVariable long projectId,
+                                               @RequestParam MultipartFile[] files, HttpServletRequest request){
+        Optional<Project> checkProject = projectService.getOptionalProject(projectId);
+        if (checkProject.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
+        Project project = checkProject.get();
+
+        if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName())) {
+
+            for (MultipartFile file : files) {
+                Image image = new Image(file);
+                project.addImage(image);
+            }
+            projectService.saveProject(project);
+            return ResponseEntity.ok().build();
+        }
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
 
 
+    @PutMapping("/projects/{id}")
+    public ResponseEntity<ProjectDetailsDTO> updateProject(@PathVariable Long id,
+                                                           @RequestBody Project project,
+                                                           HttpServletRequest request) {
+        if(project == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if(project.getDate()!=null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if(project.getOwner()!=null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
+        Optional<Project> checkProject = projectService.getOptionalProject(id);
+        if (checkProject.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        Project oldProj = checkProject.get();
+        Optional<UserEntity> checkQuery = userService.findUserByName(request.getUserPrincipal().getName());
+        if (!checkQuery.isEmpty() && (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(oldProj.getOwner().getName()))) {
+            if (project.getName() != null) oldProj.setName(project.getName());
+            if (project.getDescription() != null) oldProj.setDescription(project.getDescription());
+            if (project.getCategory() != null) oldProj.setCategory(project.getCategory());
+            if (project.getUrl() != null) oldProj.setUrl(project.getUrl());
+            if (project.getGoal() != 0 && project.getGoal() > 0) oldProj.setGoal(project.getGoal());
+            /*
+            ArrayList<Project> userProjects = new ArrayList<>(query.getProjects());
+            userProjects.add(project);
+            query.setProjects(userProjects);
+            userService.saveUser(query);
 
+             */
 
-
+            projectService.saveProject(oldProj);
+            return new ResponseEntity<>(new ProjectDetailsDTO(oldProj), HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
 }
