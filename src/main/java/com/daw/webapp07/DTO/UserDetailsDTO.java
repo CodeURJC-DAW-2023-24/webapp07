@@ -21,7 +21,7 @@ public class UserDetailsDTO {
         this.name = user.getName();
         this.email = user.getEmail();
         this.roles = user.getRoles();
-        this.profileImage = "http://localhost:8443/api/users/" + user.getId() + "/profile";
+        this.profileImage = "https://localhost:8443/api/users/" + user.getId() + "/profile";
     }
 
     public Long getId() {

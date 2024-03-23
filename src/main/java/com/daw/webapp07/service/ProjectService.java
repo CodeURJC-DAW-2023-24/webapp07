@@ -1,8 +1,10 @@
 package com.daw.webapp07.service;
 
 import com.daw.webapp07.model.Comment;
+import com.daw.webapp07.model.Image;
 import com.daw.webapp07.model.Project;
 import com.daw.webapp07.repository.CommentRepository;
+import com.daw.webapp07.repository.ImageRepository;
 import com.daw.webapp07.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +24,9 @@ public class ProjectService {
 
     @Autowired
     private CommentRepository commentRepository;
+
+    @Autowired
+    private ImageRepository imageRepository;
 
 
     public Page<Project> searchProjects(int page, int size)
@@ -44,7 +49,15 @@ public class ProjectService {
     }
 
     public void deleteProject(Long id){
+        commentRepository.deleteByProjectId(id);
         projectRepository.deleteById(id);
+    }
+
+    public Image getImage(Project project, Long img){
+        if (project.getImages().contains(imageRepository.findById(img).get())){
+            return imageRepository.findById(img).get();
+        }
+        return null;
     }
 
     public List<Project> findByOwnerName(String name){

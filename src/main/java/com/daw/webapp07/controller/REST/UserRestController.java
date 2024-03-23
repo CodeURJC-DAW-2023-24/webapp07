@@ -9,6 +9,8 @@ import com.daw.webapp07.service.ProjectService;
 import com.daw.webapp07.service.RepositoryUserDetailsService;
 import com.daw.webapp07.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -27,17 +30,10 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 public class UserRestController {
-    @Autowired
-    private ProjectService projectService;
 
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private RepositoryUserDetailsService userDetailsService;
 
     @GetMapping("/users")
     public ResponseEntity<Iterable<UserPreviewDTO>> getUsers() {
@@ -49,7 +45,7 @@ public class UserRestController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @GetMapping("/user/{id}/")
+    @GetMapping("/users/{id}/")
     public ResponseEntity<UserDetailsDTO> getUser(@PathVariable long id) {
         Optional<UserEntity> userdb = userService.findUserById(id);
         if (userdb.isPresent()) {
@@ -61,7 +57,7 @@ public class UserRestController {
         }
     }
 
-    @GetMapping("/user/{id}/inversions")
+    @GetMapping("/users/{id}/inversions")
     public ResponseEntity<Iterable<InversionDTO>> getUserInversions(@PathVariable long id) {
         Optional<UserEntity> userdb = userService.findUserById(id);
         if (userdb.isPresent()) {
@@ -76,7 +72,7 @@ public class UserRestController {
         }
     }
 
-    @GetMapping("/user/{id}/comments")
+    @GetMapping("/users/{id}/comments")
     public ResponseEntity<Iterable<CommentDTO>> getUserComments(@PathVariable long id) {
         Optional<UserEntity> userdb = userService.findUserById(id);
         if (userdb.isPresent()) {
@@ -91,7 +87,7 @@ public class UserRestController {
         }
     }
 
-    @GetMapping("/user/{id}/projects")
+    @GetMapping("/users/{id}/projects")
     public ResponseEntity<Iterable<ProjectPreviewDTO>> getUserProjects(@PathVariable long id) {
         Optional<UserEntity> userdb = userService.findUserById(id);
         if (userdb.isPresent()) {
@@ -106,4 +102,18 @@ public class UserRestController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+
+    @GetMapping("/users/{id}/profile")
+    public ResponseEntity<Object> displayProfilePhoto(@PathVariable Long id) throws SQLException{
+        UserEntity userEntity = userService.findUserById(id).orElseThrow();
+        Resource file = new InputStreamResource(userEntity.getProfilePhoto().getImageFile().getBinaryStream());
+
+        return ResponseEntity.ok()
+                .contentLength(userEntity.getProfilePhoto().getImageFile().length())
+                .body(file);
+
+    }
+
+
 }

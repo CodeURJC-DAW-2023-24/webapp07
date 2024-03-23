@@ -25,20 +25,11 @@ import java.util.*;
 
 @Controller
 public class ProjectController {
-
-
-
     @Autowired
     private UserService userService;
 
     @Autowired
     private EmailService emailService;
-
-    @Autowired
-    CommentRepository commentRepository;
-
-    @Autowired
-    InversionRepository inversionRepository;
 
     @Autowired
     ProjectService projectService;
@@ -258,7 +249,7 @@ public class ProjectController {
             return "redirect:/error-page";
 
         if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName())){
-            commentRepository.deleteByProjectId(id);
+
             projectService.deleteProject(id);
         }
 
@@ -317,7 +308,7 @@ public class ProjectController {
             return "redirect:/error-page";
 
         if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(checkProject.get().getOwner().getName())) {
-            Comment checkComment = commentRepository.findById(id).orElseThrow();
+            Comment checkComment = commentService.getComment(id).orElseThrow();
             if (checkComment == null)
                 return "redirect:/error-page";
 

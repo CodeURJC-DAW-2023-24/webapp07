@@ -89,7 +89,9 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         // PRIVATE ENDPOINTS
-                        .requestMatchers(HttpMethod.POST,"/api/projects/").hasAnyRole("USER")
+                        .requestMatchers(HttpMethod.POST,"/api/projects").hasAnyRole("USER")
+                        .requestMatchers(HttpMethod.POST,"/api/projects/**").hasAnyRole("USER")
+
                         .requestMatchers(HttpMethod.PUT,"/api/projects/**").hasAnyRole("USER")
                         .requestMatchers(HttpMethod.DELETE,"/api/projects/**").hasAnyRole("USER")
 

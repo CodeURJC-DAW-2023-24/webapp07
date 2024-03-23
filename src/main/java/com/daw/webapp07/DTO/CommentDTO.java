@@ -21,19 +21,6 @@ public class CommentDTO {
 
     }
 
-    /* METER EN USERRESTCONTROLLER
-    @GetMapping("/users/{id}/profile")
-    public ResponseEntity<Object> displayProfilePhoto(@PathVariable Long id) throws SQLException {
-        UserEntity userEntity = userService.findUserById(id).orElseThrow();
-        Resource file = new InputStreamResource(userEntity.getProfilePhoto().getImageFile().getBinaryStream());
-
-        return ResponseEntity.ok()
-                .contentLength(userEntity.getProfilePhoto().getImageFile().length())
-                .body(file);
-
-    }
-
-     */
 
     public static Iterable<CommentDTO> listCommentDTO(List<Comment> comments) {
         return comments.stream().map(CommentDTO::new).toList();

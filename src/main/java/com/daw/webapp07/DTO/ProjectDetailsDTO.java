@@ -101,9 +101,14 @@ public class ProjectDetailsDTO {
         this.category = project.getCategory();
         this.url = project.getUrl();
         this.images = new ArrayList<>();
-        for (Image image : project.getImages()) {
-            this.images.add("http://localhost:8443/api/projects/" + project.getId() + "/images/" + image.getId() + "/");
+        if(project.getImages().isEmpty()){
+            this.images.add("https://localhost:8443/api/projects/" + project.getId() + "/images");
+        }else{
+            for (Image image : project.getImages()) {
+                this.images.add("https://localhost:8443/api/projects/" + project.getId() + "/images/" + image.getId() + "/");
+            }
         }
+
         this.goal = project.getGoal();
         this.currentAmount = project.getCurrentAmount();
     }
