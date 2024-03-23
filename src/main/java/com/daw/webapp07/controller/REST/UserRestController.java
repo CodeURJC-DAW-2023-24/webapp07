@@ -1,13 +1,11 @@
 package com.daw.webapp07.controller.REST;
 
 import com.daw.webapp07.DTO.*;
-import com.daw.webapp07.model.Comment;
-import com.daw.webapp07.model.Inversion;
-import com.daw.webapp07.model.Project;
-import com.daw.webapp07.model.UserEntity;
+import com.daw.webapp07.model.*;
 import com.daw.webapp07.service.ProjectService;
 import com.daw.webapp07.service.RepositoryUserDetailsService;
 import com.daw.webapp07.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -16,16 +14,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.net.URI;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 @RestController
 @RequestMapping("/api")
@@ -33,6 +32,10 @@ public class UserRestController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private RepositoryUserDetailsService repositoryUserDetailsService;
 
 
     @GetMapping("/users")
@@ -114,6 +117,38 @@ public class UserRestController {
                 .body(file);
 
     }
+
+    @PostMapping("/users")
+    public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity user){
+
+        user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
+        user.setRoles(List.of("USER"));
+        if(repositoryUserDetailsService.registerUser(user)){
+            URI location = fromCurrentRequest().path("/{id}/").buildAndExpand(user.getId()).toUri();
+            return ResponseEntity.created(location).body(user);
+        }
+
+
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    }
+
+    @PutMapping("/users/{id}/")
+    public ResponseEntity<UserEntity> editUser(@PathVariable long id,
+                                               @RequestBody UserEntity newUser,
+                                               HttpServletRequest request) {
+
+        String name = request.getUserPrincipal().getName();
+        Optional<UserEntity> user = userService.findUserByName(name);
+        if (user.isPresent()) {
+            user.get().setEmail(newUser.getEmail());
+            userService.saveUser(user.get());
+            return ResponseEntity.ok().build();
+        }
+
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    }
+
+
 
 
 }
