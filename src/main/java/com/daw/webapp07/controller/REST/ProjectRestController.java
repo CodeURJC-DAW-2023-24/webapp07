@@ -1,14 +1,12 @@
 package com.daw.webapp07.controller.REST;
 
-import com.daw.webapp07.DTO.CommentDTO;
-import com.daw.webapp07.DTO.ImageDTO;
-import com.daw.webapp07.DTO.ProjectDetailsDTO;
-import com.daw.webapp07.DTO.ProjectPreviewDTO;
+import com.daw.webapp07.DTO.*;
 import com.daw.webapp07.model.Comment;
 import com.daw.webapp07.model.Image;
 import com.daw.webapp07.model.Project;
 import com.daw.webapp07.model.UserEntity;
 import com.daw.webapp07.service.CommentService;
+import com.daw.webapp07.service.GraphicsService;
 import com.daw.webapp07.service.ProjectService;
 import com.daw.webapp07.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -46,7 +44,7 @@ public class ProjectRestController {
     private UserService userService;
 
     @Autowired
-    private CommentService commentService;
+    private GraphicsService graphicsService;
 
 
     @GetMapping("/projects")
@@ -83,6 +81,19 @@ public class ProjectRestController {
             Project project = checkProject.get();
             ProjectDetailsDTO projectDetailsDTO = new ProjectDetailsDTO(project);
             return new ResponseEntity<>(projectDetailsDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/projects/{id}/graphics")
+    public ResponseEntity<GraphicsDTO> getProjectGraphics(@PathVariable long id) {
+        Optional<Project> checkProject = projectService.getOptionalProject(id);
+        if (checkProject.isPresent()) {
+            Project project = checkProject.get();
+            graphicsService.initializeWith(project);
+            GraphicsDTO graphicsDTO = new GraphicsDTO(graphicsService.getPastmoney(),graphicsService.getTimes(),graphicsService.getQuantities(),graphicsService.getNames());
+            return new ResponseEntity<>(graphicsDTO, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
