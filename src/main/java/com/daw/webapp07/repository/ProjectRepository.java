@@ -14,7 +14,6 @@ import java.util.List;
 public interface ProjectRepository extends JpaRepository<Project, Long> {
     List<Project> findByOwnerName(String ownerName);
 
-
     @Query(value="""
 WITH UCategoryInvestment AS (
 		 SELECT
@@ -98,5 +97,18 @@ Project p
 """, nativeQuery = true)
     public Page<Project> recomendedProjects(long userid, Pageable pageable);
 
-    public void deleteById(long id);
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM project_images WHERE project_id = ?1", nativeQuery = true)
+    void deleteImageRelartions(long id);
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM user_entity_projects WHERE projects_id = ?1", nativeQuery = true)
+    void deleteUserRelations(long id);
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM project WHERE id = ?1", nativeQuery = true)
+    void deleteById1(long id);
 }

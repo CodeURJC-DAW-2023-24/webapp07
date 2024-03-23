@@ -49,8 +49,15 @@ public class ProjectService {
     }
 
     public void deleteProject(Long id){
+        System.out.println("Deleting project with id: "+id);
         commentRepository.deleteByProjectId(id);
-        projectRepository.deleteById(id);
+        System.out.println("Comments deleted");
+        for(Image i: projectRepository.findById(id).get().getImages()){
+            imageRepository.deleteById(i.getId());
+        }
+        projectRepository.deleteImageRelartions(id);
+        projectRepository.deleteUserRelations(id);
+        projectRepository.deleteById1(id);
     }
 
     public Image getImage(Project project, Long img){
