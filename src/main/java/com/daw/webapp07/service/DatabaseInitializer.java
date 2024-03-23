@@ -48,12 +48,6 @@ public class DatabaseInitializer {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private InversionRepository inversionRepository;
-
-    @Autowired
-    private CommentRepository commentRepository;
-
     @PostConstruct
     public void init() {
         UserEntity u1 = createAndSaveUser("User1","user1@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/profiles/user1.png","USER");
@@ -351,7 +345,6 @@ public class DatabaseInitializer {
             project.addInversion(inversion);
             userRepository.save(userb.get());
             projectRepository.save(projectb.get());
-            inversionRepository.save(inversion);
         }
 
         return inversion;

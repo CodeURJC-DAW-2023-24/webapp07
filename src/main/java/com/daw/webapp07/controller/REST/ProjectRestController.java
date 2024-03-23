@@ -1,10 +1,7 @@
 package com.daw.webapp07.controller.REST;
 
 import com.daw.webapp07.DTO.*;
-import com.daw.webapp07.model.Comment;
-import com.daw.webapp07.model.Image;
-import com.daw.webapp07.model.Project;
-import com.daw.webapp07.model.UserEntity;
+import com.daw.webapp07.model.*;
 import com.daw.webapp07.service.CommentService;
 import com.daw.webapp07.service.GraphicsService;
 import com.daw.webapp07.service.ProjectService;
@@ -45,6 +42,7 @@ public class ProjectRestController {
 
     @Autowired
     private GraphicsService graphicsService;
+
 
 
     @GetMapping("/projects")
@@ -128,6 +126,21 @@ public class ProjectRestController {
 
     }
 
+    @GetMapping("/projects/{id}/inversions")
+    public ResponseEntity<Iterable<InversionDTO>> getInversions(@PathVariable long id) {
+        Optional<Project> checkProject = projectService.getOptionalProject(id);
+        if (checkProject.isPresent()) {
+            Project project = checkProject.get();
+            Collection<InversionDTO> inversionDTO = new ArrayList<>();
+            for (int i = 0; i < project.getInversions().size(); i++) {
+                inversionDTO.add(new InversionDTO(project.getInversions().get(i)));
+            }
+            return new ResponseEntity<>(inversionDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 
 
     @DeleteMapping("/projects/{id}")
@@ -170,6 +183,30 @@ public class ProjectRestController {
             return new ResponseEntity<>(new ProjectDetailsDTO(project), HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/projects/{projectId}/inversions")
+    public ResponseEntity<InversionDTO> createInversion(@PathVariable long projectId,
+                                                  @RequestBody Inversion inversion,
+                                                  HttpServletRequest request) {
+        Optional<Project> checkProject = projectService.getOptionalProject(projectId);
+        if(checkProject.isEmpty()) return ResponseEntity.notFound().build();
+        Optional<UserEntity> checkQuery = userService.findUserByName(request.getUserPrincipal().getName());
+        if(checkQuery.isEmpty()) return ResponseEntity.notFound().build();
+        if(inversion == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if(inversion.getDate()==null) inversion.setDate(LocalDate.now());
+        if(!inversion.getDate().isEqual(LocalDate.now())) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if(inversion.getAmount()<=0) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if(inversion.getUser()==null) inversion.setUser(checkQuery.get());
+        if(inversion.getUser()!=checkQuery.get()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if(inversion.getProject()==null) inversion.setProject(checkProject.get());
+        if(inversion.getProject()!=checkProject.get()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        Project project = checkProject.get();
+        project.addInversion(inversion);
+        projectService.saveProject(project);
+        checkQuery.get().addInversion(inversion);
+        userService.saveUser(checkQuery.get());
+        return new ResponseEntity<>(new InversionDTO(inversion), HttpStatus.CREATED);
     }
 
     @PostMapping("/projects/{projectId}/images")
