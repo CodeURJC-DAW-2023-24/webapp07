@@ -98,6 +98,8 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.POST,"/api/comments/**").hasAnyRole("USER")
                         .requestMatchers(HttpMethod.PUT,"/api/comments/**").hasAnyRole("USER")
                         .requestMatchers(HttpMethod.DELETE,"/api/comments/**").hasAnyRole("USER")
+
+                        .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
                         // PUBLIC ENDPOINTS
                         .anyRequest().permitAll()
                 );
