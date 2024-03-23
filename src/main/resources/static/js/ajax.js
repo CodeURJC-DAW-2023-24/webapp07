@@ -38,5 +38,23 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+let Commentspage = 1;
 
+document.addEventListener('DOMContentLoaded', () => {
+    const pageSize = 10;
+    const loadMoreBtn = document.getElementById("load-more-comments-btn-rec");
 
+    loadMoreBtn.addEventListener('click', () => {
+        const projectId = loadMoreBtn.dataset.projectId;
+
+        fetch(`/comments?page=${Commentspage}&size=${pageSize}&id=${projectId}`)
+            .then(response => response.text()) // Convertir la respuesta a texto
+            .then(html => {
+                document.getElementById('comment-container').innerHTML += html; // Insertar el HTML en el contenedor
+                Commentspage++; // Incrementar el número de página para la próxima carga
+            })
+            .catch(error => {
+                console.error('Error fetching comments:', error);
+            });
+    });
+});

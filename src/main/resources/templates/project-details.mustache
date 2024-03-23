@@ -233,22 +233,21 @@
                         </form>
                     {{/user}}
 
-                    <div class="comment-container">
-                        {{#project.comments}}  
-                            <div class="comment">
-                                    <img class="profile-pic" src="https://localhost:8443/users/{{user.id}}/profile" alt="Profile picture">
-                                <div class="comment-author">{{user}}</div>
-                                <div class="comment-text">{{text}}</div>
-                                {{#privileged}}
-                                    <div class="button-container">
-                                        <a class="buttonProjectDanger" href="/comment/{{project.id}}/{{id}}/delete" >Delete</a>
-                                    </div>
-                                {{/privileged}}
-                            </div>
+                    <div id="comment-container" class="comment-container">
 
-                        {{/project.comments}}
-                        <!-- More comments go here -->
+                        {{> comment}}
+
+                        <!-- More comments -->
+
                     </div>
+                    <div class="row">
+                        <div class="col-12 text-center">
+
+                            <a id="load-more-comments-btn-rec" class="btn btn-primary" data-project-id={{project.id}}>Load more</a>
+
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>

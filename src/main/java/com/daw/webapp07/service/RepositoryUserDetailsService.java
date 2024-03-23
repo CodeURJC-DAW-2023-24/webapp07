@@ -53,7 +53,5 @@ public class RepositoryUserDetailsService implements UserDetailsService {
         return true;
     }
 
-
-
 }
 

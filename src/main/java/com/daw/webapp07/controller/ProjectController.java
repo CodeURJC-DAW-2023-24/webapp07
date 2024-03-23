@@ -114,10 +114,19 @@ public class ProjectController {
         model.addAttribute("times",graphicsService.getTimes());
         model.addAttribute("pastmoney", graphicsService.getPastmoney());
         model.addAttribute("hasInversions", !project.getInversions().isEmpty());
+        model.addAttribute("comments",commentService.searchCommentsProject(0,10,id));
 
         return "project-details";
     }
 
+    @GetMapping("/comments")
+    public String getComments(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
+                              @RequestParam(name = "size", defaultValue = "10") int size,  @RequestParam(name = "id") int id) {
+
+        model.addAttribute("comments", commentService.searchCommentsProject(page, size,id));
+
+        return "comment";
+    }
 
     //Get method for retrieving images
     @GetMapping("/projects/{id}/images/{index}")

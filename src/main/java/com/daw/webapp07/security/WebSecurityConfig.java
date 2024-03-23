@@ -145,6 +145,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/projects/**").permitAll()
                         .requestMatchers("/users/**").permitAll()
                         .requestMatchers("/projects").permitAll()
+                        .requestMatchers("/comments").permitAll()
                         .requestMatchers("/error-page").permitAll()
                         .requestMatchers("/error").permitAll()
 

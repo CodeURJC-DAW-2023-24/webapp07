@@ -1,0 +1,13 @@
+{{#comments}}
+    <div class="comment">
+        <img class="profile-pic" src="https://localhost:8443/users/{{user.id}}/profile" alt="Profile picture">
+        <div class="comment-author">{{user}}</div>
+        <div class="comment-text">{{text}}</div>
+        {{#privileged}}
+            <div class="button-container">
+                <a class="buttonProjectDanger" href="/comment/{{project.id}}/{{id}}/delete" >Delete</a>
+            </div>
+        {{/privileged}}
+    </div>
+
+{{/comments}}
