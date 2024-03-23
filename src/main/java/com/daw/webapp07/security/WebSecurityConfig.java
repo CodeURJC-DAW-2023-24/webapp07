@@ -101,6 +101,7 @@ public class WebSecurityConfig {
 
                         .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/api/users").hasAnyRole("USER")
+                        .requestMatchers(HttpMethod.PUT, "/users/images").hasAnyRole("USER")
                         // PUBLIC ENDPOINTS
                         .anyRequest().permitAll()
                 );

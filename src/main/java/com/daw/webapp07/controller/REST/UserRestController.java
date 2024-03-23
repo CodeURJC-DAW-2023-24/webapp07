@@ -132,10 +132,8 @@ public class UserRestController {
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
-    @PutMapping("/users/{id}/")
-    public ResponseEntity<UserEntity> editUser(@PathVariable long id,
-                                               @RequestBody UserEntity newUser,
-                                               HttpServletRequest request) {
+    @PutMapping("/users")
+    public ResponseEntity<UserEntity> editUser(@RequestBody UserEntity newUser, HttpServletRequest request) {
 
         String name = request.getUserPrincipal().getName();
         Optional<UserEntity> user = userService.findUserByName(name);
@@ -148,6 +146,26 @@ public class UserRestController {
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
+    @PutMapping("/users/images")
+    public ResponseEntity<UserEntity> editProfilePicture(@RequestParam MultipartFile file, HttpServletRequest request){
+
+        Optional<UserEntity> checkUser = userService.findUserByName(request.getUserPrincipal().getName());
+        if(checkUser.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+
+        UserEntity user = checkUser.get();
+
+        if(request.getUserPrincipal().getName().equals(user.getName())){
+            Image image = new Image(file);
+            user.setProfilePhoto(image);
+
+            userService.saveUser(user);
+            return ResponseEntity.ok().build();
+        }
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+
+    }
 
 
 
