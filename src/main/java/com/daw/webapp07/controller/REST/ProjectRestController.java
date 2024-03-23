@@ -1,11 +1,14 @@
 package com.daw.webapp07.controller.REST;
 
 import com.daw.webapp07.DTO.CommentDTO;
+import com.daw.webapp07.DTO.ImageDTO;
 import com.daw.webapp07.DTO.ProjectDetailsDTO;
 import com.daw.webapp07.DTO.ProjectPreviewDTO;
+import com.daw.webapp07.model.Comment;
 import com.daw.webapp07.model.Image;
 import com.daw.webapp07.model.Project;
 import com.daw.webapp07.model.UserEntity;
+import com.daw.webapp07.service.CommentService;
 import com.daw.webapp07.service.ProjectService;
 import com.daw.webapp07.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,6 +24,7 @@ import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -32,9 +36,13 @@ public class ProjectRestController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CommentService commentService;
+
     @GetMapping("/projects")
-    public ResponseEntity<Iterable<ProjectPreviewDTO>> getProjects() {
-        Page<Project> projects = projectService.searchProjects(0, 10);
+    public ResponseEntity<Iterable<ProjectPreviewDTO>> getProjects( @RequestParam(name = "page", defaultValue = "0") int page,
+                                                                     @RequestParam(name = "size", defaultValue = "10") int size) {
+        Page<Project> projects = projectService.searchProjects(page, size);
         Collection<ProjectPreviewDTO> projectPreviewDTO = new ArrayList<>();
         for (Project project : projects) {
             projectPreviewDTO.add(new ProjectPreviewDTO(project));
@@ -54,6 +62,39 @@ public class ProjectRestController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/projects/{id}/images")
+    public ResponseEntity<Iterable<ImageDTO>> getImages(@PathVariable long id, @RequestParam(name = "page", defaultValue = "0") int page,
+                                                        @RequestParam(name = "size", defaultValue = "10") int size) {
+        Optional<Project> checkProject = projectService.getOptionalProject(id);
+        if (checkProject.isPresent()) {
+            Project project = checkProject.get();
+            List<ImageDTO> returnList = new ArrayList<>();
+            int start = page*size;
+            int end = Math.min(project.getImages().size(), start+size);
+            if(start<project.getImages().size()){
+                try {
+                    for(int i=start; i<end; i++){
+                        returnList.add(new ImageDTO(project.getImages().get(i),i));
+                    }
+                }
+                catch (Exception e){
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
+            }
+            return new ResponseEntity<>(returnList, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/project/{id}/comments")
+    public ResponseEntity<Iterable<CommentDTO>> getComments(@PathVariable long id, @RequestParam(name = "page", defaultValue = "0") int page,
+                                                            @RequestParam(name = "size", defaultValue = "10") int size) {
+        Page<Comment> comments = commentService.searchCommentsProject(page, size, id);
+        return new ResponseEntity<>(commentService.toDTO(comments), HttpStatus.OK);
+    }
+
 
     @PostMapping("/create")
     public ResponseEntity<Project> createProject(@RequestBody Project project,
