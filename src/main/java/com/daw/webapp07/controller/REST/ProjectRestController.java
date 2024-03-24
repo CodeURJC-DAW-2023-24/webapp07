@@ -86,19 +86,6 @@ public class ProjectRestController {
         }
     }
 
-    @GetMapping("/projects/{id}/graphics")
-    public ResponseEntity<GraphicsDTO> getProjectGraphics(@PathVariable long id) {
-        Optional<Project> checkProject = projectService.getOptionalProject(id);
-        if (checkProject.isPresent()) {
-            Project project = checkProject.get();
-            graphicsService.initializeWith(project);
-            GraphicsDTO graphicsDTO = new GraphicsDTO(graphicsService.getPastmoney(),graphicsService.getTimes(),graphicsService.getQuantities(),graphicsService.getNames());
-            return new ResponseEntity<>(graphicsDTO, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
     @GetMapping("/projects/{id}/images/{idImage}")
     public ResponseEntity<Object> displayImage(@PathVariable Long id, @PathVariable Long idImage) throws SQLException {
         Optional<Project> checkProject = projectService.getOptionalProject(id);

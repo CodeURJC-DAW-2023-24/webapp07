@@ -7,6 +7,7 @@ import com.daw.webapp07.model.UserEntity;
 import com.daw.webapp07.repository.ProjectRepository;
 import com.daw.webapp07.repository.UserRepository;
 import com.daw.webapp07.service.ProjectService;
+import com.daw.webapp07.service.RankingService;
 import com.daw.webapp07.service.RepositoryUserDetailsService;
 import com.daw.webapp07.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,6 +39,8 @@ public class UserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private RankingService rankingService;
 
     @Autowired
     private RepositoryUserDetailsService userDetailsService;
@@ -129,14 +132,14 @@ public class UserController {
     // This method is called when the user tries to access the ranking page
     @GetMapping("/ranking")
     public String ranking(Model model, HttpServletRequest request) {
-        List<UserEntity> users = getTopInvestors();
+        List<UserEntity> users = rankingService.getTopInvestors();
         model.addAttribute("inv1", users.get(0));
         model.addAttribute("inv2", users.get(1));
         model.addAttribute("inv3", users.get(2));
         model.addAttribute("inv1am", users.get(0).getTotalInvested());
         model.addAttribute("inv2am", users.get(1).getTotalInvested());
         model.addAttribute("inv3am", users.get(2).getTotalInvested());
-        List<Project> projects = getTopProjects();
+        List<Project> projects = rankingService.getTopProjects();
         model.addAttribute("pro1", projects.get(0).getName());
         model.addAttribute("pro2", projects.get(1).getName());
         model.addAttribute("pro3", projects.get(2).getName());
@@ -145,47 +148,4 @@ public class UserController {
         model.addAttribute("pro3am", projects.get(2).getCurrentAmount());
         return "/ranking";
     }
-
-    // This is a method that returns the top 3 investors
-    private List<UserEntity> getTopInvestors() {
-        List<UserEntity> users = userService.findAll();
-        int n = users.size();
-        boolean swapped;
-
-        do {
-            swapped = false;
-            for (int i = 0; i < n - 1; i++) {
-                if (users.get(i).getTotalInvested() < users.get(i + 1).getTotalInvested()) {
-                    UserEntity temp = users.get(i);
-                    users.set(i, users.get(i + 1));
-                    users.set(i + 1, temp);
-                    swapped = true;
-                }
-            }
-            n--;
-        } while (swapped && n > 0);
-        return users;
-    }
-
-    // This is a method that returns the top 3 projects
-    private List<Project> getTopProjects() {
-        List<Project> projects = projectService.findAll();
-        int n = projects.size();
-        boolean swapped;
-
-        do {
-            swapped = false;
-            for (int i = 0; i < n - 1; i++) {
-                if (projects.get(i).getCurrentAmount() < projects.get(i + 1).getCurrentAmount()) {
-                    Project temp = projects.get(i);
-                    projects.set(i, projects.get(i + 1));
-                    projects.set(i + 1, temp);
-                    swapped = true;
-                }
-            }
-            n--;
-        } while (swapped && n > 0);
-        return projects;
-    }
-
 }
