@@ -13,6 +13,7 @@ public class Inversion {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne
+    @JsonIgnore
     private UserEntity user;
     @ManyToOne
     @JsonIgnore
