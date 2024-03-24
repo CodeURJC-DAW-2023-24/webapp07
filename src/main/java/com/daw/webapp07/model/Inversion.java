@@ -65,4 +65,6 @@ public class Inversion {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
+    public Long getId(){return id;}
 }

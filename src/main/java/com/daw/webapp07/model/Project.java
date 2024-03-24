@@ -1,5 +1,6 @@
 package com.daw.webapp07.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.sql.Blob;
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ public class Project {
     private String description;
 
     @ManyToOne
+    @JsonIgnore
     private UserEntity owner;
     private LocalDate date;
     private Category category;

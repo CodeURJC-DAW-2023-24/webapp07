@@ -3,10 +3,12 @@ package com.daw.webapp07.controller.REST;
 import com.daw.webapp07.DTO.*;
 import com.daw.webapp07.model.*;
 import com.daw.webapp07.service.GraphicsService;
+import com.daw.webapp07.service.InversionService;
 import com.daw.webapp07.service.ProjectService;
 import com.daw.webapp07.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.SpringVersion;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import java.net.URI;
 import java.security.Principal;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -24,6 +27,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import java.util.Optional;
+
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 
 @RestController
@@ -37,6 +42,8 @@ public class ProjectRestController {
 
     @Autowired
     private GraphicsService graphicsService;
+    @Autowired
+    private InversionService inversionService;
 
 
 
@@ -127,6 +134,20 @@ public class ProjectRestController {
     }
 
 
+    @GetMapping("/projects/{id}/inversions/{inversionId}")
+    public  ResponseEntity<InversionDTO> getInversion(@PathVariable long inversionId){
+        Optional<Inversion> checkInversion = inversionService.getInversion(inversionId);
+        if (checkInversion.isPresent()) {
+            Inversion inversion = checkInversion.get();
+            InversionDTO inversionDTO = new InversionDTO(inversion);
+            return new ResponseEntity<>(inversionDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+
     @DeleteMapping("/projects/{id}")
     public ResponseEntity<ProjectDetailsDTO> deleteProject(@PathVariable long id, HttpServletRequest request) {
         Optional<Project> checkProject = projectService.getOptionalProject(id);
@@ -144,7 +165,7 @@ public class ProjectRestController {
     }
 
     @PostMapping("/projects")
-    public ResponseEntity<ProjectDetailsDTO> createProject(@RequestBody Project project,
+    public ResponseEntity<Object> createProject(@RequestBody Project project,
                                                            HttpServletRequest request) {
         if(project == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         if(project.getCurrentAmount()!=0) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -164,13 +185,15 @@ public class ProjectRestController {
 
             userService.saveUser(query);
             projectService.saveProject(project);
-            return new ResponseEntity<>(new ProjectDetailsDTO(project), HttpStatus.CREATED);
+
+            URI location = fromCurrentRequest().path("/{id}").buildAndExpand(project.getId()).toUri();
+            return ResponseEntity.created(location).body(project);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/projects/{projectId}/inversions")
-    public ResponseEntity<InversionDTO> createInversion(@PathVariable long projectId,
+    public ResponseEntity<Object> createInversion(@PathVariable long projectId,
                                                   @RequestBody Inversion inversion,
                                                   HttpServletRequest request) {
         Optional<Project> checkProject = projectService.getOptionalProject(projectId);
@@ -190,7 +213,10 @@ public class ProjectRestController {
         projectService.saveProject(project);
         checkQuery.get().addInversion(inversion);
         userService.saveUser(checkQuery.get());
-        return new ResponseEntity<>(new InversionDTO(inversion), HttpStatus.CREATED);
+
+        URI location = fromCurrentRequest().path("/{id}").buildAndExpand(inversion.getId()).toUri();
+        return ResponseEntity.created(location).body(inversion);
+
     }
 
     @PostMapping("/projects/{projectId}/images")
@@ -236,6 +262,8 @@ public class ProjectRestController {
         }
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
+
+
 
 
 
