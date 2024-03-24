@@ -2,17 +2,14 @@ package com.daw.webapp07.controller.REST;
 
 import com.daw.webapp07.DTO.*;
 import com.daw.webapp07.model.*;
-import com.daw.webapp07.service.ProjectService;
 import com.daw.webapp07.service.RepositoryUserDetailsService;
 import com.daw.webapp07.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -119,15 +116,14 @@ public class UserRestController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity user){
+    public ResponseEntity<UserDetailsDTO> createUser(@RequestBody UserEntity user){
 
         user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
         user.setRoles(List.of("USER"));
         if(repositoryUserDetailsService.registerUser(user)){
             URI location = fromCurrentRequest().path("/{id}/").buildAndExpand(user.getId()).toUri();
-            return ResponseEntity.created(location).body(user);
+            return ResponseEntity.created(location).body(new UserDetailsDTO(user));
         }
-
 
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }

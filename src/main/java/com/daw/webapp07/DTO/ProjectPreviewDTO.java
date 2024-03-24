@@ -17,7 +17,11 @@ public class ProjectPreviewDTO {
         this.id = project.getId();
         this.name = project.getName();
         this.category = project.getCategory();
-        this.image =  "https://localhost:8443/api/projects/" + this.id + "/images/" + project.getImages().get(0).getId();
+        if (project.getImages().size() > 0){
+            this.image =  "https://localhost:8443/api/projects/" + this.id + "/images/" + project.getImages().get(0).getId();
+        }else{
+            this.image = "";
+        }
     }
 
     public Long getId() {

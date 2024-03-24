@@ -2,7 +2,6 @@ package com.daw.webapp07.controller.REST;
 
 import com.daw.webapp07.DTO.*;
 import com.daw.webapp07.model.*;
-import com.daw.webapp07.service.CommentService;
 import com.daw.webapp07.service.GraphicsService;
 import com.daw.webapp07.service.ProjectService;
 import com.daw.webapp07.service.UserService;
@@ -14,22 +13,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
-import java.io.IOException;
-import java.net.URI;
 import java.security.Principal;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+
 import java.util.Optional;
 
-import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 @RestController
 @RequestMapping("/api")
@@ -97,16 +92,6 @@ public class ProjectRestController {
         }
     }
 
-    /*YA ESTABA HECHO
-    @GetMapping("/projects/{id}/comments")
-    public ResponseEntity<Iterable<CommentDTO>> getComments(@PathVariable long id, Pageable page, int size) {
-        int pageNumber = page.getPageNumber();
-        int sizePage = 10;
-        Page<Comment> comments = commentService.searchCommentsProject(pageNumber, sizePage, id);
-        return new ResponseEntity<>(commentService.toDTO(comments), HttpStatus.OK);
-    }
-     */
-
     @GetMapping("/projects/{id}/images/{idImage}")
     public ResponseEntity<Object> displayImage(@PathVariable Long id, @PathVariable Long idImage) throws SQLException {
         Optional<Project> checkProject = projectService.getOptionalProject(id);
@@ -140,7 +125,6 @@ public class ProjectRestController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
 
 
     @DeleteMapping("/projects/{id}")
@@ -275,13 +259,6 @@ public class ProjectRestController {
             if (project.getCategory() != null) oldProj.setCategory(project.getCategory());
             if (project.getUrl() != null) oldProj.setUrl(project.getUrl());
             if (project.getGoal() != 0 && project.getGoal() > 0) oldProj.setGoal(project.getGoal());
-            /*
-            ArrayList<Project> userProjects = new ArrayList<>(query.getProjects());
-            userProjects.add(project);
-            query.setProjects(userProjects);
-            userService.saveUser(query);
-
-             */
 
             projectService.saveProject(oldProj);
             return new ResponseEntity<>(new ProjectDetailsDTO(oldProj), HttpStatus.CREATED);

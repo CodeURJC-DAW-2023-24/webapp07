@@ -147,47 +147,4 @@ public class CommentRestController {
 
     }
 
-    @PutMapping("/comments/{projectId}/{id}/")
-    public ResponseEntity<CommentDTO> updateProjectComment(@PathVariable long id, @PathVariable long projectId, @RequestBody String text, HttpServletRequest request) {
-        Optional<Comment> checkComment = commentService.getComment(id);
-        if (checkComment.isPresent()) {
-            Comment comment = checkComment.get();
-            comment.setText(text);
-            Optional<Project> checkProject = projectService.getOptionalProject(projectId);
-            if (!checkProject.isEmpty()){
-                Project project = checkProject.get();
-                if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName())) {
-                    comment.setText(text);
-                    projectService.saveProject(project);
-                    return new ResponseEntity<>(new CommentDTO(comment), HttpStatus.OK);
-                }else{
-                    return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-                }
-            }
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
-    }
-
-    @PutMapping("/comments/{id}/")
-    public ResponseEntity<CommentDTO> updateComment(@PathVariable long id, @RequestBody String text, HttpServletRequest request) {
-        Optional<Comment> checkComment = commentService.getComment(id);
-        if (checkComment.isPresent()) {
-            Comment comment = checkComment.get();
-            long projectId = comment.getProject().getId();
-            Optional<Project> checkProject = projectService.getOptionalProject(projectId);
-            if (!checkProject.isEmpty()){
-                Project project = checkProject.get();
-                if (request.isUserInRole("ADMIN") || request.getUserPrincipal().getName().equals(project.getOwner().getName())) {
-                    comment.setText(text);
-                    projectService.saveProject(project);
-                    return new ResponseEntity<>(new CommentDTO(comment), HttpStatus.OK);
-                }else{
-                    return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-                }
-            }
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
 }
