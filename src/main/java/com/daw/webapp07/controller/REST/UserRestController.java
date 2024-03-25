@@ -44,8 +44,8 @@ public class UserRestController {
             @ApiResponse(responseCode = "200", description = "List of users returned successfully",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = UserPreviewDTO.class))),
-            @ApiResponse(responseCode = "400", description = "Bad request"),
-            @ApiResponse(responseCode = "404", description = "Users not found")
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Users not found", content = @Content)
     })
 
     @GetMapping("/users")
@@ -64,8 +64,8 @@ public class UserRestController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = UserDetailsDTO.class))
             ),
-            @ApiResponse(responseCode = "400", description = "Invalid ID supplied."),
-            @ApiResponse(responseCode = "404", description = "User not found. The user with the specified ID could not be found.")
+            @ApiResponse(responseCode = "400", description = "Invalid ID supplied.", content = @Content),
+            @ApiResponse(responseCode = "404", description = "User not found. The user with the specified ID could not be found.", content = @Content)
     })
 
     @GetMapping("/users/{id}/")
