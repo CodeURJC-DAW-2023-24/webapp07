@@ -37,6 +37,7 @@ RUN apt-get update && apt-get install -y \
 
 # Copia el JAR del contenedor de compilación
 COPY --from=builder /project/target/ /usr/src/app/
+COPY --from=builder /project/images/ /usr/src/app/images/
 
 # Indica el puerto que expone el contenedor
 EXPOSE 8443
