@@ -36,7 +36,7 @@ RUN apt-get update && apt-get install -y \
     && chmod +x /usr/src/app/wait-for-it.sh
 
 # Copia el JAR del contenedor de compilación
-COPY --from=builder /project/target/ /usr/src/app/
+COPY --from=builder /project/target/*.jar /usr/src/app/
 COPY --from=builder /project/images/ /usr/src/app/images/
 
 # Indica el puerto que expone el contenedor
