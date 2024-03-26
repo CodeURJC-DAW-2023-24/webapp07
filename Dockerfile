@@ -1,6 +1,7 @@
 #################################################
 # Imagen base para el contenedor de compilación
 #################################################
+FROM --platform=linux/amd64 ubuntu:jammy
 FROM maven:3.9.6-amazoncorretto-21 as builder
 
 # Define el directorio de trabajo donde ejecutar comandos
@@ -10,14 +11,14 @@ WORKDIR /project
 COPY pom.xml /project/
 
 # Descarga las dependencias del proyecto
-RUN mvn clean verify
+#RUN mvn clean verify
 
 # Copia el código del proyecto
 COPY /src /project/src
 COPY /images /project/images
 
 # Compila proyecto
-RUN mvn package -DskipTests=true
+RUN mvn clean package -DskipTests=true
 
 #################################################
 # Imagen base para el contenedor de la aplicación
@@ -35,11 +36,11 @@ RUN apt-get update && apt-get install -y \
     && chmod +x /usr/src/app/wait-for-it.sh
 
 # Copia el JAR del contenedor de compilación
-COPY --from=builder /project/target/*.jar /usr/src/app/
+COPY --from=builder /project/target/ /usr/src/app/
 
 # Indica el puerto que expone el contenedor
 EXPOSE 8443
 EXPOSE 587
 
 # Comando que se ejecuta al hacer docker run
-CMD [ "java", "-jar", "webapp07-0.0.1-SNAPSHOT.jar" ]
+CMD [ "java", "-jar", "app.jar" ]
