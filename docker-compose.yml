@@ -1,0 +1,22 @@
+version: "3.9"
+services: 
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8443:8443
+      - 587:587
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db/seedventures
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=password
+    command: ["./wait-for-it.sh", "db:3306", "--", "java", "-jar", "webapp07-0.0.1-SNAPSHOT.jar"]
+    # restart: on-failure
+  db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=seedventures
+    volumes:
+      - ./mysql:/var/lib/mysql

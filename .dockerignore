@@ -1,0 +1,8 @@
+# Target
+target/
+
+# MySQL Database
+mysql/
+
+# idea
+.idea/
