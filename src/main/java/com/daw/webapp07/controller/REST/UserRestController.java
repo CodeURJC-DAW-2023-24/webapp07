@@ -4,6 +4,11 @@ import com.daw.webapp07.DTO.*;
 import com.daw.webapp07.model.*;
 import com.daw.webapp07.service.RepositoryUserDetailsService;
 import com.daw.webapp07.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -34,6 +39,14 @@ public class UserRestController {
     @Autowired
     private RepositoryUserDetailsService repositoryUserDetailsService;
 
+    @Operation(summary = "Get all users", description = "Returns a list of all users available in the system.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "List of users returned successfully",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UserPreviewDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Users not found", content = @Content)
+    })
 
     @GetMapping("/users")
     public ResponseEntity<Iterable<UserPreviewDTO>> getUsers() {
@@ -44,6 +57,16 @@ public class UserRestController {
         }
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
+
+    @Operation(summary = "Get user", description = "Returns a user by their ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User returned successfully",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UserDetailsDTO.class))
+            ),
+            @ApiResponse(responseCode = "400", description = "Invalid ID supplied.", content = @Content),
+            @ApiResponse(responseCode = "404", description = "User not found. The user with the specified ID could not be found.", content = @Content)
+    })
 
     @GetMapping("/users/{id}/")
     public ResponseEntity<UserDetailsDTO> getUser(@PathVariable long id) {
@@ -56,6 +79,16 @@ public class UserRestController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @Operation(summary = "Get user's inversions", description = "Returns a user's inversions by their ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Inversions returned successfully",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = InversionDTO.class))
+            ),
+            @ApiResponse(responseCode = "400", description = "Invalid ID supplied."),
+            @ApiResponse(responseCode = "404", description = "User not found. The user with the specified ID could not be found.")
+    })
 
     @GetMapping("/users/{id}/inversions")
     public ResponseEntity<Iterable<InversionDTO>> getUserInversions(@PathVariable long id) {
@@ -72,6 +105,16 @@ public class UserRestController {
         }
     }
 
+    @Operation(summary = "Get user's comments", description = "Returns a user's comments by their ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Comments returned successfully",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CommentDTO.class))
+            ),
+            @ApiResponse(responseCode = "400", description = "Invalid ID supplied."),
+            @ApiResponse(responseCode = "404", description = "User not found. The user with the specified ID could not be found.")
+    })
+
     @GetMapping("/users/{id}/comments")
     public ResponseEntity<Iterable<CommentDTO>> getUserComments(@PathVariable long id) {
         Optional<UserEntity> userdb = userService.findUserById(id);
@@ -86,6 +129,16 @@ public class UserRestController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @Operation(summary = "Get user's projects", description = "Returns a user's projects by their ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Projects returned successfully",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProjectPreviewDTO.class))
+            ),
+            @ApiResponse(responseCode = "400", description = "Invalid ID supplied."),
+            @ApiResponse(responseCode = "404", description = "User not found. The user with the specified ID could not be found.")
+    })
 
     @GetMapping("/users/{id}/projects")
     public ResponseEntity<Iterable<ProjectPreviewDTO>> getUserProjects(@PathVariable long id) {
@@ -103,6 +156,13 @@ public class UserRestController {
         }
     }
 
+    @Operation(summary = "Get user's profile photo", description = "Returns user's photo by his id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Photo returned successfully"
+            ),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied"),
+            @ApiResponse(responseCode = "404", description = "User not found")
+    })
 
     @GetMapping("/users/{id}/profile")
     public ResponseEntity<Object> displayProfilePhoto(@PathVariable Long id) throws SQLException{
@@ -114,6 +174,18 @@ public class UserRestController {
                 .body(file);
 
     }
+
+
+    @Operation(summary = "Creates a new user", description = "Creates a new user in the system.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "User created successfully",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UserDetailsDTO.class))
+            ),
+            @ApiResponse(responseCode = "400", description = "Bad request."),
+            @ApiResponse(responseCode = "403", description = "Forbidden. The request is not authorized."),
+            @ApiResponse(responseCode = "404", description = "Not found. The specified resource could not be found.")
+    })
 
     @PostMapping("/users")
     public ResponseEntity<UserDetailsDTO> createUser(@RequestBody UserEntity user){
@@ -128,6 +200,14 @@ public class UserRestController {
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
+    @Operation(summary = "Edits user's profile", description = "Edits the profile of an existing user in the system.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User profile updated successfully"),
+            @ApiResponse(responseCode = "400", description = "Bad request."),
+            @ApiResponse(responseCode = "403", description = "Forbidden. The request is not authorized."),
+            @ApiResponse(responseCode = "404", description = "Not found. The specified user could not be found.")
+    })
+
     @PutMapping("/users")
     public ResponseEntity<UserEntity> editUser(@RequestBody UserEntity newUser, HttpServletRequest request) {
 
@@ -141,6 +221,14 @@ public class UserRestController {
 
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
+
+    @Operation(summary = "Edits user's profile photo", description = "Edits the profile photo of an existing user in the system.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User profile photo updated successfully"),
+            @ApiResponse(responseCode = "400", description = "Bad request."),
+            @ApiResponse(responseCode = "403", description = "Forbidden. The request is not authorized."),
+            @ApiResponse(responseCode = "404", description = "Not found. The specified user could not be found.")
+    })
 
     @PutMapping("/users/images")
     public ResponseEntity<UserEntity> editProfilePicture(@RequestParam MultipartFile file, HttpServletRequest request){

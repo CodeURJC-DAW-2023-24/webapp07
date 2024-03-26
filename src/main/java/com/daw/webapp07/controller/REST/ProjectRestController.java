@@ -6,6 +6,11 @@ import com.daw.webapp07.service.GraphicsService;
 import com.daw.webapp07.service.InversionService;
 import com.daw.webapp07.service.ProjectService;
 import com.daw.webapp07.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.SpringVersion;
@@ -47,6 +52,15 @@ public class ProjectRestController {
 
 
 
+    @Operation(summary = "Get all projects", description = "Returns a list of all projects available in the system.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "List of projects returned successfully",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProjectPreviewDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Projects not found", content = @Content)
+    })
+
     @GetMapping("/projects")
     public ResponseEntity<Iterable<ProjectPreviewDTO>> getProjects(Pageable page, HttpServletRequest request) {
         int size = 10;
@@ -74,6 +88,15 @@ public class ProjectRestController {
         return new ResponseEntity<>(projectPreviewDTO, HttpStatus.OK);
     }
 
+    @Operation(summary = "Get a project by ID", description = "Returns a project by searching his ID in the system.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "List of projects returned successfully",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProjectDetailsDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Project not found", content = @Content)
+    })
+
     @GetMapping("/projects/{id}/")
     public ResponseEntity<ProjectDetailsDTO> getProject(@PathVariable long id) {
         Optional<Project> checkProject = projectService.getOptionalProject(id);
@@ -85,6 +108,14 @@ public class ProjectRestController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+
+    @Operation(summary = "Get a project's image by ID", description = "Returns a project's image by searching his ID in the system.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "List of projects returned successfully"),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Projects not found", content = @Content)
+    })
 
     @GetMapping("/projects/{id}/images/{idImage}")
     public ResponseEntity<Object> displayImage(@PathVariable Long id, @PathVariable Long idImage) throws SQLException {
@@ -105,6 +136,16 @@ public class ProjectRestController {
 
     }
 
+    @Operation(summary = "Get all project's inversions", description = "Returns a project's inversions by their ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Inversions returned successfully",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = InversionDTO.class))
+            ),
+            @ApiResponse(responseCode = "400", description = "Invalid ID supplied."),
+            @ApiResponse(responseCode = "404", description = "Project not found. The user with the specified ID could not be found.")
+    })
+
     @GetMapping("/projects/{id}/inversions")
     public ResponseEntity<Iterable<InversionDTO>> getInversions(@PathVariable long id) {
         Optional<Project> checkProject = projectService.getOptionalProject(id);
@@ -120,6 +161,15 @@ public class ProjectRestController {
         }
     }
 
+    @Operation(summary = "Get project's inversion by ID", description = "Returns a project's specific inversion by their ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Inversions returned successfully",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = InversionDTO.class))
+            ),
+            @ApiResponse(responseCode = "400", description = "Invalid ID supplied."),
+            @ApiResponse(responseCode = "404", description = "Project not found. The user with the specified ID could not be found.")
+    })
 
     @GetMapping("/projects/{id}/inversions/{inversionId}")
     public  ResponseEntity<InversionDTO> getInversion(@PathVariable long inversionId){
@@ -134,6 +184,16 @@ public class ProjectRestController {
 
     }
 
+    @Operation(summary = "Delete a project by ID", description = "Deletes a project by its ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Project deleted successfully",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProjectDetailsDTO.class))
+            ),
+            @ApiResponse(responseCode = "400", description = "Invalid ID supplied. The provided project ID is invalid."),
+            @ApiResponse(responseCode = "403", description = "Forbidden. The request is not authorized to delete the project."),
+            @ApiResponse(responseCode = "404", description = "Project not found. The project with the specified ID could not be found.")
+    })
 
     @DeleteMapping("/projects/{id}")
     public ResponseEntity<ProjectDetailsDTO> deleteProject(@PathVariable long id, HttpServletRequest request) {
@@ -150,6 +210,17 @@ public class ProjectRestController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    @Operation(summary = "Create a new project", description = "Creates a new project based on the request body.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Project created successfully",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProjectDetailsDTO.class))
+            ),
+            @ApiResponse(responseCode = "400", description = "Bad request. The request body is invalid."),
+            @ApiResponse(responseCode = "403", description = "Forbidden. The request is not authorized to create the project."),
+            @ApiResponse(responseCode = "404", description = "User not found. The user making the request could not be found.")
+    })
 
     @PostMapping("/projects")
     public ResponseEntity<Object> createProject(@RequestBody Project project,
@@ -179,6 +250,18 @@ public class ProjectRestController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+
+    @Operation(summary = "Create a new inversion for a project", description = "Creates a new inversion for the specified project.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Inversion created successfully",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Inversion.class))
+            ),
+            @ApiResponse(responseCode = "400", description = "Bad request. The request body is invalid."),
+            @ApiResponse(responseCode = "403", description = "Forbidden. The request is not authorized to create the inversion."),
+            @ApiResponse(responseCode = "404", description = "Project or user not found. The project or user making the request could not be found.")
+    })
+
     @PostMapping("/projects/{projectId}/inversions")
     public ResponseEntity<Object> createInversion(@PathVariable long projectId,
                                                   @RequestBody Inversion inversion,
@@ -206,6 +289,14 @@ public class ProjectRestController {
 
     }
 
+    @Operation(summary = "Upload images for a project", description = "Uploads images for the specified project.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Images uploaded successfully"),
+            @ApiResponse(responseCode = "400", description = "Bad request. The request body is invalid."),
+            @ApiResponse(responseCode = "403", description = "Forbidden. The request is not authorized to upload images for the project."),
+            @ApiResponse(responseCode = "404", description = "Project not found. The project with the specified ID could not be found.")
+    })
+
     @PostMapping("/projects/{projectId}/images")
     public ResponseEntity<Object> uploadImages(@PathVariable long projectId,
                                                @RequestParam MultipartFile[] files, HttpServletRequest request){
@@ -228,6 +319,14 @@ public class ProjectRestController {
         }
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
+
+    @Operation(summary = "Update images for a project", description = "Updates images for the specified project.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Images updated successfully"),
+            @ApiResponse(responseCode = "400", description = "Bad request. The request body is invalid."),
+            @ApiResponse(responseCode = "403", description = "Forbidden. The request is not authorized to update images for the project."),
+            @ApiResponse(responseCode = "404", description = "Project not found. The project with the specified ID could not be found.")
+    })
 
     @PutMapping("/projects/{projectId}/images")
     public ResponseEntity<Object> updateImages(@PathVariable long projectId,
@@ -252,6 +351,16 @@ public class ProjectRestController {
 
 
 
+    @Operation(summary = "Update a project", description = "Updates the details of the specified project.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Project updated successfully",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProjectDetailsDTO.class))
+            ),
+            @ApiResponse(responseCode = "400", description = "Bad request. The request body is invalid."),
+            @ApiResponse(responseCode = "403", description = "Forbidden. The request is not authorized to update the project."),
+            @ApiResponse(responseCode = "404", description = "Project not found. The project with the specified ID could not be found.")
+    })
 
 
     @PutMapping("/projects/{id}")
