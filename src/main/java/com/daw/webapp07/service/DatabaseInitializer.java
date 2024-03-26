@@ -207,7 +207,7 @@ public class DatabaseInitializer {
                 FILES_FOLDER + "/galaxygetaway/galaxygetaway1.jpeg", FILES_FOLDER + "/galaxygetaway/galaxygetaway2.jpeg"
         );
 
-        UserEntity LiveMusicEnt = createAndSaveUser("LiveMusicEnt","LiveMusicEnt@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/livebeat/liveBeat1.jpeg","USER");
+        /*UserEntity LiveMusicEnt = createAndSaveUser("LiveMusicEnt","LiveMusicEnt@gmail.com","$2a$12$bVuq2TEUH/cNkJhyct.ob.wXkOA08wR67ZfLuaKy6tKnzMtdPhbV.",FILES_FOLDER + "/livebeat/liveBeat1.jpeg","USER");
         Project LiveBeat = createAndSaveProject(
                 "LiveBeat",
                 "Enjoy live concerts from the comfort of your home. LiveBeat provides access to exclusive performances by popular and emerging artists, all in high definition and surround sound.",
@@ -243,7 +243,7 @@ public class DatabaseInitializer {
                 150000,
                 0,
                 FILES_FOLDER + "/berni/berni2.jpg", FILES_FOLDER + "/berni/berni3.jpg"
-        );
+        );*/
 
         Inversion inversion1 = createAndSaveInversion(
                 u1,
@@ -276,10 +276,11 @@ public class DatabaseInitializer {
                 LocalDate.of(2023, 11, 9)
         );
 
+        /*
         BerniBear.addComment(new Comment(u2, BerniBear, "I love the animation style! Can't wait to see more."));
         BerniBear.addComment(new Comment(u3, BerniBear, "I've been a fan since the first season. Looking forward to the next one!"));
         BerniBear.addComment(new Comment(u4, BerniBear, "I'm happy to support this project. Keep up the good work!"));
-        projectRepository.save(BerniBear);
+        projectRepository.save(BerniBear);*/
 
         KebabFinder.addComment(new Comment(u1, KebabFinder, "I'm excited to see this project come to life!"));
         KebabFinder.addComment(new Comment(u2, KebabFinder, "I love kebabs! Can't wait to try this app."));
