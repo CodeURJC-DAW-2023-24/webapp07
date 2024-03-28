@@ -146,6 +146,6 @@ public class UserController {
         model.addAttribute("pro1am", projects.get(0).getCurrentAmount());
         model.addAttribute("pro2am", projects.get(1).getCurrentAmount());
         model.addAttribute("pro3am", projects.get(2).getCurrentAmount());
-        return "/ranking";
+        return "ranking";
     }
 }
